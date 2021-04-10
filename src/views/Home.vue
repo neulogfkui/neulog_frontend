@@ -1,10 +1,13 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
+    <!-- <img alt="Vue logo" src="../assets/logo.png"> -->
     <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
     <Card title="Card Title" :updateStatus="updateStatus" />
-    <TopNav />
-    <Template />
+    <ColorCard subtitle="Dashboard" title="Laporan Pasien" color="bg-success" link="/about"/>
+    <ColorCardNoFooter subtitle="Dashboard" title="Laporan Pasien" color="bg-success" link="/about" />
+    <MultiSelect />
+    <!-- <TopNav /> -->
+    <!-- <Template /> -->
   </div>
 </template>
 
@@ -14,6 +17,9 @@ import HelloWorld from '@/components/HelloWorld.vue'
 import Card from '@/components/CardTimeline.vue'
 import TopNav from '@/components/TopNav.vue'
 import Template from '@/components/Template.vue'
+import ColorCard from '@/components/ColorCard.vue'
+import ColorCardNoFooter from '@/components/ColorCardNoFooter.vue'
+import MultiSelect from '@/components/MultiSelect.vue'
 
 export default {
   name: 'Home',
@@ -21,7 +27,10 @@ export default {
     HelloWorld,
     Card,
     TopNav,
-    Template
+    Template, 
+    ColorCard,
+    ColorCardNoFooter,
+    MultiSelect
   },
   data: function() {
        return {

@@ -1,11 +1,23 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
+import HomeResiden from '../views/HomeResiden.vue'
+import TugasPresentasiForm from '../views/TugasPresentasiForm.vue'
 
 const routes = [
   {
     path: '/',
     name: 'Home',
+    component: HomeResiden
+  },
+  {
+    path: '/components',
+    name: 'Components',
     component: Home
+  },
+  {
+    path: '/tugaspresentasiform',
+    name: 'TugasPresentasiForm',
+    component: TugasPresentasiForm
   },
   {
     path: '/about',
