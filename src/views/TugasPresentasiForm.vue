@@ -187,20 +187,15 @@
     <br />
     <!-- <button class="btn btn-primary" type="submit">Submit</button> -->
   </form>
-<multiselect
-      v-model="posts.listReviewer"
-      :options="['a', 'b', 'd', 'm']">
-    </multiselect>
+
 </template>
 
 <script>
 import axios from "axios";
 import VueAxios from "vue-axios";
-import Multiselect from 'vue-multiselect'
 
 export default {
   name: "TugasPresentasiForm",
-  components: { Multiselect },
   data() {
     return {
       posts: {
