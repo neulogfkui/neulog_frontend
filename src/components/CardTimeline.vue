@@ -20,14 +20,12 @@
 </template>
 
 <script>
-
 export default {
   name: "CardTimeline",
   props: {
     title: String,
     updateStatus: Array,
   },
-
 };
 </script>
 
