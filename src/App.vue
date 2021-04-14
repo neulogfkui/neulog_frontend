@@ -88,12 +88,16 @@
       <div id="layoutSidenav_content">
       <nav>
       <router-link to="/tugaspresentasiform">TugasPresentasiForm</router-link>
+      <router-link to="/kasussulitform">KasusSulitForm</router-link>
+      <router-link to="/tugaspublikasiform">TugasPublikasiForm</router-link>
+      <router-link to="/tugaspenelitianakhirform">TugasPenelitianAkhirForm</router-link>
+      <router-link to="/addlaporantugas">LaporanTugasChoice</router-link>
       <router-link to="/components">Components</router-link>
       <router-link to="/login">Login</router-link>
       <router-link to="/about">About</router-link>
     </nav>
     <nav>
-    <router-link to="/about"> Tes Link </router-link>
+    <router-link to="/about"> Tes Link </router-link> 
       </nav>
 
 
