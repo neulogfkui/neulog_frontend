@@ -5,7 +5,7 @@
     <Card title="Card Title" :updateStatus="updateStatus" />
     <ColorCard subtitle="Dashboard" title="Laporan Pasien" color="bg-success" link="/about"/>
     <ColorCardNoFooter subtitle="Dashboard" title="Laporan Pasien" color="bg-success" link="/about" />
-    <MultiSelect />
+    <!-- <MultiSelect /> -->
     <!-- <TopNav /> -->
     <!-- <Template /> -->
   </div>
@@ -19,7 +19,7 @@ import TopNav from '@/components/TopNav.vue'
 import Template from '@/components/Template.vue'
 import ColorCard from '@/components/ColorCard.vue'
 import ColorCardNoFooter from '@/components/ColorCardNoFooter.vue'
-import MultiSelect from '@/components/MultiSelect.vue'
+// import MultiSelect from '@/components/MultiSelect.vue'
 
 export default {
   name: 'Home',
@@ -30,7 +30,7 @@ export default {
     Template, 
     ColorCard,
     ColorCardNoFooter,
-    MultiSelect
+    // MultiSelect
   },
   data: function() {
        return {

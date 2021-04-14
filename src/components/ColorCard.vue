@@ -14,7 +14,7 @@
       <div
         class="card-footer d-flex align-items-center justify-content-between"
       >
-        <a class="small text-white stretched-link" :href="link">Buat Tugas</a>
+        <a class="small text-white stretched-link" :href="link">{{ action }}</a>
 
         <div class="small text-white">
           <i class="fas fa-angle-right"></i>
@@ -33,6 +33,7 @@ export default {
     title: String,
     color: String,
     link: String,
+    action: String,
   },
 };
 </script>
