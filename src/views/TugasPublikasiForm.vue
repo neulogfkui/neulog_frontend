@@ -1,75 +1,39 @@
 <template>
-
-<form @submit="postData" method="POST">
-  <div class="row container">
-    <!-- card 1 -->
-     <div class="col-xxl-6 col-xl-6 mb-4">
-    <div class="card card-header-actions h-100">
-      <div class="card-header">
-        <b>{{ title }}</b>
-      </div>
-      <div class="card-body">
-        <!-- NAMA PERTEMUAN -->
+  <p>FORUMULIR</p>
+  <form @submit="postData" method="POST">
+    <div class="row container">
+        <!-- CARD 1 -->
+      <div class="col-xxl-6 col-xl-6 mb-4">
+        <div class="card card-header-actions h-100">
+          <div class="card-header">
+            <b>Data Tugas Publikasi</b>
+          </div>
+          <div class="card-body">
+            <!-- EVENT PUBLIKASI -->
             <div class="form-group">
-              <label for="sel1">Nama Pertemuan</label>
-              <select
-                class="form-control"
-                name="namaPertemuan"
-                v-model="posts.namaPertemuan"
-              >
-                <option
-                  v-for="item in listNamaPertemuan"
-                  v-bind:key="item.id"
-                  :value="item"
-                >
-                  {{ item }}
-                </option>
-              </select>
-            </div>
-        
-        <!-- KASUS YANG DIBAHAS -->
-            <div class="form-group">
-              <label for="sel1">Kasus Yang Dibahas</label>
-              <select
-                class="form-control"
-                name="kasusYangDibahas"
-                v-model="posts.kasusYangDibahas"
-              >
-                <option
-                  v-for="item in listKasusYangDibahas"
-                  v-bind:key="item.id"
-                  :value="item"
-                >
-                  {{ item }}
-                </option>
-              </select>
-            </div>
-
-        <!-- LINK -->
-            <div class="form-group">
-              <label class="medium mb-1">Link</label>
+              <label class="medium mb-1">Event Publikasi</label>
               <input
                 class="form-control"
-                name="link"
-                v-model="posts.linkTugas"
+                name="eventPublikasi"
+                v-model="posts.eventPublikasi"
                 type="text"
-                placeholder="Masukkan judul presentasi"
+                placeholder="Masukkan event publikasi"
               />
             </div>
-        
-        <!-- TANGGAL -->
-        <div class="form-group">
-            <label for="example-date-input">Date</label>
-            <input
-            class="form-control"
-            type="date"
-            name="tanggal"
-            v-model="posts.tanggal"
-            />
-        </div>
 
+            <!-- JUDUL PUBLIKASI -->
+            <div class="form-group">
+              <label class="medium mb-1">Judul Publikasi</label>
+              <input
+                class="form-control"
+                name="judulPublikasi"
+                v-model="posts.judulPublikasi"
+                type="text"
+                placeholder="Masukkan judul publikasi"
+              />
+            </div>
 
-        <!-- KONSULEN -->
+            <!-- KONSULEN -->
             <div class="form-group">
               <label for="sel1">Konsulen</label>
               <select
@@ -86,7 +50,32 @@
                 </option>
               </select>
             </div>
-            <!-- MODAL -->
+            <!-- TANGGAL -->
+            <div class="form-group">
+              <label for="example-date-input">Date</label>
+              <input
+                class="form-control"
+                type="date"
+                name="tanggal"
+                v-model="posts.tanggal"
+              />
+            </div>
+            
+            <!-- LINK -->
+            <div class="form-group">
+              <label class="medium mb-1">Link</label>
+              <input
+                class="form-control"
+                name="link"
+                v-model="posts.linkTugas"
+                type="text"
+                placeholder="Masukkan judul presentasi"
+              />
+            </div>
+            <!-- <multiselect
+      v-model="posts.listReviewer"
+      :options="listKonsulen">
+    </multiselect> -->
             <button
               id="completeButton"
               class="btn btn-primary"
@@ -94,7 +83,7 @@
               data-toggle="modal"
               data-target="#exampleModal"
             >
-              tes
+              Simpan
             </button>
             <div
               class="modal fade"
@@ -149,58 +138,74 @@
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+        <!-- CARD 2 -->
+      <div class="col-xxl-6 col-xl-6 mb-4">
+        <div class="card card-header-actions h-100">
+          <div class="card-header">
+            <b>{{ title }}</b>
+          </div>
+          <div class="card-body">
+            <div
+              class="timeline timeline-xs"
+              v-for="(item, index) in updateStatus"
+              v-bind:key="item.id"
+            >
+              <!-- Timeline Item -->
+              <div class="timeline-item" v-if="index % 2 == 0">
+                <p>{{ item }}</p>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                <p>
+                  <b>{{ updateStatus[index + 1] }}</b>
+                </p>
+              </div>
+              <!-- Timeline Item -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-      </div>
-    </div>
-  </div>
-  </div>
-  <!-- card 2 -->
-  <div class="col-xxl-6 col-xl-6 mb-4">
-    <div class="card card-header-actions h-100">
-      <div class="card-header">
-        <b>{{ title }}</b>
-      </div>
-      <div class="card-body">
-        
-      </div>
-    </div>
-  </div>
-  </div>
-</form>
+    <br />
+    <!-- <button class="btn btn-primary" type="submit">Submit</button> -->
+  </form>
+
 </template>
+
+
+
 
 <script>
 import axios from "axios";
 import VueAxios from "vue-axios";
 
 export default {
-  name: "KasusSulitForm",
+  name: "TugasPublikasiForm",
   data() {
     return {
       posts: {
         idKonsulen: null,
         tanggal: null,
-        kasusYangDibahas: null,
-        namaPertemuan: null,
+        eventPublikasi: null,
+        judulPublikasi: null,
         linkTugas: null,
         idResiden: 1,
         listReviewer: null,
       },
       listKonsulen: null,
-      listNamaPertemuan:null,
-      listKasusYangDibahas: null,
       success: false,
       submitted: false,
     };
   },
   mounted() {
     axios
-      .get("http://localhost:8000/KasusSulitFormAttribute")
+      .get("http://localhost:8000/TugasPublikasiFormAttribute")
       .then((resp) => {
         console.warn(resp.data);
         this.listKonsulen = resp.data.listKonsulen;
-        this.listNamaPertemuan = resp.data.listNamaPertemuan;
-        this.listKasusYangDibahas = resp.data.listKasusYangDibahas;
       });
   },
   methods: {
@@ -208,7 +213,7 @@ export default {
       console.warn(this.posts);
       axios
         .post(
-          "http://localhost:8000/laporantugas/addpembahasankasussulit/",
+          "http://localhost:8000/laporantugas/addtugaspublikasi/",
           this.posts
         )
         .then((result) => {
