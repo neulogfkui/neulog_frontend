@@ -99,7 +99,11 @@
       <br>
       <router-link to="/about">About</router-link>
       <br>
+<<<<<<< HEAD
       <router-link to="/dashboardPengurusAkademik">DashboardPengurusAkademik</router-link>
+=======
+      <router-link to="/dashboardResidenMenu">DashboardResidenMenu</router-link>
+>>>>>>> 177d08af16320c2080bfcdbd9bed50f08ec10f0b
     </nav>
     <nav>
     <router-link to="/about"> Tes Link </router-link> 
