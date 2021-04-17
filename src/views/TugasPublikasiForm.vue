@@ -1,43 +1,38 @@
 <template>
-  <p>Formmmmmm</p>
+  <p>FORUMULIR</p>
   <form @submit="postData" method="POST">
     <div class="row container">
-      <div class="col-xxl-4 col-xl-4 mb-4">
+        <!-- CARD 1 -->
+      <div class="col-xxl-6 col-xl-6 mb-4">
         <div class="card card-header-actions h-100">
           <div class="card-header">
-            <b>Data Tugas Presentasi</b>
+            <b>Data Tugas Publikasi</b>
           </div>
           <div class="card-body">
-            <!-- MODUL -->
+            <!-- EVENT PUBLIKASI -->
             <div class="form-group">
-              <label for="sel1">Modul</label>
-              <select class="form-control" name="modul" v-model="posts.idModul">
-                <option
-                  v-for="item in listModul"
-                  v-bind:key="item.id"
-                  :value="item.idModul"
-                >
-                  {{ item.namaModul }}
-                </option>
-              </select>
-            </div>
-            <!-- JENIS TUGAS -->
-            <div class="form-group">
-              <label for="sel1">Jenis Tugas</label>
-              <select
+              <label class="medium mb-1">Event Publikasi</label>
+              <input
                 class="form-control"
-                name="jenisTugas"
-                v-model="posts.jenis"
-              >
-                <option
-                  v-for="item in listJenisTugas"
-                  v-bind:key="item.id"
-                  :value="item"
-                >
-                  {{ item }}
-                </option>
-              </select>
+                name="eventPublikasi"
+                v-model="posts.eventPublikasi"
+                type="text"
+                placeholder="Masukkan event publikasi"
+              />
             </div>
+
+            <!-- JUDUL PUBLIKASI -->
+            <div class="form-group">
+              <label class="medium mb-1">Judul Publikasi</label>
+              <input
+                class="form-control"
+                name="judulPublikasi"
+                v-model="posts.judulPublikasi"
+                type="text"
+                placeholder="Masukkan judul publikasi"
+              />
+            </div>
+
             <!-- KONSULEN -->
             <div class="form-group">
               <label for="sel1">Konsulen</label>
@@ -65,17 +60,7 @@
                 v-model="posts.tanggal"
               />
             </div>
-            <!-- JUDUL -->
-            <div class="form-group">
-              <label class="medium mb-1">Judul</label>
-              <input
-                class="form-control"
-                name="judul"
-                v-model="posts.judulMakalah"
-                type="text"
-                placeholder="Masukkan judul presentasi"
-              />
-            </div>
+            
             <!-- LINK -->
             <div class="form-group">
               <label class="medium mb-1">Link</label>
@@ -96,9 +81,9 @@
               class="btn btn-primary"
               type="button"
               data-toggle="modal"
-              :data-target="modalName"
+              data-target="#exampleModal"
             >
-              tes
+              Simpan
             </button>
             <div
               class="modal fade"
@@ -157,8 +142,8 @@
           </div>
         </div>
       </div>
-
-      <div class="col-xxl-4 col-xl-4 mb-4">
+        <!-- CARD 2 -->
+      <div class="col-xxl-6 col-xl-6 mb-4">
         <div class="card card-header-actions h-100">
           <div class="card-header">
             <b>{{ title }}</b>
@@ -190,40 +175,36 @@
 
 </template>
 
+
+
+
 <script>
 import axios from "axios";
 import VueAxios from "vue-axios";
 
 export default {
-  name: "TugasPresentasiForm",
+  name: "TugasPublikasiForm",
   data() {
     return {
       posts: {
-        idModul: null,
-        jenis: null,
         idKonsulen: null,
         tanggal: null,
-        judulMakalah: null,
+        eventPublikasi: null,
+        judulPublikasi: null,
         linkTugas: null,
         idResiden: 1,
         listReviewer: null,
       },
-      listModul: null,
-      listJenisTugas: null,
       listKonsulen: null,
-      showConfirmation: false,
-      modalName: "#exampleModal",
       success: false,
       submitted: false,
     };
   },
   mounted() {
     axios
-      .get("http://localhost:8000/LaporanPresentasiFormAttribute")
+      .get("http://localhost:8000/TugasPublikasiFormAttribute")
       .then((resp) => {
         console.warn(resp.data);
-        this.listModul = resp.data.listModul;
-        this.listJenisTugas = resp.data.listJenisTugas;
         this.listKonsulen = resp.data.listKonsulen;
       });
   },
@@ -232,7 +213,7 @@ export default {
       console.warn(this.posts);
       axios
         .post(
-          "http://localhost:8000/laporantugas/addtugaspresentasi/",
+          "http://localhost:8000/laporantugas/addtugaspublikasi/",
           this.posts
         )
         .then((result) => {
@@ -247,4 +228,3 @@ export default {
   },
 };
 </script>
-

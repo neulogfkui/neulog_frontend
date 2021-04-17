@@ -1,43 +1,44 @@
 <template>
-  <p>Formmmmmm</p>
+  <p>FORUMULIR</p>
   <form @submit="postData" method="POST">
     <div class="row container">
-      <div class="col-xxl-4 col-xl-4 mb-4">
+        <!-- CARD 1 -->
+      <div class="col-xxl-6 col-xl-6 mb-4">
         <div class="card card-header-actions h-100">
           <div class="card-header">
-            <b>Data Tugas Presentasi</b>
+            <b>Data Tugas Publikasi</b>
           </div>
           <div class="card-body">
-            <!-- MODUL -->
+
+            <!-- JUDUL PROPOSAL -->
             <div class="form-group">
-              <label for="sel1">Modul</label>
-              <select class="form-control" name="modul" v-model="posts.idModul">
-                <option
-                  v-for="item in listModul"
-                  v-bind:key="item.id"
-                  :value="item.idModul"
-                >
-                  {{ item.namaModul }}
-                </option>
-              </select>
+              <label class="medium mb-1">Judul Proposal</label>
+              <input
+                class="form-control"
+                name="judulProposal"
+                v-model="posts.judulProposal"
+                type="text"
+                placeholder="Masukkan judul proposal"
+              />
             </div>
-            <!-- JENIS TUGAS -->
+
+            <!-- STAGE -->
             <div class="form-group">
-              <label for="sel1">Jenis Tugas</label>
+              <label for="sel1">Tahap</label>
               <select
                 class="form-control"
-                name="jenisTugas"
-                v-model="posts.jenis"
+                name="stage"
+                v-model="posts.stage"
               >
                 <option
-                  v-for="item in listJenisTugas"
+                  v-for="item in listStage"
                   v-bind:key="item.id"
                   :value="item"
                 >
                   {{ item }}
                 </option>
               </select>
-            </div>
+
             <!-- KONSULEN -->
             <div class="form-group">
               <label for="sel1">Konsulen</label>
@@ -55,6 +56,7 @@
                 </option>
               </select>
             </div>
+
             <!-- TANGGAL -->
             <div class="form-group">
               <label for="example-date-input">Date</label>
@@ -65,17 +67,7 @@
                 v-model="posts.tanggal"
               />
             </div>
-            <!-- JUDUL -->
-            <div class="form-group">
-              <label class="medium mb-1">Judul</label>
-              <input
-                class="form-control"
-                name="judul"
-                v-model="posts.judulMakalah"
-                type="text"
-                placeholder="Masukkan judul presentasi"
-              />
-            </div>
+            
             <!-- LINK -->
             <div class="form-group">
               <label class="medium mb-1">Link</label>
@@ -84,7 +76,7 @@
                 name="link"
                 v-model="posts.linkTugas"
                 type="text"
-                placeholder="Masukkan judul presentasi"
+                placeholder="Masukkan link tugas"
               />
             </div>
             <!-- <multiselect
@@ -96,9 +88,9 @@
               class="btn btn-primary"
               type="button"
               data-toggle="modal"
-              :data-target="modalName"
+              data-target="#exampleModal"
             >
-              tes
+              Simpan
             </button>
             <div
               class="modal fade"
@@ -157,8 +149,8 @@
           </div>
         </div>
       </div>
-
-      <div class="col-xxl-4 col-xl-4 mb-4">
+        <!-- CARD 2 -->
+      <div class="col-xxl-6 col-xl-6 mb-4">
         <div class="card card-header-actions h-100">
           <div class="card-header">
             <b>{{ title }}</b>
@@ -183,48 +175,48 @@
         </div>
       </div>
     </div>
-
+    </div>
     <br />
     <!-- <button class="btn btn-primary" type="submit">Submit</button> -->
   </form>
 
 </template>
 
+
+
+
+
+
 <script>
 import axios from "axios";
 import VueAxios from "vue-axios";
 
 export default {
-  name: "TugasPresentasiForm",
+  name: "TugasPenelitianAkhirForm",
   data() {
     return {
       posts: {
-        idModul: null,
-        jenis: null,
         idKonsulen: null,
         tanggal: null,
-        judulMakalah: null,
+        stage: null,
+        judulProposal: null,
         linkTugas: null,
         idResiden: 1,
         listReviewer: null,
       },
-      listModul: null,
-      listJenisTugas: null,
       listKonsulen: null,
-      showConfirmation: false,
-      modalName: "#exampleModal",
+      listStage: null,
       success: false,
       submitted: false,
     };
   },
   mounted() {
     axios
-      .get("http://localhost:8000/LaporanPresentasiFormAttribute")
+      .get("http://localhost:8000/TugasPenelitianAkhirFormAttribute")
       .then((resp) => {
         console.warn(resp.data);
-        this.listModul = resp.data.listModul;
-        this.listJenisTugas = resp.data.listJenisTugas;
         this.listKonsulen = resp.data.listKonsulen;
+        this.listStage = resp.data.listStage;
       });
   },
   methods: {
@@ -232,7 +224,7 @@ export default {
       console.warn(this.posts);
       axios
         .post(
-          "http://localhost:8000/laporantugas/addtugaspresentasi/",
+          "http://localhost:8000/laporantugas/addtugaspenelitianakhir/",
           this.posts
         )
         .then((result) => {
@@ -247,4 +239,3 @@ export default {
   },
 };
 </script>
-

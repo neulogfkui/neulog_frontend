@@ -26,7 +26,6 @@ export default {
     title: String,
     updateStatus: Array,
   },
-
 };
 </script>
 
