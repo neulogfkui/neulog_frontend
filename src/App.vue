@@ -99,6 +99,7 @@
       <br>
       <router-link to="/about">About</router-link>
       <br>
+      <router-link to="/dashboardPengurusAkademik">DashboardPengurusAkademik</router-link>
     </nav>
     <nav>
     <router-link to="/about"> Tes Link </router-link> 

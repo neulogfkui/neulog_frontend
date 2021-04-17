@@ -3,6 +3,7 @@
     <!-- <img alt="Vue logo" src="../assets/logo.png"> -->
     <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
     <Card title="Card Title" :updateStatus="updateStatus" />
+<<<<<<< HEAD
     <ColorCard
       subtitle="Dashboard"
       title="Laporan Pasien"
@@ -59,6 +60,11 @@
 
     
 
+=======
+    <ColorCard subtitle="Dashboard" title="Laporan Pasien" color="bg-success" link="/about"/>
+    <ColorCardNoFooter subtitle="Dashboard" title="Laporan Pasien" color="bg-success" link="/about" />
+    <!-- <MultiSelect /> -->
+>>>>>>> ddd5a29c68fe2cf2df8812c0a6f3d0e4be78591b
     <!-- <TopNav /> -->
     <!-- <Template /> -->
   </div>

@@ -6,6 +6,7 @@ import KasusSulitForm from '../views/KasusSulitForm.vue'
 import TugasPublikasiForm from '../views/TugasPublikasiForm.vue'
 import TugasPenelitianAkhirForm from '../views/TugasPenelitianAkhirForm.vue'
 import LaporanTugasChoice from '../views/LaporanTugasChoice.vue'
+import DashboardPengurusAkademikMenu from '../views/DashboardPengurusAkademik/DashboardPengurusAkademikMenu.vue'
 
 const routes = [
   //USE CASE 1
@@ -54,6 +55,11 @@ const routes = [
     component: function () {
       return import(/* webpackChunkName: "about" */ '../views/About.vue')
     }
+  },
+  {
+    path: '/dashboardPengurusAkademik',
+    name: 'dashboardPengurusAkademik',
+    component: DashboardPengurusAkademikMenu
   }
 ]
 
