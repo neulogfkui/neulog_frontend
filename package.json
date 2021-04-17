@@ -9,9 +9,11 @@
   "dependencies": {
     "axios": "^0.21.1",
     "bootstrap-vue": "^2.21.2",
+    "datatables.net-bs4": "^1.10.24",
     "feather-icons": "^4.28.0",
     "vue": "^3.0.0",
     "vue-axios": "^3.2.4",
+    "vue-chartjs": "^3.5.1",
     "vue-feather-icons": "^5.1.0",
     "vue-icon": "^2.2.0",
     "vue-multiselect": "^2.1.6",
@@ -25,6 +27,7 @@
     "@vue/cli-service": "~4.5.0",
     "@vue/compiler-sfc": "^3.0.0",
     "bootstrap": "^4.6.0",
+    "chart.js": "^3.1.0",
     "jquery": "^3.6.0",
     "popper.js": "^1.16.1"
   },

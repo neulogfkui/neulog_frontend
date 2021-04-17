@@ -4,6 +4,7 @@ import HomeResiden from '../views/HomeResiden.vue'
 import TugasPresentasiForm from '../views/TugasPresentasiForm.vue'
 
 const routes = [
+  //USE CASE 1
   {
     path: '/',
     name: 'Home',
@@ -19,6 +20,7 @@ const routes = [
     name: 'TugasPresentasiForm',
     component: TugasPresentasiForm
   },
+  //USE CASE 2
   {
     path: '/about',
     name: 'About',
