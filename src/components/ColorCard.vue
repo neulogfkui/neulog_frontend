@@ -14,13 +14,7 @@
       <div
         class="card-footer d-flex align-items-center justify-content-between"
       >
-<<<<<<< HEAD
         <a class="small text-white stretched-link" :href="link">{{ action }}</a>
-=======
-        <a class="small text-white stretched-link" :href="link">
-          {{action}}
-        </a>
->>>>>>> 177d08af16320c2080bfcdbd9bed50f08ec10f0b
 
         <div class="small text-white">
           <i class="fas fa-angle-right"></i>

@@ -2,7 +2,7 @@
   <p>FORUMULIR</p>
   <form @submit="postData" method="POST">
     <div class="row container">
-        <!-- CARD 1 -->
+      <!-- CARD 1 -->
       <div class="col-xxl-6 col-xl-6 mb-4">
         <div class="card card-header-actions h-100">
           <div class="card-header">
@@ -46,7 +46,11 @@
                   v-bind:key="item.id"
                   :value="item.idKonsulen"
                 >
-                  {{ item.penggunaModel.firstName + " " + item.penggunaModel.lastName}}
+                  {{
+                    item.penggunaModel.firstName +
+                    " " +
+                    item.penggunaModel.lastName
+                  }}
                 </option>
               </select>
             </div>
@@ -60,7 +64,7 @@
                 v-model="posts.tanggal"
               />
             </div>
-            
+
             <!-- LINK -->
             <div class="form-group">
               <label class="medium mb-1">Link</label>
@@ -132,7 +136,11 @@
                     >
                       Close
                     </button>
-                    <button class="btn btn-info" type="button" data-dismiss="modal">
+                    <button
+                      class="btn btn-info"
+                      type="button"
+                      data-dismiss="modal"
+                    >
                       Save changes
                     </button>
                   </div>
@@ -142,27 +150,41 @@
           </div>
         </div>
       </div>
-        <!-- CARD 2 -->
+      <!-- CARD 2 -->
       <div class="col-xxl-6 col-xl-6 mb-4">
         <div class="card card-header-actions h-100">
           <div class="card-header">
-            <b>{{ title }}</b>
+            <b>List Reviewer</b>
           </div>
           <div class="card-body">
-            <div
-              class="timeline timeline-xs"
-              v-for="(item, index) in updateStatus"
-              v-bind:key="item.id"
-            >
-              <!-- Timeline Item -->
-              <div class="timeline-item" v-if="index % 2 == 0">
-                <p>{{ item }}</p>
-                <p>&nbsp;&nbsp;&nbsp;&nbsp;</p>
-                <p>
-                  <b>{{ updateStatus[index + 1] }}</b>
-                </p>
-              </div>
-              <!-- Timeline Item -->
+            <div class="datatable">
+              <table
+                class="table table-bordered table-hover"
+                id="dataTable"
+                width="100%"
+                cellspacing="0"
+              >
+                <thead>
+                  <tr>
+                    <th>Nama Konsulen</th>
+                    <th>Pilih</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="item in listKonsulen" v-bind:key="item.id">
+                    <td>
+                      {{
+                        item.penggunaModel.firstName +
+                        " " +
+                        item.penggunaModel.lastName
+                      }}
+                    </td>
+                    <td>
+                      <input type="checkbox" @change="check(item.idKonsulen)" />
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
@@ -172,7 +194,6 @@
     <br />
     <!-- <button class="btn btn-primary" type="submit">Submit</button> -->
   </form>
-
 </template>
 
 
@@ -193,7 +214,7 @@ export default {
         judulPublikasi: null,
         linkTugas: null,
         idResiden: 1,
-        listReviewer: null,
+        listReviewer: [100, 101],
       },
       listKonsulen: null,
       success: false,
@@ -206,6 +227,10 @@ export default {
       .then((resp) => {
         console.warn(resp.data);
         this.listKonsulen = resp.data.listKonsulen;
+        let table = $("#dataTable").DataTable({
+          language: this.dataTableOptions,
+        });
+        table.rows().invalidate().draw();
       });
   },
   methods: {
@@ -224,6 +249,14 @@ export default {
           console.warn(result);
         });
       e.preventDefault();
+    },
+    check(item) {
+      if (this.listReviewer.includes(item)) {
+        this.listReviewer.pop(item);
+      } else {
+        this.listReviewer.push(item);
+      }
+      console.log(this.listReviewer);
     },
   },
 };
