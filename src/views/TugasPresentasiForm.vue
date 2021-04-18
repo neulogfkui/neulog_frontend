@@ -154,6 +154,7 @@
         type="button"
         data-toggle="modal"
         data-target="#exampleModal"
+        @click="refreshSubmitted"
       >
         Kirim
       </button>
@@ -229,20 +230,19 @@
               <div v-if="status == 1"></div>
               <div v-if="status == 2">
                 
-                <button class="btn btn-primary">Ok <router-link to="{ name: 'TugasPresentasiDetails', props: { data: this.posts }}"></router-link></button>
+                <router-link to="{ name: 'TugasPresentasiDetails', props: { data: this.target }}">
+                  <button class="btn btn-primary">Ok </button>
+                </router-link>
+                
          
               </div>
               <div v-if="status == 3">
                 <button
                   class="btn btn-primary"
-                  id = "buttonFailed"
                   type="button"
-
-                  @click="refreshSubmitted"
-                >
-                Ya
+                  data-dismiss="modal"
+                > Ya
                 </button>
-                
               </div>
             </div>
           </div>
@@ -276,6 +276,8 @@ export default {
         linkTugas: null,
         idResiden: 1,
         listReviewer: null,
+        idLaporanTugas: null,
+        idTugasPresentasi: null
       },
       listModul: null,
       listJenisTugas: null,
@@ -304,6 +306,18 @@ export default {
   },
 
   methods: {
+    updatePosts(){
+        this.posts.idModul = this.target.laporanTugasPresentasiModel.idModul;
+        this.posts.jenis = this.target.laporanTugasPresentasiModel.jenis,
+        this.posts.idKonsulen = this.target.idKonsulen;
+        this.posts.tanggal = this.target.tanggal,
+        this.posts.judulMakalah = this.target.laporanTugasPresentasiModel.judulMakalah;
+        this.posts.linkTugas= this.target.linkTugas;
+        this.posts.idResiden=this.target.idResiden;
+        this.posts.listReviewer=this.target.listReviewer;
+        this.posts.idTugasPresentasi=this.target.laporanTugasPresentasiModel.idTugasPresentasi;
+        this.posts.idLaporanTugas=this.target.idLaporanTugas;
+    },
     postData(e) {
       this.status = 1;
       console.warn(this.posts);
@@ -313,8 +327,10 @@ export default {
           this.posts
         )
         .then((result) => {
-          if (result == "Success") {
+          if (result != null) {
             this.status = 2;
+            this.target = result;
+            updatePosts();
           } else {
             this.status = 3;
           }
@@ -332,8 +348,7 @@ export default {
     },
     refreshSubmitted() {
       this.status = 0;
-      const demoId = document.querySelector('#buttonFailed');
-      demoId.setAttribute("data-dismiss","modal");
+      console.log(this.status);
     },
     loadDataTable() {
       (function (factory) {

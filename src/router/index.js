@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import HomeResiden from '../views/HomeResiden.vue'
 import TugasPresentasiForm from '../views/TugasPresentasiForm.vue'
+import TugasPresentasiDetail from '../views/Details/TugasPresentasiDetail.vue'
 import KasusSulitForm from '../views/KasusSulitForm.vue'
 import TugasPublikasiForm from '../views/TugasPublikasiForm.vue'
 import TugasPenelitianAkhirForm from '../views/TugasPenelitianAkhirForm.vue'
@@ -42,6 +43,12 @@ const routes = [
     path: '/tugaspresentasiform',
     name: 'TugasPresentasiForm',
     component: TugasPresentasiForm,
+    props:{ target:null }
+  },
+  {
+    path: '/tugaspresentasidetail',
+    name: 'TugasPresentasiDetail',
+    component: TugasPresentasiDetail,
     props:{ target:null }
   },
   {
