@@ -154,6 +154,7 @@
         type="button"
         data-toggle="modal"
         data-target="#exampleModal"
+        @click="refreshSubmitted"
       >
         Kirim
       </button>
@@ -229,7 +230,7 @@
               <div v-if="status == 1"></div>
               <div v-if="status == 2">
                 
-                <button class="btn btn-primary">Ok <router-link to="{ name: 'TugasPresentasiDetails', props: { data: this.posts }}"></router-link></button>
+                <router-link :to="'/tugaspresentasidetail/' + posts.idLaporanTugas"><button class="btn btn-primary" data-dismiss="modal">Ok </button></router-link>
          
               </div>
               <div v-if="status == 3">
@@ -237,8 +238,7 @@
                   class="btn btn-primary"
                   id = "buttonFailed"
                   type="button"
-
-                  @click="refreshSubmitted"
+                  data-dismiss="modal"
                 >
                 Ya
                 </button>
@@ -276,6 +276,7 @@ export default {
         linkTugas: null,
         idResiden: 1,
         listReviewer: null,
+        idLaporanTugas: 0,
       },
       listModul: null,
       listJenisTugas: null,
@@ -313,12 +314,13 @@ export default {
           this.posts
         )
         .then((result) => {
-          if (result == "Success") {
+          if (result.data != "0") {
+            this.posts.idLaporanTugas = result.data;
             this.status = 2;
           } else {
             this.status = 3;
           }
-          console.warn(result);
+          console.warn(result.data);
         });
       e.preventDefault();
     },
@@ -332,8 +334,6 @@ export default {
     },
     refreshSubmitted() {
       this.status = 0;
-      const demoId = document.querySelector('#buttonFailed');
-      demoId.setAttribute("data-dismiss","modal");
     },
     loadDataTable() {
       (function (factory) {
