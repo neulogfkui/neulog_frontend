@@ -20486,3 +20486,7 @@ pre[class*=language-] {
 .token.variable {
   color: #ff6666;
 }
+
+.upper{
+  margin-top: -3rem;
+}
