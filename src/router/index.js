@@ -6,8 +6,28 @@ import KasusSulitForm from '../views/KasusSulitForm.vue'
 import TugasPublikasiForm from '../views/TugasPublikasiForm.vue'
 import TugasPenelitianAkhirForm from '../views/TugasPenelitianAkhirForm.vue'
 import LaporanTugasChoice from '../views/LaporanTugasChoice.vue'
+import DashboardPengurusAkademikMenu from '../views/DashboardPengurusAkademik/DashboardPengurusAkademikMenu.vue'
+import DashboardResidenMenu from '../views/DashboardResiden/DashboardResidenMenu.vue'
+import DashboardLaporanPasien from '../views/DashboardResiden/DashboardLaporanPasien.vue'
+import DashboardLaporanTugas from '../views/DashboardResiden/DashboardLaporanTugas.vue'
+import DashboardTugasPresentasi from '../views/DashboardResiden/DashboardTugasPresentasi.vue'
+import DashboardPKSM from '../views/DashboardResiden/DashboardPKSM.vue'
+import DashboardPublikasi from '../views/DashboardResiden/DashboardPublikasi.vue'
+import DashboardTPA from '../views/DashboardResiden/DashboardTPA.vue'
+import DashboardProgressTest from '../views/DashboardResiden/DashboardProgressTest.vue'
+import DashboardKompetensi from '../views/DashboardResiden/DashboardKompetensi.vue'
+import DashboardModul from '../views/DashboardResiden/DashboardModul.vue'
+import DashboardTindakan from '../views/DashboardResiden/DashboardTindakan.vue'
+import DashboardJaga from '../views/DashboardResiden/DashboardJaga.vue'
 
 const routes = [
+  //ALL
+  //AUTHOR: ALL
+
+
+  //USE CASE 1
+  //AUTHOR: NUR
+  // --------------------------------------------
   {
     path: '/',
     name: 'Home',
@@ -21,7 +41,8 @@ const routes = [
   {
     path: '/tugaspresentasiform',
     name: 'TugasPresentasiForm',
-    component: TugasPresentasiForm
+    component: TugasPresentasiForm,
+    props:{ target:null }
   },
   {
     path: '/kasussulitform',
