@@ -2,10 +2,10 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import HomeResiden from '../views/HomeResiden.vue'
 import TugasPresentasiForm from '../views/TugasPresentasiForm.vue'
-import TugasPresentasiDetail from '../views/Details/TugasPresentasiDetail.vue'
 import KasusSulitForm from '../views/KasusSulitForm.vue'
 import TugasPublikasiForm from '../views/TugasPublikasiForm.vue'
 import TugasPenelitianAkhirForm from '../views/TugasPenelitianAkhirForm.vue'
+import TugasPresentasiDetail from '../views/Details/TugasPresentasiDetail.vue'
 import LaporanTugasChoice from '../views/LaporanTugasChoice.vue'
 import DashboardPengurusAkademikMenu from '../views/DashboardPengurusAkademik/DashboardPengurusAkademikMenu.vue'
 import DashboardResidenMenu from '../views/DashboardResiden/DashboardResidenMenu.vue'
@@ -20,8 +20,10 @@ import DashboardKompetensi from '../views/DashboardResiden/DashboardKompetensi.v
 import DashboardModul from '../views/DashboardResiden/DashboardModul.vue'
 import DashboardTindakan from '../views/DashboardResiden/DashboardTindakan.vue'
 import DashboardJaga from '../views/DashboardResiden/DashboardJaga.vue'
+import LaporanPasienDetail from '../views/DashboardResiden/LaporanPasienDetail.vue'
 
 const routes = [
+
   //ALL
   //AUTHOR: ALL
 
@@ -35,21 +37,34 @@ const routes = [
     component: HomeResiden
   },
   {
+    path: '/dashboardtugaspresentasi/:idResiden',
+    name: 'DashboardTugasPresentasi',
+    component: DashboardTugasPresentasi
+  },
+  {
+    path: '/dashboardlaporanpasien/:idResiden',
+    name: 'DashboardLaporanPasien',
+    component: DashboardLaporanPasien
+  },
+  {
+    path: '/laporanpasiendetail/:idLaporanPasien',
+    name: 'LaporanPasienDetail',
+    component: LaporanPasienDetail
+  },
+  {
     path: '/components',
     name: 'Components',
     component: Home
   },
   {
-    path: '/tugaspresentasiform',
+    path: '/tugaspresentasiform/:operation',
     name: 'TugasPresentasiForm',
     component: TugasPresentasiForm,
-    props:{ target:null }
   },
   {
-    path: '/tugaspresentasidetail',
+    path: '/tugaspresentasidetail/:idLaporanTugas',
     name: 'TugasPresentasiDetail',
     component: TugasPresentasiDetail,
-    props:{ target:null }
   },
   {
     path: '/kasussulitform',
