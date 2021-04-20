@@ -209,9 +209,7 @@
               </div>
               <div v-if="status == 1"></div>
               <div v-if="status == 2">
-                
-                <button class="btn btn-primary">Ok <router-link to="{ name: 'TugasPresentasiDetails', props: { data: this.posts }}"></router-link></button>
-         
+                <router-link :to="'/tugaspublikasidetail/' + posts.idLaporanTugas"><button class="btn btn-primary" data-dismiss="modal">Ok </button></router-link>
               </div>
               <div v-if="status == 3">
                 <button
@@ -258,9 +256,11 @@ export default {
         linkTugas: null,
         idResiden: 1,
         listReviewer: null,
+        idLaporanTugas: 0,
       },
       listKonsulen: null,
       status: 0,
+      target: null,
     };
   },
   mounted() {
@@ -284,7 +284,8 @@ export default {
           this.posts
         )
         .then((result) => {
-          if (result.data == "Success") {
+          if (result.data != "0") {
+            this.posts.idLaporanTugas = result.data;
             this.status = 2;
           } else {
             this.status = 3;

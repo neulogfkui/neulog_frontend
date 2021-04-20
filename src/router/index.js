@@ -6,6 +6,9 @@ import KasusSulitForm from '../views/KasusSulitForm.vue'
 import TugasPublikasiForm from '../views/TugasPublikasiForm.vue'
 import TugasPenelitianAkhirForm from '../views/TugasPenelitianAkhirForm.vue'
 import TugasPresentasiDetail from '../views/Details/TugasPresentasiDetail.vue'
+import TugasPublikasiDetail from '../views/Details/TugasPublikasiDetail.vue'
+import KasusSulitDetail from '../views/Details/KasusSulitDetail.vue'
+import TugasPenelitianAkhirDetail from '../views/Details/TugasPenelitianAkhirDetail.vue'
 import LaporanTugasChoice from '../views/LaporanTugasChoice.vue'
 import DashboardPengurusAkademikMenu from '../views/DashboardPengurusAkademik/DashboardPengurusAkademikMenu.vue'
 import DashboardResidenMenu from '../views/DashboardResiden/DashboardResidenMenu.vue'
@@ -48,6 +51,21 @@ const routes = [
     path: '/tugaspresentasidetail/:idLaporanTugas',
     name: 'TugasPresentasiDetail',
     component: TugasPresentasiDetail,
+  },
+  {
+    path: '/tugaspublikasidetail/:idLaporanTugas',
+    name: 'TugasPublikasiDetail',
+    component: TugasPublikasiDetail,
+  },
+  {
+    path: '/kasussulitdetail/:idLaporanTugas',
+    name: 'KasusSulitDetail',
+    component: KasusSulitDetail,
+  },
+  {
+    path: '/tugaspenelitianakhirdetail/:idLaporanTugas',
+    name: 'TugasPenelitianAkhirDetail',
+    component: TugasPenelitianAkhirDetail,
   },
   {
     path: '/kasussulitform',
