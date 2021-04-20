@@ -257,13 +257,34 @@ export default {
         idResiden: 1,
         listReviewer: null,
         idLaporanTugas: 0,
+        idChild:0,
       },
       listKonsulen: null,
       status: 0,
       target: null,
+      isMounted: false
     };
   },
   mounted() {
+    if (this.$route.params.operation != 0) {
+      axios
+        .get(
+          "http://localhost:8000/laporantugas/" + this.$route.params.operation
+        )
+        .then((resp) => {
+          console.warn(resp.data);
+          this.posts.idKonsulen = resp.data.idKonsulen;
+          this.posts.tanggal = resp.data.tugas.tanggalDibuat;
+          this.posts.eventPublikasi = resp.data.tugas.tugasPublikasiModel.eventPublikasi;
+          this.posts.judulPublikasi = resp.data.tugas.tugasPublikasiModel.judulPublikasi;
+          this.posts.linkTugas = resp.data.tugas.linkTugas;
+          this.posts.listReviewer = resp.data.listReviewer;
+          this.posts.idLaporanTugas = resp.data.tugas.idLaporanTugas;
+          this.posts.idChild = resp.data.tugas.tugasPublikasiModel.idTugasPublikasi;
+          console.log(this.posts);
+        });
+        this.isMounted = true;
+    }
     axios
       .get("http://localhost:8000/TugasPublikasiFormAttribute")
       .then((resp) => {
@@ -278,9 +299,16 @@ export default {
       this.status = 1;
       console.warn(this.posts);
       
+      var url = "";
+      if(this.$route.params.operation == 0){
+        url = "http://localhost:8000/laporantugas/addtugaspublikasi/";
+      }else{
+        url = "http://localhost:8000/laporantugas/updatetugaspublikasi/"
+      }
+
       axios
         .post(
-          "http://localhost:8000/laporantugas/addtugaspublikasi/",
+          url,
           this.posts
         )
         .then((result) => {

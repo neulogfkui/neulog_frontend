@@ -264,16 +264,37 @@ export default {
         idResiden: 1,
         listReviewer: null,
         idLaporanTugas:0,
+        idChild:0,
       },
       listKonsulen: null,
       listNamaPertemuan:null,
       listKasusYangDibahas: null,
       status:0,
       target: null,
+      isMounted: false
     };
   },
   components: {MainHeader},
   mounted() {
+    if (this.$route.params.operation != 0) {
+      axios
+        .get(
+          "http://localhost:8000/laporantugas/" + this.$route.params.operation
+        )
+        .then((resp) => {
+          console.warn(resp.data);
+          this.posts.idKonsulen = resp.data.idKonsulen;
+          this.posts.tanggal = resp.data.tugas.tanggalDibuat;
+          this.posts.kasusYangDibahas = resp.data.tugas.pembahasanKasusSulitMultidisiplinModel.kasusYangDibahas;
+          this.posts.namaPertemuan = resp.data.tugas.pembahasanKasusSulitMultidisiplinModel.namaPertemuan;
+          this.posts.linkTugas = resp.data.tugas.linkTugas;
+          this.posts.listReviewer = resp.data.listReviewer;
+          this.posts.idLaporanTugas = resp.data.tugas.idLaporanTugas;
+          this.posts.idChild = resp.data.tugas.pembahasanKasusSulitMultidisiplinModel.idKasusSulit;
+          console.log(this.posts);
+        });
+        this.isMounted = true;
+    }
     axios
       .get("http://localhost:8000/KasusSulitFormAttribute")
       .then((resp) => {
@@ -290,9 +311,16 @@ export default {
       this.status = 1;
       console.warn(this.posts);
       
+      var url = "";
+      if(this.$route.params.operation == 0){
+        url = "http://localhost:8000/laporantugas/addpembahasankasussulit/";
+      }else{
+        url = "http://localhost:8000/laporantugas/updatepembahasankasussulit/"
+      }
+
       axios
         .post(
-          "http://localhost:8000/laporantugas/addpembahasankasussulit/",
+          url,
           this.posts
         )
         .then((result) => {

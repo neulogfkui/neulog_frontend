@@ -85,17 +85,17 @@ const routes = [
     component: TugasPenelitianAkhirDetail,
   },
   {
-    path: '/kasussulitform',
+    path: '/kasussulitform/:operation',
     name: 'KasusSulitForm',
     component: KasusSulitForm
   },
   {
-    path: '/tugaspublikasiform',
+    path: '/tugaspublikasiform/:operation',
     name: 'tugasPublikasiForm',
     component: TugasPublikasiForm
   },
   {
-    path: '/tugaspenelitianakhirform',
+    path: '/tugaspenelitianakhirform/:operation',
     name: 'tugasPenelitianAkhirForm',
     component: TugasPenelitianAkhirForm
   },

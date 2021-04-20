@@ -1,90 +1,91 @@
 <template>
-<MainHeader/>
-<div class="container upper">
-<form @submit="postData" method="POST">
-    <div class="row">
+  <MainHeader />
+  <div class="container upper">
+    <form @submit="postData" method="POST">
+      <div class="row">
         <!-- CARD 1 -->
-      <div class="col-xxl-6 col-xl-6 mb-4">
-        <div class="card card-header-actions h-100">
-          <div class="card-header">
-            <b>Data Tugas Publikasi</b>
-          </div>
-          <div class="card-body">
+        <div class="col-xxl-6 col-xl-6 mb-4">
+          <div class="card card-header-actions h-100">
+            <div class="card-header">
+              <b>Data Tugas Publikasi</b>
+            </div>
+            <div class="card-body">
+              <!-- JUDUL PROPOSAL -->
+              <div class="form-group">
+                <label class="medium mb-1">Judul Proposal</label>
+                <input
+                  class="form-control"
+                  name="judulProposal"
+                  v-model="posts.judulProposal"
+                  type="text"
+                  placeholder="Masukkan judul proposal"
+                />
+              </div>
 
-            <!-- JUDUL PROPOSAL -->
-            <div class="form-group">
-              <label class="medium mb-1">Judul Proposal</label>
-              <input
-                class="form-control"
-                name="judulProposal"
-                v-model="posts.judulProposal"
-                type="text"
-                placeholder="Masukkan judul proposal"
-              />
-            </div>
-            <!-- STAGE -->
-            <div class="form-group">
-              <label for="sel1">Tahap</label>
-              <select
-                class="form-control"
-                name="stage"
-                v-model="posts.stage"
-              >
-                <option
-                  v-for="item in listStage"
-                  v-bind:key="item.id"
-                  :value="item"
-                >
-                  {{ item }}
-                </option>
-              </select>
+              <!-- STAGE -->
+              <div class="form-group">
+                <label for="sel1">Tahap</label>
+                <select class="form-control" name="stage" v-model="posts.stage">
+                  <option
+                    v-for="item in listStage"
+                    v-bind:key="item.id"
+                    :value="item"
+                  >
+                    {{ item }}
+                  </option>
+                </select>
 
-            <!-- KONSULEN -->
-            <div class="form-group">
-              <label for="sel1">Konsulen</label>
-              <select
-                class="form-control"
-                name="konsulen"
-                v-model="posts.idKonsulen"
-              >
-                <option
-                  v-for="item in listKonsulen"
-                  v-bind:key="item.id"
-                  :value="item.idKonsulen"
-                >
-                  {{ item.penggunaModel.firstName + " " + item.penggunaModel.lastName}}
-                </option>
-              </select>
-            </div>
+                <!-- KONSULEN -->
+                <div class="form-group">
+                  <label for="sel1">Konsulen</label>
+                  <select
+                    class="form-control"
+                    name="konsulen"
+                    v-model="posts.idKonsulen"
+                  >
+                    <option
+                      v-for="item in listKonsulen"
+                      v-bind:key="item.id"
+                      :value="item.idKonsulen"
+                    >
+                      {{
+                        item.penggunaModel.firstName +
+                        " " +
+                        item.penggunaModel.lastName
+                      }}
+                    </option>
+                  </select>
+                </div>
 
-            <!-- TANGGAL -->
-            <div class="form-group">
-              <label for="example-date-input">Date</label>
-              <input
-                class="form-control"
-                type="date"
-                name="tanggal"
-                v-model="posts.tanggal"
-              />
+                <!-- TANGGAL -->
+                <div class="form-group">
+                  <label for="example-date-input">Date</label>
+                  <input
+                    class="form-control"
+                    type="date"
+                    name="tanggal"
+                    v-model="posts.tanggal"
+                  />
+                </div>
+
+                <!-- LINK -->
+                <div class="form-group">
+                  <label class="medium mb-1">Link</label>
+                  <input
+                    class="form-control"
+                    name="link"
+                    v-model="posts.linkTugas"
+                    type="text"
+                    placeholder="Masukkan link tugas"
+                  />
+                </div>
+                <!--  -->
+              </div>
             </div>
-            
-            <!-- LINK -->
-            <div class="form-group">
-              <label class="medium mb-1">Link</label>
-              <input
-                class="form-control"
-                name="link"
-                v-model="posts.linkTugas"
-                type="text"
-                placeholder="Masukkan link tugas"
-              />
-            </div>
-            <!--  -->
           </div>
         </div>
-      </div>
         <!-- CARD 2 -->
-      <div class="col-xxl-6 col-xl-6 mb-4">
+        <div class="col-xxl-6 col-xl-6 mb-4">
           <div class="card card-header-actions h-100">
             <div class="card-header">
               <b>List Reviewer</b>
@@ -125,26 +126,24 @@
             </div>
           </div>
         </div>
-    </div>
-    </div>
-    <!-- START MODAL -->
+      </div>
+      <!-- START MODAL -->
       <!-- ------------------------------------------------ -->
       <!-- BUTTON UNTUK MENAMPILKAN MODAL -->
       <div class="row justify-content-center align-self-center">
-
-      <button
-        id="completeButton"
-        class="btn btn-primary mr-4"
-        type="button"
-        data-toggle="modal"
-        data-target="#exampleModal"
-        @click="refreshSubmitted"
-      >
-        Kirim
-      </button>
-      <router-link to="/">
-        <button class="btn btn-danger">Batal</button>
-      </router-link>
+        <button
+          id="completeButton"
+          class="btn btn-primary mr-4"
+          type="button"
+          data-toggle="modal"
+          data-target="#exampleModal"
+          @click="refreshSubmitted"
+        >
+          Kirim
+        </button>
+        <router-link to="/">
+          <button class="btn btn-danger">Batal</button>
+        </router-link>
       </div>
 
       <!-- DIV BESAR MODAL -->
@@ -184,7 +183,8 @@
             <!-- BODY MODAL -->
             <div class="modal-body">
               <h5 v-if="status == 0" class="modal-title" id="exampleModalLabel">
-                Anda dapat mengubah laporan ini sebelum konsulen memberi evaluasi
+                Anda dapat mengubah laporan ini sebelum konsulen memberi
+                evaluasi
               </h5>
               <h5 v-if="status == 1" class="modal-title" id="exampleModalLabel">
                 Harap tunggu sebentar
@@ -193,7 +193,8 @@
                 Konsulen dan reviewer telah diberikan notifikasi
               </h5>
               <h5 v-if="status == 3" class="modal-title" id="exampleModalLabel">
-                Terjadi kesalahan pada sistem. Mohon lengkapi data pada formulir.
+                Terjadi kesalahan pada sistem. Mohon lengkapi data pada
+                formulir.
               </h5>
             </div>
             <!-- FOOTER MODAL -->
@@ -208,25 +209,25 @@
                 >
                   Tidak
                 </button>
-
-                
               </div>
               <div v-if="status == 1"></div>
               <div v-if="status == 2">
-                
-                <button class="btn btn-primary">Ok <router-link to="{ name: 'TugasPresentasiDetails', props: { data: this.posts }}"></router-link></button>
-         
+                <router-link
+                  :to="'/tugaspenelitianakhirdetail/' + posts.idLaporanTugas"
+                  ><button class="btn btn-primary" data-dismiss="modal">
+                    Ok
+                  </button></router-link
+                >
               </div>
               <div v-if="status == 3">
                 <button
                   class="btn btn-primary"
-                  id = "buttonFailed"
+                  id="buttonFailed"
                   type="button"
                   data-dismiss="modal"
                 >
-                Ya
+                  Ya
                 </button>
-                
               </div>
             </div>
           </div>
@@ -234,11 +235,9 @@
       </div>
       <!-- END MODAL -->
       <!-- ------------------------------------------------ -->
-    <br />
-  </form>
-</div>
-  
-
+      <br />
+    </form>
+  </div>
 </template>
 
 
@@ -263,14 +262,36 @@ export default {
         linkTugas: null,
         idResiden: 1,
         listReviewer: null,
+        idLaporanTugas: null,
+        idChild:0,
       },
       listKonsulen: null,
       listStage: null,
       status: 0,
+      target: null,
     };
   },
-  components: {MainHeader},
+  components: { MainHeader },
   mounted() {
+    if (this.$route.params.operation != 0) {
+      axios
+        .get(
+          "http://localhost:8000/laporantugas/" + this.$route.params.operation
+        )
+        .then((resp) => {
+          console.warn(resp.data);
+          this.posts.idKonsulen = resp.data.idKonsulen;
+          this.posts.tanggal = resp.data.tugas.tanggalDibuat;
+          this.posts.judulProposal = resp.data.tugas.tugasPenelitianAkhirModel.judulProposal;
+          this.posts.stage = resp.data.tugas.tugasPenelitianAkhirModel.stage;
+          this.posts.linkTugas = resp.data.tugas.linkTugas;
+          this.posts.listReviewer = resp.data.listReviewer;
+          this.posts.idLaporanTugas = resp.data.tugas.idLaporanTugas;
+          this.posts.idChild = resp.data.tugas.tugasPenelitianAkhirModel.idTugasPenelitianAkhir;
+          console.log(this.posts);
+        });
+        this.isMounted = true;
+    }
     axios
       .get("http://localhost:8000/TugasPenelitianAkhirFormAttribute")
       .then((resp) => {
@@ -285,14 +306,22 @@ export default {
     postData(e) {
       this.status = 1;
       console.warn(this.posts);
-      
+
+      var url = "";
+      if(this.$route.params.operation == 0){
+        url = "http://localhost:8000/laporantugas/addtugaspenelitianakhir/";
+      }else{
+        url = "http://localhost:8000/laporantugas/updatetugaspenelitianakhir/"
+      }
+
       axios
         .post(
-          "http://localhost:8000/laporantugas/addtugaspenelitianakhir/",
+          url,
           this.posts
         )
         .then((result) => {
-           if (result.data == "Success") {
+          if (result.data != "0") {
+            this.posts.idLaporanTugas = result.data;
             this.status = 2;
           } else {
             this.status = 3;
@@ -301,7 +330,7 @@ export default {
         });
       e.preventDefault();
     },
-     check(item) {
+    check(item) {
       if (this.posts.listReviewer.includes(item)) {
         this.posts.listReviewer.pop(item);
       } else {

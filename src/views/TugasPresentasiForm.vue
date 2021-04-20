@@ -16,7 +16,6 @@
                   class="form-control"
                   name="modul"
                   v-model="posts.idModul"
-                  :disabled="this.$route.params.operation != '0'"
                 >
                   <option
                     v-for="item in listModul"

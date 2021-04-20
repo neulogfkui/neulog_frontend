@@ -83,7 +83,7 @@
               <div v-if="status == 1"></div>
               <div v-if="status == 2">
                 
-                <router-link :to="'/tugaspublikasidetail/' + posts.idLaporanTugas"><button class="btn btn-primary" data-dismiss="modal">Ok </button></router-link>
+                <router-link to="/"><button class="btn btn-primary" data-dismiss="modal">Ok </button></router-link>
          
               </div>
               <div v-if="status == 3">
@@ -123,12 +123,12 @@ export default {
             this.status = 1;
             console.warn(this.posts);
             axios
-                .delete(
-                "http://localhost:8000/laporantugas/deletepembahasankasussulit",
+                .post(
+                "http://localhost:8000/laporantugas/deletepembahasankasussulit/",
                 this.delete
                 )
                 .then((result) => {
-                if (result.data != "Success") {
+                if (result.data == "Success") {
                     this.status = 2;
                 } else {
                     this.status = 3;
