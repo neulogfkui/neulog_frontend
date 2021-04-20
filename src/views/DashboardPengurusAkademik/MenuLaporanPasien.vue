@@ -2,32 +2,36 @@
   <MainHeader />
   <div class="container">
     <div class="row upper">
+      <BarChart
+        v-if="isMounted"
+        :label="this.labelBarTindakan"
+        :data="this.dataBarTindakan"
+        title="Sebaran Tindakan"
+      >
+      </BarChart>
       <PieChart
         v-if="isMounted"
-        keterangan="Laporan Pasien"
+        keterangan="Laporan Pasien Dibuat"
         :persentase="this.persentase"
-        :total="this.createdLaporanPasien"
-        :label="this.label"
-        :data="this.jumlah"
+        :total="this.totalLaporanPasien"
+        :label="this.labelPie"
+        :data="this.dataPie"
         title="Sebaran Status Laporan Pasien"
       >
       </PieChart>
-      <BigNumberCard
-        title="Rata - Rata Laporan Pasien Per Bulan"
-        :count="avgPasienPerMonth"
-        caption="Pasien / Bulan"
-      />
+      <!-- Masih error -->
       <BarChart
         v-if="isMounted"
-        :label="this.labelBar"
-        :data="this.dataBar"
-        title="Sebaran Pasien"
-      />
+        :label="this.labelBarLaporan"
+        :data="this.dataBarLaporan"
+        title="Sebaran Tipe Laporan"
+      >
+      </BarChart>
       <!-- Tabel Laporan Pasien -->
       <div class="col-xxl-12 col-xl-12 mb-4 mt-4">
         <div class="card card-header-actions h-100">
           <div class="card-header">
-            <b>List Reviewer</b>
+            <b>Daftar Seluruh Laporan Pasien</b>
           </div>
           <div class="card-body">
             <div class="datatable" v-if="isMounted">
@@ -41,10 +45,10 @@
                   <tr>
                     <th>No</th>
                     <th>Tanggal</th>
-                    <th>Inisial Pasien</th>
                     <th>Usia</th>
                     <th>No Rekam Medis</th>
-                    <th>Konsulen</th>
+                    <th>Residen</th>
+                    <th>BPJP</th>
                     <th>Jaga</th>
                     <th>Status</th>
                     <th>Detail</th>
@@ -62,9 +66,6 @@
                       {{ item.tanggalDibuat }}
                     </td>
                     <td>
-                      {{ item.inisialPasien }}
-                    </td>
-                    <td>
                       {{ item.usiaPasien }}
                     </td>
                     <td>
@@ -72,9 +73,16 @@
                     </td>
                     <td>
                       {{
-                        item.konsulen.penggunaModel.firstName +
+                        item.residen.penggunaModel.firstName +
                         " " +
-                        item.konsulen.penggunaModel.lastName
+                        item.residen.penggunaModel.lastName
+                      }}
+                    </td>
+                    <td>
+                      {{
+                        item.konsulen.pengguna.firstName +
+                        " " +
+                        item.konsulen.pengguna.lastName
                       }}
                     </td>
                     <td v-if="item.isFromJaga">Ya</td>
@@ -96,65 +104,49 @@
       </div>
     </div>
   </div>
-  <h4>{{ createdLaporanPasien }}</h4>
-  <h4>{{ persentase }}</h4>
-  <h4 v-for="a in label" v-bind:key="a.id">{{ a }}</h4>
-  <h4 v-for="a in jumlah" v-bind:key="a.id">{{ a }}</h4>
-  <table style="width: 100%">
-    <tr>
-      <th>Diagnosis</th>
-      <th>No. Rekam Medis</th>
-      <th>Status</th>
-    </tr>
-    <tr v-for="a in listLaporanPasien" v-bind:key="a.id">
-      <td>{{ a.diagnosis }}</td>
-      <td>{{ a.noRekamMedis }}</td>
-      <td>{{ a.status }}</td>
-    </tr>
-  </table>
 </template>
 
 <script>
 import axios from "axios";
 import MainHeader from "@/components/MainHeader.vue";
 import PieChart from "@/components/PieChart.vue";
-import BigNumberCard from "@/components/BigNumberCard.vue";
 import BarChart from "@/components/BarChart.vue";
 
 export default {
-  name: "DashboardLaporanPasien",
+  name: "MenuLaporanPasien",
   data() {
     return {
-      createdLaporanPasien: Number,
-      label: [],
-      jumlah: [],
-      labelBar: [],
-      dataBar: [],
-      avgPasienPerMonth: Number,
-      listLaporanPasien: Array,
+      labelBarTindakan: [],
+      dataBarTindakan: [],
+      labelPie: [],
+      dataPie: [],
+      totalLaporanPasien: Number,
       persentase: Number,
+      labelBarLaporan: [],
+      dataBarLaporan: [],
+      listLaporanPasien: Array,
       isMounted: false,
     };
   },
   components: {
     MainHeader,
     PieChart,
-    BigNumberCard,
     BarChart,
   },
   mounted() {
     axios
-      .get("http://localhost:8000/api/dashboardResiden/laporanPasien/1")
+      .get("http://localhost:8000/api/dashboardPengurusAkademik/laporanpasien/")
       .then((resp) => {
         console.warn(resp.data);
-        this.createdLaporanPasien = resp.data.createdLaporanPasien;
-        this.label = resp.data.label;
-        this.jumlah = resp.data.jumlah;
+        this.labelBarTindakan = resp.data.labelTindakan;
+        this.dataBarTindakan = resp.data.listJumlahTindakanPerKategori;
+        this.labelPie = resp.data.labelStatus;
+        this.dataPie = resp.data.listJumlahLaporanPerStatus;
+        this.totalLaporanPasien = resp.data.totalLaporanPasien;
+        this.persentase = resp.data.persentaseDisetujui;
+        this.labelBarLaporan = resp.data.labelLaporan;
+        this.dataBarLaporan = resp.data.listJumlahLaporanPasienPerTipe;
         this.listLaporanPasien = resp.data.listLaporanPasien;
-        this.persentase = resp.data.persentase;
-        this.labelBar = resp.data.labelBar;
-        this.dataBar = resp.data.dataBar;
-        this.avgPasienPerMonth = resp.data.avgPasienPerMonth;
         this.isMounted = true;
         this.loadDataTable();
       });

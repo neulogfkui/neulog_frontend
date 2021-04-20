@@ -2,32 +2,21 @@
   <MainHeader />
   <div class="container">
     <div class="row upper">
-      <PieChart
-        v-if="isMounted"
-        keterangan="Laporan Pasien"
-        :persentase="this.persentase"
-        :total="this.createdLaporanPasien"
-        :label="this.label"
-        :data="this.jumlah"
-        title="Sebaran Status Laporan Pasien"
-      >
-      </PieChart>
       <BigNumberCard
         title="Rata - Rata Laporan Pasien Per Bulan"
-        :count="avgPasienPerMonth"
+        :count="avgLaporanPasien"
         caption="Pasien / Bulan"
       />
-      <BarChart
-        v-if="isMounted"
-        :label="this.labelBar"
-        :data="this.dataBar"
-        title="Sebaran Pasien"
+      <BigNumberCard
+        title="Rata - Rata Laporan Tugas Per Bulan"
+        :count="avgLaporanTugas"
+        caption="Tugas / Bulan"
       />
       <!-- Tabel Laporan Pasien -->
       <div class="col-xxl-12 col-xl-12 mb-4 mt-4">
         <div class="card card-header-actions h-100">
           <div class="card-header">
-            <b>List Reviewer</b>
+            <b>Daftar Seluruh Konsulen</b>
           </div>
           <div class="card-body">
             <div class="datatable" v-if="isMounted">
@@ -40,49 +29,24 @@
                 <thead>
                   <tr>
                     <th>No</th>
-                    <th>Tanggal</th>
-                    <th>Inisial Pasien</th>
-                    <th>Usia</th>
-                    <th>No Rekam Medis</th>
-                    <th>Konsulen</th>
-                    <th>Jaga</th>
-                    <th>Status</th>
+                    <th>Nama</th>
                     <th>Detail</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr
-                    v-for="(item, index) in listLaporanPasien"
+                    v-for="(item, index) in listKonsulen"
                     v-bind:key="item.id"
                   >
                     <td>
                       {{ index + 1 }}
                     </td>
                     <td>
-                      {{ item.tanggalDibuat }}
+                      {{ item.pengguna.firstName + " " + item.pengguna.lastName }}
                     </td>
-                    <td>
-                      {{ item.inisialPasien }}
-                    </td>
-                    <td>
-                      {{ item.usiaPasien }}
-                    </td>
-                    <td>
-                      {{ item.noRekamMedis }}
-                    </td>
-                    <td>
-                      {{
-                        item.konsulen.penggunaModel.firstName +
-                        " " +
-                        item.konsulen.penggunaModel.lastName
-                      }}
-                    </td>
-                    <td v-if="item.isFromJaga">Ya</td>
-                    <td v-if="!item.isFromJaga">Tidak</td>
-                    <td>{{ item.status }}</td>
                     <td>
                       <router-link
-                        :to="'/laporanpasiendetail/' + item.idLaporanPasien"
+                        :to="'/konsulendetail/' + item.idKonsulen"
                       >
                         <button class="btn btn-secondary">Lihat</button>
                       </router-link>
@@ -96,65 +60,35 @@
       </div>
     </div>
   </div>
-  <h4>{{ createdLaporanPasien }}</h4>
-  <h4>{{ persentase }}</h4>
-  <h4 v-for="a in label" v-bind:key="a.id">{{ a }}</h4>
-  <h4 v-for="a in jumlah" v-bind:key="a.id">{{ a }}</h4>
-  <table style="width: 100%">
-    <tr>
-      <th>Diagnosis</th>
-      <th>No. Rekam Medis</th>
-      <th>Status</th>
-    </tr>
-    <tr v-for="a in listLaporanPasien" v-bind:key="a.id">
-      <td>{{ a.diagnosis }}</td>
-      <td>{{ a.noRekamMedis }}</td>
-      <td>{{ a.status }}</td>
-    </tr>
-  </table>
 </template>
 
 <script>
 import axios from "axios";
 import MainHeader from "@/components/MainHeader.vue";
-import PieChart from "@/components/PieChart.vue";
 import BigNumberCard from "@/components/BigNumberCard.vue";
-import BarChart from "@/components/BarChart.vue";
 
 export default {
-  name: "DashboardLaporanPasien",
+  name: "MenuKonsulen",
   data() {
     return {
-      createdLaporanPasien: Number,
-      label: [],
-      jumlah: [],
-      labelBar: [],
-      dataBar: [],
-      avgPasienPerMonth: Number,
-      listLaporanPasien: Array,
-      persentase: Number,
+      avgLaporanPasien: Number,
+      avgLaporanTugas: Number,
+      listKonsulen: Array,
       isMounted: false,
     };
   },
   components: {
     MainHeader,
-    PieChart,
     BigNumberCard,
-    BarChart,
   },
   mounted() {
     axios
-      .get("http://localhost:8000/api/dashboardResiden/laporanPasien/1")
+      .get("http://localhost:8000/api/dashboardPengurusAkademik/konsulen/")
       .then((resp) => {
         console.warn(resp.data);
-        this.createdLaporanPasien = resp.data.createdLaporanPasien;
-        this.label = resp.data.label;
-        this.jumlah = resp.data.jumlah;
-        this.listLaporanPasien = resp.data.listLaporanPasien;
-        this.persentase = resp.data.persentase;
-        this.labelBar = resp.data.labelBar;
-        this.dataBar = resp.data.dataBar;
-        this.avgPasienPerMonth = resp.data.avgPasienPerMonth;
+        this.avgLaporanPasien = resp.data.averageLaporanPasien;
+        this.avgLaporanTugas = resp.data.averageLaporanTugas;
+        this.listKonsulen = resp.data.listKonsulen;
         this.isMounted = true;
         this.loadDataTable();
       });

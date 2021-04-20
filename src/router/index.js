@@ -21,6 +21,11 @@ import DashboardModul from '../views/DashboardResiden/DashboardModul.vue'
 import DashboardTindakan from '../views/DashboardResiden/DashboardTindakan.vue'
 import DashboardJaga from '../views/DashboardResiden/DashboardJaga.vue'
 import LaporanPasienDetail from '../views/DashboardResiden/LaporanPasienDetail.vue'
+import MenuLaporanPasien from '../views/DashboardPengurusAkademik/MenuLaporanPasien.vue'
+import MenuResiden from '../views/DashboardPengurusAkademik/MenuResiden.vue'
+import MenuKonsulen from '../views/DashboardPengurusAkademik/MenuKonsulen.vue'
+import MenuLaporanTugas from '../views/DashboardPengurusAkademik/MenuLaporanTugas.vue'
+import MenuModul from '../views/DashboardPengurusAkademik/MenuModul.vue'
 
 const routes = [
 
@@ -90,6 +95,36 @@ const routes = [
     path: '/addlaporantugas',
     name: 'laporanTugasChoice',
     component: LaporanTugasChoice
+  },
+  {
+    path: '/dashboardpengurusakademik',
+    name: 'DashboardPengurusAkademik',
+    component: DashboardPengurusAkademikMenu
+  },
+  {
+    path: '/dashboardpengurusakademik/laporanpasien',
+    name: 'MenuLaporanPasien',
+    component: MenuLaporanPasien
+  },
+  {
+    path: '/dashboardpengurusakademik/residen',
+    name: 'MenuResiden',
+    component: MenuResiden
+  },
+  {
+    path: '/dashboardpengurusakademik/konsulen',
+    name: 'MenuKonsulen',
+    component: MenuKonsulen
+  },
+  {
+    path: '/dashboardpengurusakademik/laporantugas',
+    name: 'MenuLaporanTugas',
+    component: MenuLaporanTugas
+  },
+  {
+    path: '/dashboardpengurusakademik/modul',
+    name: 'MenuModul',
+    component: MenuModul
   },
   {
     path: '/about',

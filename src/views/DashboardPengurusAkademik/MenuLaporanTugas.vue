@@ -2,159 +2,388 @@
   <MainHeader />
   <div class="container">
     <div class="row upper">
-      <PieChart
-        v-if="isMounted"
-        keterangan="Laporan Pasien"
-        :persentase="this.persentase"
-        :total="this.createdLaporanPasien"
-        :label="this.label"
-        :data="this.jumlah"
-        title="Sebaran Status Laporan Pasien"
-      >
-      </PieChart>
-      <BigNumberCard
-        title="Rata - Rata Laporan Pasien Per Bulan"
-        :count="avgPasienPerMonth"
-        caption="Pasien / Bulan"
-      />
       <BarChart
         v-if="isMounted"
         :label="this.labelBar"
         :data="this.dataBar"
-        title="Sebaran Pasien"
-      />
-      <!-- Tabel Laporan Pasien -->
+        title="Sebaran Jenis Tugas"
+      >
+      </BarChart>
+      <PieChart
+        v-if="isMounted"
+        keterangan="Laporan Tugas"
+        :persentase="this.persentase"
+        :total="this.totalLaporanTugas"
+        :label="this.labelPie"
+        :data="this.dataPie"
+        title="Sebaran Status Laporan Tugas"
+      >
+      </PieChart>
+      <!-- Tabel Laporan Tugas -->
       <div class="col-xxl-12 col-xl-12 mb-4 mt-4">
-        <div class="card card-header-actions h-100">
-          <div class="card-header">
-            <b>List Reviewer</b>
-          </div>
-          <div class="card-body">
-            <div class="datatable" v-if="isMounted">
-              <table
-                class="table table-bordered table-hover"
-                id="dataTable"
-                width="100%"
-                cellspacing="0"
-              >
-                <thead>
-                  <tr>
-                    <th>No</th>
-                    <th>Tanggal</th>
-                    <th>Inisial Pasien</th>
-                    <th>Usia</th>
-                    <th>No Rekam Medis</th>
-                    <th>Konsulen</th>
-                    <th>Jaga</th>
-                    <th>Status</th>
-                    <th>Detail</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr
-                    v-for="(item, index) in listLaporanPasien"
-                    v-bind:key="item.id"
-                  >
-                    <td>
-                      {{ index + 1 }}
-                    </td>
-                    <td>
-                      {{ item.tanggalDibuat }}
-                    </td>
-                    <td>
-                      {{ item.inisialPasien }}
-                    </td>
-                    <td>
-                      {{ item.usiaPasien }}
-                    </td>
-                    <td>
-                      {{ item.noRekamMedis }}
-                    </td>
-                    <td>
-                      {{
-                        item.konsulen.penggunaModel.firstName +
-                        " " +
-                        item.konsulen.penggunaModel.lastName
-                      }}
-                    </td>
-                    <td v-if="item.isFromJaga">Ya</td>
-                    <td v-if="!item.isFromJaga">Tidak</td>
-                    <td>{{ item.status }}</td>
-                    <td>
-                      <router-link
-                        :to="'/laporanpasiendetail/' + item.idLaporanPasien"
-                      >
-                        <button class="btn btn-secondary">Lihat</button>
-                      </router-link>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
+      <div class="card">
+        <div class="card-header border-bottom">
+            <ul class="nav nav-tabs card-header-tabs" id="cardTab" role="tablist">
+            <li class="nav-item">
+                <a
+                class="nav-link active"
+                id="presentasi-tab"
+                href="#presentasi"
+                data-toggle="tab"
+                role="tab"
+                aria-controls="overview"
+                aria-selected="true"
+                >Tugas Presentasi</a
+                >
+            </li>
+            <li class="nav-item">
+                <a
+                class="nav-link"
+                id="kasussulit-tab"
+                href="#kasussulit"
+                data-toggle="tab"
+                role="tab"
+                aria-controls="example"
+                aria-selected="false"
+                >Kasus Sulit dan Multidisiplin</a
+                >
+            </li>
+            <li class="nav-item">
+                <a
+                class="nav-link"
+                id="publikasi-tab"
+                href="#publikasi"
+                data-toggle="tab"
+                role="tab"
+                aria-controls="example"
+                aria-selected="false"
+                >Tugas Publikasi</a
+                >
+            </li>
+            <li class="nav-item">
+                <a
+                class="nav-link"
+                id="akhir-tab"
+                href="#akhir"
+                data-toggle="tab"
+                role="tab"
+                aria-controls="example"
+                aria-selected="false"
+                >Tugas Akhir</a
+                >
+            </li>
+            </ul>
         </div>
-      </div>
+        <div class="card-body">
+          <div class="tab-content" id="cardTabContent">
+                <!-- PRESENTASI -->
+            <div
+                class="tab-pane fade show active"
+                id="presentasi"
+                role="tabpanel"
+                aria-labelledby="presentasi-tab"
+            >
+            <div class="datatable" v-if="isMounted">
+                <table
+                    class="table table-bordered table-hover"
+                    id="dataTable"
+                    width="100%"
+                    cellspacing="0"
+                >
+                    <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Tanggal</th>
+                        <th>Jenis</th>
+                        <th>Judul</th>
+                        <th>Modul</th>
+                        <th>Konsulen</th>
+                        <th>Status</th>
+                        <th>Detail</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr
+                        v-for="(item, index) in listTugasPresentasi"
+                        v-bind:key="item.id"
+                    >
+                        <td>
+                        {{ index + 1 }}
+                        </td>
+                        <td>
+                        {{ item.laporanTugasPresentasiModel.tanggalDibuat }}
+                        </td>
+                        <td>
+                        {{ item.jenis }}
+                        </td>
+                        <td>
+                        {{ item.judulMakalah }}
+                        </td>
+                        <td>
+                        {{ item.modulModel.namaModul }}
+                        </td>
+                        <td>
+                        {{ item.laporanTugasPresentasiModel.konsulenModel.pengguna.firstName + " " +
+                        item.laporanTugasPresentasiModel.konsulenModel.pengguna.lastName }}
+                        </td>
+                         <td>
+                        {{ item.laporanTugasPresentasiModel.status }}
+                        </td>
+                        <td>
+                        <router-link
+                            :to="'/tugaspresentasidetail/' + item.idTugasPresentasi"
+                        >
+                            <button class="btn btn-secondary">Lihat</button>
+                        </router-link>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            </div>
+            <!-- END PRESENTASI -->
+
+            <!-- Data table nya blm kebaca -->
+            <!-- KASUS SULIT -->
+            <div
+                class="tab-pane fade"
+                id="kasussulit"
+                role="tabpanel"
+                aria-labelledby="kasussulit-tab"
+            >
+            <div class="datatable" v-if="isMounted">
+                <table
+                    class="table table-bordered table-hover"
+                    id="dataTable"
+                    width="100%"
+                    cellspacing="0"
+                >
+                    <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Tanggal</th>
+                        <th>Nama Pertemuan</th>
+                        <th>Kasus</th>
+                        <th>Konsulen</th>
+                        <th>Status</th>
+                        <th>Detail</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr
+                        v-for="(item, index) in listPembahasanKasusSulitMultidisiplin"
+                        v-bind:key="item.id"
+                    >
+                        <td>
+                        {{ index + 1 }}
+                        </td>
+                        <td>
+                        {{ item.laporanTugasKasusSulitModel.tanggalDibuat }}
+                        </td>
+                        <td>
+                        {{ item.namaPertemuan }}
+                        </td>
+                        <td>
+                        {{ item.kasusYangDibahas }}
+                        </td>
+                        <td>
+                        {{ item.laporanTugasKasusSulitModel.konsulenModel.pengguna.firstName + " " +
+                        item.laporanTugasKasusSulitModel.konsulenModel.pengguna.lastName }}
+                        </td>
+                         <td>
+                        {{ item.laporanTugasKasusSulitModel.status }}
+                        </td>
+                        <td>
+                        <router-link
+                            :to="'/kasussulitdetail/' + item.idKasusSulit"
+                        >
+                            <button class="btn btn-secondary">Lihat</button>
+                        </router-link>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            </div>
+            <!-- END KASUS SULIT -->
+
+            <!-- PUBLIKASI -->
+            <div
+                class="tab-pane fade"
+                id="publikasi"
+                role="tabpanel"
+                aria-labelledby="publikasi-tab"
+            >
+            <div class="datatable" v-if="isMounted">
+                <table
+                    class="table table-bordered table-hover"
+                    id="dataTable"
+                    width="100%"
+                    cellspacing="0"
+                >
+                    <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Tanggal</th>
+                        <th>Judul</th>
+                        <th>Event</th>
+                        <th>Konsulen</th>
+                        <th>Status</th>
+                        <th>Detail</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr
+                        v-for="(item, index) in listTugasPublikasi"
+                        v-bind:key="item.id"
+                    >
+                        <td>
+                        {{ index + 1 }}
+                        </td>
+                        <td>
+                        {{ item.laporanTugasPublikasiModel.tanggalDibuat }}
+                        </td>
+                        <td>
+                        {{ item.judulPublikasi }}
+                        </td>
+                        <td>
+                        {{ item.eventPublikasi }}
+                        </td>
+                        <td>
+                        {{ item.laporanTugasPublikasiModel.konsulenModel.pengguna.firstName + " " +
+                        item.laporanTugasPublikasiModel.konsulenModel.pengguna.lastName }}
+                        </td>
+                         <td>
+                        {{ item.laporanTugasPublikasiModel.status }}
+                        </td>
+                        <td>
+                        <router-link
+                            :to="'/tugaspublikasidetail/' + item.idTugasPublikasi"
+                        >
+                            <button class="btn btn-secondary">Lihat</button>
+                        </router-link>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            </div>
+            <!-- END PUBLIKASI -->
+
+            <!-- TUGAS AKHIR -->
+            <div
+                class="tab-pane fade"
+                id="akhir"
+                role="tabpanel"
+                aria-labelledby="akhir-tab"
+            >
+            <div class="datatable" v-if="isMounted">
+                <table
+                    class="table table-bordered table-hover"
+                    id="dataTable"
+                    width="100%"
+                    cellspacing="0"
+                >
+                    <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Tanggal</th>
+                        <th>Judul</th>
+                        <th>Stage</th>
+                        <th>Konsulen</th>
+                        <th>Status</th>
+                        <th>Detail</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr
+                        v-for="(item, index) in listTugasPenelitianAkhir"
+                        v-bind:key="item.id"
+                    >
+                        <td>
+                        {{ index + 1 }}
+                        </td>
+                        <td>
+                        {{ item.laporanTugasPenelitianAkhirModel.tanggalDibuat }}
+                        </td>
+                        <td>
+                        {{ item.judulProposal }}
+                        </td>
+                        <td>
+                        {{ item.stage }}
+                        </td>
+                        <td>
+                        {{ item.laporanTugasPenelitianAkhirModel.konsulenModel.pengguna.firstName + " " +
+                        item.laporanTugasPenelitianAkhirModel.konsulenModel.pengguna.lastName }}
+                        </td>
+                         <td>
+                        {{ item.laporanTugasPenelitianAkhirModel.status }}
+                        </td>
+                        <td>
+                        <router-link
+                            :to="'/tugasakhirdetail/' + item.idTugasPenelitianAkhir"
+                        >
+                            <button class="btn btn-secondary">Lihat</button>
+                        </router-link>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            </div>
+            <!-- END TUGAS AKHIR -->
+
+        </div>
+        </div>
+        </div>
+        </div>
     </div>
   </div>
-  <h4>{{ createdLaporanPasien }}</h4>
-  <h4>{{ persentase }}</h4>
-  <h4 v-for="a in label" v-bind:key="a.id">{{ a }}</h4>
-  <h4 v-for="a in jumlah" v-bind:key="a.id">{{ a }}</h4>
-  <table style="width: 100%">
-    <tr>
-      <th>Diagnosis</th>
-      <th>No. Rekam Medis</th>
-      <th>Status</th>
-    </tr>
-    <tr v-for="a in listLaporanPasien" v-bind:key="a.id">
-      <td>{{ a.diagnosis }}</td>
-      <td>{{ a.noRekamMedis }}</td>
-      <td>{{ a.status }}</td>
-    </tr>
-  </table>
 </template>
 
 <script>
 import axios from "axios";
 import MainHeader from "@/components/MainHeader.vue";
 import PieChart from "@/components/PieChart.vue";
-import BigNumberCard from "@/components/BigNumberCard.vue";
 import BarChart from "@/components/BarChart.vue";
 
 export default {
-  name: "DashboardLaporanPasien",
+  name: "MenuLaporanTugas",
   data() {
     return {
-      createdLaporanPasien: Number,
-      label: [],
-      jumlah: [],
       labelBar: [],
       dataBar: [],
-      avgPasienPerMonth: Number,
-      listLaporanPasien: Array,
+      labelPie: [],
+      dataPie: [],
+      totalLaporanTugas: Number,
       persentase: Number,
+      listTugasPresentasi: Array,
+      listPembahasanKasusSulitMultidisiplin: Array,
+      listTugasPublikasi: Array,
+      listTugasPenelitianAkhir: Array,
       isMounted: false,
     };
   },
   components: {
     MainHeader,
     PieChart,
-    BigNumberCard,
     BarChart,
   },
   mounted() {
     axios
-      .get("http://localhost:8000/api/dashboardResiden/laporanPasien/1")
+      .get("http://localhost:8000/api/dashboardPengurusAkademik/laporantugas/")
       .then((resp) => {
         console.warn(resp.data);
-        this.createdLaporanPasien = resp.data.createdLaporanPasien;
-        this.label = resp.data.label;
-        this.jumlah = resp.data.jumlah;
-        this.listLaporanPasien = resp.data.listLaporanPasien;
-        this.persentase = resp.data.persentase;
-        this.labelBar = resp.data.labelBar;
-        this.dataBar = resp.data.dataBar;
-        this.avgPasienPerMonth = resp.data.avgPasienPerMonth;
+        this.labelBar = resp.data.labelJenisTugas;
+        this.dataBar = resp.data.listJumlahTugasPerJenis;
+        this.labelPie = resp.data.labelStatus;
+        this.dataPie = resp.data.listJumlahLaporanPerStatus;
+        this.totalLaporanTugas = resp.data.totalLaporanTugas;
+        this.persentase = resp.data.persentaseDiterima;
+        this.listTugasPresentasi = resp.data.listTugasPresentasi;
+        this.listPembahasanKasusSulitMultidisiplin = resp.data.listPembahasanKasusSulitMultidisiplin;
+        this.listTugasPublikasi = resp.data.listTugasPublikasi;
+        this.listTugasPenelitianAkhir = resp.data.listTugasPenelitianAkhir;
         this.isMounted = true;
         this.loadDataTable();
       });
