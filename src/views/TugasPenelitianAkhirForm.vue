@@ -22,7 +22,6 @@
                 placeholder="Masukkan judul proposal"
               />
             </div>
-
             <!-- STAGE -->
             <div class="form-group">
               <label for="sel1">Tahap</label>

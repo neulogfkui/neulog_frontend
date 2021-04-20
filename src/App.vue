@@ -240,6 +240,7 @@ export default {
   mounted() {
     this.role = ["konsulen"];
     this.id = [1];
+    // this.loadDataTable();
   },
 };
 </script>

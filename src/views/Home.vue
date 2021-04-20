@@ -15,6 +15,8 @@
       color="bg-success"
       link="/about"
     />
+    <AreaChart />
+    <PieChart :label="options" :data="data"/>
     <BarChart />
     <!-- <TestTable /> -->
 
@@ -77,6 +79,8 @@ import Template from "@/components/Template.vue";
 import ColorCard from "@/components/ColorCard.vue";
 import ColorCardNoFooter from "@/components/ColorCardNoFooter.vue";
 import BarChart from "@/components/BarChart.vue"
+import PieChart from "@/components/PieChart.vue"
+import AreaChart from "@/components/AreaChart.vue"
 import TestTable from "@/components/TestTable.vue"
 
 export default {
@@ -90,6 +94,8 @@ export default {
     ColorCard,
     ColorCardNoFooter,
     BarChart,
+    PieChart,
+    AreaChart,
     TestTable
   },
   data: function () {

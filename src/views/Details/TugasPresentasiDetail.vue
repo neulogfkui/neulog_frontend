@@ -1,5 +1,6 @@
 <template>
 <MainHeader/>
+
      <!-- START MODAL -->
       <!-- ------------------------------------------------ -->
       <!-- BUTTON UNTUK MENAMPILKAN MODAL -->
@@ -83,7 +84,7 @@
               <div v-if="status == 1"></div>
               <div v-if="status == 2">
                 
-                <router-link :to="'/tugaspresentasidetail/' + posts.idLaporanTugas"><button class="btn btn-primary" data-dismiss="modal">Ok </button></router-link>
+                <router-link to='/'><button class="btn btn-primary" data-dismiss="modal">Ok </button></router-link>
          
               </div>
               <div v-if="status == 3">
@@ -114,21 +115,23 @@ export default {
     components: {MainHeader},
     data() {
     return {
-        delete: {idLaporanTugas: this.$route.params.idLaporanTugas},
+        delete: {idLaporanTugas: null},
         status: 0,
     };
+  }, mounted(){
+      this.delete.idLaporanTugas = this.$route.params.idLaporanTugas
   },
     methods:{
         deleteLaporanTugas(e) {
             this.status = 1;
-            console.warn(this.posts);
+            console.warn(this.$route.params.idLaporanTugas);
             axios
-                .delete(
-                "http://localhost:8000/laporantugas/deletetugaspresentasi",
+                .post(
+                "http://localhost:8000/laporantugas/deletetugaspresentasi/",
                 this.delete
                 )
                 .then((result) => {
-                if (result.data != "Success") {
+                if (result.data == "Success") {
                     this.status = 2;
                 } else {
                     this.status = 3;
@@ -136,7 +139,7 @@ export default {
                 console.warn(result.data);
                 });
             e.preventDefault();
-            },
+        },
     }
 }
 </script>

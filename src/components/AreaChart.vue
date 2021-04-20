@@ -1,34 +1,20 @@
 <template>
-<div class="col-lg-4">
-  <div class="card mb-4 h-100">
-    <div class="card-header">{{ title }}</div>
-    <div class="card-body ">
-      <div class="chart-bar">
-        <br>
-        <canvas id="myBarChart" width="100%" height="50"></canvas>
+  <div class="card mb-4">
+    <div class="card-header">Area Chart Example</div>
+    <div class="card-body">
+      <div class="chart-area">
+        <canvas id="myAreaChart" width="100%" height="30"></canvas>
       </div>
     </div>
-    <!-- <div class="card-footer small text-muted">
+    <div class="card-footer small text-muted">
       Updated yesterday at 11:59 PM
-    </div> -->
+    </div>
   </div>
-   </div>
 </template>
 
 <script>
-import Chart from "@/vendors/chart.js/Chart.min.js";
 export default {
-  name: "BarChart",
-  props: {
-    label: Array,
-    data: Array,
-    title: String,
-  },
-  data(){
-    return{
-      dataMax: 0,
-    }
-  },
+  name: "AreaChart",
   mounted() {
     // Set new default font family and font color to mimic Bootstrap's default styling
     (Chart.defaults.global.defaultFontFamily = "Metropolis"),
@@ -60,20 +46,53 @@ export default {
       return s.join(dec);
     }
 
-    // Bar Chart Example
-    var ctx = document.getElementById("myBarChart");
-    var myBarChart = new Chart(ctx, {
-      type: "bar",
+    // Area Chart Example
+    var ctx = document.getElementById("myAreaChart");
+    var myLineChart = new Chart(ctx, {
+      type: "line",
       data: {
-        labels: this.label,
+        labels: [
+          "Jan",
+          "Feb",
+          "Mar",
+          "Apr",
+          "May",
+          "Jun",
+          "Jul",
+          "Aug",
+          "Sep",
+          "Oct",
+          "Nov",
+          "Dec",
+        ],
         datasets: [
           {
-            label: "Total",
-            backgroundColor: "rgba(0, 97, 242, 1)",
-            hoverBackgroundColor: "rgba(0, 97, 242, 0.9)",
-            borderColor: "#4e73df",
-            data: this.data,
-            maxBarThickness: 25,
+            label: "Earnings",
+            lineTension: 0.3,
+            backgroundColor: "rgba(0, 97, 242, 0.05)",
+            borderColor: "rgba(0, 97, 242, 1)",
+            pointRadius: 3,
+            pointBackgroundColor: "rgba(0, 97, 242, 1)",
+            pointBorderColor: "rgba(0, 97, 242, 1)",
+            pointHoverRadius: 3,
+            pointHoverBackgroundColor: "rgba(0, 97, 242, 1)",
+            pointHoverBorderColor: "rgba(0, 97, 242, 1)",
+            pointHitRadius: 10,
+            pointBorderWidth: 2,
+            data: [
+              0,
+              10000,
+              5000,
+              15000,
+              10000,
+              20000,
+              15000,
+              25000,
+              20000,
+              30000,
+              25000,
+              40000,
+            ],
           },
         ],
       },
@@ -91,27 +110,25 @@ export default {
           xAxes: [
             {
               time: {
-                unit: "month",
+                unit: "date",
               },
               gridLines: {
                 display: false,
                 drawBorder: false,
               },
               ticks: {
-                maxTicksLimit: 6,
+                maxTicksLimit: 7,
               },
             },
           ],
           yAxes: [
             {
               ticks: {
-                min: 0,
-                max: Math.max.apply(0, this.data),
-                maxTicksLimit: 2,
-                padding: 15,
+                maxTicksLimit: 5,
+                padding: 10,
                 // Include a dollar sign in the ticks
                 callback: function (value, index, values) {
-                  return number_format(value);
+                  return "$" + number_format(value);
                 },
               },
               gridLines: {
@@ -128,22 +145,24 @@ export default {
           display: false,
         },
         tooltips: {
+          backgroundColor: "rgb(255,255,255)",
+          bodyFontColor: "#858796",
           titleMarginBottom: 10,
           titleFontColor: "#6e707e",
           titleFontSize: 14,
-          backgroundColor: "rgb(255,255,255)",
-          bodyFontColor: "#858796",
           borderColor: "#dddfeb",
           borderWidth: 1,
           xPadding: 15,
           yPadding: 15,
           displayColors: false,
+          intersect: false,
+          mode: "index",
           caretPadding: 10,
           callbacks: {
             label: function (tooltipItem, chart) {
               var datasetLabel =
                 chart.datasets[tooltipItem.datasetIndex].label || "";
-              return datasetLabel + ": " + number_format(tooltipItem.yLabel);
+              return datasetLabel + ": $" + number_format(tooltipItem.yLabel);
             },
           },
         },

@@ -23,8 +23,10 @@ import DashboardKompetensi from '../views/DashboardResiden/DashboardKompetensi.v
 import DashboardModul from '../views/DashboardResiden/DashboardModul.vue'
 import DashboardTindakan from '../views/DashboardResiden/DashboardTindakan.vue'
 import DashboardJaga from '../views/DashboardResiden/DashboardJaga.vue'
+import LaporanPasienDetail from '../views/DashboardResiden/LaporanPasienDetail.vue'
 
 const routes = [
+
   //ALL
   //AUTHOR: ALL
 
@@ -38,12 +40,27 @@ const routes = [
     component: HomeResiden
   },
   {
+    path: '/dashboardtugaspresentasi/:idResiden',
+    name: 'DashboardTugasPresentasi',
+    component: DashboardTugasPresentasi
+  },
+  {
+    path: '/dashboardlaporanpasien/:idResiden',
+    name: 'DashboardLaporanPasien',
+    component: DashboardLaporanPasien
+  },
+  {
+    path: '/laporanpasiendetail/:idLaporanPasien',
+    name: 'LaporanPasienDetail',
+    component: LaporanPasienDetail
+  },
+  {
     path: '/components',
     name: 'Components',
     component: Home
   },
   {
-    path: '/tugaspresentasiform',
+    path: '/tugaspresentasiform/:operation',
     name: 'TugasPresentasiForm',
     component: TugasPresentasiForm,
   },

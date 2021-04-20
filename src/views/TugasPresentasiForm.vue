@@ -16,6 +16,7 @@
                   class="form-control"
                   name="modul"
                   v-model="posts.idModul"
+                  :disabled="this.$route.params.operation != '0'"
                 >
                   <option
                     v-for="item in listModul"
@@ -29,10 +30,25 @@
               <!-- JENIS TUGAS -->
               <div class="form-group">
                 <label for="sel1">Jenis Tugas</label>
+                <!-- disabled -->
                 <select
                   class="form-control"
                   name="jenisTugas"
                   v-model="posts.jenis"
+                  v-if="this.$route.params.operation != '0'"
+                  disabled
+                >
+                  <option
+                  >
+                    {{ posts.jenis }}
+                  </option>
+                </select>
+                <!-- not disabled -->
+                <select
+                  class="form-control"
+                  name="jenisTugas"
+                  v-model="posts.jenis"
+                  v-if="this.$route.params.operation == '0'"
                 >
                   <option
                     v-for="item in listJenisTugas"
@@ -50,6 +66,7 @@
                   class="form-control"
                   name="konsulen"
                   v-model="posts.idKonsulen"
+                  :disabled="this.$route.params.operation != '0'"
                 >
                   <option
                     v-for="item in listKonsulen"
@@ -100,7 +117,7 @@
           </div>
         </div>
 
-        <div class="col-xxl-6 col-xl-6 mb-4">
+        <div class="col-xxl-6 col-xl-6 mb-4" v-if="isMounted">
           <div class="card card-header-actions h-100">
             <div class="card-header">
               <b>List Reviewer</b>
@@ -132,6 +149,7 @@
                         <input
                           type="checkbox"
                           @change="check(item.idKonsulen)"
+                          :checked="posts.listReviewer.includes(item.idKonsulen)"
                         />
                       </td>
                     </tr>
@@ -147,20 +165,19 @@
       <!-- ------------------------------------------------ -->
       <!-- BUTTON UNTUK MENAMPILKAN MODAL -->
       <div class="row justify-content-center align-self-center">
-
-      <button
-        id="completeButton"
-        class="btn btn-primary mr-4"
-        type="button"
-        data-toggle="modal"
-        data-target="#exampleModal"
-        @click="refreshSubmitted"
-      >
-        Kirim
-      </button>
-      <router-link to="/">
-        <button class="btn btn-danger">Batal</button>
-      </router-link>
+        <button
+          id="completeButton"
+          class="btn btn-primary mr-4"
+          type="button"
+          data-toggle="modal"
+          data-target="#exampleModal"
+          @click="refreshSubmitted"
+        >
+          Kirim
+        </button>
+        <router-link to="/">
+          <button class="btn btn-danger">Batal</button>
+        </router-link>
       </div>
 
       <!-- DIV BESAR MODAL -->
@@ -200,7 +217,8 @@
             <!-- BODY MODAL -->
             <div class="modal-body">
               <h5 v-if="status == 0" class="modal-title" id="exampleModalLabel">
-                Anda dapat mengubah laporan ini sebelum konsulen memberi evaluasi
+                Anda dapat mengubah laporan ini sebelum konsulen memberi
+                evaluasi
               </h5>
               <h5 v-if="status == 1" class="modal-title" id="exampleModalLabel">
                 Harap tunggu sebentar
@@ -209,7 +227,8 @@
                 Konsulen dan reviewer telah diberikan notifikasi
               </h5>
               <h5 v-if="status == 3" class="modal-title" id="exampleModalLabel">
-                Terjadi kesalahan pada sistem. Mohon lengkapi data pada formulir.
+                Terjadi kesalahan pada sistem. Mohon lengkapi data pada
+                formulir.
               </h5>
             </div>
             <!-- FOOTER MODAL -->
@@ -224,25 +243,24 @@
                 >
                   Tidak
                 </button>
-
-                
               </div>
               <div v-if="status == 1"></div>
               <div v-if="status == 2">
-                
-                <router-link :to="'/tugaspresentasidetail/' + posts.idLaporanTugas"><button class="btn btn-primary" data-dismiss="modal">Ok </button></router-link>
-         
+                <router-link
+                  :to="'/tugaspresentasidetail/' + posts.idLaporanTugas"
+                  ><button class="btn btn-primary" data-dismiss="modal">
+                    Ok
+                  </button></router-link
+                >
               </div>
               <div v-if="status == 3">
                 <button
                   class="btn btn-primary"
-                  id = "buttonFailed"
                   type="button"
                   data-dismiss="modal"
                 >
-                Ya
+                  Ya
                 </button>
-                
               </div>
             </div>
           </div>
@@ -259,6 +277,7 @@
 import axios from "axios";
 import VueAxios from "vue-axios";
 import MainHeader from "@/components/MainHeader.vue";
+import App from "@/App.vue";
 
 export default {
   name: "TugasPresentasiForm",
@@ -275,48 +294,73 @@ export default {
         judulMakalah: null,
         linkTugas: null,
         idResiden: 1,
-        listReviewer: null,
+        listReviewer: [],
         idLaporanTugas: 0,
+        idChild:0,
       },
       listModul: null,
       listJenisTugas: null,
       listKonsulen: null,
       status: 0,
-      target: null,
+      isMounted: false
     };
   },
   mounted() {
-    if(this.$route.params.target != null){
-      this.target = "edit"
-    }else{
-      this.target = "create"
+    console.warn(this.$route.params.operation)
+    if (this.$route.params.operation != 0) {
+      axios
+        .get(
+          "http://localhost:8000/laporantugas/" + this.$route.params.operation
+        )
+        .then((resp) => {
+          console.warn(resp.data);
+          this.posts.idModul = resp.data.child.modulModel.idModul;
+          this.posts.jenis = resp.data.child.jenis;
+          this.posts.idKonsulen = resp.data.idKonsulen;
+          this.posts.tanggal = resp.data.tugas.tanggalDibuat;
+          this.posts.judulMakalah = resp.data.child.judulMakalah;
+          this.posts.linkTugas = resp.data.tugas.linkTugas;
+          this.posts.listReviewer = resp.data.listReviewer;
+          this.posts.idLaporanTugas = resp.data.tugas.idLaporanTugas;
+          this.posts.idChild = resp.data.child.idTugasPresentasi;
+          console.log(this.posts);
+        });
+        this.isMounted = true;
     }
     console.log(this.target);
     axios
       .get("http://localhost:8000/LaporanPresentasiFormAttribute")
       .then((resp) => {
         console.warn(resp.data);
+        this.listKonsulen = resp.data.listKonsulen;
         this.listModul = resp.data.listModul;
         this.listJenisTugas = resp.data.listJenisTugas;
-        this.listKonsulen = resp.data.listKonsulen;
         this.loadDataTable();
-        this.posts.listReviewer = [];
+        // this.posts.listReviewer = [];
       });
+    this.isMounted = true;
   },
 
   methods: {
     postData(e) {
       this.status = 1;
       console.warn(this.posts);
+      var url = "";
+      if(this.$route.params.operation == 0){
+        url = "http://localhost:8000/laporantugas/addtugaspresentasi/";
+      }else{
+        url = "http://localhost:8000/laporantugas/updatetugaspresentasi/"
+      }
       axios
         .post(
-          "http://localhost:8000/laporantugas/addtugaspresentasi/",
+          url,
           this.posts
         )
         .then((result) => {
           if (result.data != "0") {
             this.posts.idLaporanTugas = result.data;
             this.status = 2;
+            this.target = result;
           } else {
             this.status = 3;
           }
