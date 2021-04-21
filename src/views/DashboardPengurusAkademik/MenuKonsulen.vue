@@ -46,7 +46,7 @@
                     </td>
                     <td>
                       <router-link
-                        :to="'/konsulendetail/' + item.idKonsulen"
+                        :to="'konsulen/' + item.idKonsulen"
                       >
                         <button class="btn btn-secondary">Lihat</button>
                       </router-link>

@@ -89,7 +89,7 @@
                         </td>
                         <td>
                         <router-link
-                            :to="'/residendetail/' + item.idResiden"
+                            :to="'residen/' + item.idResiden"
                         >
                             <button class="btn btn-secondary">Lihat</button>
                         </router-link>
@@ -146,7 +146,7 @@
                         </td>
                         <td>
                         <router-link
-                            :to="'/residendetail/' + item.idResiden"
+                            :to="'residen/' + item.idResiden"
                         >
                             <button class="btn btn-secondary">Lihat</button>
                         </router-link>

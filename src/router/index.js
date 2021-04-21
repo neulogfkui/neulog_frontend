@@ -26,6 +26,9 @@ import MenuResiden from '../views/DashboardPengurusAkademik/MenuResiden.vue'
 import MenuKonsulen from '../views/DashboardPengurusAkademik/MenuKonsulen.vue'
 import MenuLaporanTugas from '../views/DashboardPengurusAkademik/MenuLaporanTugas.vue'
 import MenuModul from '../views/DashboardPengurusAkademik/MenuModul.vue'
+import DetailMenuResiden from '../views/DashboardPengurusAkademik/DetailMenuResiden.vue'
+import DetailMenuKonsulen from '../views/DashboardPengurusAkademik/DetailMenuKonsulen.vue'
+import DetailMenuModul from '../views/DashboardPengurusAkademik/DetailMenuModul.vue'
 
 const routes = [
 
@@ -55,6 +58,11 @@ const routes = [
     path: '/laporanpasiendetail/:idLaporanPasien',
     name: 'LaporanPasienDetail',
     component: LaporanPasienDetail
+  },
+  {
+    path: '/dashboardresiden/:idResiden',
+    name: 'DashboardResidenMenu',
+    component: DashboardResidenMenu
   },
   {
     path: '/components',
@@ -125,6 +133,21 @@ const routes = [
     path: '/dashboardpengurusakademik/modul',
     name: 'MenuModul',
     component: MenuModul
+  },
+  {
+    path: '/dashboardpengurusakademik/residen/:idResiden',
+    name: 'DetailMenuResiden',
+    component: DetailMenuResiden
+  },
+  {
+    path: '/dashboardpengurusakademik/konsulen/:idKonsulen',
+    name: 'DetailMenuKonsulen',
+    component: DetailMenuKonsulen
+  },
+  {
+    path: '/dashboardpengurusakademik/modul/:idModul',
+    name: 'DetailMenuModul',
+    component: DetailMenuModul
   },
   {
     path: '/about',
