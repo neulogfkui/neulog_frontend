@@ -1,37 +1,156 @@
 <template>
-  <MainHeader />
-  <div class="container">
-    <div class="row upper">
-      <BarChart
-        v-if="isMounted"
-        :label="this.labelBarTindakan"
-        :data="this.dataBarTindakan"
-        title="Sebaran Tindakan"
-      >
-      </BarChart>
-      <PieChart
-        v-if="isMounted"
-        keterangan="Laporan Pasien Dibuat"
-        :persentase="this.persentase"
-        :total="this.totalLaporanPasien"
-        :label="this.labelPie"
-        :data="this.dataPie"
-        title="Sebaran Status Laporan Pasien"
-      >
-      </PieChart>
-      <!-- Masih error -->
-      <BarChart
-        v-if="isMounted"
-        :label="this.labelBarLaporan"
-        :data="this.dataBarLaporan"
-        title="Sebaran Tipe Laporan"
-      >
-      </BarChart>
-      <!-- Tabel Laporan Pasien -->
-      <div class="col-xxl-12 col-xl-12 mb-4 mt-4">
+<MainHeader />
+<div class="container upper">
+    <div class="row">
+        <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+            <div class="card card-header-actions h-100">
+                <div class="card-header">
+                    <b>Data Laporan Pasien</b>
+                </div>
+            <div class="card-body">
+                <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text">
+                            Tanggal
+                        </p>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text">
+                            {{ tanggal }}
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text">
+                            Usia
+                        </p>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text">
+                            {{ usia }}
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text">
+                            No Rekam Medis
+                        </p>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text">
+                            {{ noRekam }}
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text">
+                            Pasien Jaga
+                        </p>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text" v-if="jaga">
+                            Ya
+                        </p>
+                        <p class="card-text" v-if="!jaga">
+                            Tidak
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text">
+                            Konsulen
+                        </p>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text">
+                            {{ konsulenFirstName + " " + konsulenLastName }}
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text">
+                            Status
+                        </p>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text">
+                            {{ status }}
+                        </p>
+                    </div>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        <div class="col-xxl-3 col-xl-3 mb-4 mt-4">
+            <div class="card card-header-actions h-100">
+                <div class="card-header">
+                    <b>Update Status</b>
+                </div>
+            <div class="card-body">
+                <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xxl-12 col-xl-12 mb-4 mt-4" v-for="(item) in updateStatus"
+                    v-bind:key="item.id">
+                        <p class="card-text">
+                            {{ item }}
+                        </p>
+                    </div>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        <div class="col-xxl-3 col-xl-3 mb-4 mt-4">
+            <div class="card card-header-actions h-100">
+                <div class="card-header">
+                    <b>Feedback</b>
+                </div>
+            <div class="card-body">
+                <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xxl-12 col-xl-12 mb-4 mt-4">
+                        <p class="card-text">
+                            {{ feedback }}
+                        </p>
+                    </div>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xxl-12 col-xl-12 mb-4 mt-4">
+            <div class="card card-header-actions h-100">
+                <div class="card-header">
+                    <b>Diagnosis</b>
+                </div>
+            <div class="card-body">
+                <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xxl-12 col-xl-12 mb-4 mt-4">
+                        <p class="card-text">
+                            {{ diagnosis }}
+                        </p>
+                    </div>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
         <div class="card card-header-actions h-100">
           <div class="card-header">
-            <b>Daftar Seluruh Laporan Pasien</b>
+            <b>Daftar Tindakan yang Dilakukan</b>
           </div>
           <div class="card-body">
             <div class="datatable" v-if="isMounted">
@@ -44,56 +163,56 @@
                 <thead>
                   <tr>
                     <th>No</th>
-                    <th>Tanggal</th>
-                    <th>Usia</th>
-                    <th>No Rekam Medis</th>
-                    <th>Residen</th>
-                    <th>BPJP</th>
-                    <th>Jaga</th>
-                    <th>Status</th>
-                    <th>Detail</th>
+                    <th>Tindakan</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr
-                    v-for="(item, index) in listLaporanPasien"
+                    v-for="(item, index) in listTindakan"
                     v-bind:key="item.id"
                   >
                     <td>
                       {{ index + 1 }}
                     </td>
                     <td>
-                      {{ item.tanggalDibuat }}
+                      {{ item.namaTindakan }}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+        <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+        <div class="card card-header-actions h-100">
+          <div class="card-header">
+            <b>Daftar Kompetensi yang Didapatkan</b>
+          </div>
+          <div class="card-body">
+            <div class="datatable" v-if="isMounted">
+              <table
+                class="table table-bordered table-hover"
+                id="dataTable"
+                width="100%"
+                cellspacing="0"
+              >
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>Kompetensi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    v-for="(item, index) in listKompetensi"
+                    v-bind:key="item.id"
+                  >
+                    <td>
+                      {{ index + 1 }}
                     </td>
                     <td>
-                      {{ item.usiaPasien }}
-                    </td>
-                    <td>
-                      {{ item.noRekamMedis }}
-                    </td>
-                    <td>
-                      {{
-                        item.residen.penggunaModel.firstName +
-                        " " +
-                        item.residen.penggunaModel.lastName
-                      }}
-                    </td>
-                    <td>
-                      {{
-                        item.konsulen.pengguna.firstName +
-                        " " +
-                        item.konsulen.pengguna.lastName
-                      }}
-                    </td>
-                    <td v-if="item.isFromJaga">Ya</td>
-                    <td v-if="!item.isFromJaga">Tidak</td>
-                    <td>{{ item.status }}</td>
-                    <td>
-                      <router-link
-                        :to="'laporanpasien/' + item.idLaporanPasien"
-                      >
-                        <button class="btn btn-secondary">Lihat</button>
-                      </router-link>
+                      {{ item.kompetensi.namaKompetensi }}
                     </td>
                   </tr>
                 </tbody>
@@ -103,50 +222,54 @@
         </div>
       </div>
     </div>
-  </div>
+</div>
 </template>
 
 <script>
 import axios from "axios";
 import MainHeader from "@/components/MainHeader.vue";
-import PieChart from "@/components/PieChart.vue";
-import BarChart from "@/components/BarChart.vue";
 
 export default {
-  name: "MenuLaporanPasien",
+  name: "DetailMenuLaporanPasien",
   data() {
     return {
-      labelBarTindakan: [],
-      dataBarTindakan: [],
-      labelPie: [],
-      dataPie: [],
-      totalLaporanPasien: Number,
-      persentase: Number,
-      labelBarLaporan: [],
-      dataBarLaporan: [],
-      listLaporanPasien: Array,
+      laporanPasien: Array,
+      tanggal: String,
+      usia: String,
+      noRekam: String,
+      jaga: Boolean,
+      konsulenFirstName: String,
+      konsulenLastName: String,
+      status: String,
+      updateStatus: Array,
+      feedback: String,
+      diagnosis: String,
+      listTindakan: Array,
+      listKompetensi: Array,
       isMounted: false,
     };
   },
   components: {
     MainHeader,
-    PieChart,
-    BarChart,
   },
   mounted() {
     axios
-      .get("http://localhost:8000/api/dashboardPengurusAkademik/laporanpasien/")
+      .get("http://localhost:8000/api/dashboardPengurusAkademik/laporanpasien/1") // nanti diganti ini angka 1 nya
       .then((resp) => {
         console.warn(resp.data);
-        this.labelBarTindakan = resp.data.labelTindakan;
-        this.dataBarTindakan = resp.data.listJumlahTindakanPerKategori;
-        this.labelPie = resp.data.labelStatus;
-        this.dataPie = resp.data.listJumlahLaporanPerStatus;
-        this.totalLaporanPasien = resp.data.totalLaporanPasien;
-        this.persentase = resp.data.persentaseDisetujui;
-        this.labelBarLaporan = resp.data.labelLaporan;
-        this.dataBarLaporan = resp.data.listJumlahLaporanPasienPerTipe;
-        this.listLaporanPasien = resp.data.listLaporanPasien;
+        this.laporanPasien = resp.data.laporanPasien;
+        this.tanggal = resp.data.laporanPasien.tanggalDibuat
+        this.usia = resp.data.laporanPasien.usiaPasien
+        this.noRekam = resp.data.laporanPasien.noRekamMedis
+        this.jaga = resp.data.laporanPasien.isFromJaga
+        this.konsulenFirstName = resp.data.laporanPasien.konsulen.pengguna.firstName
+        this.konsulenLastName = resp.data.laporanPasien.konsulen.pengguna.lastName
+        this.status = resp.data.laporanPasien.status
+        this.updateStatus = resp.data.updateStatus
+        this.feedback = resp.data.laporanPasien.feedback
+        this.diagnosis = resp.data.laporanPasien.diagnosis
+        this.listTindakan = resp.data.laporanPasien.listTindakan
+        this.listKompetensi = resp.data.listKompetensiLaporan
         this.isMounted = true;
         this.loadDataTable();
       });

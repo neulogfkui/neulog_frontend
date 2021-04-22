@@ -29,6 +29,11 @@ import MenuModul from '../views/DashboardPengurusAkademik/MenuModul.vue'
 import DetailMenuResiden from '../views/DashboardPengurusAkademik/DetailMenuResiden.vue'
 import DetailMenuKonsulen from '../views/DashboardPengurusAkademik/DetailMenuKonsulen.vue'
 import DetailMenuModul from '../views/DashboardPengurusAkademik/DetailMenuModul.vue'
+import DetailMenuLaporanPasien from '../views/DashboardPengurusAkademik/DetailMenuLaporanPasien.vue'
+import DetailMenuTugasPresentasi from '../views/DashboardPengurusAkademik/DetailMenuTugasPresentasi.vue'
+import DetailMenuTugasPublikasi from '../views/DashboardPengurusAkademik/DetailMenuTugasPublikasi.vue'
+import DetailMenuTugasKasusSulit from '../views/DashboardPengurusAkademik/DetailMenuTugasKasusSulit.vue'
+import DetailMenuTugasAkhir from '../views/DashboardPengurusAkademik/DetailMenuTugasAkhir.vue'
 
 const routes = [
 
@@ -148,6 +153,31 @@ const routes = [
     path: '/dashboardpengurusakademik/modul/:idModul',
     name: 'DetailMenuModul',
     component: DetailMenuModul
+  },
+  {
+    path: '/dashboardpengurusakademik/laporanpasien/:idLaporanPasien',
+    name: 'DetailMenuLaporanPasien',
+    component: DetailMenuLaporanPasien
+  },
+  {
+    path: '/dashboardpengurusakademik/laporantugas/tugaspresentasi/:idLaporanTugas',
+    name: 'DetailMenuTugasPresentasi',
+    component: DetailMenuTugasPresentasi
+  },
+  {
+    path: '/dashboardpengurusakademik/laporantugas/tugaspublikasi/:idLaporanTugas',
+    name: 'DetailMenuTugasPublikasi',
+    component: DetailMenuTugasPublikasi
+  },
+  {
+    path: '/dashboardpengurusakademik/laporantugas/tugaskasussulit/:idLaporanTugas',
+    name: 'DetailMenuTugasKasusSulit',
+    component: DetailMenuTugasKasusSulit
+  },
+  {
+    path: '/dashboardpengurusakademik/laporantugas/tugasakhir/:idLaporanTugas',
+    name: 'DetailMenuTugasAkhir',
+    component: DetailMenuTugasAkhir
   },
   {
     path: '/about',

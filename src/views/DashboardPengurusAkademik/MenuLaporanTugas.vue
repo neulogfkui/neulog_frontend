@@ -111,27 +111,27 @@
                         {{ index + 1 }}
                         </td>
                         <td>
-                        {{ item.laporanTugasPresentasiModel.tanggalDibuat }}
+                        {{ item.tanggalDibuat }}
                         </td>
                         <td>
-                        {{ item.jenis }}
+                        {{ item.tugasPresentasiModel.jenis }}
                         </td>
                         <td>
-                        {{ item.judulMakalah }}
+                        {{ item.tugasPresentasiModel.judulMakalah }}
                         </td>
                         <td>
-                        {{ item.modulModel.namaModul }}
+                        {{ item.tugasPresentasiModel.modulModel.namaModul }}
                         </td>
                         <td>
-                        {{ item.laporanTugasPresentasiModel.konsulenModel.pengguna.firstName + " " +
-                        item.laporanTugasPresentasiModel.konsulenModel.pengguna.lastName }}
+                        {{ item.konsulenModel.pengguna.firstName + " " +
+                        item.konsulenModel.pengguna.lastName }}
                         </td>
                          <td>
-                        {{ item.laporanTugasPresentasiModel.status }}
+                        {{ item.status }}
                         </td>
                         <td>
                         <router-link
-                            :to="'/tugaspresentasidetail/' + item.idTugasPresentasi"
+                            :to="'laporantugas/tugaspresentasi/' + item.idLaporanTugas"
                         >
                             <button class="btn btn-secondary">Lihat</button>
                         </router-link>
@@ -178,24 +178,24 @@
                         {{ index + 1 }}
                         </td>
                         <td>
-                        {{ item.laporanTugasKasusSulitModel.tanggalDibuat }}
+                        {{ item.tanggalDibuat }}
                         </td>
                         <td>
-                        {{ item.namaPertemuan }}
+                        {{ item.pembahasanKasusSulitMultidisiplinModel.namaPertemuan }}
                         </td>
                         <td>
-                        {{ item.kasusYangDibahas }}
+                        {{ item.pembahasanKasusSulitMultidisiplinModel.kasusYangDibahas }}
                         </td>
                         <td>
-                        {{ item.laporanTugasKasusSulitModel.konsulenModel.pengguna.firstName + " " +
-                        item.laporanTugasKasusSulitModel.konsulenModel.pengguna.lastName }}
+                        {{ item.konsulenModel.pengguna.firstName + " " +
+                        item.konsulenModel.pengguna.lastName }}
                         </td>
                          <td>
-                        {{ item.laporanTugasKasusSulitModel.status }}
+                        {{ item.status }}
                         </td>
                         <td>
                         <router-link
-                            :to="'/kasussulitdetail/' + item.idKasusSulit"
+                            :to="'laporantugas/tugaskasussulit/' + item.idLaporanTugas"
                         >
                             <button class="btn btn-secondary">Lihat</button>
                         </router-link>
@@ -241,24 +241,24 @@
                         {{ index + 1 }}
                         </td>
                         <td>
-                        {{ item.laporanTugasPublikasiModel.tanggalDibuat }}
+                        {{ item.tanggalDibuat }}
                         </td>
                         <td>
-                        {{ item.judulPublikasi }}
+                        {{ item.tugasPublikasiModel.judulPublikasi }}
                         </td>
                         <td>
-                        {{ item.eventPublikasi }}
+                        {{ item.tugasPublikasiModel.eventPublikasi }}
                         </td>
                         <td>
-                        {{ item.laporanTugasPublikasiModel.konsulenModel.pengguna.firstName + " " +
-                        item.laporanTugasPublikasiModel.konsulenModel.pengguna.lastName }}
+                        {{ item.konsulenModel.pengguna.firstName + " " +
+                        item.konsulenModel.pengguna.lastName }}
                         </td>
                          <td>
-                        {{ item.laporanTugasPublikasiModel.status }}
+                        {{ item.status }}
                         </td>
                         <td>
                         <router-link
-                            :to="'/tugaspublikasidetail/' + item.idTugasPublikasi"
+                            :to="'laporantugas/tugaspublikasi/' + item.idLaporanTugas"
                         >
                             <button class="btn btn-secondary">Lihat</button>
                         </router-link>
@@ -304,24 +304,24 @@
                         {{ index + 1 }}
                         </td>
                         <td>
-                        {{ item.laporanTugasPenelitianAkhirModel.tanggalDibuat }}
+                        {{ item.tanggalDibuat }}
                         </td>
                         <td>
-                        {{ item.judulProposal }}
+                        {{ item.tugasPenelitianAkhirModel.judulProposal }}
                         </td>
                         <td>
-                        {{ item.stage }}
+                        {{ item.tugasPenelitianAkhirModel.stage }}
                         </td>
                         <td>
-                        {{ item.laporanTugasPenelitianAkhirModel.konsulenModel.pengguna.firstName + " " +
-                        item.laporanTugasPenelitianAkhirModel.konsulenModel.pengguna.lastName }}
+                        {{ item.konsulenModel.pengguna.firstName + " " +
+                        item.konsulenModel.pengguna.lastName }}
                         </td>
                          <td>
-                        {{ item.laporanTugasPenelitianAkhirModel.status }}
+                        {{ item.status }}
                         </td>
                         <td>
                         <router-link
-                            :to="'/tugasakhirdetail/' + item.idTugasPenelitianAkhir"
+                            :to="'laporantugas/tugasakhir/' + item.idLaporanTugas"
                         >
                             <button class="btn btn-secondary">Lihat</button>
                         </router-link>
