@@ -189,6 +189,10 @@
             <div class="sidenav-footer-content">
               <div class="sidenav-footer-subtitle">Logged in as:</div>
               <div class="sidenav-footer-title">Valerie Luna</div>
+              <button 
+                class="btn btn-danger m-1" 
+                style="margin-bottom:2rem!important;"
+                @click="logOut">Logout</button>
             </div>
           </div>
         </nav>
@@ -242,5 +246,11 @@ export default {
     this.id = [1];
     // this.loadDataTable();
   },
+  methods: {
+    logOut() {
+      this.$store.dispatch('logout');
+      this.$router.push('/login');
+    }
+  }
 };
 </script>

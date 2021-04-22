@@ -1,16 +1,3 @@
-// import { createStore } from 'vuex'
-// import { auth } from "./auth.module"
-
-// export default createStore({
-//   state: {
-//     tes: "INI TEST LOH"
-//   },
-//   modules: {
-//     auth
-//   }
-// });
-
-import { createStore } from 'vuex';
 import AuthService from '../services/auth.service';
 
 const user = JSON.parse(localStorage.getItem('user'));
@@ -18,8 +5,8 @@ const initialState = user
   ? { status: { loggedIn: true }, user }
   : { status: { loggedIn: false }, user: null };
 
-export default createStore({
-  // namespaced: true,
+export const auth = {
+  namespaced: true,
   state: initialState,
   actions: {
     login({ commit }, user) {
@@ -71,4 +58,4 @@ export default createStore({
       state.status.loggedIn = false;
     }
   }
-});
+};
