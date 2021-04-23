@@ -52,6 +52,16 @@ const routes = [
     component: LaporanPasienDetail
   },
   {
+    path: '/dashboardmodul/:idResiden',
+    name: 'DashboardModul',
+    component: DashboardModul
+  },
+  {
+    path: '/moduldetail/:idModulResiden',
+    name: 'ModulDetail',
+    component: ModulDetail
+  },
+  {
     path: '/components',
     name: 'Components',
     component: Home
