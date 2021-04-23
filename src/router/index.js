@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
-import Login from '../views/Login.vue'
+// import Login from '../views/Login.vue'
+import MengelolaAkun from '../views/MengelolaAkun.vue'
 import HomeResiden from '../views/HomeResiden.vue'
 import TugasPresentasiForm from '../views/TugasPresentasiForm.vue'
 import KasusSulitForm from '../views/KasusSulitForm.vue'
@@ -38,10 +39,15 @@ const routes = [
     component: HomeResiden
   },
   {
-    path: '/login',
-    name: "Login",
-    component: Login
+    path: '/mengelolaAkun',
+    name: 'MengelolaAkun',
+    component: MengelolaAkun
   },
+  // {
+  //   path: '/login',
+  //   name: "Login",
+  //   component: Login
+  // },
   {
     path: '/dashboardtugaspresentasi/:idResiden',
     name: 'DashboardTugasPresentasi',

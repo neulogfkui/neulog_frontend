@@ -29,6 +29,24 @@ class AuthService {
       password: user.password
     });
   }
+
+  registerResiden(residen) {
+    return axios.post(API_URL + 'signup/residen', {
+      username: residen.username,
+      name: residen.name,
+      password: residen.password,
+      email: residen.email,
+      alamat: residen.alamat,
+      role: ["ROLE_RESIDEN"],
+      tempatLahir: residen.tempatLahir,
+      tanggalLahir: residen.tanggalLahir,
+      tahunMasuk: residen.tahunMasuk,
+      npm: residen.npm,
+      term: residen.term,
+      nomorTelepon: residen.nomorTelepon,
+      idPembimbing: residen.idPembimbing
+    })
+  }
 }
 
 export default new AuthService();

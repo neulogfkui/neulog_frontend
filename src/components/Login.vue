@@ -54,33 +54,34 @@
 
 <script>
 import User from '../models/user';
+// import {Form, Field, ErrorMessage} from 'vee-validate';
 
 export default {
   name: 'Login',
   data() {
+    // const validateSchema = yup.object({
+    //   username: yup.string().required(),
+    //   password: yup.string().required()
+    // })
     return {
       user: new User('', ''),
       loading: false,
-      message: ''
+      message: '',
+      error: null,
+      // validateSchema
     };
   },
 
   computed: {
     loggedIn() {
-      return this.$store.state.status.loggedIn;
-    }
-  },
-
-  created() {
-    if (this.loggedIn) {
-      this.$router.push('/');
+      return this.$store.state.auth.status.loggedIn;
     }
   },
 
   methods: {
     handleLogin() {
         console.log("handleLogin")
-      this.loading = true;
+        this.loading = true;
     //   this.$validator.validateAll().then(isValid => {
     //     if (!isValid) {
     //       this.loading = false;
@@ -88,19 +89,20 @@ export default {
     //     }
 
         if (this.user.username && this.user.password) {
-          this.$store.dispatch('login', this.user).then(
-            () => {
-              this.$router.push('/');
-            },
-            error => {
-              this.loading = false;
-              this.message =
-                (error.response && error.response.data && error.response.data.message) ||
-                error.message ||
-                error.toString();
+          this.$store.dispatch('auth/login', this.user).then(
+          success => {
+            this.loading = false;
+          },
+          error => {
+            this.loading = false;
+            this.message =
+              (error.response && error.response.data && error.response.data.message) ||
+              error.message ||
+              error.toString();
+              this.$store.commit("loginFailure");
             }
           );
-        }
+        };
     //   });
     }
   }

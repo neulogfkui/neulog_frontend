@@ -1,5 +1,9 @@
 <template>
   <body class="nav-fixed">
+    <div v-if="!isLoggedIn">
+      <Login />
+    </div>
+    <div v-else>
     <nav
       class="topnav navbar navbar-expand shadow justify-content-between justify-content-sm-start navbar-light bg-white"
       id="sidenavAccordion"
@@ -229,27 +233,40 @@
         </footer>
       </div>
     </div>
+    </div>
   </body>
 </template>
 
 <script>
+import Login from './components/Login';
+
 export default {
   name: "App",
+  components: {Login},
   data: function () {
     return {
+      isLoggedIn: this.$store.state.auth.status.loggedIn,
       role: [],
       id: Array,
     };
   },
+  // computed: {
+  //   isLoggedIn(){ this.$store.state.status.loggedIn;},
+  // },
   mounted() {
     this.role = ["konsulen"];
     this.id = [1];
     // this.loadDataTable();
   },
+  updated() {
+    this.isLoggedIn = this.$store.state.auth.status.loggedIn;
+    console.log(this.isLoggedIn);
+  },
   methods: {
     logOut() {
-      this.$store.dispatch('logout');
-      this.$router.push('/login');
+      this.$store.dispatch('auth/logout');
+      this.$router.push('/');
+      this.isLoggedIn = this.$store.state.auth.status.loggedIn;
     }
   }
 };
