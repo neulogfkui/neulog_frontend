@@ -70,13 +70,31 @@
                         </div>
                     </div>
 
-                    <!-- Save changes button-->
-                    <button @click="handleGetResidenDatas" class="btn btn-primary" type="button">Save changes</button>
-                    <div class="form-group">
-                        <div v-if="successful && message" class="alert alert-success mt-3" role="alert">{{message}}</div>
-                        <div v-if="!successful && message" class="alert alert-danger mt-3" role="alert">{{message}}</div>
-                    </div>
+                     <!-- Buttons -->
+                    <button class="btn btn-primary" type="button">Edit Account</button>
+                    <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#deleteConfirmation">Delete Account</button>
                 </form>
+            </div>
+        </div>
+    </div>
+
+        <!-- Confirmation Modal -->
+    <div class="modal fade" id="deleteConfirmation" tabindex="-1" role="dialog" aria-labelledby="deleteConfirmationTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteConfirmationTitle">Penghapusan akun {{ user.username }}</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+                <div v-if="!deleted" class="modal-body">Apakah anda yakin? Akun {{ user.name }} ({{user.username}}) akan terhapus secara permanen dan tidak dapat dikembalikan lagi.</div>
+                <div v-if="deleted" class="modal-body success-body">
+                    <i class="far fa-check-circle check-success"></i>
+                    Akun {{ user.name }} ({{user.username}}) berhasil dihapus. Halaman ini tidak akan dapat diakses lagi setelah anda menutupnya.
+                </div>
+                <div class="modal-footer">
+                    <button v-if="!deleted" @click="deletePengguna" class="btn btn-danger" type="button">Hapus</button>
+                    <button class="btn btn-light" type="button" data-dismiss="modal">Tutup</button>
+                </div>
             </div>
         </div>
     </div>
@@ -96,7 +114,8 @@ export default {
             namaKonsulen: "",
             submitted: false,
             successful: false,
-            message: ''
+            message: '',
+            deleted: false
         }
     },
     mounted() {
@@ -136,13 +155,48 @@ export default {
         loggedIn(){
             return this.$store.state.auth.status.loggedIn
         }
-    }
+    },
 
+    methods: {
+        deletePengguna() {
+            this.$store.dispatch('auth/deletePengguna', this.user.username).then(
+            success => {
+                this.deleted = true;
+            },
+            error => {
+                this.message =
+                    (error.response && error.response.data && error.response.data.message) ||
+                    error.message ||
+                    error.toString();
+                this.successful = false;
+                this.$router.push('/404');
+                }
+            );
+        }
+    }
 }
 </script>
 
-<style>
-#residen-style {
-    margin: auto;
+<style scoped>
+i {
+    color: rgba(54, 138, 54, 0.781);
+}
+.btn {
+    margin: 2rem .75rem 0 0;
+}
+.btn-light {
+    background-color: rgb(211, 211, 211);
+}
+.modal-title {
+    color: rgb(14, 91, 207);
+}
+.success-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.check-success {
+    margin: 2rem;
+    font-size: 3rem;
 }
 </style>

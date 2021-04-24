@@ -10,7 +10,7 @@
                                 <div class="text-center mt-4">
                                     <img class="img-fluid p-4" src="@/assets/img/illustrations/404-error.svg" alt />
                                     <p class="lead">This requested URL was not found on this server. Please check your URL or the ID used inside the URL ...</p>
-                                    <a class="text-arrow-icon" href="index.html">
+                                    <a class="text-arrow-icon" href="/">
                                         <i class="ml-0 mr-1" data-feather="arrow-left"></i>
                                         Return to Dashboard
                                     </a>

@@ -49,6 +49,18 @@ export const auth = {
         }
       );
     },
+    deletePengguna({ commit }, username) {
+      return AuthService.deletePengguna(username).then(
+        response => {
+          commit('registerSuccess');
+          return Promise.resolve(response.data);
+        },
+        error => {
+          commit('registerFailure');
+          return Promise.reject(error);
+        }
+      );
+    },
   },
   mutations: {
     loginSuccess(state, user) {
