@@ -23,7 +23,18 @@ export const user = {
           return Promise.reject(error);
         }
       );
-    }
+    },
+
+    getPenggunaByUsername({ commit }, username) {
+      return UserService.getPenggunaByUsername(username).then(
+        datas => {
+          return Promise.resolve(datas);
+        },
+        error => {
+          return Promise.reject(error);
+        }
+      );
+    },
   },
   mutations: {}
 };

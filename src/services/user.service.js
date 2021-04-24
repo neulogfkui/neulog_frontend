@@ -17,6 +17,12 @@ class UserService {
     .then(response => { return response.data;});
   }
 
+  getPenggunaByUsername(username) {
+    return axios
+    .get(API_URL + 'pengguna/' + username, { headers: authHeader() })
+    .then(response => { return response.data;});
+  }
+
   // getPublicContent() {
   //   return axios.get(API_URL + 'all');
   // }

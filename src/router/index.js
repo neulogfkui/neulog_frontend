@@ -2,10 +2,12 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 
+// USE CASE - 12
 // import MengelolaAkun from '../views/MengelolaAkun.vue'
 import ResidenRegister from '../views/mengelolaAkun/ResidenRegister.vue'
 import ViewResiden from '../views/mengelolaAkun/ViewResiden.vue'
 import StaffRegister from '../views/mengelolaAkun/StaffRegister.vue'
+import ViewStaff from '../views/mengelolaAkun/ViewStaff.vue'
 
 import HomeResiden from '../views/HomeResiden.vue'
 import TugasPresentasiForm from '../views/TugasPresentasiForm.vue'
@@ -109,6 +111,11 @@ const routes = [
     component: ViewResiden,
   },
   {
+    path: '/mengelola-akun/view-staff/:username',
+    name: 'ViewStaff',
+    component: ViewStaff,
+  },
+  {
     path: '/mengelola-akun/residen-register',
     name: 'ResidenRegister',
     component: ResidenRegister,
@@ -119,6 +126,14 @@ const routes = [
     component: StaffRegister,
   },
 
+
+
+  // MISCELLANEOUS
+  {
+    path: '/:pathMatch(.*)*',
+    name: '404',
+    component: PageNotFound
+  },
   {
     path: '/about',
     name: 'About',
@@ -129,13 +144,6 @@ const routes = [
       return import(/* webpackChunkName: "about" */ '../views/About.vue')
     }
   },
-
-  // MISCELLANEOUS
-  {
-    path: '/:pathMatch(.*)*',
-    name: '404',
-    component: PageNotFound
-  }
 ]
 
 const router = createRouter({
