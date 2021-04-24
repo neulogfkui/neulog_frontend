@@ -21,7 +21,7 @@
                 :count="persenAvgProlongDays"
                 caption="Hari"
             />
-            <!-- Tabel Laporan Pasien -->
+            <!-- Tabel -->
             <div class="col-xxl-12 col-xl-12 mb-4 mt-4">
                 <div class="card card-header-actions h-100">
                     <div class="card-header">

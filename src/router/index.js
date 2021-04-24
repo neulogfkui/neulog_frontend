@@ -62,6 +62,11 @@ const routes = [
     component: ModulDetail
   },
   {
+    path: '/dashboardjaga/:idResiden',
+    name: 'DashboardJaga',
+    component: DashboardJaga
+  },
+  {
     path: '/components',
     name: 'Components',
     component: Home
