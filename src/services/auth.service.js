@@ -47,6 +47,18 @@ class AuthService {
       idPembimbing: residen.idPembimbing
     })
   }
+
+  registerStaff(staff) {
+    return axios.post(API_URL + 'signup/staff', {
+      username: staff.username,
+      name: staff.name,
+      password: staff.password,
+      email: staff.email,
+      role: staff.role,
+      tempatLahir: staff.tempatLahir,
+      tanggalLahir: staff.tanggalLahir
+    })
+  }
 }
 
 export default new AuthService();

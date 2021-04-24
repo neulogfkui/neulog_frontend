@@ -37,8 +37,8 @@ export const auth = {
         }
       );
     },
-    register({ commit }, user) {
-      return AuthService.register(user).then(
+    registerStaff({ commit }, staff) {
+      return AuthService.registerStaff(staff).then(
         response => {
           commit('registerSuccess');
           return Promise.resolve(response.data);
@@ -48,7 +48,7 @@ export const auth = {
           return Promise.reject(error);
         }
       );
-    }
+    },
   },
   mutations: {
     loginSuccess(state, user) {

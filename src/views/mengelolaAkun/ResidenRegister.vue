@@ -1,5 +1,5 @@
 <template>
-<div class="col-xl-8">
+<div class="container mt-10 align-items-center justify-content-center">
         <!-- Account details card-->
         <div class="card mb-4">
             <div class="card-header">Account Details</div>
@@ -83,7 +83,7 @@
                     </div>
 
                     <!-- Save changes button-->
-                    <button @click="handelResidenResgister" class="btn btn-primary" type="button">Save changes</button>
+                    <button @click="handleResidenResgister" class="btn btn-primary" type="button">Save changes</button>
                     <div class="form-group">
                         <div v-if="successful && message" class="alert alert-success mt-3" role="alert">{{message}}</div>
                         <div v-if="!successful && message" class="alert alert-danger mt-3" role="alert">{{message}}</div>
@@ -95,10 +95,10 @@
 </template>
 
 <script>
-import Residen from '../models/residen';
+import Residen from '../../models/residen';
 
 export default {
-    name: "MengelolaAkun",
+    name: "ResidenRegister",
     data() {
         return {
             password: "",
@@ -114,7 +114,7 @@ export default {
         }
     },
     methods: {
-        handelResidenResgister(){
+        handleResidenResgister(){
             this.residen.tahunMasuk = parseInt(this.residen.tahunMasuk);
             console.log(this.residen);
             this.message = '';
@@ -137,3 +137,9 @@ export default {
     }
 }
 </script>
+
+<style>
+#residen-style {
+    margin: auto;
+}
+</style>

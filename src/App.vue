@@ -247,7 +247,7 @@ export default {
     return {
       isLoggedIn: this.$store.state.auth.status.loggedIn,
       role: [],
-      id: Array,
+      id: Array
     };
   },
   // computed: {
@@ -269,5 +269,5 @@ export default {
       this.isLoggedIn = this.$store.state.auth.status.loggedIn;
     }
   }
-};
+}
 </script>

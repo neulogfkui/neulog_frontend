@@ -1,7 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
-// import Login from '../views/Login.vue'
-import MengelolaAkun from '../views/MengelolaAkun.vue'
+import Login from '../views/Login.vue'
+
+// import MengelolaAkun from '../views/MengelolaAkun.vue'
+import ResidenRegister from '../views/mengelolaAkun/ResidenRegister.vue'
+import ViewResiden from '../views/mengelolaAkun/ViewResiden.vue'
+import StaffRegister from '../views/mengelolaAkun/StaffRegister.vue'
+
 import HomeResiden from '../views/HomeResiden.vue'
 import TugasPresentasiForm from '../views/TugasPresentasiForm.vue'
 import KasusSulitForm from '../views/KasusSulitForm.vue'
@@ -24,30 +29,21 @@ import DashboardTindakan from '../views/DashboardResiden/DashboardTindakan.vue'
 import DashboardJaga from '../views/DashboardResiden/DashboardJaga.vue'
 import LaporanPasienDetail from '../views/DashboardResiden/LaporanPasienDetail.vue'
 
+import PageNotFound from '../views/errors/404'
+
 const routes = [
 
   //ALL
   //AUTHOR: ALL
-
-
-  //USE CASE 1
-  //AUTHOR: NUR
-  // --------------------------------------------
   {
     path: '/',
     name: 'Home',
     component: HomeResiden
   },
-  {
-    path: '/mengelolaAkun',
-    name: 'MengelolaAkun',
-    component: MengelolaAkun
-  },
-  // {
-  //   path: '/login',
-  //   name: "Login",
-  //   component: Login
-  // },
+
+  //USE CASE 1
+  //AUTHOR: NUR
+  // --------------------------------------------
   {
     path: '/dashboardtugaspresentasi/:idResiden',
     name: 'DashboardTugasPresentasi',
@@ -103,6 +99,26 @@ const routes = [
     name: 'laporanTugasChoice',
     component: LaporanTugasChoice
   },
+
+  //USE CASE 12
+  //AUTHOR: AVI
+  // --------------------------------------------
+  {
+    path: '/mengelola-akun/view-residen/:idResiden',
+    name: 'ViewResiden',
+    component: ViewResiden,
+  },
+  {
+    path: '/mengelola-akun/residen-register',
+    name: 'ResidenRegister',
+    component: ResidenRegister,
+  },
+  {
+    path: '/mengelola-akun/staff-register',
+    name: 'StaffRegister',
+    component: StaffRegister,
+  },
+
   {
     path: '/about',
     name: 'About',
@@ -112,6 +128,13 @@ const routes = [
     component: function () {
       return import(/* webpackChunkName: "about" */ '../views/About.vue')
     }
+  },
+
+  // MISCELLANEOUS
+  {
+    path: '/:pathMatch(.*)*',
+    name: '404',
+    component: PageNotFound
   }
 ]
 
