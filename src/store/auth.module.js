@@ -49,6 +49,30 @@ export const auth = {
         }
       );
     },
+    updateResiden({ commit }, residen) {
+      return AuthService.updateResiden(residen).then(
+        response => {
+          commit('registerSuccess');
+          return Promise.resolve(response.data);
+        },
+        error => {
+          commit('registerFailure');
+          return Promise.reject(error);
+        }
+      );
+    },
+    updateStaff({ commit }, staff) {
+      return AuthService.updateStaff(staff).then(
+        response => {
+          commit('registerSuccess');
+          return Promise.resolve(response.data);
+        },
+        error => {
+          commit('registerFailure');
+          return Promise.reject(error);
+        }
+      );
+    },
     deletePengguna({ commit }, username) {
       return AuthService.deletePengguna(username).then(
         response => {

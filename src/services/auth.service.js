@@ -36,14 +36,14 @@ class AuthService {
       name: residen.name,
       password: residen.password,
       email: residen.email,
-      alamat: residen.alamat,
+      alamatRumah: residen.alamat,
       role: ["ROLE_RESIDEN"],
       tempatLahir: residen.tempatLahir,
       tanggalLahir: residen.tanggalLahir,
       tahunMasuk: residen.tahunMasuk,
       npm: residen.npm,
       term: residen.term,
-      nomorTelepon: residen.nomorTelepon,
+      noTelepon: residen.nomorTelepon,
       idPembimbing: residen.idPembimbing
     })
   }
@@ -57,6 +57,38 @@ class AuthService {
       role: staff.role,
       tempatLahir: staff.tempatLahir,
       tanggalLahir: staff.tanggalLahir
+    })
+  }
+
+  updateResiden(residen) {
+    return axios.post(API_URL + 'update/residen', {
+      username: residen.username,
+      name: residen.name,
+      password: residen.password,
+      email: residen.email,
+      alamatRumah: residen.alamatRumah,
+      role: ["ROLE_RESIDEN"],
+      tempatLahir: residen.tempatLahir,
+      tanggalLahir: residen.tanggalLahir,
+      tahunMasuk: residen.tahunMasuk,
+      npm: residen.npm,
+      term: residen.term,
+      noTelepon: residen.noTelepon,
+      idPembimbing: residen.idPembimbing,
+      oldPassword: residen.oldPassword
+    })
+  }
+
+  updateStaff(staff) {
+    return axios.post(API_URL + 'update/staff', {
+      username: staff.username,
+      name: staff.name,
+      password: staff.password,
+      email: staff.email,
+      role: staff.role,
+      tempatLahir: staff.tempatLahir,
+      tanggalLahir: staff.tanggalLahir,
+      oldPassword: staff.oldPassword
     })
   }
 

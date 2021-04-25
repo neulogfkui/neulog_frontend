@@ -22,10 +22,15 @@
                         </div>
                     </div>
 
+                    <div class="form-group">
+                        <label class="small mb-1" for="inputOldPassword">Old Password</label>
+                        <input v-model="oldPassword" class="form-control" id="inputOldPassword" type="password" placeholder="Enter Password" >
+                    </div>
+
                     <!-- Form Row-->
                     <div class="form-row">
                         <div class="form-group col">
-                            <label class="small mb-1" for="inputPassword">Password</label>
+                            <label class="small mb-1" for="inputPassword">New Password</label>
                             <input v-model="residen.password" class="form-control" id="inputPassword" type="password" placeholder="Enter Password" >
                         </div>
                         <div class="form-group col">
@@ -50,11 +55,11 @@
                     <div class="form-row">
                         <div class="form-group col">
                             <label class="small mb-1" for="inputAlamat">Alamat</label>
-                            <input v-model="residen.alamat" class="form-control" id="inputAlamat" type="text" placeholder="Enter your Alamat"/>
+                            <input v-model="residen.alamatRumah" class="form-control" id="inputAlamat" type="text" placeholder="Enter your Alamat"/>
                         </div>
                         <div class="form-group col">
                             <label class="small mb-1" for="inputNomorTelepon">Nomor Telepon</label>
-                            <input v-model="residen.nomorTelepon" class="form-control" id="inputNomorTelepon" type="text" name="NomorTelepon" placeholder="Enter your Nomor Telepon"/>
+                            <input v-model="residen.noTelepon" class="form-control" id="inputNomorTelepon" type="text" name="NomorTelepon" placeholder="Enter your Nomor Telepon"/>
                         </div>
                     </div>
 
@@ -83,7 +88,7 @@
                     </div>
 
                     <!-- Save changes button-->
-                    <button @click="handleResidenResgister" class="btn btn-primary" type="button" data-toggle="modal" data-target="#saveModal">Buat Residen</button>
+                    <button @click="handleUpdateResiden" class="btn btn-primary" type="button" data-toggle="modal" data-target="#updateSuccess">Save changes</button>
                     <div class="form-group">
                         <div v-if="successful && message" class="alert alert-success mt-3" role="alert">{{message}}</div>
                         <div v-if="!successful && message" class="alert alert-danger mt-3" role="alert">{{message}}</div>
@@ -92,22 +97,22 @@
             </div>
         </div>
     </div>
-
+    
     <!-- Confirmation Modal -->
-    <div class="modal fade" id="saveModal" tabindex="-1" role="dialog" aria-labelledby="saveModalTitle" aria-hidden="true">
+    <div class="modal fade" id="updateSuccess" tabindex="-1" role="dialog" aria-labelledby="updateSuccessTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="saveModalTitle">Pesan Perubahan Data</h5>
+                    <h5 class="modal-title" id="updateSuccessTitle">Pesan Perubahan Data</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                 </div>
                 <div v-if="successful" class="modal-body success-body">
                     <i class="far fa-check-circle check-success"></i>
-                    Akun {{ residen.name }} ({{residen.username}}) berhasil ditambahkan.
+                    Akun {{ residen.name }} ({{residen.username}}) berhasil diperbaharui.
                 </div>
                 <div v-if="!successful" class="modal-body fail-body">
                     <i class="far fa-times-circle check-fail"></i>
-                    Akun {{ residen.name }} ({{residen.username}}) gagal ditambahkan. Mohon periksa kembali data yang dimasukkan.
+                    Akun {{ residen.name }} ({{residen.username}}) gagal diperbaharui. Mohon periksa kembali data yang dimasukkan.
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-light" type="button" data-dismiss="modal">Tutup</button>
@@ -119,16 +124,19 @@
 
 <script>
 import Residen from '../../models/residen';
+import User from '../../models/user';
 
 export default {
-    name: "ResidenRegister",
+    name: "UpdateResiden",
     data() {
         return {
+            oldPassword: "",
             rePassword: "",
             residen: new Residen(),
             submitted: false,
             successful: false,
-            message: ''
+            message: '',
+            namaKonsulen: "",
         }
     },
     computed: {
@@ -136,19 +144,23 @@ export default {
             return this.$store.state.auth.status.loggedIn
         }
     },
-    methods: {
 
-        handleResidenResgister(){
+    created() {
+        this.fetchDatas();
+    },
+
+    methods: {
+        handleUpdateResiden(){
             if (this.rePassword != this.residen.password) {
                 this.message = "Masukan pada 'Re-Enter Password' tidak sama dengan password baru";
                 return
             }
 
-            this.residen.tahunMasuk = parseInt(this.residen.tahunMasuk);
-            console.log(this.residen);
             this.message = '';
             this.submitted = true;
-            this.$store.dispatch('auth/registerResiden', this.residen).then(
+            this.residen.oldPassword = this.oldPassword;
+            console.log(this.residen);
+            this.$store.dispatch('auth/updateResiden', this.residen).then(
             success => {
                 this.successful = true;
                 this.message = success.message || success.response || success.toString();
@@ -161,14 +173,56 @@ export default {
                 this.successful = false
                 }
             );
+        },
+
+        fetchDatas() {
+            this.$store.dispatch('user/getResidenById', this.$route.params.idResiden).then(
+            success => {
+                this.residen = success;
+                this.residen.idPembimbing = success.konsulen.idKonsulen;
+            },
+            error => {
+                this.message =
+                    (error.response && error.response.data && error.response.data.message) ||
+                    error.message ||
+                    error.toString();
+                this.$router.push('/404');
+                }
+            );
+            
+            this.$store.dispatch('user/getPenggunaByResidenId', this.$route.params.idResiden).then(
+            success => {
+                this.residen.username = success.username;
+                this.residen.name = success.name;
+                this.residen.email = success.email;
+                this.residen.tanggalLahir = success.tanggalLahir;
+                this.residen.tempatLahir = success.tempatLahir;
+            },
+            error => {
+                this.message =
+                    (error.response && error.response.data && error.response.data.message) ||
+                    error.message ||
+                    error.toString();
+                this.successful = false;
+                this.$router.push('/404');
+                }
+            );
+            console.log(this.residen);
         }
     }
 }
 </script>
 
 <style>
-#residen-style {
-    margin: auto;
+#role-checkbox {
+    display: flex;
+}
+#role-checkbox > .form-group {
+    display: flex;
+    margin: 1rem;
+}
+#role-checkbox > .form-group > label {
+    margin-left: .3rem;
 }
 .btn-light {
     background-color: rgb(211, 211, 211);
