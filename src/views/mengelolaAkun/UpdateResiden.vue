@@ -213,7 +213,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 #role-checkbox {
     display: flex;
 }

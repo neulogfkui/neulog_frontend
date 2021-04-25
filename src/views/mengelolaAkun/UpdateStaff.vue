@@ -2,7 +2,7 @@
 <div class="container mt-10 align-items-center justify-content-center">
         <!-- Account details card-->
         <div class="card mb-4">
-            <div class="card-header">Account Details</div>
+            <div class="card-header">Data Staff</div>
             <div class="card-body">
                 <form>
                     <div class="form-group">
@@ -17,20 +17,20 @@
                             <input v-model="staff.username" class="form-control" id="inputUsername" type="text" placeholder="Enter your username"/>
                         </div>
                         <div class="form-group col">
-                            <label class="small mb-1" for="inputEmailAddress">Email address</label>
+                            <label class="small mb-1" for="inputEmailAddress">Email</label>
                             <input v-model="staff.email" class="form-control" id="inputEmailAddress" type="email" placeholder="Enter your email address"/>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label class="small mb-1" for="inputOldPassword">Old Password</label>
+                        <label class="small mb-1" for="inputOldPassword">Password Lama</label>
                         <input v-model="oldPassword" class="form-control" id="inputOldPassword" type="password" placeholder="Enter Password" >
                     </div>
 
                     <!-- Form Row-->
                     <div class="form-row">
                         <div class="form-group col">
-                            <label class="small mb-1" for="inputPassword">Password</label>
+                            <label class="small mb-1" for="inputPassword">Password Baru</label>
                             <input v-model="staff.password" class="form-control" id="inputPassword" type="password" placeholder="Enter Password" >
                         </div>
                         <div class="form-group col">
@@ -97,7 +97,7 @@
                     </div>
 
                     <!-- Save changes button-->
-                    <button @click="handleUpdateStaff" class="btn btn-primary" type="button" data-toggle="modal" data-target="#saveModal">Buat Staff Baru</button>
+                    <button @click="handleUpdateStaff" class="btn btn-primary" type="button" data-toggle="modal" data-target="#saveModal">Simpan Perubahan</button>
                     <div class="form-group">
                         <div v-if="successful && message" class="alert alert-success mt-3" role="alert">{{message}}</div>
                         <div v-if="!successful && message" class="alert alert-danger mt-3" role="alert">{{message}}</div>
@@ -117,11 +117,11 @@
                 </div>
                 <div v-if="successful" class="modal-body success-body">
                     <i class="far fa-check-circle check-success"></i>
-                    Akun {{ staff.name }} ({{staff.username}}) berhasil ditambahkan.
+                    Akun {{ staff.name }} ({{staff.username}}) berhasil diperbaharui.
                 </div>
                 <div v-if="!successful" class="modal-body fail-body">
                     <i class="far fa-times-circle check-fail"></i>
-                    Akun {{ staff.name }} ({{staff.username}}) gagal ditambahkan. Mohon periksa kembali data yang dimasukkan.
+                    Akun {{ staff.name }} ({{staff.username}}) gagal diperbaharui. Mohon periksa kembali data yang dimasukkan.
                 </div>
                 <div class="modal-footer">
                     <button @click="redirectToView" class="btn btn-light" type="button" data-dismiss="modal">Tutup</button>
@@ -207,7 +207,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 #role-checkbox {
     display: flex;
 }

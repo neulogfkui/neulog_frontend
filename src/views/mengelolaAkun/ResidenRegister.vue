@@ -166,7 +166,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 #residen-style {
     margin: auto;
 }

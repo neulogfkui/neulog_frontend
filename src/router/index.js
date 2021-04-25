@@ -3,7 +3,7 @@ import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 
 // USE CASE - 12
-// import MengelolaAkun from '../views/MengelolaAkun.vue'
+import MengelolaAkun from '../views/mengelolaAkun/MengelolaAkun.vue'
 import ResidenRegister from '../views/mengelolaAkun/ResidenRegister.vue'
 import ViewResiden from '../views/mengelolaAkun/ViewResiden.vue'
 import StaffRegister from '../views/mengelolaAkun/StaffRegister.vue'
@@ -107,6 +107,11 @@ const routes = [
   //USE CASE 12
   //AUTHOR: AVI
   // --------------------------------------------
+  {
+    path: '/mengelola-akun',
+    name: 'MengelolaAkun',
+    component: MengelolaAkun,
+  },
   {
     path: '/mengelola-akun/view-residen/:idResiden',
     name: 'ViewResiden',

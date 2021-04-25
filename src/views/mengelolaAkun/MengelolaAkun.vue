@@ -1,145 +1,71 @@
 <template>
-<div class="container mt-10 align-items-center justify-content-center">
-        <!-- Account details card-->
-        <div class="card mb-4">
-            <div class="card-header">Account Details</div>
-            <div class="card-body">
-                <form>
-                    <div class="form-group">
-                        <label class="small mb-1" for="inputNamaLengkap">Nama Lengkap (Sesuai Kartu Mahasiswa)</label>
-                        <input v-model="residen.name" class="form-control" id="inputNamaLengkap" type="text" placeholder="Enter your fullname"/>
+    <header class="page-header page-header-dark bg-gradient-primary-to-secondary pb-10">
+        <div class="container">
+            <div class="page-header-content pt-4">
+                <div class="row align-items-center justify-content-between">
+                    <div class="col-auto mt-4">
+                        <h1 class="page-header-title">
+                            <div class="page-header-icon"><i class="fas fa-id-card mr-3"></i></div>
+                            Dashboard Pengelolaan Akun
+                        </h1>
+                        <div class="page-header-subtitle mt-2">Selamat datang, {{ user.username }}.</div>
                     </div>
+                    <div class="col-12 col-xl-auto user-email">{{ user.email }}</div>
+                </div>
+            </div>
+        </div>
+    </header>
 
-                    <!-- Form Group (username)-->
-                    <div class="form-row">
-                        <div class="form-group col">
-                            <label class="small mb-1" for="inputUsername">Username (gunakan huruf kecil tanpa spasi)</label>
-                            <input v-model="residen.username" class="form-control" id="inputUsername" type="text" placeholder="Enter your username"/>
-                        </div>
-                        <div class="form-group col">
-                            <label class="small mb-1" for="inputEmailAddress">Email address</label>
-                            <input v-model="residen.email" class="form-control" id="inputEmailAddress" type="email" placeholder="Enter your email address"/>
-                        </div>
-                    </div>
-
-                    <!-- Form Row-->
-                    <div class="form-row">
-                        <div class="form-group col">
-                            <label class="small mb-1" for="inputPassword">Password</label>
-                            <input v-model="residen.password" class="form-control" id="inputPassword" type="password" placeholder="Enter Password" >
-                        </div>
-                        <div class="form-group col">
-                            <label class="small mb-1" for="inputRePassword">Re-Enter Password</label>
-                            <input v-model="password" class="form-control" id="inputRePassword" type="password" placeholder="Enter Password" >
-                        </div>
-                    </div>
-
-                    <!-- Form Row-->
-                    <div class="form-row">
-                        <div class="form-group col">
-                            <label class="small mb-1" for="inputTempatLahir">Tempat Lahir</label>
-                            <input v-model="residen.tempatLahir" class="form-control" id="inputTempatLahir" type="text" placeholder="Enter your tempat lahir"/>
-                        </div>
-                        <div class="form-group col">
-                            <label class="small mb-1" for="inputBirthday">Tanggal Lahir (yyyy-mm-dd)</label>
-                            <input v-model="residen.tanggalLahir" class="form-control" id="inputBirthday" type="text" name="birthday" placeholder="Enter your birthday"/>
-                        </div>
-                    </div>
-
-                    <!-- Form Row-->
-                    <div class="form-row">
-                        <div class="form-group col">
-                            <label class="small mb-1" for="inputAlamat">Alamat</label>
-                            <input v-model="residen.alamat" class="form-control" id="inputAlamat" type="text" placeholder="Enter your Alamat"/>
-                        </div>
-                        <div class="form-group col">
-                            <label class="small mb-1" for="inputNomorTelepon">Nomor Telepon</label>
-                            <input v-model="residen.nomorTelepon" class="form-control" id="inputNomorTelepon" type="text" name="NomorTelepon" placeholder="Enter your Nomor Telepon"/>
-                        </div>
-                    </div>
-
-                    <!-- Form Row-->
-                    <div class="form-row">
-                        <div class="form-group col">
-                            <label class="small mb-1" for="inputTahunMasuk">Tahun Masuk</label>
-                            <input v-model="residen.tahunMasuk" class="form-control" id="inputTahunMasuk" type="number" placeholder="Tahun masuk universitas"/>
-                        </div>
-                        <div class="form-group col">
-                            <label class="small mb-1" for="inputTerm">Term Perkuliahan</label>
-                            <input v-model="residen.term" class="form-control" id="inputTerm" type="text" name="Term" placeholder="Enter your Term"/>
-                        </div>
-                    </div>
-
-                    <!-- Form Row-->
-                    <div class="form-row">
-                        <div class="form-group col">
-                            <label class="small mb-1" for="inputNpm">NPM</label>
-                            <input v-model="residen.npm" class="form-control" id="inputNpm" type="text" placeholder="NPM"/>
-                        </div>
-                        <div class="form-group col">
-                            <label class="small mb-1" for="inputIdPembimbing">IdPembimbing Perkuliahan</label>
-                            <input v-model="residen.idPembimbing" class="form-control" id="inputIdPembimbing" type="text" name="IdPembimbing" placeholder="Enter your IdPembimbing"/>
-                        </div>
-                    </div>
-
-                    <!-- Save changes button-->
-                    <button @click="handelResidenResgister" class="btn btn-primary" type="button">Save changes</button>
-                    <div class="form-group">
-                        <div v-if="successful && message" class="alert alert-success mt-3" role="alert">{{message}}</div>
-                        <div v-if="!successful && message" class="alert alert-danger mt-3" role="alert">{{message}}</div>
-                    </div>
-                </form>
+    <div class="number-card container mt-n10">
+        <div class="card">
+            <div class="card-header">Jumlah Akun Residen</div>
+            <div class="card-body text-center">
+                <p class="n-residen">
+                    {{ nResiden }}
+                </p>
+                <button @click="redirectToResidenRegister" class="btn btn-teal">Buat Akun Residen</button>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-import Residen from '../../models/residen';
 
 export default {
-    name: "MengelolaAkun",
     data() {
         return {
-            password: "",
-            residen: new Residen(),
-            submitted: false,
-            successful: false,
-            message: ''
+            user: this.$store.state.auth.user,
+            nResiden: 8
         }
     },
-    computed: {
-        loggedIn(){
-            return this.$store.state.auth.status.loggedIn
-        }
+
+    created() {
+        console.log(this.user);
     },
+
     methods: {
-        handelResidenResgister(){
-            this.residen.tahunMasuk = parseInt(this.residen.tahunMasuk);
-            console.log(this.residen);
-            this.message = '';
-            this.submitted = true;
-            this.$store.dispatch('auth/registerResiden', this.residen).then(
-            success => {
-                this.successful = true;
-                this.message = success.message || success.response || success.toString();
-                this.residen = new Residen();
-            },
-            error => {
-                this.message =
-                    (error.response && error.response.data && error.response.data.message) ||
-                    error.message ||
-                    error.toString();
-                this.successful = false
-                }
-            );
+        redirectToResidenRegister() {
+            this.$router.push('/mengelola-akun/residen-register')
         }
     }
 }
 </script>
 
 <style>
-#residen-style {
-    margin: auto;
+.page-header {
+    background: rgb(43,77,223);
+    background: linear-gradient(90deg, rgba(43,77,223,1) 44%, rgba(25,217,160,1) 100%);
+}
+.user-email {
+    color: rgb(255, 255, 255);
+}
+.number-card {
+    max-width: 35%;
+}
+.n-residen {
+    font-size: 5rem;
+    background: -webkit-linear-gradient(rgb(31, 223, 159), rgb(59, 104, 226));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 </style>
