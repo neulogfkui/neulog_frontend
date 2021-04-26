@@ -1,12 +1,12 @@
 <template>
     <MainHeader/>
     <div class="container">
-        <div class="row upper">
+        <div class="row upper justify-content-center">
             <PieChart
                 v-if="isMounted"
                 keterangan="Laporan Pasien Jaga Dibuat"
                 :persentase="this.angkaPersentase"
-                :total="this.listJaga"
+                :total="this.totalJaga"
                 :label="this.label"
                 :data="this.jumlah"
                 title="Sebaran Status Laporan Pasien Jaga"
@@ -84,7 +84,7 @@ export default {
     name: "DashboardJaga",
     data() {
         return {
-        createdLaporanPasien: Number,
+        totalJaga: Number,
         listJaga: Array,
         label: [],
         jumlah: [],
@@ -103,7 +103,7 @@ export default {
         .get("http://localhost:8000/api/dashboardResiden/jaga/1")
         .then((resp) => {
             console.warn(resp.data);
-            this.createdLaporanPasien = resp.data.createdLaporanPasien;
+            this.totalJaga = resp.data.totalJaga;
             this.listJaga = resp.data.listJaga;
             this.label = resp.data.label;
             this.jumlah = resp.data.jumlah;

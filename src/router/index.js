@@ -37,9 +37,9 @@ const routes = [
     component: HomeResiden
   },
   {
-    path: '/dashboardtugaspresentasi/:idResiden',
-    name: 'DashboardTugasPresentasi',
-    component: DashboardTugasPresentasi
+    path: '/dashboardresidenmenu/:idResiden',
+    name: 'DashboardResidenMenu',
+    component: DashboardResidenMenu
   },
   {
     path: '/dashboardlaporanpasien/:idResiden',
@@ -52,20 +52,55 @@ const routes = [
     component: LaporanPasienDetail
   },
   {
+    path: '/dashboardlaporantugas/:idResiden',
+    name: 'DashboardLaporanTugas',
+    component: DashboardLaporanTugas
+  },
+  {
+    path: '/dashboardtugaspresentasi/:idResiden',
+    name: 'DashboardTugasPresentasi',
+    component: DashboardTugasPresentasi
+  },
+  {
+    path: '/dashboardPKSM/:idResiden',
+    name: 'DashboardPKSM',
+    component: DashboardPKSM
+  },
+  {
+    path: '/dashboardpublikasi/:idResiden',
+    name: 'DashboardPublikasi',
+    component: DashboardPublikasi
+  },
+  {
+    path: '/dashboardTPA/:idResiden',
+    name: 'DashboardTPA',
+    component: DashboardTPA
+  },
+  {
     path: '/dashboardmodul/:idResiden',
     name: 'DashboardModul',
     component: DashboardModul
   },
-  {
-    path: '/moduldetail/:idModulResiden',
-    name: 'ModulDetail',
-    component: ModulDetail
-  },
+  // {
+  //   path: '/moduldetail/:idModulResiden',
+  //   name: 'ModulDetail',
+  //   component: ModulDetail
+  // },
   {
     path: '/dashboardjaga/:idResiden',
     name: 'DashboardJaga',
     component: DashboardJaga
   },
+  {
+    path: '/dashboardtindakan/:idResiden',
+    name: 'DashboardTindakan',
+    component: DashboardTindakan
+  },
+  // {
+  //   path: '/tindakandetail/:idTindakan',
+  //   name: 'TindakanDetail',
+  //   component: TindakanDetail
+  // },
   {
     path: '/components',
     name: 'Components',

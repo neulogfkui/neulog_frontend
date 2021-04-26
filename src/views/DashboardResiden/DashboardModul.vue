@@ -5,7 +5,7 @@
             <BigNumberCard
                 title="Total Modul Selesai"
                 :count="total"
-                caption="Modul selesai"
+                caption="Modul Selesai"
             />
             <PieChart
                 v-if="isMounted"
@@ -39,7 +39,6 @@
                             <tr>
                                 <th>No</th>
                                 <th>Modul</th>
-                                <th>Modul Besar</th>
                                 <th>Periode Modul</th>
                                 <th>Status</th>
                                 <th>Detail</th>
@@ -48,8 +47,7 @@
                             <tbody>
                                 <tr v-for="(item, index) in listModulResiden" v-bind:key="item.id">
                                     <td>{{ index + 1 }}</td>
-                                    <!-- <td>{{ item.modul }}</td> -->
-                                    <!-- <td>{{ item.modulbesar }}</td> -->
+                                    <td>{{ item.modul.modulModel.namaModul }}</td>
                                     <td>{{ item.tanggalMulai + " - " + item.tanggalSelesai }}</td>
                                     <td>{{ item.status }}</td>
                                     <td>
