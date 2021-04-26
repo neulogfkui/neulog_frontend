@@ -245,7 +245,6 @@ export default {
   components: {Login},
   data: function () {
     return {
-      isLoggedIn: this.$store.state.auth.status.loggedIn,
       role: [],
       id: Array
     };
@@ -253,6 +252,11 @@ export default {
   // computed: {
   //   isLoggedIn(){ this.$store.state.status.loggedIn;},
   // },
+  computed: {
+    isLoggedIn() {
+      return this.$store.state.auth.status.loggedIn;
+    }
+  },
   mounted() {
     this.role = ["konsulen"];
     this.id = [1];

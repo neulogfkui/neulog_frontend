@@ -30,8 +30,8 @@
 
     <!-- <div class="container mt-5">
 		<div class="card mb-4"> -->
-			      <div class="col-xxl-12 col-xl-12 mb-4 mt-4">
-        <div class="card card-header-actions h-100">
+		<div v-if="dataTableReady" class="col-xxl-12 col-xl-12 mb-4 mt-4">
+        <div class="card card-header-actions">
 		<div class="card-header">Extended DataTables</div>
 			<div class="card-body">
 				<div class="datatable">
@@ -72,9 +72,23 @@ export default {
         return {
 			user: this.$store.state.auth.user,
             nResiden: 8,
-            residens: Array
+            residens: Array,
+			ready: false
+			// [{
+			// 	name: "a",
+			// 	username: "b",
+			// 	email: "c",
+			// 	tahunMasuk: "d",
+			// 	term: "e"
+			// }]
         }
     },
+
+	computed: {
+		dataTableReady() {
+			return this.ready;
+		}
+	},
 
     // components: {DataTable},
 
@@ -84,6 +98,8 @@ export default {
                 this.successful = true;
                 this.message = success.message || success.response || success.toString();
 				this.residens = success;
+				this.loadDataTable();
+				this.ready = true;
             },
             error => {
                 this.message =
@@ -91,10 +107,11 @@ export default {
                     error.message ||
                     error.toString();
                 this.successful = false
+				this.loadDataTable();
+				
                 }
             );
-		console.log("load");
-		this.loadDataTable();
+			console.log(this.user);
     },
 
     methods: {

@@ -1,4 +1,5 @@
 import AuthService from '../services/auth.service';
+import UserService from '../services/user.service';
 
 const user = JSON.parse(localStorage.getItem('user'));
 const initialState = user
@@ -12,8 +13,11 @@ export const auth = {
     login({ commit }, user) {
       return AuthService.login(user).then(
         user => {
-          commit('loginSuccess', user);
-          return Promise.resolve(user);
+          return UserService.getPenggunaRolesByUsername(user.username)
+          .then(userData => {
+            commit('loginSuccess', userData);
+            return Promise.resolve(userData);
+          })
         },
         error => {
           commit('loginFailure');

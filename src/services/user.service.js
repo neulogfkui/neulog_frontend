@@ -35,6 +35,12 @@ class UserService {
     .then(response => { return response.data;});
   }
 
+  getPenggunaRolesByUsername(username) {
+    return axios
+    .get(API_URL + 'pengguna/roles/' + username, { headers: authHeader() })
+    .then(response => { return response.data;});
+  }
+
   // getPublicContent() {
   //   return axios.get(API_URL + 'all');
   // }

@@ -82,17 +82,13 @@ export default {
         if (this.user.username && this.user.password) {
           this.$store.dispatch('auth/login', this.user).then(
             () => {
-              console.log("success")
-              this.$router.push('/');
             },
             error => {
               this.loading = false;
-              console.log('eeeee')
               this.message =
                 (error.response && error.response.data && error.response.data.message) ||
                 error.message ||
                 error.toString();
-                console.log("fail")
             }
           );
           console.log("adsf")
