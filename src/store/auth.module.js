@@ -11,10 +11,11 @@ export const auth = {
   state: initialState,
   actions: {
     login({ commit }, user) {
-      return AuthService.login(user).then(
+      AuthService.login(user).then(
         user => {
           return UserService.getPenggunaRolesByUsername(user.username)
           .then(userData => {
+            localStorage.setItem("userData", JSON.stringify(userData));
             commit('loginSuccess', userData);
             return Promise.resolve(userData);
           })

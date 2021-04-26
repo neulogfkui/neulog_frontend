@@ -72,12 +72,6 @@ export default {
     };
   },
 
-  computed: {
-    loggedIn() {
-      return this.$store.state.auth.status.loggedIn;
-    }
-  },
-
   methods: {
     handleLogin() {
         console.log("handleLogin")
