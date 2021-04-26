@@ -119,12 +119,6 @@ export default {
         );
     },
 
-    computed: {
-        loggedIn(){
-            return this.$store.state.auth.status.loggedIn
-        }
-    },
-
     methods: {
         deletePengguna() {
             this.$store.dispatch('auth/deletePengguna', this.$route.params.username).then(

@@ -94,7 +94,8 @@
                     Akun {{ staff.name }} ({{staff.username}}) gagal ditambahkan. Mohon periksa kembali data yang dimasukkan.
                 </div>
                 <div class="modal-footer">
-                    <button @click="redirectToView" class="btn btn-light" type="button" data-dismiss="modal">Tutup</button>
+                    <button v-if="successful" @click="redirectToView" class="btn btn-light" type="button" data-dismiss="modal">Tutup</button>
+                    <button v-if="!successful" class="btn btn-light" type="button" data-dismiss="modal">Tutup</button>
                 </div>
             </div>
         </div>
@@ -116,11 +117,7 @@ export default {
             message: ''
         }
     },
-    computed: {
-        loggedIn(){
-            return this.$store.state.auth.status.loggedIn
-        }
-    },
+
     methods: {
         redirectToView() {
             this.$router.push('/mengelola-akun/view-staff/'+this.staff.username);
