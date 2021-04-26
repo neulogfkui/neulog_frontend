@@ -37,12 +37,12 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <!-- <tr
-                    v-for="(item, index) in listLaporanPasien"
+                  <tr
+                    v-for="(item, index) in listTugas"
                     v-bind:key="item.id"
                   >
                     <td>{{ index + 1 }}</td>
-                    <td>{{ item.tanggalDibuat }}</td>
+                    <td>{{ item.laporanTugasKasusSulitModel.LaporanTugasModel.tanggalDibuat }}</td>
                     <td>{{ item.namaPertemuan }}</td>
                     <td>{{ item.kasusYangDibahas }}</td>
                     <td>
@@ -52,15 +52,15 @@
                         item.konsulen.penggunaModel.lastName
                       }}
                     </td>
-                    <td>{{ item.status }}</td>
+                    <td>{{ item.laporanTugasKasusSulitModel.LaporanTugasModel.status }}</td>
                     <td>
-                      <router-link
-                        :to="'/laporanpasiendetail/' + item.idLaporanPasien"
+                      <!-- <router-link
+                        :to="'/laporantugasdetail/' + item.idLaporanTugas"
                       >
                         <button class="btn btn-secondary">Lihat</button>
-                      </router-link>
+                      </router-link> -->
                     </td>
-                  </tr> -->
+                  </tr>
                 </tbody>
               </table>
             </div>
@@ -86,7 +86,7 @@ export default {
       jumlah: [],
       label: [],
       persentase: Number,
-    //   listTugas: [],
+      listTugas: [],
       isMounted: false
     };
   },
@@ -99,7 +99,7 @@ export default {
         this.jumlah = resp.data.jumlah;
         this.label = resp.data.label;
         this.persentase = resp.data.persentase;
-        // this.listTugas = resp.data.listTugas;
+        this.listTugas = resp.data.listTugas;
         this.isMounted = true;
         this.loadDataTable();
       });
