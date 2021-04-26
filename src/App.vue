@@ -3,7 +3,7 @@
     <div v-if="!isLoggedIn">
       <Login />
     </div>
-    <div v-else>
+    <div v-if="isLoggedIn">
     <nav
       class="topnav navbar navbar-expand shadow justify-content-between justify-content-sm-start navbar-light bg-white"
       id="sidenavAccordion"
@@ -260,7 +260,7 @@ export default {
   },
   updated() {
     this.isLoggedIn = this.$store.state.auth.status.loggedIn;
-    console.log(this.isLoggedIn);
+    console.log("log: " +this.isLoggedIn);
   },
   methods: {
     logOut() {

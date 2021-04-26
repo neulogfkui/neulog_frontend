@@ -99,7 +99,7 @@ export default {
               (error.response && error.response.data && error.response.data.message) ||
               error.message ||
               error.toString();
-              this.$store.commit("loginFailure");
+              this.$store.commit("auth/loginFailure");
             }
           );
         };

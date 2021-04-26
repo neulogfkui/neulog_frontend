@@ -6,7 +6,7 @@
         src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
         class="profile-img-card"
       />
-      <form name="form" @submit.prevent="handleLogin">
+      <form name="form" @submit="handleLogin">
         <div class="form-group">
           <label for="username">Username</label>
           <input
@@ -69,11 +69,7 @@ export default {
       return this.$store.state.status.loggedIn;
     }
   },
-  // created() {
-  //   if (this.loggedIn) {
-  //     this.$router.push('/profile');
-  //   }
-  // },
+
   methods: {
     handleLogin() {
       this.loading = true;
@@ -86,16 +82,20 @@ export default {
         if (this.user.username && this.user.password) {
           this.$store.dispatch('auth/login', this.user).then(
             () => {
-              this.$router.push('/profile');
+              console.log("success")
+              this.$router.push('/');
             },
             error => {
               this.loading = false;
+              console.log('eeeee')
               this.message =
                 (error.response && error.response.data && error.response.data.message) ||
                 error.message ||
                 error.toString();
+                console.log("fail")
             }
           );
+          console.log("adsf")
         }
       });
     }

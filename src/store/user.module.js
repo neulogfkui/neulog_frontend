@@ -14,6 +14,28 @@ export const user = {
       );
     },
 
+    getAllPenggunaResiden({ commit }) {
+      return UserService.getAllPenggunaResiden().then(
+        datas => {
+          return Promise.resolve(datas);
+        },
+        error => {
+          return Promise.reject(error);
+        }
+      );
+    },
+
+    getAllPengguna({ commit }) {
+      return UserService.getAllPengguna().then(
+        datas => {
+          return Promise.resolve(datas);
+        },
+        error => {
+          return Promise.reject(error);
+        }
+      );
+    },
+
     getPenggunaByResidenId({ commit }, id) {
       return UserService.getPenggunaByResidenId(id).then(
         datas => {

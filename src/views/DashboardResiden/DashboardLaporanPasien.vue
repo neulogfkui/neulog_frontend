@@ -120,6 +120,7 @@ import MainHeader from "@/components/MainHeader.vue";
 import PieChart from "@/components/PieChart.vue";
 import BigNumberCard from "@/components/BigNumberCard.vue";
 import BarChart from "@/components/BarChart.vue";
+import authHeader from '@/services/auth-header';
 
 export default {
   name: "DashboardLaporanPasien",
@@ -144,9 +145,9 @@ export default {
   },
   mounted() {
     axios
-      .get("http://localhost:8000/api/dashboardResiden/laporanPasien/1")
+      .get("http://localhost:8000/api/dashboardResiden/laporanPasien/1", { headers: authHeader() })
       .then((resp) => {
-        console.warn(resp.data);
+        console.warn(resp);
         this.createdLaporanPasien = resp.data.createdLaporanPasien;
         this.label = resp.data.label;
         this.jumlah = resp.data.jumlah;
