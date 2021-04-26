@@ -32,11 +32,9 @@ export const auth = {
     registerResiden({ commit }, residen) {
       return AuthService.registerResiden(residen).then(
         response => {
-          commit('registerSuccess');
           return Promise.resolve(response.data);
         },
         error => {
-          commit('registerFailure');
           return Promise.reject(error);
         }
       );
@@ -44,11 +42,9 @@ export const auth = {
     registerStaff({ commit }, staff) {
       return AuthService.registerStaff(staff).then(
         response => {
-          commit('registerSuccess');
           return Promise.resolve(response.data);
         },
         error => {
-          commit('registerFailure');
           return Promise.reject(error);
         }
       );
@@ -56,11 +52,9 @@ export const auth = {
     updateResiden({ commit }, residen) {
       return AuthService.updateResiden(residen).then(
         response => {
-          commit('registerSuccess');
           return Promise.resolve(response.data);
         },
         error => {
-          commit('registerFailure');
           return Promise.reject(error);
         }
       );
@@ -68,11 +62,9 @@ export const auth = {
     updateStaff({ commit }, staff) {
       return AuthService.updateStaff(staff).then(
         response => {
-          commit('registerSuccess');
           return Promise.resolve(response.data);
         },
         error => {
-          commit('registerFailure');
           return Promise.reject(error);
         }
       );
@@ -80,11 +72,9 @@ export const auth = {
     deletePengguna({ commit }, username) {
       return AuthService.deletePengguna(username).then(
         response => {
-          commit('registerSuccess');
           return Promise.resolve(response.data);
         },
         error => {
-          commit('registerFailure');
           return Promise.reject(error);
         }
       );
