@@ -52,9 +52,11 @@ import DetailMenuTugasAkhir from '../views/DashboardPengurusAkademik/DetailMenuT
 import PageNotFound from '../views/errors/404'
 
 import LaporanPasienRoute from "@/router/LaporanPasienRoute.js" 
+import LaporanTugasRoute from "@/router/LaporanTugasRoute.js" 
 
 const routes = [
   ...LaporanPasienRoute,
+  ...LaporanTugasRoute,
   //ALL
   //AUTHOR: ALL
   {
