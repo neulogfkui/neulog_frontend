@@ -1,5 +1,10 @@
 <template>
-<MainHeader />
+<LightHeader
+    v-if="isMounted"
+    title= "Detail Tugas Akhir"
+    :subtitle = this.subtitle
+    icon= "book-open">
+</LightHeader>
 <div class="container upper">
     <div class="row">
         <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
@@ -65,7 +70,7 @@
                     </div>
                     <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
                         <p class="card-text">
-                            {{ konsulenFirstName + " " + konsulenLastName }}
+                            {{ konsulenName }}
                         </p>
                     </div>
                 </div>
@@ -129,17 +134,18 @@
 <script>
 import axios from "axios";
 import MainHeader from "@/components/MainHeader.vue";
+import LightHeader from "@/components/LightHeader.vue";
 
 export default {
   name: "DetailMenuTugasAkhir",
   data() {
     return {
+      subtitle: String,
       tanggal: String,
       judul: String,
       stage: String,
       linkTugas: String,
-      konsulenFirstName: String,
-      konsulenLastName: String,
+      konsulenName: String,
       status: String,
       updateStatus: Array,
       feedback: String,
@@ -148,10 +154,11 @@ export default {
   },
   components: {
     MainHeader,
+    LightHeader
   },
   mounted() {
     axios
-      .get("http://localhost:8000/api/dashboardPengurusAkademik/laporantugas/4") // nanti diganti ini angka 1 nya
+      .get("http://localhost:8000/api/dashboardPengurusAkademik/laporantugas/" + this.$route.params.idLaporanTugas) // nanti diganti ini angka 1 nya
       .then((resp) => {
         console.warn(resp.data);
         this.laporanPasien = resp.data.laporanPasien;
@@ -159,12 +166,12 @@ export default {
         this.judul = resp.data.laporanTugas.tugasPenelitianAkhirModel.judulProposal
         this.stage = resp.data.laporanTugas.tugasPenelitianAkhirModel.stage
         this.linkTugas = resp.data.laporanTugas.linkTugas
-        this.konsulenFirstName = resp.data.laporanTugas.konsulenModel.pengguna.firstName
-        this.konsulenLastName = resp.data.laporanTugas.konsulenModel.pengguna.lastName
+        this.konsulenName = resp.data.laporanTugas.konsulenModel.pengguna.name
         this.status = resp.data.laporanTugas.status
         this.updateStatus = resp.data.updateStatus
         this.feedback = resp.data.laporanTugas.feedback
         this.isMounted = true;
+        this.subtitle = ""
       });
   },
 };
