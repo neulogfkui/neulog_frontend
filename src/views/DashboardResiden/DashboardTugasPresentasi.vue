@@ -79,7 +79,7 @@
             id="kasus"
             role="tabpanel"
             aria-labelledby="kasus-tab"
-          ><div class="datatable" v-if="isMounted">
+          ><div class="datatable" v-if="isDataTableReady">
               <table
                 class="table table-bordered table-hover"
                 id="dataTable"
@@ -136,7 +136,7 @@
             role="tabpanel"
             aria-labelledby="referat-tab"
           >
-            <div class="datatable" v-if="isMounted">
+            <div class="datatable" v-if="isDataTableReady">
               <table
                 class="table table-bordered table-hover"
                 id="dataTable"
@@ -193,7 +193,7 @@
             role="tabpanel"
             aria-labelledby="book-tab"
           >
-            <div class="datatable" v-if="isMounted">
+            <div class="datatable" v-if="isDataTableReady">
               <table
                 class="table table-bordered table-hover"
                 id="dataTable"
@@ -250,7 +250,7 @@
             role="tabpanel"
             aria-labelledby="journal-tab"
           >
-            <div class="datatable" v-if="isMounted">
+            <div class="datatable" v-if="isDataTableReady">
               <table
                 class="table table-bordered table-hover"
                 id="dataTable"
@@ -311,6 +311,7 @@ import axios from "axios";
 import MainHeader from "@/components/MainHeader.vue";
 import PieChart from "@/components/PieChart.vue";
 import BarChart from "@/components/BarChart.vue";
+import dataTableLoader from "@/js/datatable";
 
 export default {
   name: "DashboardTugasPresentasi",
@@ -326,11 +327,17 @@ export default {
       listJournal:[],
       listKasus: [],
       listBook: [],
-      isMounted: false
+      isMounted: false,
+      ready = false,
     };
   },
-    components: {
+  components: {
     MainHeader, PieChart, BarChart
+  },
+  computed:{
+    isDataTableReady() {
+      return this.ready
+    }
   },
   mounted() {
     axios
@@ -347,8 +354,9 @@ export default {
         this.listJournal = resp.data.listJournal;
         this.listKasus = resp.data.listKasus;
         this.listBook = resp.data.listBook;
+        dataTableLoader();
+        this.ready = true;
         this.isMounted = true;
-        this.loadDataTable();
       });
       
     

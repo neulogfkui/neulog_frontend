@@ -29,7 +29,7 @@
             <b>List Reviewer</b>
           </div>
           <div class="card-body">
-            <div class="datatable" v-if="isMounted">
+            <div class="datatable" v-if="isDataTableReady">
               <table
                 class="table table-bordered table-hover"
                 id="dataTable"
@@ -88,6 +88,7 @@ import PieChart from "@/components/PieChart.vue";
 import BigNumberCard from "@/components/BigNumberCard.vue";
 import BarChart from "@/components/BarChart.vue";
 import authHeader from '@/services/auth-header';
+import dataTableLoader from "@/js/datatable";
 
 export default {
   name: "DashboardLaporanPasien",
@@ -102,6 +103,7 @@ export default {
       listLaporanPasien: Array,
       persentase: Number,
       isMounted: false,
+      ready = false,
     };
   },
   components: {
@@ -109,6 +111,11 @@ export default {
     PieChart,
     BigNumberCard,
     BarChart,
+  },
+  computed:{
+    isDataTableReady() {
+      return this.ready
+    }
   },
   mounted() {
     axios
@@ -123,8 +130,9 @@ export default {
         this.labelBar = resp.data.labelBar;
         this.dataBar = resp.data.dataBar;
         this.avgPasienPerMonth = resp.data.avgPasienPerMonth;
+        dataTableLoader();
+        this.ready = true;
         this.isMounted = true;
-        this.loadDataTable();
       });
   },
   methods:{

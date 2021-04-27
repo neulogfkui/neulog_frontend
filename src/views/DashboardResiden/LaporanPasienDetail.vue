@@ -153,7 +153,7 @@
             <b>Daftar Tindakan yang Dilakukan</b>
           </div>
           <div class="card-body">
-            <div class="datatable" v-if="isMounted">
+            <div class="datatable" v-if="isDataTableReady">
               <table
                 class="table table-bordered table-hover"
                 id="dataTable"
@@ -190,7 +190,7 @@
             <b>Daftar Kompetensi yang Didapatkan</b>
           </div>
           <div class="card-body">
-            <div class="datatable" v-if="isMounted">
+            <div class="datatable" v-if="isDataTableReady">
               <table
                 class="table table-bordered table-hover"
                 id="dataTable"
@@ -228,6 +228,8 @@
 <script>
 import axios from "axios";
 import MainHeader from "@/components/MainHeader.vue";
+import dataTableLoader from "@/js/datatable";
+
 export default {
   name: "DetailMenuLaporanPasien",
   data() {
@@ -245,10 +247,16 @@ export default {
       listTindakan: Array,
       listKompetensi: Array,
       isMounted: false,
+      ready = false,
     };
   },
   components: {
     MainHeader,
+  },
+  computed:{
+    isDataTableReady() {
+      return this.ready
+    }
   },
   mounted() {
     axios
@@ -267,8 +275,9 @@ export default {
         this.diagnosis = resp.data.laporanPasien.diagnosis;
         this.listTindakan = resp.data.laporanPasien.listTindakan;
         this.listKompetensi = resp.data.listKompetensiLaporan;
+        dataTableLoader();
+        this.ready = true;
         this.isMounted = true;
-        this.loadDataTable();
       });
   },
   methods:{

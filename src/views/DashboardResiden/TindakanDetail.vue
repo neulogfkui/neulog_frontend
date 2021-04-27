@@ -5,7 +5,7 @@
         <!-- <b>Daftar Pasien dengan Tindakan {{ namaTindakan }}</b> -->
         </div>
         <div class="card-body">
-        <div class="datatable" v-if="isMounted">
+        <div class="datatable" v-if="isDataTableReady">
             <table
             class="table table-bordered table-hover"
             id="dataTable"
@@ -71,6 +71,7 @@
 import axios from "axios";
 import MainHeader from "@/components/MainHeader.vue";
 import authHeader from '@/services/auth-header';
+import dataTableLoader from "@/js/datatable";
 
 export default {
   name: "DashboardLaporanPasien",
@@ -78,10 +79,16 @@ export default {
     return {
       listTindakan: Array,
       isMounted: false,
+      ready = false,
     };
   },
   components: {
     MainHeader,
+  },
+  computed:{
+    isDataTableReady() {
+      return this.ready
+    }
   },
   mounted() {
     axios
@@ -89,8 +96,9 @@ export default {
       .then((resp) => {
         console.warn(resp);
         this.listTindakan = resp.data.listTindakan;
+        dataTableLoader();
+        this.ready = true;
         this.isMounted = true;
-        this.loadDataTable();
       });
   },
   methods:{

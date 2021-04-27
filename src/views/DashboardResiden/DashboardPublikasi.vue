@@ -18,7 +18,7 @@
             <b>Daftar Laporan Tugas Publikasi</b>
           </div>
           <div class="card-body">
-            <div class="datatable" v-if="isMounted">
+            <div class="datatable" v-if="isDataTableReady">
               <table
                 class="table table-bordered table-hover"
                 id="dataTable"
@@ -71,6 +71,7 @@ import MainHeader from "@/components/MainHeader.vue";
 import PieChart from "@/components/PieChart.vue";
 import BigNumberCard from "@/components/BigNumberCard.vue";
 import BarChart from "@/components/BarChart.vue";
+import dataTableLoader from "@/js/datatable";
 
 export default {
   name: "DashboardPublikasi",
@@ -81,11 +82,17 @@ export default {
       label: [],
       persentase: Number,
       listTugas: [],
-      isMounted: false
+      isMounted: false,
+      ready = false,
     };
   },
   components: {
     MainHeader, PieChart, BigNumberCard, BarChart
+  },
+  computed:{
+    isDataTableReady() {
+      return this.ready
+    }
   },
   mounted() {
     axios
@@ -97,8 +104,9 @@ export default {
         this.label = resp.data.label;
         this.persentase = resp.data.persentase;
         this.listTugas = resp.data.listTugas;
+        dataTableLoader();
+        this.ready = true;
         this.isMounted = true;
-        this.loadDataTable();
       });
   },
   methods:{

@@ -15,7 +15,7 @@
                         <b>Daftar Seluruh Tindakan</b>
                     </div>
                     <div class="card-body">
-                        <div class="datatable" v-if="isMounted">
+                        <div class="datatable" v-if="isDataTableReady">
                             <table
                                 class="table table-bordered table-hover"
                                 id="dataTable"
@@ -59,6 +59,7 @@ import MainHeader from "@/components/MainHeader.vue";
 import PieChart from "@/components/PieChart.vue";
 import BigNumberCard from "@/components/BigNumberCard.vue";
 import BarChart from "@/components/BarChart.vue";
+import dataTableLoader from "@/js/datatable";
 
 export default {
     name: "DashboardTindakan",
@@ -68,6 +69,7 @@ export default {
         label: [],
         jumlah: [],
         isMounted: false,
+        ready = false,
         };
     },
     components: {
@@ -75,6 +77,11 @@ export default {
         PieChart,
         BigNumberCard,
         BarChart,
+    },
+    computed:{
+        isDataTableReady() {
+          return this.ready
+        }
     },
     mounted() {
         axios
@@ -84,8 +91,9 @@ export default {
             this.listTindakan = resp.data.listTindakan;
             this.label = resp.data.label;
             this.jumlah = resp.data.jumlah;
+            dataTableLoader();
+            this.ready = true;
             this.isMounted = true;
-            this.loadDataTable();
         });
     },
     methods:{

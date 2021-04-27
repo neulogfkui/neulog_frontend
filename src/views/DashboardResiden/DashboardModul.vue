@@ -28,7 +28,7 @@
                         <b>Daftar Seluruh Modul</b>
                     </div>
                     <div class="card-body">
-                        <div class="datatable" v-if="isMounted">
+                        <div class="datatable" v-if="isDataTableReady">
                             <table
                                 class="table table-bordered table-hover"
                                 id="dataTable"
@@ -74,6 +74,7 @@ import MainHeader from "@/components/MainHeader.vue";
 import PieChart from "@/components/PieChart.vue";
 import BigNumberCard from "@/components/BigNumberCard.vue";
 import BarChart from "@/components/BarChart.vue";
+import dataTableLoader from "@/js/datatable";
 
 export default {
     name: "DashboardModul",
@@ -89,6 +90,7 @@ export default {
         persenAvgProlongDays: Number,
         totalProlongDays: Number,
         isMounted: false,
+        ready = false,
         };
     },
     components: {
@@ -96,6 +98,11 @@ export default {
         PieChart,
         BigNumberCard,
         BarChart,
+    },
+    computed:{
+      isDataTableReady() {
+        return this.ready
+      }
     },
     mounted() {
         axios
@@ -111,8 +118,9 @@ export default {
             this.persentase = resp.data.persentase;
             this.persenAvgProlongDays = resp.data.persenAvgProlongDays;
             this.totalProlongDays = resp.data.totalProlongDays;
+            dataTableLoader();
+            this.ready = true;
             this.isMounted = true;
-            this.loadDataTable();
         });
     },
     methods:{
