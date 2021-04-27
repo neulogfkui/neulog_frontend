@@ -4,10 +4,11 @@
     * Licensed under SEE_LICENSE (https://github.com/StartBootstrap/sb-admin-pro/blob/master/LICENSE)
     */
 
-// import $ from 'jquery';
-// import feather from 'feather-icons';
-// import jQuery from 'jquery';
+import $ from 'jquery';
+import feather from 'feather-icons';
+import jQuery from 'jquery';
 
+export default function loadScript() {
     (function ($) {
     "use strict";
 
@@ -97,3 +98,4 @@
 
 })(jQuery);
 // })($);
+}

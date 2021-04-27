@@ -30,15 +30,16 @@
             <div class="nav accordion" id="accordionSidenav">
               <!-- RESIDEN -->
               <!-- ----------------------------------------------------------------------------------------- -->
-              <div v-if="role.includes('residen')">
+              
                 <!-- Home -->
                 <div class="sidenav-menu-heading">Home</div>
                 <router-link to="/" class="nav-link">
                   <div class="nav-link-icon">
-                    <i data-feather="bar-chart"></i>
+                    <i class="fas fa-home"></i>
                   </div>
                   Home</router-link
                 >
+              <div v-if="userRoles.includes('ROLE_RESIDEN')">
                 <!-- Dashbooard -->
                 <div class="sidenav-menu-heading">Dashboard</div>
                 <a
@@ -136,16 +137,16 @@
 
                 <!-- KONSULEN -->
                 <!-- ----------------------------------------------------------------------------------------- -->
-                <div v-if="role.includes('konsulen')">
                   <!-- Home -->
-                  <div class="sidenav-menu-heading">Home</div>
+                  <!-- <div class="sidenav-menu-heading">Home</div>
                   <router-link to="/" class="nav-link">
                     <div class="nav-link-icon">
                       <i data-feather="bar-chart"></i>
                     </div>
                     Home</router-link
-                  >
+                  > -->
                   <!-- Dashbooard -->
+                  <div v-if="userRoles.includes('RESIDEN_KONSULEN')">
                   <div class="sidenav-menu-heading">Dashboard</div>
                   <a
                     class="nav-link collapsed"
@@ -183,8 +184,63 @@
                       >
                     </nav>
                   </div>
+                </div>
                   <!-- END OF RESIDEN -->
                   <!-- ----------------------------------------------------------------------------------------- -->
+                
+                
+                <!-- ADMIN MENU [AVI] -->
+                <!-- ----------------------------------------------------------------------------------------- -->
+                
+                  <!-- Home -->
+                  <!-- <div class="sidenav-menu-heading">Home</div>
+                  <router-link to="/mengelola-akun" class="nav-link">
+                    <div class="nav-link-icon">
+                      <i class="fas fa-home"></i>
+                    </div>
+                    Admin Home</router-link
+                  > -->
+                  <div v-if="userRoles.includes('ROLE_ADMIN')">
+                  <!-- Dashbooard -->
+                  <div class="sidenav-menu-heading">Dashboard</div>
+                  <a
+                    class="nav-link collapsed"
+                    href="javascript:void(0);"
+                    data-toggle="collapse"
+                    data-target="#collapseDashboards"
+                    aria-expanded="false"
+                    aria-controls="collapseDashboards"
+                  >
+                    <div class="nav-link-icon">
+                      <i class="fas fa-th-large"></i>
+                    </div>
+                    Dashboard Admin
+                    <div class="sidenav-collapse-arrow">
+                      <i class="fas fa-angle-down"></i>
+                    </div>
+                  </a>
+                  <div
+                    class="collapse"
+                    id="collapseDashboards"
+                    data-parent="#accordionSidenav"
+                  >
+                    <nav
+                      class="sidenav-menu-nested nav accordion"
+                      id="accordionSidenavPages"
+                    >
+                      <router-link class="nav-link" to="/mengelola-akun"
+                        >Mengelola Akun</router-link
+                      >
+                      <router-link class="nav-link" to="/mengelola-akun/residen-register"
+                        >Registrasi Residen</router-link
+                      >
+                      <router-link class="nav-link" to="/mengelola-akun/staff-register"
+                        >Registrasi Staff</router-link
+                      >
+                    </nav>
+                  </div>
+                  <!-- END OF RESIDEN -->
+                
                 </div>
               </div>
             </div>
@@ -239,6 +295,7 @@
 
 <script>
 import Login from './components/Login';
+import loadScript from './js/scripts';
 
 export default {
   name: "App",
@@ -249,29 +306,33 @@ export default {
       id: Array
     };
   },
-  // computed: {
-  //   isLoggedIn(){ this.$store.state.status.loggedIn;},
-  // },
+
   computed: {
     isLoggedIn() {
       return this.$store.state.auth.status.loggedIn;
+    },
+    // isUserDataLoaded() {
+    //   return (this.$store.state.auth.user!=undefined);
+    // },
+    userRoles() {
+      if (this.isLoggedIn) return this.$store.state.auth.user.roles;
+      else return ["ROLE_DEFAULT"];
     }
   },
+  
   mounted() {
-    this.role = ["konsulen"];
-    this.id = [1];
-    // this.loadDataTable();
+    loadScript();
   },
-  updated() {
-    this.isLoggedIn = this.$store.state.auth.status.loggedIn;
-    console.log("log: " +this.isLoggedIn);
-  },
+
   methods: {
     logOut() {
       this.$store.dispatch('auth/logout');
       this.$router.push('/');
-      this.isLoggedIn = this.$store.state.auth.status.loggedIn;
-    }
+    },
+
+    // isRole(role) {
+    //   if user
+    // }
   }
 }
 </script>
