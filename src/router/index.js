@@ -1,15 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
-// import Login from '../views/Login.vue'
-
-// USE CASE - 12
-import MengelolaAkun from '../views/mengelolaAkun/MengelolaAkun.vue'
-import ResidenRegister from '../views/mengelolaAkun/ResidenRegister.vue'
-import ViewResiden from '../views/mengelolaAkun/ViewResiden.vue'
-import StaffRegister from '../views/mengelolaAkun/StaffRegister.vue'
-import ViewStaff from '../views/mengelolaAkun/ViewStaff.vue'
-import UpdateResiden from '../views/mengelolaAkun/UpdateResiden.vue'
-import UpdateStaff from '../views/mengelolaAkun/UpdateStaff.vue'
 
 import HomeResiden from '../views/HomeResiden.vue'
 import TugasPresentasiForm from '../views/TugasPresentasiForm.vue'
@@ -49,9 +39,13 @@ import DetailMenuTugasAkhir from '../views/DashboardPengurusAkademik/DetailMenuT
 import PageNotFound from '../views/errors/404'
 
 import LaporanPasienRoute from "@/router/LaporanPasienRoute.js" 
+import MengelolaAkunRoute from "@/router/MengelolaAkunRoute.js"
 
 const routes = [
   ...LaporanPasienRoute,
+  // UC-12
+  ...MengelolaAkunRoute,
+
   //ALL
   //AUTHOR: ALL
   {
@@ -123,47 +117,6 @@ const routes = [
     name: 'laporanTugasChoice',
     component: LaporanTugasChoice
   },
-
-  //USE CASE 12
-  //AUTHOR: AVI
-  // --------------------------------------------
-  {
-    path: '/mengelola-akun',
-    name: 'MengelolaAkun',
-    component: MengelolaAkun,
-  },
-  {
-    path: '/mengelola-akun/view-residen/:idResiden',
-    name: 'ViewResiden',
-    component: ViewResiden,
-  },
-  {
-    path: '/mengelola-akun/view-staff/:username',
-    name: 'ViewStaff',
-    component: ViewStaff,
-  },
-  {
-    path: '/mengelola-akun/residen-register',
-    name: 'ResidenRegister',
-    component: ResidenRegister,
-  },
-  {
-    path: '/mengelola-akun/staff-register',
-    name: 'StaffRegister',
-    component: StaffRegister,
-  },
-  {
-    path: '/mengelola-akun/residen-update/:idResiden',
-    name: 'UpdateResiden',
-    component: UpdateResiden,
-  },
-  {
-    path: '/mengelola-akun/staff-update/:username',
-    name: 'UpdateStaff',
-    component: UpdateStaff,
-  },
-
-
 
   // MISCELLANEOUS
   {
