@@ -172,7 +172,7 @@ export default {
   },
   mounted() {
     axios
-      .get("http://localhost:8000/api/dashboardPengurusAkademik/modul/1") // nanti diganti ini angka 1 nya
+      .get("http://localhost:8000/api/dashboardPengurusAkademik/modul/" + this.$route.params.idModul) // nanti diganti ini angka 1 nya
       .then((resp) => {
         console.warn(resp.data);
         this.namaModul = resp.data.detailModul.namaModul
