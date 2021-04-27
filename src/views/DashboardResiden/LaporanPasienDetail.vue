@@ -231,7 +231,7 @@ import MainHeader from "@/components/MainHeader.vue";
 import dataTableLoader from "@/js/datatable";
 
 export default {
-  name: "DetailMenuLaporanPasien",
+  name: "LaporanPasienDetail",
   data() {
     return {
       laporanPasien: Array,
@@ -256,11 +256,14 @@ export default {
   computed:{
     isDataTableReady() {
       return this.ready
-    }
+    },
+    // getIdLaporanPasien() {
+    //   return JSON.parse(localStorage.getItem("userData")).laporanPasien.idLaporanPasien;
+    // },
   },
   mounted() {
     axios
-      .get("http://localhost:8000/api/dashboardResiden/laporanPasienDetail/1")
+      .get("http://localhost:8000/api/dashboardResiden/laporanPasienDetail/" + this.$route.params.idLaporanPasien)
       .then((resp) => {
         console.warn(resp.data);
         this.laporanPasien = resp.data.laporanPasien;

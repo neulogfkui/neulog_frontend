@@ -88,11 +88,14 @@ export default {
   computed:{
     isDataTableReady() {
       return this.ready
-    }
+    },
+    // getIdTindakan() {
+    //   return JSON.parse(localStorage.getItem("userData")).tindakan.idTindakan;
+    // },
   },
   mounted() {
     axios
-      .get("http://localhost:8000/api/dashboardResiden/laporanPasien/1", { headers: authHeader() })
+      .get("http://localhost:8000/api/dashboardResiden/laporanPasien/" + this.$route.params.idTindakan, { headers: authHeader() })
       .then((resp) => {
         console.warn(resp);
         this.listTindakan = resp.data.listTindakan;

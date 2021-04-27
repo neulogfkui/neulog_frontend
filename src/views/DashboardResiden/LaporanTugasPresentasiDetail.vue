@@ -161,9 +161,14 @@ export default {
   components: {
     MainHeader,
   },
+  computed:{
+    // getIdLaporanTugas() {
+    //   return JSON.parse(localStorage.getItem("userData")).laporanTugas.idLaporanTugas;
+    // },
+  },
   mounted() {
     axios
-    //   .get("http://localhost:8000/api/dashboardResiden/laporantugas/1")
+    //   .get("http://localhost:8000/api/dashboardResiden/laporanTugas/1")
       .then((resp) => {
         console.warn(resp.data);
         this.laporanPasien = resp.data.laporanPasien;

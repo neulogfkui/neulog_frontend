@@ -16,10 +16,11 @@
     <div class='container'>
         <SingleTab title='Daftar Tugas'></SingleTab>
         <div class='row'>
+            <!-- Bingung syntax-nya untuk nge-link sesuai idResiden
             <ColorCard title='Tugas Presentasi' subtitle="Laporan Tugas" color='bg-success' link='/dashboardtugaspresentasi/1' action='View More'></ColorCard>
             <ColorCard title='Pembahasan Kasus Sulit dan MultiDisiplin' subtitle="Laporan Tugas" color='bg-warning' link='/dashboardPKSM/1' action='View More'></ColorCard>
             <ColorCard title='Publikasi' subtitle="Laporan Tugas" color='bg-primary' link='/dashboardpublikasi/1' action='View More'></ColorCard>
-            <ColorCard title='Tugas Penelitian Akhir' subtitle="Laporan Tugas" color='bg-secondary' link='/dashboardTPA/1' action='View More'></ColorCard>
+            <ColorCard title='Tugas Penelitian Akhir' subtitle="Laporan Tugas" color='bg-secondary' link='/dashboardTPA/1' action='View More'></ColorCard> -->
         </div>
     </div>
 </template>
@@ -48,9 +49,14 @@ export default {
             isMounted: false
         }
     },
+    computed:{
+        getIdResiden() {
+          return JSON.parse(localStorage.getItem("userData")).residen.idResiden;
+        },
+    },
     mounted() {
         axios
-            .get("http://localhost:8000/api/dashboardResiden/laporanTugas/1")
+            .get("http://localhost:8000/api/dashboardResiden/laporanTugas/" + this.$route.params.idResiden)
             .then((resp) => {
             console.warn(resp.data);
             this.createdLaporanTugas = resp.data.createdLaporanTugas;

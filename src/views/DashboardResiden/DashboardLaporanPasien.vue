@@ -115,11 +115,14 @@ export default {
   computed:{
     isDataTableReady() {
       return this.ready
-    }
+    },
+    getIdResiden() {
+      return JSON.parse(localStorage.getItem("userData")).residen.idResiden;
+    },
   },
   mounted() {
     axios
-      .get("http://localhost:8000/api/dashboardResiden/laporanPasien/1", { headers: authHeader() })
+      .get("http://localhost:8000/api/dashboardResiden/laporanPasien/" + this.$route.params.idResiden, { headers: authHeader() })
       .then((resp) => {
         console.warn(resp);
         this.createdLaporanPasien = resp.data.createdLaporanPasien;

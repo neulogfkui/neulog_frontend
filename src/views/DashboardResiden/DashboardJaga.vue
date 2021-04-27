@@ -97,11 +97,14 @@ export default {
     computed:{
         isDataTableReady() {
           return this.ready
-        }
+        },
+        getIdResiden() {
+          return JSON.parse(localStorage.getItem("userData")).residen.idResiden;
+        },
     },
     mounted() {
         axios
-        .get("http://localhost:8000/api/dashboardResiden/jaga/1")
+        .get("http://localhost:8000/api/dashboardResiden/jaga/" + this.$route.params.idResiden)
         .then((resp) => {
             console.warn(resp.data);
             this.totalJaga = resp.data.totalJaga;

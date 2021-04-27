@@ -92,11 +92,14 @@ export default {
   computed:{
     isDataTableReady() {
       return this.ready
-    }
+    },
+    getIdResiden() {
+      return JSON.parse(localStorage.getItem("userData")).residen.idResiden;
+    },
   },
   mounted() {
     axios
-      .get("http://localhost:8000/api/dashboardResiden/laporanTugas/TPA/1")
+      .get("http://localhost:8000/api/dashboardResiden/laporanTugas/TPA/" + this.$route.params.idResiden)
       .then((resp) => {
         console.warn(resp.data);
         this.total = resp.data.total;
