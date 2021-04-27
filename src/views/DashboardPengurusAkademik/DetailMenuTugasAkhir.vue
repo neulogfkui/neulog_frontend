@@ -5,7 +5,7 @@
         <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
             <div class="card card-header-actions h-100">
                 <div class="card-header">
-                    <b>Data Presentasi Kasus</b>
+                    <b>Data Tugas Penelitian Akhir</b>
                 </div>
             <div class="card-body">
                 <div class="container-fluid">
@@ -24,18 +24,6 @@
                 <div class="row">
                     <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
                         <p class="card-text">
-                            Modul
-                        </p>
-                    </div>
-                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
-                        <p class="card-text">
-                            {{ modul }}
-                        </p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
-                        <p class="card-text">
                             Judul
                         </p>
                     </div>
@@ -48,12 +36,12 @@
                 <div class="row">
                     <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
                         <p class="card-text">
-                            Jenis Tugas
+                            Stage
                         </p>
                     </div>
                     <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
                         <p class="card-text">
-                            {{ jenis }}
+                            {{ stage }}
                         </p>
                     </div>
                 </div>
@@ -77,7 +65,7 @@
                     </div>
                     <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
                         <p class="card-text">
-                            {{ konsulen }}
+                            {{ konsulenFirstName + " " + konsulenLastName }}
                         </p>
                     </div>
                 </div>
@@ -143,15 +131,15 @@ import axios from "axios";
 import MainHeader from "@/components/MainHeader.vue";
 
 export default {
-  name: "LaporanTugasPresentasiDetail",
+  name: "DetailMenuTugasAkhir",
   data() {
     return {
       tanggal: String,
-      modul: String,
       judul: String,
-      jenis: String,
+      stage: String,
       linkTugas: String,
-      konsulen: String,
+      konsulenFirstName: String,
+      konsulenLastName: String,
       status: String,
       updateStatus: Array,
       feedback: String,
@@ -163,16 +151,16 @@ export default {
   },
   mounted() {
     axios
-    //   .get("http://localhost:8000/api/dashboardResiden/laporantugas/1")
+      .get("http://localhost:8000/api/dashboardPengurusAkademik/laporantugas/4") // nanti diganti ini angka 1 nya
       .then((resp) => {
         console.warn(resp.data);
         this.laporanPasien = resp.data.laporanPasien;
         this.tanggal = resp.data.laporanTugas.tanggalDibuat
-        this.modul = resp.data.laporanTugas.tugasPresentasiModel.modulModel.namaModul
-        this.judul = resp.data.laporanTugas.tugasPresentasiModel.judulMakalah
-        this.jenis = resp.data.laporanTugas.tugasPresentasiModel.jenis
+        this.judul = resp.data.laporanTugas.tugasPenelitianAkhirModel.judulProposal
+        this.stage = resp.data.laporanTugas.tugasPenelitianAkhirModel.stage
         this.linkTugas = resp.data.laporanTugas.linkTugas
-        this.konsulen = resp.data.laporanTugas.konsulenModel.pengguna.name
+        this.konsulenFirstName = resp.data.laporanTugas.konsulenModel.pengguna.firstName
+        this.konsulenLastName = resp.data.laporanTugas.konsulenModel.pengguna.lastName
         this.status = resp.data.laporanTugas.status
         this.updateStatus = resp.data.updateStatus
         this.feedback = resp.data.laporanTugas.feedback

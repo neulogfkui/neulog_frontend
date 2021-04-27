@@ -1,66 +1,166 @@
 <template>
-  <MainHeader/>
+  <MainHeader />
   <div class="container">
-    <div class="row upper justify-content-center">
+    <div class="row upper">
       <PieChart
         v-if="isMounted"
-        keterangan="Laporan Pembahasan Kasus Sulit dan Multidisiplin Dibuat"
+        keterangan="Residen"
         :persentase="this.persentase"
-        :total="this.total"
-        :label="this.label"
-        :data="this.jumlah"
-        title="Sebaran Status Laporan Pembahasan Kasus Sulit dan Multidisiplin"
-      />
-      <!-- Tabel -->
-      <div class="col-xxl-12 col-xl-12 mb-4 mt-4">
-        <div class="card card-header-actions h-100">
-          <div class="card-header">
-            <b>Daftar Laporan Pembahasan Kasus Sulit dan Multidisiplin</b>
-          </div>
-          <div class="card-body">
-            <div class="datatable" v-if="isMounted">
-              <table
-                class="table table-bordered table-hover"
-                id="dataTable"
-                width="100%"
-                cellspacing="0"
-              >
-                <thead>
-                  <tr>
-                    <th>No</th>
-                    <th>Tanggal</th>
-                    <th>Nama Pertemuan</th>
-                    <th>Kasus yang Dibahas</th>
-                    <th>Konsulen</th>
-                    <th>Status</th>
-                    <th>Detail</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr
-                    v-for="(item, index) in listTugas"
-                    v-bind:key="item.id"
-                  >
-                    <td>{{ index + 1 }}</td>
-                    <td>{{ item.laporanTugasKasusSulitModel.LaporanTugasModel.tanggalDibuat }}</td>
-                    <td>{{ item.namaPertemuan }}</td>
-                    <td>{{ item.kasusYangDibahas }}</td>
-                    <td>{{ item.konsulen.penggunaModel.name }}</td>
-                    <td>{{ item.laporanTugasKasusSulitModel.LaporanTugasModel.status }}</td>
-                    <td>
-                      <!-- <router-link
-                        :to="'/laporantugasdetail/' + item.idLaporanTugas"
-                      >
-                        <button class="btn btn-secondary">Lihat</button>
-                      </router-link> -->
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
+        :total="this.totalResiden"
+        :label="this.labelPie"
+        :data="this.dataPie"
+        title="Sebaran Status Residen"
+      >
+      </PieChart>
+    </div>
+    <div class="col-xxl-12 col-xl-12 mb-4 mt-4">
+      <div class="card">
+        <div class="card-header border-bottom">
+            <ul class="nav nav-tabs card-header-tabs" id="cardTab" role="tablist">
+            <li class="nav-item">
+                <a
+                class="nav-link active"
+                id="ongoing-tab"
+                href="#ongoing"
+                data-toggle="tab"
+                role="tab"
+                aria-controls="overview"
+                aria-selected="true"
+                >On Going</a
+                >
+            </li>
+            <li class="nav-item">
+                <a
+                class="nav-link"
+                id="lulus-tab"
+                href="#lulus"
+                data-toggle="tab"
+                role="tab"
+                aria-controls="example"
+                aria-selected="false"
+                >Lulus</a
+                >
+            </li>
+            </ul>
         </div>
-      </div>
+        <div class="card-body">
+          <div class="tab-content" id="cardTabContent">
+                <!-- ON GOING -->
+            <div
+                class="tab-pane fade show active"
+                id="ongoing"
+                role="tabpanel"
+                aria-labelledby="ongoing-tab"
+            >
+            <div class="datatable" v-if="isMounted">
+                <table
+                    class="table table-bordered table-hover"
+                    id="dataTable"
+                    width="100%"
+                    cellspacing="0"
+                >
+                    <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama</th>
+                        <th>NPM</th>
+                        <th>Tahun/Term</th>
+                        <th>Detail</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr
+                        v-for="(item, index) in listOnGoing"
+                        v-bind:key="item.id"
+                    >
+                        <td>
+                        {{ index + 1 }}
+                        </td>
+                        <td>
+                        {{ item.penggunaModel.firstName +
+                        " " +
+                        item.penggunaModel.lastName }}
+                        </td>
+                        <td>
+                        {{ item.npm }}
+                        </td>
+                        <td>
+                        {{ item.tahunMasuk + " / " + item.term }}
+                        </td>
+                        <td>
+                        <router-link
+                            :to="'residen/' + item.idResiden"
+                        >
+                            <button class="btn btn-secondary">Lihat</button>
+                        </router-link>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            </div>
+            <!-- END ON GOING -->
+
+            <!-- Data table nya blm kebaca -->
+            <!-- LULUS -->
+            <div
+                class="tab-pane fade"
+                id="lulus"
+                role="tabpanel"
+                aria-labelledby="lulus-tab"
+            >
+            <div class="datatable" v-if="isMounted">
+                <table
+                    class="table table-bordered table-hover"
+                    id="dataTable"
+                    width="100%"
+                    cellspacing="0"
+                >
+                    <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama</th>
+                        <th>NPM</th>
+                        <th>Tahun/Term</th>
+                        <th>Detail</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr
+                        v-for="(item, index) in listLulus"
+                        v-bind:key="item.id"
+                    >
+                        <td>
+                        {{ index + 1 }}
+                        </td>
+                        <td>
+                        {{ item.penggunaModel.firstName +
+                        " " +
+                        item.penggunaModel.lastName }}
+                        </td>
+                        <td>
+                        {{ item.npm }}
+                        </td>
+                        <td>
+                        {{ item.tahunMasuk + " / " + item.term }}
+                        </td>
+                        <td>
+                        <router-link
+                            :to="'residen/' + item.idResiden"
+                        >
+                            <button class="btn btn-secondary">Lihat</button>
+                        </router-link>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            </div>
+            <!-- END LULUS -->
+
+        </div>
+        </div>
+        </div>
     </div>
   </div>
 </template>
@@ -69,39 +169,40 @@
 import axios from "axios";
 import MainHeader from "@/components/MainHeader.vue";
 import PieChart from "@/components/PieChart.vue";
-import BigNumberCard from "@/components/BigNumberCard.vue";
-import BarChart from "@/components/BarChart.vue";
 
 export default {
-  name: "DashboardPKSM",
+  name: "MenuResiden",
   data() {
     return {
-      total: Number,
-      jumlah: [],
-      label: [],
+      labelPie: [],
+      dataPie: [],
+      totalResiden: Number,
       persentase: Number,
-      listTugas: [],
-      isMounted: false
+      listOnGoing: Array,
+      listLulus: Array,
+      isMounted: false,
     };
   },
-    components: {
-    MainHeader, PieChart, BigNumberCard, BarChart
+  components: {
+    MainHeader,
+    PieChart,
   },
   mounted() {
     axios
-      .get("http://localhost:8000/api/dashboardResiden/laporanTugas/PKSM/1")
+      .get("http://localhost:8000/api/dashboardPengurusAkademik/residen/")
       .then((resp) => {
         console.warn(resp.data);
-        this.total = resp.data.total;
-        this.jumlah = resp.data.jumlah;
-        this.label = resp.data.label;
-        this.persentase = resp.data.persentase;
-        this.listTugas = resp.data.listTugas;
+        this.labelPie = resp.data.labelStatus;
+        this.dataPie = resp.data.listJumlahResidenPerStatus;
+        this.totalResiden = resp.data.totalResiden;
+        this.persentase = resp.data.persentaseLulus;
+        this.listOnGoing = resp.data.listResidenOnGoing;
+        this.listLulus = resp.data.listResidenLulus;
         this.isMounted = true;
         this.loadDataTable();
       });
   },
-    methods:{
+  methods:{
     loadDataTable() {
       (function (factory) {
         "use strict";

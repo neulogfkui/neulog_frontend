@@ -1,21 +1,22 @@
 <template>
-  <MainHeader/>
+  <MainHeader />
   <div class="container">
-    <div class="row upper justify-content-center">
-      <PieChart
-        v-if="isMounted"
-        keterangan="Laporan Pembahasan Kasus Sulit dan Multidisiplin Dibuat"
-        :persentase="this.persentase"
-        :total="this.total"
-        :label="this.label"
-        :data="this.jumlah"
-        title="Sebaran Status Laporan Pembahasan Kasus Sulit dan Multidisiplin"
+    <div class="row upper">
+      <BigNumberCard
+        title="Rata - Rata Laporan Pasien Per Bulan"
+        :count="avgLaporanPasien"
+        caption="Pasien / Bulan"
       />
-      <!-- Tabel -->
+      <BigNumberCard
+        title="Rata - Rata Laporan Tugas Per Bulan"
+        :count="avgLaporanTugas"
+        caption="Tugas / Bulan"
+      />
+      <!-- Tabel Laporan Pasien -->
       <div class="col-xxl-12 col-xl-12 mb-4 mt-4">
         <div class="card card-header-actions h-100">
           <div class="card-header">
-            <b>Daftar Laporan Pembahasan Kasus Sulit dan Multidisiplin</b>
+            <b>Daftar Seluruh Konsulen</b>
           </div>
           <div class="card-body">
             <div class="datatable" v-if="isMounted">
@@ -28,31 +29,27 @@
                 <thead>
                   <tr>
                     <th>No</th>
-                    <th>Tanggal</th>
-                    <th>Nama Pertemuan</th>
-                    <th>Kasus yang Dibahas</th>
-                    <th>Konsulen</th>
-                    <th>Status</th>
+                    <th>Nama</th>
                     <th>Detail</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr
-                    v-for="(item, index) in listTugas"
+                    v-for="(item, index) in listKonsulen"
                     v-bind:key="item.id"
                   >
-                    <td>{{ index + 1 }}</td>
-                    <td>{{ item.laporanTugasKasusSulitModel.LaporanTugasModel.tanggalDibuat }}</td>
-                    <td>{{ item.namaPertemuan }}</td>
-                    <td>{{ item.kasusYangDibahas }}</td>
-                    <td>{{ item.konsulen.penggunaModel.name }}</td>
-                    <td>{{ item.laporanTugasKasusSulitModel.LaporanTugasModel.status }}</td>
                     <td>
-                      <!-- <router-link
-                        :to="'/laporantugasdetail/' + item.idLaporanTugas"
+                      {{ index + 1 }}
+                    </td>
+                    <td>
+                      {{ item.pengguna.firstName + " " + item.pengguna.lastName }}
+                    </td>
+                    <td>
+                      <router-link
+                        :to="'konsulen/' + item.idKonsulen"
                       >
                         <button class="btn btn-secondary">Lihat</button>
-                      </router-link> -->
+                      </router-link>
                     </td>
                   </tr>
                 </tbody>
@@ -68,40 +65,35 @@
 <script>
 import axios from "axios";
 import MainHeader from "@/components/MainHeader.vue";
-import PieChart from "@/components/PieChart.vue";
 import BigNumberCard from "@/components/BigNumberCard.vue";
-import BarChart from "@/components/BarChart.vue";
 
 export default {
-  name: "DashboardPKSM",
+  name: "MenuKonsulen",
   data() {
     return {
-      total: Number,
-      jumlah: [],
-      label: [],
-      persentase: Number,
-      listTugas: [],
-      isMounted: false
+      avgLaporanPasien: Number,
+      avgLaporanTugas: Number,
+      listKonsulen: Array,
+      isMounted: false,
     };
   },
-    components: {
-    MainHeader, PieChart, BigNumberCard, BarChart
+  components: {
+    MainHeader,
+    BigNumberCard,
   },
   mounted() {
     axios
-      .get("http://localhost:8000/api/dashboardResiden/laporanTugas/PKSM/1")
+      .get("http://localhost:8000/api/dashboardPengurusAkademik/konsulen/")
       .then((resp) => {
         console.warn(resp.data);
-        this.total = resp.data.total;
-        this.jumlah = resp.data.jumlah;
-        this.label = resp.data.label;
-        this.persentase = resp.data.persentase;
-        this.listTugas = resp.data.listTugas;
+        this.avgLaporanPasien = resp.data.averageLaporanPasien;
+        this.avgLaporanTugas = resp.data.averageLaporanTugas;
+        this.listKonsulen = resp.data.listKonsulen;
         this.isMounted = true;
         this.loadDataTable();
       });
   },
-    methods:{
+  methods:{
     loadDataTable() {
       (function (factory) {
         "use strict";

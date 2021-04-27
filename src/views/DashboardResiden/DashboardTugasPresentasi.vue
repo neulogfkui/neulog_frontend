@@ -111,7 +111,7 @@
                       {{ item.tugasPresentasiModel.judulMakalah }}
                     </td>
                     <td>
-                      {{ item.konsulenModel.pengguna.firstName + " " + item.konsulenModel.pengguna.lastName }}
+                      {{ item.konsulenModel.pengguna.name }}
                     </td>
                     <td>
                       {{ item.status }}

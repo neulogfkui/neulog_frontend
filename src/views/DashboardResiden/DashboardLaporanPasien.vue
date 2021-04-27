@@ -4,7 +4,7 @@
     <div class="row upper">
       <PieChart
         v-if="isMounted"
-        keterangan="Laporan Pasien Dibuat"
+        keterangan="Laporan Pasien"
         :persentase="this.persentase"
         :total="this.createdLaporanPasien"
         :label="this.label"
@@ -54,28 +54,12 @@
                     v-for="(item, index) in listLaporanPasien"
                     v-bind:key="item.id"
                   >
-                    <td>
-                      {{ index + 1 }}
-                    </td>
-                    <td>
-                      {{ item.tanggalDibuat }}
-                    </td>
-                    <td>
-                      {{ item.inisialPasien }}
-                    </td>
-                    <td>
-                      {{ item.usiaPasien }}
-                    </td>
-                    <td>
-                      {{ item.noRekamMedis }}
-                    </td>
-                    <td>
-                      {{
-                        item.konsulen.penggunaModel.firstName +
-                        " " +
-                        item.konsulen.penggunaModel.lastName
-                      }}
-                    </td>
+                    <td>{{ index + 1 }}</td>
+                    <td>{{ item.tanggalDibuat }}</td>
+                    <td>{{ item.inisialPasien }}</td>
+                    <td>{{ item.usiaPasien }}</td>
+                    <td>{{ item.noRekamMedis }}</td>
+                    <td>{{ item.konsulen.penggunaModel.name }}</td>
                     <td v-if="item.isFromJaga">Ya</td>
                     <td v-if="!item.isFromJaga">Tidak</td>
                     <td>{{ item.status }}</td>
@@ -103,6 +87,7 @@ import MainHeader from "@/components/MainHeader.vue";
 import PieChart from "@/components/PieChart.vue";
 import BigNumberCard from "@/components/BigNumberCard.vue";
 import BarChart from "@/components/BarChart.vue";
+import authHeader from '@/services/auth-header';
 
 export default {
   name: "DashboardLaporanPasien",
@@ -127,9 +112,9 @@ export default {
   },
   mounted() {
     axios
-      .get("http://localhost:8000/api/dashboardResiden/laporanPasien/1")
+      .get("http://localhost:8000/api/dashboardResiden/laporanPasien/1", { headers: authHeader() })
       .then((resp) => {
-        console.warn(resp.data);
+        console.warn(resp);
         this.createdLaporanPasien = resp.data.createdLaporanPasien;
         this.label = resp.data.label;
         this.jumlah = resp.data.jumlah;

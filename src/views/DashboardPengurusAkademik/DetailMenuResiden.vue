@@ -2,132 +2,116 @@
 <MainHeader />
 <div class="container upper">
     <div class="row">
-        <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+        <div class="col-xxl-12 col-xl-12 mb-4 mt-4">
             <div class="card card-header-actions h-100">
                 <div class="card-header">
-                    <b>Data Presentasi Kasus</b>
+                    <b>Data Residen</b>
                 </div>
             <div class="card-body">
                 <div class="container-fluid">
                 <div class="row">
                     <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
                         <p class="card-text">
-                            Tanggal
+                            Nama Lengkap
                         </p>
                     </div>
                     <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
                         <p class="card-text">
-                            {{ tanggal }}
+                            {{ firstName + " " + lastName }}
                         </p>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
                         <p class="card-text">
-                            Modul
+                            NPM
                         </p>
                     </div>
                     <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
                         <p class="card-text">
-                            {{ modul }}
+                            {{ npm }}
                         </p>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
                         <p class="card-text">
-                            Judul
+                            Tahun Masuk/Term
                         </p>
                     </div>
                     <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
                         <p class="card-text">
-                            {{ judul }}
+                            {{ tahunMasuk + " / " + term }}
                         </p>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
                         <p class="card-text">
-                            Jenis Tugas
+                            TTL
                         </p>
                     </div>
                     <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
                         <p class="card-text">
-                            {{ jenis }}
+                            {{ tempatLahir + ", " + tanggalLahir }}
                         </p>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
                         <p class="card-text">
-                            Link Tugas
+                            Alamat Rumah
                         </p>
                     </div>
                     <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
                         <p class="card-text">
-                            {{ linkTugas }}
+                            {{ alamat }}
                         </p>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
                         <p class="card-text">
-                            Konsulen
+                            Telepon
                         </p>
                     </div>
                     <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
                         <p class="card-text">
-                            {{ konsulen }}
+                            {{ telepon }}
                         </p>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
                         <p class="card-text">
-                            Status
+                            Email
                         </p>
                     </div>
                     <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
                         <p class="card-text">
-                            {{ status }}
+                            {{ email }}
                         </p>
                     </div>
                 </div>
-                </div>
-            </div>
-            </div>
-        </div>
-        <div class="col-xxl-3 col-xl-3 mb-4 mt-4">
-            <div class="card card-header-actions h-100">
-                <div class="card-header">
-                    <b>Update Status</b>
-                </div>
-            <div class="card-body">
-                <div class="container-fluid">
                 <div class="row">
-                    <div class="col-xxl-12 col-xl-12 mb-4 mt-4" v-for="(item) in updateStatus"
-                    v-bind:key="item.id">
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
                         <p class="card-text">
-                            {{ item }}
+                            Pembimbing
+                        </p>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text">
+                            {{ pembimbingFirstName + " " + pembimbingLastName }}
                         </p>
                     </div>
                 </div>
-                </div>
-            </div>
-            </div>
-        </div>
-        <div class="col-xxl-3 col-xl-3 mb-4 mt-4">
-            <div class="card card-header-actions h-100">
-                <div class="card-header">
-                    <b>Feedback</b>
-                </div>
-            <div class="card-body">
-                <div class="container-fluid">
                 <div class="row">
-                    <div class="col-xxl-12 col-xl-12 mb-4 mt-4">
-                        <p class="card-text">
-                            {{ feedback }}
-                        </p>
+                    <div class="col-xxl-12 col-xl-12 mb-4 mt-4 text-center">
+                        <router-link
+                        :to="'/dashboardresiden/' + idResiden"
+                      >
+                        <button class="btn btn-primary">Lihat Dashboard</button>
+                      </router-link>
                     </div>
                 </div>
                 </div>
@@ -143,18 +127,23 @@ import axios from "axios";
 import MainHeader from "@/components/MainHeader.vue";
 
 export default {
-  name: "LaporanTugasPresentasiDetail",
+  name: "DetailMenuResiden",
   data() {
     return {
-      tanggal: String,
-      modul: String,
-      judul: String,
-      jenis: String,
-      linkTugas: String,
-      konsulen: String,
-      status: String,
-      updateStatus: Array,
-      feedback: String,
+      data: Array,
+      idResiden: Number,
+      firstName: String,
+      lastName: String,
+      npm: String,
+      tahunMasuk: String,
+      term: String,
+      tempatLahir: String,
+      tanggalLahir: String,
+      alamat: String,
+      telepon: String,
+      email: String,
+      pembimbingFirstName: String,
+      pembimbingLastName: String,
       isMounted: false,
     };
   },
@@ -163,19 +152,23 @@ export default {
   },
   mounted() {
     axios
-    //   .get("http://localhost:8000/api/dashboardResiden/laporantugas/1")
+      .get("http://localhost:8000/api/dashboardPengurusAkademik/residen/1") // nanti diganti ini angka 1 nya
       .then((resp) => {
         console.warn(resp.data);
-        this.laporanPasien = resp.data.laporanPasien;
-        this.tanggal = resp.data.laporanTugas.tanggalDibuat
-        this.modul = resp.data.laporanTugas.tugasPresentasiModel.modulModel.namaModul
-        this.judul = resp.data.laporanTugas.tugasPresentasiModel.judulMakalah
-        this.jenis = resp.data.laporanTugas.tugasPresentasiModel.jenis
-        this.linkTugas = resp.data.laporanTugas.linkTugas
-        this.konsulen = resp.data.laporanTugas.konsulenModel.pengguna.name
-        this.status = resp.data.laporanTugas.status
-        this.updateStatus = resp.data.updateStatus
-        this.feedback = resp.data.laporanTugas.feedback
+        this.data = resp.data;
+        this.idResiden = resp.data.idResiden
+        this.firstName = resp.data.penggunaModel.firstName
+        this.lastName = resp.data.penggunaModel.lastName
+        this.npm = resp.data.npm
+        this.tahunMasuk = resp.data.tahunMasuk
+        this.term = resp.data.term
+        this.tempatLahir = resp.data.penggunaModel.tempatLahir
+        this.tanggalLahir = resp.data.penggunaModel.tanggalLahir
+        this.alamat = resp.data.alamatRumah
+        this.telepon = resp.data.noTelepon
+        this.email = resp.data.penggunaModel.email
+        this.pembimbingFirstName = resp.data.konsulen.pengguna.firstName
+        this.pembimbingLastName = resp.data.konsulen.pengguna.lastName
         this.isMounted = true;
       });
   },

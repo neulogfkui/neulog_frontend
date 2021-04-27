@@ -47,13 +47,7 @@
                                     <td>{{ item.inisialPasien }}</td>
                                     <td>{{ item.usiaPasien }}</td>
                                     <td>{{ item.noRekamMedis }}</td>
-                                    <td>
-                                    {{
-                                        item.konsulen.penggunaModel.firstName +
-                                        " " +
-                                        item.konsulen.penggunaModel.lastName
-                                    }}
-                                    </td>
+                                    <td>{{ item.konsulen.penggunaModel.name }}</td>
                                     <td>{{ item.status }}</td>
                                     <td>
                                     <router-link

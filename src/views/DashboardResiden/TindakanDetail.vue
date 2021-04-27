@@ -1,107 +1,99 @@
 <template>
-  <MainHeader/>
-  <div class="container">
-    <div class="row upper justify-content-center">
-      <PieChart
-        v-if="isMounted"
-        keterangan="Laporan Pembahasan Kasus Sulit dan Multidisiplin Dibuat"
-        :persentase="this.persentase"
-        :total="this.total"
-        :label="this.label"
-        :data="this.jumlah"
-        title="Sebaran Status Laporan Pembahasan Kasus Sulit dan Multidisiplin"
-      />
-      <!-- Tabel -->
-      <div class="col-xxl-12 col-xl-12 mb-4 mt-4">
-        <div class="card card-header-actions h-100">
-          <div class="card-header">
-            <b>Daftar Laporan Pembahasan Kasus Sulit dan Multidisiplin</b>
-          </div>
-          <div class="card-body">
-            <div class="datatable" v-if="isMounted">
-              <table
-                class="table table-bordered table-hover"
-                id="dataTable"
-                width="100%"
-                cellspacing="0"
-              >
-                <thead>
-                  <tr>
-                    <th>No</th>
-                    <th>Tanggal</th>
-                    <th>Nama Pertemuan</th>
-                    <th>Kasus yang Dibahas</th>
-                    <th>Konsulen</th>
-                    <th>Status</th>
-                    <th>Detail</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr
-                    v-for="(item, index) in listTugas"
-                    v-bind:key="item.id"
-                  >
-                    <td>{{ index + 1 }}</td>
-                    <td>{{ item.laporanTugasKasusSulitModel.LaporanTugasModel.tanggalDibuat }}</td>
-                    <td>{{ item.namaPertemuan }}</td>
-                    <td>{{ item.kasusYangDibahas }}</td>
-                    <td>{{ item.konsulen.penggunaModel.name }}</td>
-                    <td>{{ item.laporanTugasKasusSulitModel.LaporanTugasModel.status }}</td>
-                    <td>
-                      <!-- <router-link
-                        :to="'/laporantugasdetail/' + item.idLaporanTugas"
-                      >
-                        <button class="btn btn-secondary">Lihat</button>
-                      </router-link> -->
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
+    <div class="col-xxl-12 col-xl-12 mb-4 mt-4">
+    <div class="card card-header-actions h-100">
+        <div class="card-header">
+        <!-- <b>Daftar Pasien dengan Tindakan {{ namaTindakan }}</b> -->
         </div>
-      </div>
+        <div class="card-body">
+        <div class="datatable" v-if="isMounted">
+            <table
+            class="table table-bordered table-hover"
+            id="dataTable"
+            width="100%"
+            cellspacing="0"
+            >
+            <thead>
+                <tr>
+                <th>No</th>
+                <th>Tanggal</th>
+                <th>Inisial Pasien</th>
+                <th>Usia</th>
+                <th>No Rekam Medis</th>
+                <th>Konsulen</th>
+                <th>Jaga</th>
+                <th>Status</th>
+                <th>Detail</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr
+                v-for="(item, index) in listTindakan"
+                v-bind:key="item.id"
+                >
+                <td>
+                    {{ index + 1 }}
+                </td>
+                <td>
+                    {{ item.tanggalDibuat }}
+                </td>
+                <td>
+                    {{ item.inisialPasien }}
+                </td>
+                <td>
+                    {{ item.usiaPasien }}
+                </td>
+                <td>
+                    {{ item.noRekamMedis }}
+                </td>
+                <td>
+                    {{ item.konsulen.penggunaModel.name }}
+                </td>
+                <td v-if="item.isFromJaga">Ya</td>
+                <td v-if="!item.isFromJaga">Tidak</td>
+                <td>{{ item.status }}</td>
+                <td>
+                    <router-link
+                    :to="'/laporanpasiendetail/' + item.idLaporanPasien"
+                    >
+                    <button class="btn btn-secondary">Lihat</button>
+                    </router-link>
+                </td>
+                </tr>
+            </tbody>
+            </table>
+        </div>
+        </div>
     </div>
-  </div>
+    </div>
 </template>
 
 <script>
 import axios from "axios";
 import MainHeader from "@/components/MainHeader.vue";
-import PieChart from "@/components/PieChart.vue";
-import BigNumberCard from "@/components/BigNumberCard.vue";
-import BarChart from "@/components/BarChart.vue";
+import authHeader from '@/services/auth-header';
 
 export default {
-  name: "DashboardPKSM",
+  name: "DashboardLaporanPasien",
   data() {
     return {
-      total: Number,
-      jumlah: [],
-      label: [],
-      persentase: Number,
-      listTugas: [],
-      isMounted: false
+      listTindakan: Array,
+      isMounted: false,
     };
   },
-    components: {
-    MainHeader, PieChart, BigNumberCard, BarChart
+  components: {
+    MainHeader,
   },
   mounted() {
     axios
-      .get("http://localhost:8000/api/dashboardResiden/laporanTugas/PKSM/1")
+      .get("http://localhost:8000/api/dashboardResiden/laporanPasien/1", { headers: authHeader() })
       .then((resp) => {
-        console.warn(resp.data);
-        this.total = resp.data.total;
-        this.jumlah = resp.data.jumlah;
-        this.label = resp.data.label;
-        this.persentase = resp.data.persentase;
-        this.listTugas = resp.data.listTugas;
+        console.warn(resp);
+        this.listTindakan = resp.data.listTindakan;
         this.isMounted = true;
         this.loadDataTable();
       });
   },
-    methods:{
+  methods:{
     loadDataTable() {
       (function (factory) {
         "use strict";

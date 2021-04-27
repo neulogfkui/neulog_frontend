@@ -77,7 +77,7 @@
                     </div>
                     <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
                         <p class="card-text">
-                            {{ konsulen }}
+                            {{ konsulenFirstName + " " + konsulenLastName }}
                         </p>
                     </div>
                 </div>
@@ -143,7 +143,7 @@ import axios from "axios";
 import MainHeader from "@/components/MainHeader.vue";
 
 export default {
-  name: "LaporanTugasPresentasiDetail",
+  name: "DetailMenuTugasPresentasi",
   data() {
     return {
       tanggal: String,
@@ -151,7 +151,8 @@ export default {
       judul: String,
       jenis: String,
       linkTugas: String,
-      konsulen: String,
+      konsulenFirstName: String,
+      konsulenLastName: String,
       status: String,
       updateStatus: Array,
       feedback: String,
@@ -163,7 +164,7 @@ export default {
   },
   mounted() {
     axios
-    //   .get("http://localhost:8000/api/dashboardResiden/laporantugas/1")
+      .get("http://localhost:8000/api/dashboardPengurusAkademik/laporantugas/3") // nanti diganti ini angka 1 nya
       .then((resp) => {
         console.warn(resp.data);
         this.laporanPasien = resp.data.laporanPasien;
@@ -172,7 +173,8 @@ export default {
         this.judul = resp.data.laporanTugas.tugasPresentasiModel.judulMakalah
         this.jenis = resp.data.laporanTugas.tugasPresentasiModel.jenis
         this.linkTugas = resp.data.laporanTugas.linkTugas
-        this.konsulen = resp.data.laporanTugas.konsulenModel.pengguna.name
+        this.konsulenFirstName = resp.data.laporanTugas.konsulenModel.pengguna.firstName
+        this.konsulenLastName = resp.data.laporanTugas.konsulenModel.pengguna.lastName
         this.status = resp.data.laporanTugas.status
         this.updateStatus = resp.data.updateStatus
         this.feedback = resp.data.laporanTugas.feedback

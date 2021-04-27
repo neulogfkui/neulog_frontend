@@ -68,7 +68,7 @@
                     </div>
                     <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
                         <p class="card-text">
-                            {{ konsulenFirstName + " " + konsulenLastName }}
+                            {{ konsulen }}
                         </p>
                     </div>
                 </div>
@@ -237,8 +237,7 @@ export default {
       usia: String,
       noRekam: String,
       jaga: Boolean,
-      konsulenFirstName: String,
-      konsulenLastName: String,
+      konsulen: String,
       status: String,
       updateStatus: Array,
       feedback: String,
@@ -261,8 +260,7 @@ export default {
         this.usia = resp.data.laporanPasien.usiaPasien;
         this.noRekam = resp.data.laporanPasien.noRekamMedis;
         this.jaga = resp.data.laporanPasien.isFromJaga;
-        this.konsulenFirstName = resp.data.laporanPasien.konsulen.pengguna.firstName;
-        this.konsulenLastName = resp.data.laporanPasien.konsulen.pengguna.lastName;
+        this.konsulen = resp.data.laporanPasien.konsulen.pengguna.name;
         this.status = resp.data.laporanPasien.status;
         this.updateStatus = resp.data.updateStatus;
         this.feedback = resp.data.laporanPasien.feedback;

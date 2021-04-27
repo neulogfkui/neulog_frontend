@@ -1,107 +1,195 @@
 <template>
-  <MainHeader/>
-  <div class="container">
-    <div class="row upper justify-content-center">
-      <PieChart
-        v-if="isMounted"
-        keterangan="Laporan Pembahasan Kasus Sulit dan Multidisiplin Dibuat"
-        :persentase="this.persentase"
-        :total="this.total"
-        :label="this.label"
-        :data="this.jumlah"
-        title="Sebaran Status Laporan Pembahasan Kasus Sulit dan Multidisiplin"
-      />
-      <!-- Tabel -->
-      <div class="col-xxl-12 col-xl-12 mb-4 mt-4">
-        <div class="card card-header-actions h-100">
-          <div class="card-header">
-            <b>Daftar Laporan Pembahasan Kasus Sulit dan Multidisiplin</b>
-          </div>
-          <div class="card-body">
-            <div class="datatable" v-if="isMounted">
-              <table
-                class="table table-bordered table-hover"
-                id="dataTable"
-                width="100%"
-                cellspacing="0"
-              >
-                <thead>
-                  <tr>
-                    <th>No</th>
-                    <th>Tanggal</th>
-                    <th>Nama Pertemuan</th>
-                    <th>Kasus yang Dibahas</th>
-                    <th>Konsulen</th>
-                    <th>Status</th>
-                    <th>Detail</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr
-                    v-for="(item, index) in listTugas"
-                    v-bind:key="item.id"
-                  >
-                    <td>{{ index + 1 }}</td>
-                    <td>{{ item.laporanTugasKasusSulitModel.LaporanTugasModel.tanggalDibuat }}</td>
-                    <td>{{ item.namaPertemuan }}</td>
-                    <td>{{ item.kasusYangDibahas }}</td>
-                    <td>{{ item.konsulen.penggunaModel.name }}</td>
-                    <td>{{ item.laporanTugasKasusSulitModel.LaporanTugasModel.status }}</td>
-                    <td>
-                      <!-- <router-link
-                        :to="'/laporantugasdetail/' + item.idLaporanTugas"
-                      >
-                        <button class="btn btn-secondary">Lihat</button>
-                      </router-link> -->
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+<MainHeader />
+<div class="container upper">
+    <div class="row">
+        <div class="col-xxl-7 col-xl-7 mb-4 mt-4">
+            <div class="card card-header-actions h-100">
+                <div class="card-header">
+                    <b>Data Modul</b>
+                </div>
+            <div class="card-body">
+                <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text">
+                            Nama Modul
+                        </p>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text">
+                            {{ namaModul }}
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text">
+                            Ketua Modul
+                        </p>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text">
+                            {{ ketuaModulFirstName + " " + ketuaModulLastName }}
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text">
+                            Jumlah Residen
+                        </p>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text">
+                            {{ jumlahResiden }}
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text">
+                            Tanggal Dibuat
+                        </p>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text">
+                            {{ tanggalDibuat }}
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text">
+                            Deskripsi
+                        </p>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text">
+                            {{ deskripsi }}
+                        </p>
+                    </div>
+                </div>
+                </div>
             </div>
-          </div>
+            </div>
         </div>
-      </div>
+        <div class="col mb-4 mt-4">
+            <BigNumberCardModul
+                title="Waktu Pemenuhan Pencapaian"
+                :count1="avgDurasi"
+                caption1="Hari"
+                :count2="minDurasi"
+                caption2="Hari"
+                :count3="maxDurasi"
+                caption3="Hari"
+            />
+        </div>
     </div>
-  </div>
+    <div class="row">
+        <div class="col-xxl-12 col-xl-12 mb-4 mt-4">
+            <div class="card card-header-actions h-100">
+                <div class="card-header">
+                    <b>Daftar Residen</b>
+                </div>
+            <div class="card-body">
+                <div class="datatable" v-if="isMounted">
+                    <table
+                        class="table table-bordered table-hover"
+                        id="dataTable"
+                        width="100%"
+                        cellspacing="0"
+                    >
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Nama Residen</th>
+                                <th>Tanggal Mulai</th>
+                                <th>Tanggal Selesai</th>
+                                <th>Status</th>
+                                <th>Feedback</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr
+                                v-for="(item, index) in listModulResiden"
+                                v-bind:key="item.id"
+                            >
+                                <td>
+                                {{ index + 1 }}
+                                </td>
+                                <td>
+                                {{ item.residen.penggunaModel.firstName + " " + item.residen.penggunaModel.lastName }}
+                                </td>
+                                <td>
+                                {{ item.tanggalMulai }}
+                                </td>
+                                <td>
+                                {{ item.tanggalSelesai }}
+                                </td>
+                                <td>
+                                {{ item.status }}
+                                </td>
+                                <td>
+                                {{ item.feedback }}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
 </template>
 
 <script>
 import axios from "axios";
 import MainHeader from "@/components/MainHeader.vue";
-import PieChart from "@/components/PieChart.vue";
-import BigNumberCard from "@/components/BigNumberCard.vue";
-import BarChart from "@/components/BarChart.vue";
+import BigNumberCardModul from "@/components/BigNumberCardModul.vue";
 
 export default {
-  name: "DashboardPKSM",
+  name: "DetailMenuModul",
   data() {
     return {
-      total: Number,
-      jumlah: [],
-      label: [],
-      persentase: Number,
-      listTugas: [],
-      isMounted: false
+      detailModul: Array,
+      namaModul: String,
+      ketuaModulFirstName: String,
+      ketuaModulLastName: String,
+      jumlahResiden: Number,
+      tanggalDibuat: String,
+      deskripsi: String,
+      avgDurasi: Number,
+      minDurasi: Number,
+      maxDurasi: Number,
+      listModulResiden: Array,
+      isMounted: false,
     };
   },
-    components: {
-    MainHeader, PieChart, BigNumberCard, BarChart
+  components: {
+    MainHeader,
+    BigNumberCardModul,
   },
   mounted() {
     axios
-      .get("http://localhost:8000/api/dashboardResiden/laporanTugas/PKSM/1")
+      .get("http://localhost:8000/api/dashboardPengurusAkademik/modul/" + this.$route.params.idModul) // nanti diganti ini angka 1 nya
       .then((resp) => {
         console.warn(resp.data);
-        this.total = resp.data.total;
-        this.jumlah = resp.data.jumlah;
-        this.label = resp.data.label;
-        this.persentase = resp.data.persentase;
-        this.listTugas = resp.data.listTugas;
+        this.namaModul = resp.data.detailModul.namaModul
+        this.ketuaModulFirstName = resp.data.detailModul.ketuaModulodel.pengguna.firstName
+        this.ketuaModulLastName = resp.data.detailModul.ketuaModulodel.pengguna.lastName
+        this.jumlahResiden = resp.data.jumlahResiden
+        this.tanggalDibuat = resp.data.detailModul.tanggalDibuat
+        this.deskripsi = resp.data.detailModul.deskripsi
+        this.avgDurasi = resp.data.averageDurasi
+        this.minDurasi = resp.data.minDurasi
+        this.maxDurasi = resp.data.maxDurasi
+        this.listModulResiden = resp.data.listModulResiden
         this.isMounted = true;
         this.loadDataTable();
       });
   },
-    methods:{
+  methods:{
     loadDataTable() {
       (function (factory) {
         "use strict";

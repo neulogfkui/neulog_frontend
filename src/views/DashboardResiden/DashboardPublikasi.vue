@@ -45,13 +45,7 @@
                     <td>{{ item.laporanTugasPublikasiModel.LaporanTugasModel.tanggalDibuat }}</td>
                     <td>{{ item.judulPublikasi }}</td>
                     <td>{{ item.eventPublikasi }}</td>
-                    <td>
-                      {{
-                        item.konsulen.penggunaModel.firstName +
-                        " " +
-                        item.konsulen.penggunaModel.lastName
-                      }}
-                    </td>
+                    <td>{{ item.konsulen.penggunaModel.name }}</td>
                     <td>{{ item.laporanTugasPublikasiModel.LaporanTugasModel.status }}</td>
                     <td>
                       <!-- <router-link
