@@ -16,8 +16,8 @@ export const auth = {
           return UserService.getPenggunaRolesByUsername(user.username)
           .then(userData => {
             localStorage.setItem("userData", JSON.stringify(userData));
-            commit('loginSuccess', userData);
-            return Promise.resolve(userData);
+            commit('loginSuccess', user);
+            return Promise.resolve(user);
           })
         },
         error => {
@@ -83,8 +83,8 @@ export const auth = {
   },
   mutations: {
     loginSuccess(state, user) {
-      state.status.loggedIn = true;
       state.user = user;
+      state.status.loggedIn = true;
     },
     loginFailure(state) {
       state.status.loggedIn = false;

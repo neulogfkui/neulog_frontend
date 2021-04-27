@@ -21,7 +21,7 @@
             <div class="card-header">Jumlah Akun Residen</div>
             <div class="card-body text-center">
                 <p class="n-residen">
-                    {{ nResiden }}
+                    {{ residens.length }}
                 </p>
                 <button @click="redirectToResidenRegister" class="btn btn-teal">Buat Akun Residen</button>
             </div>
@@ -47,6 +47,7 @@
 							<th>Username</th>
 							<th>E-mail</th>
 							<th>Tahun-Masuk/Term</th>
+							<th>Actions</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -55,6 +56,7 @@
 							<td>{{ residen.username }}</td>
 							<td>{{ residen.email }}</td>
 							<td>{{ residen.tahunMasuk }}/{{ residen.term }}</td>
+							<td><button @click="redirectToView(residen.id)" class="btn btn-primary">Lihat Detail</button></td>
 							</tr>
 						</tbody>
 					</table>
@@ -65,14 +67,12 @@
 </template>
 
 <script>
-// import DataTable from '../../components/TestTableAvi';
 import dataTableLoader from '../../js/datatable';
 
 export default {
     data() {
         return {
 			user: this.$store.state.auth.user,
-            nResiden: 8,
             residens: Array,
 			ready: false
         }
@@ -83,8 +83,6 @@ export default {
 			return this.ready;
 		}
 	},
-
-    // components: {DataTable},
 
     created() {
 		this.$store.dispatch('user/getAllPenggunaResiden').then(
@@ -104,14 +102,17 @@ export default {
                 this.successful = false
 				// this.loadDataTable();
 				dataTableLoader();
-				
-                }
-            );
+            }
+		);
     },
 
     methods: {
         redirectToResidenRegister() {
             this.$router.push('/mengelola-akun/residen-register');
+		},
+
+		redirectToView(idResiden) {
+            this.$router.push('/mengelola-akun/view-residen/'+idResiden);
 		}
 	}
 }
@@ -126,7 +127,7 @@ export default {
     color: rgb(255, 255, 255);
 }
 .number-card {
-    max-width: 35% !important;
+	max-width: 30% !important;
 }
 .n-residen {
     font-size: 5rem;
