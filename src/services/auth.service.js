@@ -96,6 +96,7 @@ class AuthService {
   deletePengguna(username) {
     return axios.delete(API_URL + 'delete/' + username);
   }
+
 }
 
 export default new AuthService();

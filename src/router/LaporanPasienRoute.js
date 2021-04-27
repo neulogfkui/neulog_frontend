@@ -2,7 +2,7 @@ import LaporanPasienForm from "@/views/LaporanPasien/LaporanPasienForm.vue"
 
 let routes = [
     {
-        path: '/laporanpasienform/:idResiden',
+        path: '/laporanpasienform/:operation',
         name: 'LaporanPasienForm',
         component: LaporanPasienForm,
     }
