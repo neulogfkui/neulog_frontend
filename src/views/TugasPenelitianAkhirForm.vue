@@ -52,7 +52,7 @@
                   v-bind:key="item.id"
                   :value="item.idKonsulen"
                 >
-                  {{ item.penggunaModel.firstName + " " + item.penggunaModel.lastName}}
+                  {{ item.pengguna.name }}
                 </option>
               </select>
             </div>
@@ -107,9 +107,7 @@
                     <tr v-for="item in listKonsulen" v-bind:key="item.id">
                       <td>
                         {{
-                          item.penggunaModel.firstName +
-                          " " +
-                          item.penggunaModel.lastName
+                          item.pengguna.name
                         }}
                       </td>
                       <td>

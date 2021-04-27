@@ -8,7 +8,7 @@
             <div class="text-lg font-weight-bold" v-if="title.length>39">{{ title }}</div>
             <div class="text-lg font-weight-bold" v-if="title.length<39">{{ title }}<br><br></div>
           </div>
-          <i class="feather-xl text-white-50" data-feather="calendar"></i>
+          <i class="feather-xl text-white-50" :data-feather="icon"></i>
         </div>
       </div>
       <div
@@ -34,6 +34,7 @@ export default {
     color: String,
     link: String,
     action: String,
+    icon: String
   },
 };
 </script>
