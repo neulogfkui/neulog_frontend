@@ -212,7 +212,7 @@
                     aria-controls="collapseDashboards"
                   >
                     <div class="nav-link-icon">
-                      <i class="fas fa-th-large"></i>
+                      <i data-feather="layout"></i>
                     </div>
                     Dashboard Admin
                     <div class="sidenav-collapse-arrow">

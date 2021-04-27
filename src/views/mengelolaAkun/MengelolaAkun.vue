@@ -28,9 +28,8 @@
         </div>
     </div>
 
-    <!-- <div class="container mt-5">
-		<div class="card mb-4"> -->
-		<div v-if="dataTableReady" class="col-xxl-12 col-xl-12 mb-4 mt-4">
+    <div v-if="dataTableReady" class="container mt-5">
+		<div class="card mb-4 mt-4">
         <div class="card card-header-actions">
 		<div class="card-header">Extended DataTables</div>
 			<div class="card-body">
@@ -63,6 +62,7 @@
 				</div>
 			</div>
 		</div>
+		</div>
 	</div>
 </template>
 
@@ -74,7 +74,7 @@ export default {
         return {
 			user: this.$store.state.auth.user,
             residens: Array,
-			ready: false
+			ready: false,
         }
     },
 
