@@ -1,0 +1,185 @@
+<template>
+<MainHeader />
+<div class="container upper">
+    <div class="row">
+        <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+            <div class="card card-header-actions h-100">
+                <div class="card-header">
+                    <b>Data Presentasi Kasus</b>
+                </div>
+            <div class="card-body">
+                <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text">
+                            Tanggal
+                        </p>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text">
+                            {{ tanggal }}
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text">
+                            Modul
+                        </p>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text">
+                            {{ modul }}
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text">
+                            Judul
+                        </p>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text">
+                            {{ judul }}
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text">
+                            Jenis Tugas
+                        </p>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text">
+                            {{ jenis }}
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text">
+                            Link Tugas
+                        </p>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text">
+                            {{ linkTugas }}
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text">
+                            Konsulen
+                        </p>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text">
+                            {{ konsulenFirstName + " " + konsulenLastName }}
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text">
+                            Status
+                        </p>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text">
+                            {{ status }}
+                        </p>
+                    </div>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        <div class="col-xxl-3 col-xl-3 mb-4 mt-4">
+            <div class="card card-header-actions h-100">
+                <div class="card-header">
+                    <b>Update Status</b>
+                </div>
+            <div class="card-body">
+                <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xxl-12 col-xl-12 mb-4 mt-4" v-for="(item) in updateStatus"
+                    v-bind:key="item.id">
+                        <p class="card-text">
+                            {{ item }}
+                        </p>
+                    </div>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        <div class="col-xxl-3 col-xl-3 mb-4 mt-4">
+            <div class="card card-header-actions h-100">
+                <div class="card-header">
+                    <b>Feedback</b>
+                </div>
+            <div class="card-body">
+                <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xxl-12 col-xl-12 mb-4 mt-4">
+                        <p class="card-text">
+                            {{ feedback }}
+                        </p>
+                    </div>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+</template>
+
+<script>
+import axios from "axios";
+import MainHeader from "@/components/MainHeader.vue";
+
+export default {
+  name: "DetailMenuTugasPresentasi",
+  data() {
+    return {
+      tanggal: String,
+      modul: String,
+      judul: String,
+      jenis: String,
+      linkTugas: String,
+      konsulenFirstName: String,
+      konsulenLastName: String,
+      status: String,
+      updateStatus: Array,
+      feedback: String,
+      isMounted: false,
+    };
+  },
+  components: {
+    MainHeader,
+  },
+  mounted() {
+    axios
+      .get("http://localhost:8000/api/dashboardPengurusAkademik/laporantugas/3") // nanti diganti ini angka 1 nya
+      .then((resp) => {
+        console.warn(resp.data);
+        this.laporanPasien = resp.data.laporanPasien;
+        this.tanggal = resp.data.laporanTugas.tanggalDibuat
+        this.modul = resp.data.laporanTugas.tugasPresentasiModel.modulModel.namaModul
+        this.judul = resp.data.laporanTugas.tugasPresentasiModel.judulMakalah
+        this.jenis = resp.data.laporanTugas.tugasPresentasiModel.jenis
+        this.linkTugas = resp.data.laporanTugas.linkTugas
+        this.konsulenFirstName = resp.data.laporanTugas.konsulenModel.pengguna.firstName
+        this.konsulenLastName = resp.data.laporanTugas.konsulenModel.pengguna.lastName
+        this.status = resp.data.laporanTugas.status
+        this.updateStatus = resp.data.updateStatus
+        this.feedback = resp.data.laporanTugas.feedback
+        this.isMounted = true;
+      });
+  },
+};
+</script>
