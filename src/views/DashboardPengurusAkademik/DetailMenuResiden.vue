@@ -1,5 +1,9 @@
 <template>
-<MainHeader />
+<LightHeader
+    v-if="isMounted"
+    :title= this.title
+    icon= "user">
+</LightHeader>
 <div class="container upper">
     <div class="row">
         <div class="col-xxl-12 col-xl-12 mb-4 mt-4">
@@ -17,7 +21,7 @@
                     </div>
                     <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
                         <p class="card-text">
-                            {{ firstName + " " + lastName }}
+                            {{ name }}
                         </p>
                     </div>
                 </div>
@@ -101,7 +105,7 @@
                     </div>
                     <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
                         <p class="card-text">
-                            {{ pembimbingFirstName + " " + pembimbingLastName }}
+                            {{ pembimbingName }}
                         </p>
                     </div>
                 </div>
@@ -125,15 +129,16 @@
 <script>
 import axios from "axios";
 import MainHeader from "@/components/MainHeader.vue";
+import LightHeader from "@/components/LightHeader.vue";
 
 export default {
   name: "DetailMenuResiden",
   data() {
     return {
+      title: String,
       data: Array,
       idResiden: Number,
-      firstName: String,
-      lastName: String,
+      name: String,
       npm: String,
       tahunMasuk: String,
       term: String,
@@ -142,33 +147,32 @@ export default {
       alamat: String,
       telepon: String,
       email: String,
-      pembimbingFirstName: String,
-      pembimbingLastName: String,
+      pembimbingName: String,
       isMounted: false,
     };
   },
   components: {
     MainHeader,
+    LightHeader,
   },
   mounted() {
     axios
-      .get("http://localhost:8000/api/dashboardPengurusAkademik/residen/1") // nanti diganti ini angka 1 nya
+      .get("http://localhost:8000/api/dashboardPengurusAkademik/residen/" + this.$route.params.idResiden) // nanti diganti ini angka 1 nya
       .then((resp) => {
         console.warn(resp.data);
         this.data = resp.data;
         this.idResiden = resp.data.idResiden
-        this.firstName = resp.data.penggunaModel.firstName
-        this.lastName = resp.data.penggunaModel.lastName
+        this.name = resp.data.pengguna.name
         this.npm = resp.data.npm
         this.tahunMasuk = resp.data.tahunMasuk
         this.term = resp.data.term
-        this.tempatLahir = resp.data.penggunaModel.tempatLahir
-        this.tanggalLahir = resp.data.penggunaModel.tanggalLahir
+        this.tempatLahir = resp.data.pengguna.tempatLahir
+        this.tanggalLahir = resp.data.pengguna.tanggalLahir
         this.alamat = resp.data.alamatRumah
         this.telepon = resp.data.noTelepon
-        this.email = resp.data.penggunaModel.email
-        this.pembimbingFirstName = resp.data.konsulen.pengguna.firstName
-        this.pembimbingLastName = resp.data.konsulen.pengguna.lastName
+        this.email = resp.data.pengguna.email
+        this.pembimbingName = resp.data.konsulen.pengguna.name
+        this.title = "Detail Residen " + this.name
         this.isMounted = true;
       });
   },

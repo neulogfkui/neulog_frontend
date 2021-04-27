@@ -1,5 +1,9 @@
 <template>
-<MainHeader />
+<LightHeader
+    v-if="isMounted"
+    :title= this.title
+    icon= "users">
+</LightHeader>
 <div class="container upper">
     <div class="row">
         <div class="col-xxl-12 col-xl-12 mb-4 mt-4">
@@ -17,7 +21,7 @@
                     </div>
                     <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
                         <p class="card-text">
-                            {{ firstName + " " + lastName }}
+                            {{ name }}
                         </p>
                     </div>
                 </div>
@@ -53,7 +57,7 @@
                     </div>
                     <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
                         <p v-for="(item) in role" v-bind:key="item.id" class="card-text" >
-                            {{ item }}
+                            {{ item.name }}
                         </p>
                     </div>
                 </div>
@@ -78,15 +82,16 @@
 <script>
 import axios from "axios";
 import MainHeader from "@/components/MainHeader.vue";
+import LightHeader from "@/components/LightHeader.vue";
 
 export default {
   name: "DetailMenuKonsulen",
   data() {
     return {
+      title: String,
       data: Array,
       idKonsulen: Number,
-      firstName: String,
-      lastName: String,
+      name: String,
       tempatLahir: String,
       tanggalLahir: String,
       alamat: String,
@@ -98,20 +103,21 @@ export default {
   },
   components: {
     MainHeader,
+    LightHeader,
   },
   mounted() {
     axios
-      .get("http://localhost:8000/api/dashboardPengurusAkademik/konsulen/1") // nanti diganti ini angka 1 nya
+      .get("http://localhost:8000/api/dashboardPengurusAkademik/konsulen/" + this.$route.params.idKonsulen) // nanti diganti ini angka 1 nya
       .then((resp) => {
         console.warn(resp.data);
         this.data = resp.data;
-        this.idResiden = resp.data.idKonsulen
-        this.firstName = resp.data.pengguna.firstName
-        this.lastName = resp.data.pengguna.lastName
+        this.idKonsulen = resp.data.idKonsulen
+        this.name = resp.data.pengguna.name
         this.tempatLahir = resp.data.pengguna.tempatLahir
         this.tanggalLahir = resp.data.pengguna.tanggalLahir
         this.email = resp.data.pengguna.email
         this.role = resp.data.pengguna.roles
+        this.title = "Detail Konsulen " + this.name
         this.isMounted = true;
       });
   },
