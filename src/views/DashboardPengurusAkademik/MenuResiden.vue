@@ -4,158 +4,200 @@
     <div class="row upper">
       <PieChart
         v-if="isMounted"
-        keterangan="Laporan Pasien"
+        keterangan="Residen"
         :persentase="this.persentase"
-        :total="this.createdLaporanPasien"
-        :label="this.label"
-        :data="this.jumlah"
-        title="Sebaran Status Laporan Pasien"
+        :total="this.totalResiden"
+        :label="this.labelPie"
+        :data="this.dataPie"
+        title="Sebaran Status Residen"
       >
       </PieChart>
-      <BigNumberCard
-        title="Rata - Rata Laporan Pasien Per Bulan"
-        :count="avgPasienPerMonth"
-        caption="Pasien / Bulan"
-      />
-      <BarChart
-        v-if="isMounted"
-        :label="this.labelBar"
-        :data="this.dataBar"
-        title="Sebaran Pasien"
-      />
-      <!-- Tabel Laporan Pasien -->
-      <div class="col-xxl-12 col-xl-12 mb-4 mt-4">
-        <div class="card card-header-actions h-100">
-          <div class="card-header">
-            <b>List Reviewer</b>
-          </div>
-          <div class="card-body">
-            <div class="datatable" v-if="isMounted">
-              <table
-                class="table table-bordered table-hover"
-                id="dataTable"
-                width="100%"
-                cellspacing="0"
-              >
-                <thead>
-                  <tr>
-                    <th>No</th>
-                    <th>Tanggal</th>
-                    <th>Inisial Pasien</th>
-                    <th>Usia</th>
-                    <th>No Rekam Medis</th>
-                    <th>Konsulen</th>
-                    <th>Jaga</th>
-                    <th>Status</th>
-                    <th>Detail</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr
-                    v-for="(item, index) in listLaporanPasien"
-                    v-bind:key="item.id"
-                  >
-                    <td>
-                      {{ index + 1 }}
-                    </td>
-                    <td>
-                      {{ item.tanggalDibuat }}
-                    </td>
-                    <td>
-                      {{ item.inisialPasien }}
-                    </td>
-                    <td>
-                      {{ item.usiaPasien }}
-                    </td>
-                    <td>
-                      {{ item.noRekamMedis }}
-                    </td>
-                    <td>
-                      {{
-                        item.konsulen.penggunaModel.firstName +
-                        " " +
-                        item.konsulen.penggunaModel.lastName
-                      }}
-                    </td>
-                    <td v-if="item.isFromJaga">Ya</td>
-                    <td v-if="!item.isFromJaga">Tidak</td>
-                    <td>{{ item.status }}</td>
-                    <td>
-                      <router-link
-                        :to="'/laporanpasiendetail/' + item.idLaporanPasien"
-                      >
-                        <button class="btn btn-secondary">Lihat</button>
-                      </router-link>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
+    </div>
+    <div class="col-xxl-12 col-xl-12 mb-4 mt-4">
+      <div class="card">
+        <div class="card-header border-bottom">
+            <ul class="nav nav-tabs card-header-tabs" id="cardTab" role="tablist">
+            <li class="nav-item">
+                <a
+                class="nav-link active"
+                id="ongoing-tab"
+                href="#ongoing"
+                data-toggle="tab"
+                role="tab"
+                aria-controls="overview"
+                aria-selected="true"
+                >On Going</a
+                >
+            </li>
+            <li class="nav-item">
+                <a
+                class="nav-link"
+                id="lulus-tab"
+                href="#lulus"
+                data-toggle="tab"
+                role="tab"
+                aria-controls="example"
+                aria-selected="false"
+                >Lulus</a
+                >
+            </li>
+            </ul>
         </div>
-      </div>
+        <div class="card-body">
+          <div class="tab-content" id="cardTabContent">
+                <!-- ON GOING -->
+            <div
+                class="tab-pane fade show active"
+                id="ongoing"
+                role="tabpanel"
+                aria-labelledby="ongoing-tab"
+            >
+            <div class="datatable" v-if="isMounted">
+                <table
+                    class="table table-bordered table-hover"
+                    id="dataTable"
+                    width="100%"
+                    cellspacing="0"
+                >
+                    <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama</th>
+                        <th>NPM</th>
+                        <th>Tahun/Term</th>
+                        <th>Detail</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr
+                        v-for="(item, index) in listOnGoing"
+                        v-bind:key="item.id"
+                    >
+                        <td>
+                        {{ index + 1 }}
+                        </td>
+                        <td>
+                        {{ item.penggunaModel.firstName +
+                        " " +
+                        item.penggunaModel.lastName }}
+                        </td>
+                        <td>
+                        {{ item.npm }}
+                        </td>
+                        <td>
+                        {{ item.tahunMasuk + " / " + item.term }}
+                        </td>
+                        <td>
+                        <router-link
+                            :to="'residen/' + item.idResiden"
+                        >
+                            <button class="btn btn-secondary">Lihat</button>
+                        </router-link>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            </div>
+            <!-- END ON GOING -->
+
+            <!-- Data table nya blm kebaca -->
+            <!-- LULUS -->
+            <div
+                class="tab-pane fade"
+                id="lulus"
+                role="tabpanel"
+                aria-labelledby="lulus-tab"
+            >
+            <div class="datatable" v-if="isMounted">
+                <table
+                    class="table table-bordered table-hover"
+                    id="dataTable"
+                    width="100%"
+                    cellspacing="0"
+                >
+                    <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama</th>
+                        <th>NPM</th>
+                        <th>Tahun/Term</th>
+                        <th>Detail</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr
+                        v-for="(item, index) in listLulus"
+                        v-bind:key="item.id"
+                    >
+                        <td>
+                        {{ index + 1 }}
+                        </td>
+                        <td>
+                        {{ item.penggunaModel.firstName +
+                        " " +
+                        item.penggunaModel.lastName }}
+                        </td>
+                        <td>
+                        {{ item.npm }}
+                        </td>
+                        <td>
+                        {{ item.tahunMasuk + " / " + item.term }}
+                        </td>
+                        <td>
+                        <router-link
+                            :to="'residen/' + item.idResiden"
+                        >
+                            <button class="btn btn-secondary">Lihat</button>
+                        </router-link>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            </div>
+            <!-- END LULUS -->
+
+        </div>
+        </div>
+        </div>
     </div>
   </div>
-  <h4>{{ createdLaporanPasien }}</h4>
-  <h4>{{ persentase }}</h4>
-  <h4 v-for="a in label" v-bind:key="a.id">{{ a }}</h4>
-  <h4 v-for="a in jumlah" v-bind:key="a.id">{{ a }}</h4>
-  <table style="width: 100%">
-    <tr>
-      <th>Diagnosis</th>
-      <th>No. Rekam Medis</th>
-      <th>Status</th>
-    </tr>
-    <tr v-for="a in listLaporanPasien" v-bind:key="a.id">
-      <td>{{ a.diagnosis }}</td>
-      <td>{{ a.noRekamMedis }}</td>
-      <td>{{ a.status }}</td>
-    </tr>
-  </table>
 </template>
 
 <script>
 import axios from "axios";
 import MainHeader from "@/components/MainHeader.vue";
 import PieChart from "@/components/PieChart.vue";
-import BigNumberCard from "@/components/BigNumberCard.vue";
-import BarChart from "@/components/BarChart.vue";
-import authHeader from '@/services/auth-header';
 
 export default {
-  name: "DashboardLaporanPasien",
+  name: "MenuResiden",
   data() {
     return {
-      createdLaporanPasien: Number,
-      label: [],
-      jumlah: [],
-      labelBar: [],
-      dataBar: [],
-      avgPasienPerMonth: Number,
-      listLaporanPasien: Array,
+      labelPie: [],
+      dataPie: [],
+      totalResiden: Number,
       persentase: Number,
+      listOnGoing: Array,
+      listLulus: Array,
       isMounted: false,
     };
   },
   components: {
     MainHeader,
     PieChart,
-    BigNumberCard,
-    BarChart,
   },
   mounted() {
     axios
-      .get("http://localhost:8000/api/dashboardResiden/laporanPasien/1", { headers: authHeader() })
+      .get("http://localhost:8000/api/dashboardPengurusAkademik/residen/")
       .then((resp) => {
-        console.warn(resp);
-        this.createdLaporanPasien = resp.data.createdLaporanPasien;
-        this.label = resp.data.label;
-        this.jumlah = resp.data.jumlah;
-        this.listLaporanPasien = resp.data.listLaporanPasien;
-        this.persentase = resp.data.persentase;
-        this.labelBar = resp.data.labelBar;
-        this.dataBar = resp.data.dataBar;
-        this.avgPasienPerMonth = resp.data.avgPasienPerMonth;
+        console.warn(resp.data);
+        this.labelPie = resp.data.labelStatus;
+        this.dataPie = resp.data.listJumlahResidenPerStatus;
+        this.totalResiden = resp.data.totalResiden;
+        this.persentase = resp.data.persentaseLulus;
+        this.listOnGoing = resp.data.listResidenOnGoing;
+        this.listLulus = resp.data.listResidenLulus;
         this.isMounted = true;
         this.loadDataTable();
       });
