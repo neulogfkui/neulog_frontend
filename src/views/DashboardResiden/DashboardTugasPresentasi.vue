@@ -1,5 +1,23 @@
 <template>
+  <MainHeader />
   <div class="container">
+    <div class="row upper justify-content-center">
+      <PieChart
+        v-if="isMounted"
+        keterangan="Tugas Presentasi Dibuat"
+        :persentase="this.persentase"
+        :total="this.total"
+        :label="this.label"
+        :data="this.jumlah"
+        title="Sebaran Status Tugas Presentasi"
+      />
+      <BarChart
+        v-if="isMounted"
+        :label="this.labelBar"
+        :data="this.jumlahBar"
+        title="Sebaran Jenis Tugas Presentasi"
+      />
+    </div>
     <div class="card">
       <div class="card-header border-bottom">
         <ul class="nav nav-tabs card-header-tabs" id="cardTab" role="tablist">
@@ -75,7 +93,6 @@
                     <th>Judul</th>
                     <th>Konsulen</th>
                     <th>Status</th>
-                    <th>Konsulen</th>
                     <th>Detail</th>
                   </tr>
                 </thead>
@@ -100,11 +117,61 @@
                       {{ item.status }}
                     </td>
                     <td>
-                      {{
-                        item.konsulenModel.pengguna.firstName +
-                        " " +
-                        item.konsulenModel.pengguna.lastName
-                      }}
+                      <router-link
+                        :to="'/laporanpasiendetail/' + item.idLaporanPasien"
+                      >
+                        <button class="btn btn-secondary">Lihat</button>
+                      </router-link>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <!-- END KASUS -->
+          <!-- REFERAT -->
+          <div
+            class="tab-pane fade"
+            id="referat"
+            role="tabpanel"
+            aria-labelledby="referat-tab"
+          >
+            <div class="datatable" v-if="isMounted">
+              <table
+                class="table table-bordered table-hover"
+                id="dataTable"
+                width="100%"
+                cellspacing="0"
+              >
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>Tanggal</th>
+                    <th>Judul</th>
+                    <th>Konsulen</th>
+                    <th>Status</th>
+                    <th>Detail</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    v-for="(item, index) in listKasus"
+                    v-bind:key="item.id"
+                  >
+                    <td>
+                      {{ index + 1 }}
+                    </td>
+                    <td>
+                      {{ item.tanggalDibuat }}
+                    </td>
+                    <td>
+                      {{ item.tugasPresentasiModel.judulMakalah }}
+                    </td>
+                    <td>
+                      {{ item.konsulenModel.pengguna.firstName + " " + item.konsulenModel.pengguna.lastName }}
+                    </td>
+                    <td>
+                      {{ item.status }}
                     </td>
                     <td>
                       <router-link
@@ -117,36 +184,122 @@
                 </tbody>
               </table>
             </div>
-
           </div>
-          <!-- END KASUS -->
-          <div
-            class="tab-pane fade"
-            id="referat"
-            role="tabpanel"
-            aria-labelledby="referat-tab"
-          >
-            <h5 class="card-title">Example Pane</h5>
-            <p class="card-text">...</p>
-          </div>
+          <!-- END REFERAT -->
+          <!-- BOOK READING -->
           <div
             class="tab-pane fade"
             id="book"
             role="tabpanel"
             aria-labelledby="book-tab"
           >
-            <h5 class="card-title">Example Pane</h5>
-            <p class="card-text">...</p>
+            <div class="datatable" v-if="isMounted">
+              <table
+                class="table table-bordered table-hover"
+                id="dataTable"
+                width="100%"
+                cellspacing="0"
+              >
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>Tanggal</th>
+                    <th>Judul</th>
+                    <th>Konsulen</th>
+                    <th>Status</th>
+                    <th>Detail</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    v-for="(item, index) in listKasus"
+                    v-bind:key="item.id"
+                  >
+                    <td>
+                      {{ index + 1 }}
+                    </td>
+                    <td>
+                      {{ item.tanggalDibuat }}
+                    </td>
+                    <td>
+                      {{ item.tugasPresentasiModel.judulMakalah }}
+                    </td>
+                    <td>
+                      {{ item.konsulenModel.pengguna.firstName + " " + item.konsulenModel.pengguna.lastName }}
+                    </td>
+                    <td>
+                      {{ item.status }}
+                    </td>
+                    <td>
+                      <router-link
+                        :to="'/laporanpasiendetail/' + item.idLaporanPasien"
+                      >
+                        <button class="btn btn-secondary">Lihat</button>
+                      </router-link>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
+          <!-- END BOOK READING -->
+          <!-- JOURNAL READING -->
           <div
             class="tab-pane fade"
             id="journal"
             role="tabpanel"
             aria-labelledby="journal-tab"
           >
-            <h5 class="card-title">Example Pane</h5>
-            <p class="card-text">...</p>
+            <div class="datatable" v-if="isMounted">
+              <table
+                class="table table-bordered table-hover"
+                id="dataTable"
+                width="100%"
+                cellspacing="0"
+              >
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>Tanggal</th>
+                    <th>Judul</th>
+                    <th>Konsulen</th>
+                    <th>Status</th>
+                    <th>Detail</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    v-for="(item, index) in listKasus"
+                    v-bind:key="item.id"
+                  >
+                    <td>
+                      {{ index + 1 }}
+                    </td>
+                    <td>
+                      {{ item.tanggalDibuat }}
+                    </td>
+                    <td>
+                      {{ item.tugasPresentasiModel.judulMakalah }}
+                    </td>
+                    <td>
+                      {{ item.konsulenModel.pengguna.firstName + " " + item.konsulenModel.pengguna.lastName }}
+                    </td>
+                    <td>
+                      {{ item.status }}
+                    </td>
+                    <td>
+                      <router-link
+                        :to="'/laporanpasiendetail/' + item.idLaporanPasien"
+                      >
+                        <button class="btn btn-secondary">Lihat</button>
+                      </router-link>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
+          <!-- END JOURNAL READING -->
         </div>
       </div>
     </div>
@@ -155,11 +308,16 @@
 
 <script>
 import axios from "axios";
+import MainHeader from "@/components/MainHeader.vue";
+import PieChart from "@/components/PieChart.vue";
+import BarChart from "@/components/BarChart.vue";
+
 export default {
   name: "DashboardTugasPresentasi",
   data() {
     return {
       total: Number,
+      persentase: Number,
       jumlah: [],
       label: [],
       jumlahBar: [],
@@ -171,12 +329,16 @@ export default {
       isMounted: false
     };
   },
+    components: {
+    MainHeader, PieChart, BarChart
+  },
   mounted() {
     axios
       .get("http://localhost:8000/api/dashboardResiden/laporanTugas/tugasPresentasi/1")
       .then((resp) => {
         console.warn(resp.data);
         this.total = resp.data.total;
+        this.persentase = resp.data.persentase;
         this.jumlah = resp.data.jumlah;
         this.label = resp.data.label;
         this.jumlahBar = resp.data.jumlahBar;

@@ -90,6 +90,9 @@ export default {
       isMounted: false
     };
   },
+    components: {
+    MainHeader, PieChart, BigNumberCard, BarChart
+  },
   mounted() {
     axios
       .get("http://localhost:8000/api/dashboardResiden/laporanTugas/PKSM/1")
