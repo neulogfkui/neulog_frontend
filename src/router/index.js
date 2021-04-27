@@ -12,15 +12,10 @@ import UpdateResiden from '../views/mengelolaAkun/UpdateResiden.vue'
 import UpdateStaff from '../views/mengelolaAkun/UpdateStaff.vue'
 
 import HomeResiden from '../views/HomeResiden.vue'
-import TugasPresentasiForm from '../views/TugasPresentasiForm.vue'
-import KasusSulitForm from '../views/KasusSulitForm.vue'
-import TugasPublikasiForm from '../views/TugasPublikasiForm.vue'
-import TugasPenelitianAkhirForm from '../views/TugasPenelitianAkhirForm.vue'
 import TugasPresentasiDetail from '../views/Details/TugasPresentasiDetail.vue'
 import TugasPublikasiDetail from '../views/Details/TugasPublikasiDetail.vue'
 import KasusSulitDetail from '../views/Details/KasusSulitDetail.vue'
 import TugasPenelitianAkhirDetail from '../views/Details/TugasPenelitianAkhirDetail.vue'
-import LaporanTugasChoice from '../views/LaporanTugasChoice.vue'
 import DashboardPengurusAkademikMenu from '../views/DashboardPengurusAkademik/DashboardPengurusAkademikMenu.vue'
 import DashboardResidenMenu from '../views/DashboardResiden/DashboardResidenMenu.vue'
 import DashboardLaporanPasien from '../views/DashboardResiden/DashboardLaporanPasien.vue'
@@ -94,11 +89,6 @@ const routes = [
     component: Home
   },
   {
-    path: '/tugaspresentasiform/:operation',
-    name: 'TugasPresentasiForm',
-    component: TugasPresentasiForm,
-  },
-  {
     path: '/tugaspresentasidetail/:idLaporanTugas',
     name: 'TugasPresentasiDetail',
     component: TugasPresentasiDetail,
@@ -117,31 +107,6 @@ const routes = [
     path: '/tugaspenelitianakhirdetail/:idLaporanTugas',
     name: 'TugasPenelitianAkhirDetail',
     component: TugasPenelitianAkhirDetail,
-  },
-  {
-    path: '/kasussulitform/:operation',
-    name: 'KasusSulitForm',
-    component: KasusSulitForm
-  },
-  {
-    path: '/tugaspublikasiform/:operation',
-    name: 'tugasPublikasiForm',
-    component: TugasPublikasiForm
-  },
-  {
-    path: '/tugaspenelitianakhirform/:operation',
-    name: 'tugasPenelitianAkhirForm',
-    component: TugasPenelitianAkhirForm
-  },
-  {
-    path: '/addlaporantugas',
-    name: 'laporanTugasChoice',
-    component: LaporanTugasChoice
-  },
-  {
-    path: '/addlaporantugas',
-    name: 'laporanTugasChoice',
-    component: LaporanTugasChoice
   },
 
   //USE CASE 12

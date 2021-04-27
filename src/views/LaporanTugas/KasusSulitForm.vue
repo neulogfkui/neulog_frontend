@@ -1,6 +1,9 @@
 <template>
-<MainHeader/>
-<div class="container upper">
+<LightHeader 
+  title="Pembahasan Kasus Sulit dan Multidisiplin"
+  icon="file-text"
+  :subtitle="subtitleHeader"/>
+<div class="container">
 <form @submit="postData" method="POST">
   <div class="row">
     <!-- card 1 -->
@@ -83,7 +86,7 @@
                   v-bind:key="item.id"
                   :value="item.idKonsulen"
                 >
-                  {{ item.penggunaModel.firstName + " " + item.penggunaModel.lastName}}
+                  {{ item.pengguna.name}}
                 </option>
               </select>
             </div>
@@ -92,7 +95,7 @@
     </div>
   </div>
   <!-- card 2 -->
-  <div class="col-xxl-6 col-xl-6 mb-4">
+  <div class="col-xxl-6 col-xl-6 mb-4" v-if="isDataTableReady">
           <div class="card card-header-actions h-100">
             <div class="card-header">
               <b>List Reviewer</b>
@@ -115,9 +118,7 @@
                     <tr v-for="item in listKonsulen" v-bind:key="item.id">
                       <td>
                         {{
-                          item.penggunaModel.firstName +
-                          " " +
-                          item.penggunaModel.lastName
+                          item.pengguna.name
                         }}
                       </td>
                       <td>
@@ -249,7 +250,8 @@
 <script>
 import axios from "axios";
 import VueAxios from "vue-axios";
-import MainHeader from "@/components/MainHeader.vue";
+import LightHeader from "@/components/LightHeader.vue";
+import dataTableLoader from "@/js/datatable";
 
 export default {
   name: "KasusSulitForm",
@@ -271,10 +273,27 @@ export default {
       listKasusYangDibahas: null,
       status:0,
       target: null,
-      isMounted: false
+      isMounted: false,
+      ready: false,
+      subtitleHeader:
+        JSON.parse(localStorage.getItem("userData")).name +
+        " - " +
+        JSON.parse(localStorage.getItem("userData")).residen.npm,
     };
   },
-  components: {MainHeader},
+  components: {LightHeader},
+
+  computed:{
+    isDataTableReady(){
+      return this.ready
+    },
+    getIdResiden(){
+      return JSON.parse(localStorage.getItem("userData")).residen.idResiden;
+    },
+    // isLoggedIn(){
+    //   return this.$store.state.auth.status.loggedIn
+    // }
+  },
   mounted() {
     if (this.$route.params.operation != 0) {
       axios
@@ -302,7 +321,8 @@ export default {
         this.listKonsulen = resp.data.listKonsulen;
         this.listNamaPertemuan = resp.data.listNamaPertemuan;
         this.listKasusYangDibahas = resp.data.listKasusYangDibahas;
-        this.loadDataTable();
+        dataTableLoader();
+        this.ready = true;
         this.posts.listReviewer = [];
       });
   },

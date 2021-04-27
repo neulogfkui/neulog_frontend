@@ -1,6 +1,9 @@
 <template>
-  <MainHeader />
-  <div class="container upper">
+  <LightHeader 
+  title="Tambah Laporan Tugas - Tugas Presentasi"
+  icon="file-text"
+  :subtitle="subtitleHeader"/>
+  <div class="container">
     <form @submit="postData" method="POST">
       <div class="row">
         <div class="col-xxl-6 col-xl-6 mb-4">
@@ -271,7 +274,7 @@
 <script>
 import axios from "axios";
 import VueAxios from "vue-axios";
-import MainHeader from "@/components/MainHeader.vue";
+import LightHeader from "@/components/LightHeader.vue";
 import App from "@/App.vue";
 import dataTableLoader from "@/js/datatable";
 import { computed } from 'vue';
@@ -279,7 +282,7 @@ import { computed } from 'vue';
 export default {
   name: "TugasPresentasiForm",
   components: {
-    MainHeader,
+    LightHeader,
   },
   data() {
     return {
@@ -300,7 +303,11 @@ export default {
       listKonsulen: null,
       status: 0,
       isMounted: false,
-      ready: false
+      ready: false,
+      subtitleHeader:
+        JSON.parse(localStorage.getItem("userData")).name +
+        " - " +
+        JSON.parse(localStorage.getItem("userData")).residen.npm,
     };
   },
   computed:{
