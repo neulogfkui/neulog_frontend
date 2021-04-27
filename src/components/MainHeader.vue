@@ -1,6 +1,6 @@
 <template>
   <header
-    class="page-header page-header-dark bg-gradient-primary-to-secondary pb-10"
+    class="page-header page-header-dark pb-10"
   >
     <div class="container">
       <div class="page-header-content pt-4">
@@ -47,3 +47,4 @@ export default {
   },
 };
 </script>
+

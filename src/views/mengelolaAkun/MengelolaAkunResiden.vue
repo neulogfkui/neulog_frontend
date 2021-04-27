@@ -16,6 +16,7 @@
         </div>
     </header>
 
+
     <div class="number-card container mt-n10">
         <div class="card">
             <div class="card-header">Jumlah Akun Residen</div>
@@ -26,11 +27,22 @@
                 <button @click="redirectToResidenRegister" class="btn btn-teal">Buat Akun Residen</button>
             </div>
         </div>
-    </div>
+    </div
+	>
 
-    <!-- <div class="container mt-5">
-		<div class="card mb-4"> -->
-		<div v-if="dataTableReady" class="col-xxl-12 col-xl-12 mb-4 mt-4">
+	<div class="container mt-4">
+
+	<!-- TAB NAVBAR -->	
+	<nav class="nav nav-borders">
+		<a class="nav-link active ml-0" href="#">Akun Residen</a>
+		<a class="nav-link" href="/mengelola-akun/staff">Akun Staff</a>
+	</nav>
+	<hr class="nav-underline mt-0 mb-4"/>
+
+
+	<!-- RESIDEN DATATABLE -->
+    <div v-if="dataTableReady" class="container mt-5">
+		<div class="card mb-4 mt-4">
         <div class="card card-header-actions">
 		<div class="card-header">Extended DataTables</div>
 			<div class="card-body">
@@ -63,6 +75,8 @@
 				</div>
 			</div>
 		</div>
+		</div>
+	</div>
 	</div>
 </template>
 
@@ -74,10 +88,9 @@ export default {
         return {
 			user: this.$store.state.auth.user,
             residens: Array,
-			ready: false
+			ready: false,
         }
     },
-
 	computed: {
 		dataTableReady() {
 			return this.ready;
@@ -100,7 +113,6 @@ export default {
                     error.message ||
                     error.toString();
                 this.successful = false
-				// this.loadDataTable();
 				dataTableLoader();
             }
 		);
@@ -120,8 +132,8 @@ export default {
 
 <style>
 .page-header {
-    background: rgb(43,77,223);
-    background: linear-gradient(90deg, rgba(43,77,223,1) 44%, rgba(25,217,160,1) 100%);
+    background: rgb(43,77,223) !important;
+    background: linear-gradient(90deg, rgba(43,77,223,1) 44%, rgba(25,217,160,1) 100%) !important;
 }
 .user-email {
     color: rgb(255, 255, 255);

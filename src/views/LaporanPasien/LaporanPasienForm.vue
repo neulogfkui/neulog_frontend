@@ -5,7 +5,7 @@
     icon="user"
   ></LightHeader>
   <form @submit="postData">
-    <div class="container" v-if="isCreated">
+    <div class="container" v-if="getReady">
       <div class="row">
         <div class="col-xxl-12 col-xl-12 mb-4">
           <div class="card card-header-actions h-100">
@@ -143,6 +143,7 @@
                   <input
                     type="checkbox"
                     @change="changeTempKompetensi(kompetensi.idKompetensi)"
+                    :checked="tempKompetensi.includes(kompetensi.idKompetensi)"
                   />
                   <label class="ml-2">{{ kompetensi.namaKompetensi }}</label>
                 </div>
@@ -169,6 +170,9 @@
                     @change="
                       changeTempTindakan(kategoriTindakan.idKategoriTindakan)
                     "
+                    :checked="
+                      tempTindakan.includes(kategoriTindakan.idKategoriTindakan)
+                    "
                   />
                   <label class="ml-2">{{
                     kategoriTindakan.namaKategoriTindakan
@@ -185,6 +189,7 @@
                     <input
                       type="checkbox"
                       @change="changeTempTindakanLain(namaTindakan)"
+                      :checked="tempTindakanLain.includes(namaTindakan)"
                     />
                     <label class="ml-2">{{ namaTindakan }}</label>
                   </div>
@@ -411,11 +416,30 @@ export default {
         " - " +
         JSON.parse(localStorage.getItem("userData")).residen.npm,
       status: 0,
+      ready: false,
+    };
+  },
+  created() {
+    Array.prototype.remove = function () {
+      var what,
+        a = arguments,
+        L = a.length,
+        ax;
+      while (L && this.length) {
+        what = a[--L];
+        while ((ax = this.indexOf(what)) !== -1) {
+          this.splice(ax, 1);
+        }
+      }
+      return this;
     };
   },
   computed: {
     getTindakanLainChoice() {
       return this.tindakanLainChoice;
+    },
+    getReady() {
+      return this.ready;
     },
   },
   methods: {
@@ -430,7 +454,7 @@ export default {
       if (!this.tempKompetensi.includes(idKompetensi)) {
         this.tempKompetensi.push(idKompetensi);
       } else {
-        this.tempKompetensi.pop(idKompetensi);
+        this.tempKompetensi.remove(idKompetensi);
       }
       console.warn(this.tempKompetensi);
     },
@@ -438,7 +462,7 @@ export default {
       if (!this.tempTindakan.includes(idKategoriTindakan)) {
         this.tempTindakan.push(idKategoriTindakan);
       } else {
-        this.tempTindakan.pop(idKategoriTindakan);
+        this.tempTindakan.remove(idKategoriTindakan);
       }
       console.warn(this.tempTindakan);
     },
@@ -446,7 +470,7 @@ export default {
       if (!this.tempTindakanLain.includes(namaTindakan)) {
         this.tempTindakanLain.push(namaTindakan);
       } else {
-        this.tempTindakanLain.pop(namaTindakan);
+        this.tempTindakanLain.remove(namaTindakan);
       }
       console.warn(this.tempTindakanLain);
     },
@@ -471,17 +495,21 @@ export default {
       this.posts.strTindakanLain = this.listToStr(this.tempTindakanLain);
       console.warn(this.posts);
 
-      axios
-        .post("http://localhost:8000/api/laporan-pasien/create", this.posts)
-        .then((result) => {
-          if (result.data != "0") {
-            this.posts.idLaporanPasien = result.data;
-            this.status = 2;
-          } else {
-            this.status = 3;
-          }
-          console.warn(result.data);
-        });
+      var url;
+      if (this.$route.params.operation != 0) {
+        url = "http://localhost:8000/api/laporan-pasien/update";
+      } else {
+        url = "http://localhost:8000/api/laporan-pasien/create";
+      }
+      axios.post(url, this.posts).then((result) => {
+        if (result.data != "0") {
+          this.posts.idLaporanPasien = result.data;
+          this.status = 2;
+        } else {
+          this.status = 3;
+        }
+        console.warn(result.data);
+      });
       e.preventDefault();
     },
     listToStr(list) {
@@ -493,38 +521,57 @@ export default {
       console.log(dummy);
       return dummy.slice(0, -1);
     },
-    strToList(dummy){
-        var list = dummy.split(",");
-        return list;
-    }
+    strToList(dummy) {
+      console.log(dummy);
+      if (dummy == undefined) {
+        return [];
+      }
+      var list = dummy.split(",");
+      return list;
+    },
+    strToListNumber(dummy) {
+      console.log(dummy);
+      if (dummy == undefined) {
+        return [];
+      }
+      var newList = [];
+      var list = dummy.split(",");
+      var i;
+      for (i = 0; i < list.length; i++) {
+        newList.push(parseInt(list[i]));
+      }
+      return newList;
+    },
   },
   mounted() {
     if (this.$route.params.operation != 0) {
       axios
-        .get("http://localhost:8000/api/laporan-pasien/" + this.$route.params.operation)
+        .get(
+          "http://localhost:8000/api/laporan-pasien/" +
+            this.$route.params.operation
+        )
         .then((resp) => {
-    //     this.idLaporanPasien: resp.data.idLaporanPasien,
-    //     this.inisialPasien: null,
-    //     this.usiaPasien: null,
-    //     this.noRekamMedis: null,
-    //     this.diagnosis: null,
-    //     this.isJaga: false,
-    //     this.tanggalJaga: null,
-    //     this.idKonsulen: null,
-    //     this.idResiden:,
-    //     this.strKompetensi: null,
-    //     strTindakan: null,
-    //     strTindakanLain: null,
-    //           tempKompetensi: [],
-    //   tempTindakan: [],
-    //   tempTindakanLain: [],
-    //   showTanggal: false,
-    //   listKonsulen: [],
-    //   listKompetensi: [],
-    //   listKategoriTindakan: [],
-    //   isCreated: false,
-    //   tindakanLainChoice: [],
-
+          console.log(resp.data);
+          this.posts.idLaporanPasien = resp.data.idLaporanPasien;
+          this.posts.inisialPasien = resp.data.inisialPasien;
+          this.posts.usiaPasien = resp.data.usiaPasien;
+          this.posts.noRekamMedis = resp.data.noRekamMedis;
+          this.posts.diagnosis = resp.data.diagnosis;
+          this.posts.isJaga = resp.data.isFromJaga;
+          this.posts.tanggalJaga = resp.data.tanggalJaga;
+          this.posts.idKonsulen = resp.data.konsulen.idKonsulen;
+          this.posts.idResiden = resp.data.konsulen.idKonsulen;
+          this.posts.strKompetensi = resp.data.strKompetensi;
+          this.posts.strTindakan = resp.data.strTindakan;
+          this.posts.strTindakanLain = resp.data.strTindakanLain;
+          this.tempKompetensi = this.strToListNumber(this.posts.strKompetensi);
+          this.tempTindakan = this.strToListNumber(this.posts.strTindakan);
+          this.tempTindakanLain = this.strToList(this.posts.strTindakanLain);
+          this.tindakanLainChoice = [...this.tempTindakanLain];
+          console.log(this.tempKompetensi);
+          console.log(this.tempTindakan);
+          console.log(this.tempTindakanLain);
+          console.log(this.posts);
         });
     }
     axios
@@ -534,6 +581,7 @@ export default {
         this.listKompetensi = resp.data.listKompetensi;
         this.listKategoriTindakan = resp.data.listKategoriTindakan;
         this.isCreated = true;
+        this.ready = true;
         console.warn(this.listKompetensi);
       });
   },
