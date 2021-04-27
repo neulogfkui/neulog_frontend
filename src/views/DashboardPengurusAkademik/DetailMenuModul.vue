@@ -1,161 +1,190 @@
 <template>
-  <MainHeader />
-  <div class="container">
-    <div class="row upper">
-      <PieChart
-        v-if="isMounted"
-        keterangan="Laporan Pasien"
-        :persentase="this.persentase"
-        :total="this.createdLaporanPasien"
-        :label="this.label"
-        :data="this.jumlah"
-        title="Sebaran Status Laporan Pasien"
-      >
-      </PieChart>
-      <BigNumberCard
-        title="Rata - Rata Laporan Pasien Per Bulan"
-        :count="avgPasienPerMonth"
-        caption="Pasien / Bulan"
-      />
-      <BarChart
-        v-if="isMounted"
-        :label="this.labelBar"
-        :data="this.dataBar"
-        title="Sebaran Pasien"
-      />
-      <!-- Tabel Laporan Pasien -->
-      <div class="col-xxl-12 col-xl-12 mb-4 mt-4">
-        <div class="card card-header-actions h-100">
-          <div class="card-header">
-            <b>List Reviewer</b>
-          </div>
-          <div class="card-body">
-            <div class="datatable" v-if="isMounted">
-              <table
-                class="table table-bordered table-hover"
-                id="dataTable"
-                width="100%"
-                cellspacing="0"
-              >
-                <thead>
-                  <tr>
-                    <th>No</th>
-                    <th>Tanggal</th>
-                    <th>Inisial Pasien</th>
-                    <th>Usia</th>
-                    <th>No Rekam Medis</th>
-                    <th>Konsulen</th>
-                    <th>Jaga</th>
-                    <th>Status</th>
-                    <th>Detail</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr
-                    v-for="(item, index) in listLaporanPasien"
-                    v-bind:key="item.id"
-                  >
-                    <td>
-                      {{ index + 1 }}
-                    </td>
-                    <td>
-                      {{ item.tanggalDibuat }}
-                    </td>
-                    <td>
-                      {{ item.inisialPasien }}
-                    </td>
-                    <td>
-                      {{ item.usiaPasien }}
-                    </td>
-                    <td>
-                      {{ item.noRekamMedis }}
-                    </td>
-                    <td>
-                      {{
-                        item.konsulen.penggunaModel.firstName +
-                        " " +
-                        item.konsulen.penggunaModel.lastName
-                      }}
-                    </td>
-                    <td v-if="item.isFromJaga">Ya</td>
-                    <td v-if="!item.isFromJaga">Tidak</td>
-                    <td>{{ item.status }}</td>
-                    <td>
-                      <router-link
-                        :to="'/laporanpasiendetail/' + item.idLaporanPasien"
-                      >
-                        <button class="btn btn-secondary">Lihat</button>
-                      </router-link>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+<MainHeader />
+<div class="container upper">
+    <div class="row">
+        <div class="col-xxl-7 col-xl-7 mb-4 mt-4">
+            <div class="card card-header-actions h-100">
+                <div class="card-header">
+                    <b>Data Modul</b>
+                </div>
+            <div class="card-body">
+                <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text">
+                            Nama Modul
+                        </p>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text">
+                            {{ namaModul }}
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text">
+                            Ketua Modul
+                        </p>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text">
+                            {{ ketuaModulFirstName + " " + ketuaModulLastName }}
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text">
+                            Jumlah Residen
+                        </p>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text">
+                            {{ jumlahResiden }}
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text">
+                            Tanggal Dibuat
+                        </p>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text">
+                            {{ tanggalDibuat }}
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text">
+                            Deskripsi
+                        </p>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text">
+                            {{ deskripsi }}
+                        </p>
+                    </div>
+                </div>
+                </div>
             </div>
-          </div>
+            </div>
         </div>
-      </div>
+        <div class="col mb-4 mt-4">
+            <BigNumberCardModul
+                title="Waktu Pemenuhan Pencapaian"
+                :count1="avgDurasi"
+                caption1="Hari"
+                :count2="minDurasi"
+                caption2="Hari"
+                :count3="maxDurasi"
+                caption3="Hari"
+            />
+        </div>
     </div>
-  </div>
-  <h4>{{ createdLaporanPasien }}</h4>
-  <h4>{{ persentase }}</h4>
-  <h4 v-for="a in label" v-bind:key="a.id">{{ a }}</h4>
-  <h4 v-for="a in jumlah" v-bind:key="a.id">{{ a }}</h4>
-  <table style="width: 100%">
-    <tr>
-      <th>Diagnosis</th>
-      <th>No. Rekam Medis</th>
-      <th>Status</th>
-    </tr>
-    <tr v-for="a in listLaporanPasien" v-bind:key="a.id">
-      <td>{{ a.diagnosis }}</td>
-      <td>{{ a.noRekamMedis }}</td>
-      <td>{{ a.status }}</td>
-    </tr>
-  </table>
+    <div class="row">
+        <div class="col-xxl-12 col-xl-12 mb-4 mt-4">
+            <div class="card card-header-actions h-100">
+                <div class="card-header">
+                    <b>Daftar Residen</b>
+                </div>
+            <div class="card-body">
+                <div class="datatable" v-if="isMounted">
+                    <table
+                        class="table table-bordered table-hover"
+                        id="dataTable"
+                        width="100%"
+                        cellspacing="0"
+                    >
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Nama Residen</th>
+                                <th>Tanggal Mulai</th>
+                                <th>Tanggal Selesai</th>
+                                <th>Status</th>
+                                <th>Feedback</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr
+                                v-for="(item, index) in listModulResiden"
+                                v-bind:key="item.id"
+                            >
+                                <td>
+                                {{ index + 1 }}
+                                </td>
+                                <td>
+                                {{ item.residen.penggunaModel.firstName + " " + item.residen.penggunaModel.lastName }}
+                                </td>
+                                <td>
+                                {{ item.tanggalMulai }}
+                                </td>
+                                <td>
+                                {{ item.tanggalSelesai }}
+                                </td>
+                                <td>
+                                {{ item.status }}
+                                </td>
+                                <td>
+                                {{ item.feedback }}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
 </template>
 
 <script>
 import axios from "axios";
 import MainHeader from "@/components/MainHeader.vue";
-import PieChart from "@/components/PieChart.vue";
-import BigNumberCard from "@/components/BigNumberCard.vue";
-import BarChart from "@/components/BarChart.vue";
-import authHeader from '@/services/auth-header';
+import BigNumberCardModul from "@/components/BigNumberCardModul.vue";
 
 export default {
-  name: "DashboardLaporanPasien",
+  name: "DetailMenuModul",
   data() {
     return {
-      createdLaporanPasien: Number,
-      label: [],
-      jumlah: [],
-      labelBar: [],
-      dataBar: [],
-      avgPasienPerMonth: Number,
-      listLaporanPasien: Array,
-      persentase: Number,
+      detailModul: Array,
+      namaModul: String,
+      ketuaModulFirstName: String,
+      ketuaModulLastName: String,
+      jumlahResiden: Number,
+      tanggalDibuat: String,
+      deskripsi: String,
+      avgDurasi: Number,
+      minDurasi: Number,
+      maxDurasi: Number,
+      listModulResiden: Array,
       isMounted: false,
     };
   },
   components: {
     MainHeader,
-    PieChart,
-    BigNumberCard,
-    BarChart,
+    BigNumberCardModul,
   },
   mounted() {
     axios
-      .get("http://localhost:8000/api/dashboardResiden/laporanPasien/1", { headers: authHeader() })
+      .get("http://localhost:8000/api/dashboardPengurusAkademik/modul/1") // nanti diganti ini angka 1 nya
       .then((resp) => {
-        console.warn(resp);
-        this.createdLaporanPasien = resp.data.createdLaporanPasien;
-        this.label = resp.data.label;
-        this.jumlah = resp.data.jumlah;
-        this.listLaporanPasien = resp.data.listLaporanPasien;
-        this.persentase = resp.data.persentase;
-        this.labelBar = resp.data.labelBar;
-        this.dataBar = resp.data.dataBar;
-        this.avgPasienPerMonth = resp.data.avgPasienPerMonth;
+        console.warn(resp.data);
+        this.namaModul = resp.data.detailModul.namaModul
+        this.ketuaModulFirstName = resp.data.detailModul.ketuaModulodel.pengguna.firstName
+        this.ketuaModulLastName = resp.data.detailModul.ketuaModulodel.pengguna.lastName
+        this.jumlahResiden = resp.data.jumlahResiden
+        this.tanggalDibuat = resp.data.detailModul.tanggalDibuat
+        this.deskripsi = resp.data.detailModul.deskripsi
+        this.avgDurasi = resp.data.averageDurasi
+        this.minDurasi = resp.data.minDurasi
+        this.maxDurasi = resp.data.maxDurasi
+        this.listModulResiden = resp.data.listModulResiden
         this.isMounted = true;
         this.loadDataTable();
       });
