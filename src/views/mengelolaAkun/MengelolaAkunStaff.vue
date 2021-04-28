@@ -16,18 +16,17 @@
         </div>
     </header>
 
-    <div class="number-card container mt-n10">
-        <div class="card">
+    <div class="number-card-container container mt-n10">
+        <div class="number-card card">
             <div class="card-header">Jumlah Akun Residen</div>
             <div class="card-body text-center">
                 <p class="n-residen">
                     {{ staffs.length }}
                 </p>
-                <button @click="redirectToResidenRegister" class="btn btn-teal">Buat Akun Residen</button>
+                <button @click="redirectToStaffRegister" class="btn btn-teal">Buat Akun Staff</button>
             </div>
         </div>
-    </div
-	>
+    </div>
 
 	<div class="container mt-4">
 
@@ -74,7 +73,10 @@
 									<span v-if="role.name=='ROLE_KETUAMODUL'" class="badge badge-secondary role-tag">K. Modul</span>
 								</div>
 							</td>
-							<td><button @click="redirectToView(staff.id)" class="btn btn-primary">Lihat Detail</button></td>
+							<td>
+								<button @click="redirectToView(staff.username)" class="btn btn-primary mr-2">Detail</button>
+								<button @click="redirectToUpdate(staff.username)" class="btn btn-warning">Update</button>
+							</td>
 							</tr>
 						</tbody>
 					</table>
@@ -105,14 +107,13 @@ export default {
 	},
 
     created() {
-		this.$store.dispatch('user/getAllPengguna').then(
+		this.$store.dispatch('user/getAllPenggunaStaff').then(
 			success => {
                 this.successful = true;
                 this.message = success.message || success.response || success.toString();
 				this.staffs = success
 				dataTableLoader();
 				this.ready = true;
-				console.log(this.staffs)
             },
             error => {
                 this.message =
@@ -120,19 +121,22 @@ export default {
                     error.message ||
                     error.toString();
                 this.successful = false
-				// this.loadDataTable();
 				dataTableLoader();
             }
 		);
     },
 
     methods: {
-        redirectToResidenRegister() {
-            this.$router.push('/mengelola-akun/residen-register');
+		redirectToUpdate(username) {
+            this.$router.push("/mengelola-akun/staff-update/"+username);
+        },
+
+        redirectToStaffRegister() {
+            this.$router.push('/mengelola-akun/staff-register');
 		},
 
-		redirectToView(idResiden) {
-            this.$router.push('/mengelola-akun/view-residen/'+idResiden);
+		redirectToView(username) {
+            this.$router.push('/mengelola-akun/view-staff/'+username);
 		}
 	}
 }
@@ -146,8 +150,12 @@ export default {
 .user-email {
     color: rgb(255, 255, 255);
 }
+.number-card-container {
+	display: flex;
+	justify-content: center;
+}
 .number-card {
-	max-width: 30% !important;
+	min-width: 20rem !important;
 }
 .n-residen {
     font-size: 5rem;
@@ -162,5 +170,9 @@ export default {
 }
 .role-tag {
 	font-size: .7rem;
+}
+tr td:last-child {
+    width: 1%;
+    white-space: nowrap;
 }
 </style>

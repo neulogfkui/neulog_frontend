@@ -14,6 +14,7 @@ import LaporanPasienDetail from '../views/DashboardResiden/LaporanPasienDetail.v
 import PageNotFound from '../views/errors/404'
 
 import LaporanPasienRoute from "@/router/LaporanPasienRoute.js" 
+import MengelolaAkunRoute from "@/router/MengelolaAkunRoute.js"
 import DashboardPengurusAkademikRoute from "@/router/DashboardPengurusAkademikRoute.js" 
 import MengelolaAkunRoute from "@/router/MengelolaAkunRoute.js"
 import LaporanTugasRoute from "@/router/LaporanTugasRoute.js" 
@@ -25,12 +26,13 @@ const routes = [
   ...MengelolaAkunRoute,
   ...LaporanTugasRoute,
   ...DashboardResidenRoute,
+
   //ALL
   //AUTHOR: ALL
   {
     path: '/',
     name: 'Home',
-    component: HomeResiden
+    component: Home
   },
 
   //USE CASE 1
