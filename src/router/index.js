@@ -38,7 +38,7 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: HomeResiden
+    component: Home
   },
 
   //USE CASE 1

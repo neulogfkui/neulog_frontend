@@ -111,7 +111,6 @@ export default {
 				this.staffs = success
 				dataTableLoader();
 				this.ready = true;
-				console.log(this.staffs)
             },
             error => {
                 this.message =
