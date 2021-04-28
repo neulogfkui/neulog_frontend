@@ -121,10 +121,8 @@ export default {
     mounted() {
         this.$store.dispatch('user/getResidenById', this.$route.params.idResiden).then(
         success => {
-            console.log(success);
             this.residen = success;
             this.namaKonsulen = success.konsulen.pengguna.name;
-            console.log(this.residen);
         },
         error => {
             this.message =
