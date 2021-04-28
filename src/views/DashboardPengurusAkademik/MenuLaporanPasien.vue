@@ -111,6 +111,7 @@ import MainHeader from "@/components/MainHeader.vue";
 import PieChart from "@/components/PieChart.vue";
 import BarChart from "@/components/BarChart.vue";
 import dataTableLoader from "@/js/datatable";
+import authHeader from "@/services/auth-header";
 
 export default {
   name: "MenuLaporanPasien",
@@ -124,7 +125,7 @@ export default {
       persentase: Number,
       labelBarLaporan: [],
       dataBarLaporan: [],
-      listLaporanPasien: Array,
+      listLaporanPasien: [],
       isMounted: false,
       ready: false
     };
@@ -139,9 +140,9 @@ export default {
       return this.ready
     }
   },
-  mounted() {
+  created() {
     axios
-      .get("http://localhost:8000/api/dashboardPengurusAkademik/laporanpasien/")
+      .get("http://localhost:8000/api/dashboardPengurusAkademik/laporanpasien/", { headers: authHeader() })
       .then((resp) => {
         console.warn(resp.data);
         this.labelBarTindakan = resp.data.labelTindakan;
@@ -154,8 +155,8 @@ export default {
         this.dataBarLaporan = resp.data.listJumlahLaporanPasienPerTipe;
         this.listLaporanPasien = resp.data.listLaporanPasien;
         this.isMounted = true;
-        this.ready = true;
         dataTableLoader();
+        this.ready = true;
       });
   }
 };
