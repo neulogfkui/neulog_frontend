@@ -235,8 +235,11 @@
                       class="sidenav-menu-nested nav accordion"
                       id="accordionSidenavPages"
                     >
-                      <router-link class="nav-link" to="/mengelola-akun"
-                        >Mengelola Akun</router-link
+                      <router-link class="nav-link" to="/mengelola-akun/residen"
+                        >Mengelola Akun Residen</router-link
+                      >
+                      <router-link class="nav-link" to="/mengelola-akun/staff"
+                        >Mengelola Akun Staff</router-link
                       >
                       <router-link class="nav-link" to="/mengelola-akun/residen-register"
                         >Registrasi Residen</router-link

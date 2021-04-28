@@ -17,8 +17,8 @@
     </header>
 
 
-    <div class="number-card container mt-n10">
-        <div class="card">
+    <div class="number-card-container container mt-n10">
+        <div class="number-card card">
             <div class="card-header">Jumlah Akun Residen</div>
             <div class="card-body text-center">
                 <p class="n-residen">
@@ -27,8 +27,7 @@
                 <button @click="redirectToResidenRegister" class="btn btn-teal">Buat Akun Residen</button>
             </div>
         </div>
-    </div
-	>
+    </div>
 
 	<div class="container mt-4">
 
@@ -68,7 +67,10 @@
 							<td>{{ residen.username }}</td>
 							<td>{{ residen.email }}</td>
 							<td>{{ residen.tahunMasuk }}/{{ residen.term }}</td>
-							<td><button @click="redirectToView(residen.id)" class="btn btn-primary">Lihat Detail</button></td>
+							<td>
+								<button @click="redirectToView(residen.id)" class="btn btn-primary mr-2">Detail</button>
+								<button @click="redirectToUpdate(residen.id)" class="btn btn-warning">Update</button>
+							</td>
 							</tr>
 						</tbody>
 					</table>
@@ -119,6 +121,10 @@ export default {
     },
 
     methods: {
+        redirectToUpdate(id) {
+            this.$router.push("/mengelola-akun/residen-update/"+id);
+        },
+
         redirectToResidenRegister() {
             this.$router.push('/mengelola-akun/residen-register');
 		},
@@ -138,13 +144,21 @@ export default {
 .user-email {
     color: rgb(255, 255, 255);
 }
+.number-card-container {
+	display: flex;
+	justify-content: center;
+}
 .number-card {
-	max-width: 30% !important;
+	min-width: 20rem !important;
 }
 .n-residen {
     font-size: 5rem;
     background: -webkit-linear-gradient(rgb(31, 223, 159), rgb(59, 104, 226));
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
+}
+tr td:last-child {
+    width: 1%;
+    white-space: nowrap;
 }
 </style>
