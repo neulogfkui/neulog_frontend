@@ -38,14 +38,14 @@ class AuthService {
       name: residen.name,
       password: residen.password,
       email: residen.email,
-      alamatRumah: residen.alamat,
+      alamatRumah: residen.alamatRumah,
       role: ["ROLE_RESIDEN"],
       tempatLahir: residen.tempatLahir,
       tanggalLahir: residen.tanggalLahir,
       tahunMasuk: residen.tahunMasuk,
       npm: residen.npm,
       term: residen.term,
-      noTelepon: residen.nomorTelepon,
+      noTelepon: residen.noTelepon,
       idPembimbing: residen.idPembimbing
     }, { headers: authHeader() })
   }

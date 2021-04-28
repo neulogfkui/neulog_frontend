@@ -124,7 +124,7 @@ export default {
         },
 
         handleStaffResgister(){
-            if (!(this.staff.name && this.staff.username && this.staff && this.roles.length!=0
+            if (!(this.staff.name && this.staff.username && this.staff.password && this.roles.length!=0
                     && this.staff.email && this.staff.tempatLahir && this.staff.tanggalLahir)) {
                 this.message = "Mohon lengkapi semua field pada formulir.";
                 return
