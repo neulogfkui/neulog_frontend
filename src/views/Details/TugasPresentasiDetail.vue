@@ -30,7 +30,7 @@
         </button>
       </router-link>
     </div>
-    <div class="row">
+    <div class="row justify-content-center">
       <div class="col-xxl-4 col-xl-4 mb-4">
         <div class="card card-header-actions h-100">
           <div class="card-header">Data Tugas Presentasi</div>
@@ -205,6 +205,7 @@ import VueAxios from "vue-axios";
 import LightHeader from "@/components/LightHeader";
 import CardTimeline from "@/components/CardTimeline";
 import CardTimelineEnter from "@/components/CardTimelineEnter";
+import authHeader from "@/services/auth-header"
 
 export default {
   name: "TugasPresentasiDetail",
@@ -230,7 +231,7 @@ export default {
     axios
       .get(
         "http://localhost:8000/api/dashboardPengurusAkademik/laporantugas/" +
-          this.$route.params.idLaporanTugas
+          this.$route.params.idLaporanTugas, { headers : authHeader()}
       ) // nanti diganti ini angka 1 nya
       .then((resp) => {
         console.warn(resp.data);
@@ -240,7 +241,7 @@ export default {
     axios
       .get(
         "http://localhost:8000/api/dashboardPengurusAkademik/getResiden/" +
-          this.$route.params.idLaporanTugas
+          this.$route.params.idLaporanTugas, 
       ) // nanti diganti ini angka 1 nya
       .then((resp) => {
         console.warn(resp.data);

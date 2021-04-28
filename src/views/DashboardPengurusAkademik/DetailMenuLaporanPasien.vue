@@ -8,6 +8,7 @@
   </LightHeader>
   <div class="container" v-if="isMounted">
     <div class="row mr-2 mb-4 justify-content-end upper">
+      <div v-if="isResiden">
       <button
         id="completeButton"
         class="btn btn-danger mr-4"
@@ -21,8 +22,9 @@
       <router-link :to="'/laporanpasienform/'+this.posts.idLaporanPasien">
           <button class="btn btn-warning" v-if="this.posts.status != 'DITERIMA'">Edit</button>
       </router-link>
+      </div>
     </div>
-    <div class="row">
+    <div class="row justify-content-center">
       <div class="col-xxl-4 col-xl-4 mb-4" v-if="isMounted">
         <div class="card card-header-actions h-100">
           <div class="card-header">
@@ -87,9 +89,8 @@
         v-if="isMounted"
       ></CardTimeline>
       <CardTimelineEnter
-        title="Feedback"
+        title="Feedback" v-if="this.posts.feedback != null"
         :updateStatus="this.posts.feedback"
-        v-if="isMounted"
       ></CardTimelineEnter>
     </div>
     <div class="row">
@@ -278,6 +279,9 @@ export default {
     isDataTableReady() {
       return this.ready;
     },
+    isResiden(){
+      return JSON.parse(localStorage.getItem('user')).roles.includes('ROLE_RESIDEN')
+    }
   },
   methods: {
     strToList(dummy) {

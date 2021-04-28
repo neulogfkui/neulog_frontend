@@ -70,6 +70,7 @@ import axios from "axios";
 import MainHeader from "@/components/MainHeader.vue";
 import BigNumberCard from "@/components/BigNumberCard.vue";
 import dataTableLoader from "@/js/datatable";
+import authHeader from "@/services/auth-header";
 
 export default {
   name: "MenuKonsulen",
@@ -93,7 +94,7 @@ export default {
   },
   mounted() {
     axios
-      .get("http://localhost:8000/api/dashboardPengurusAkademik/konsulen/")
+      .get("http://localhost:8000/api/dashboardPengurusAkademik/konsulen/", { headers: authHeader() })
       .then((resp) => {
         console.warn(resp.data);
         this.avgLaporanPasien = resp.data.averageLaporanPasien;

@@ -1,10 +1,11 @@
 <template>
   <MainHeader
     title= "Dashboard Residen"
-    icon= "user">
+    icon= "user"
+    :subtitle="this.subtitle">
   </MainHeader>
   <div class="container">
-    <div class="row upper">
+    <div class="row upper justify-content-center">
       <PieChart
         v-if="isMounted"
         keterangan="Residen"
@@ -29,6 +30,7 @@
                 role="tab"
                 aria-controls="overview"
                 aria-selected="true"
+                @click=changeData(1)
                 >On Going</a
                 >
             </li>
@@ -41,6 +43,7 @@
                 role="tab"
                 aria-controls="example"
                 aria-selected="false"
+                @click=changeData(2)
                 >Lulus</a
                 >
             </li>
@@ -73,7 +76,7 @@
                     </thead>
                     <tbody>
                     <tr
-                        v-for="(item, index) in listOnGoing"
+                        v-for="(item, index) in getMainList"
                         v-bind:key="item.id"
                     >
                         <td>
@@ -106,54 +109,8 @@
             <!-- LULUS -->
             <div
                 class="tab-pane fade"
-                id="lulus"
                 role="tabpanel"
-                aria-labelledby="lulus-tab"
             >
-            <div class="datatable" v-if="isDataTableReady">
-                <table
-                    class="table table-bordered table-hover"
-                    id="dataTable"
-                    width="100%"
-                    cellspacing="0"
-                >
-                    <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Nama</th>
-                        <th>NPM</th>
-                        <th>Tahun/Term</th>
-                        <th>Detail</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr
-                        v-for="(item, index) in listLulus"
-                        v-bind:key="item.id"
-                    >
-                        <td>
-                        {{ index + 1 }}
-                        </td>
-                        <td>
-                        {{ item.pengguna.name }}
-                        </td>
-                        <td>
-                        {{ item.npm }}
-                        </td>
-                        <td>
-                        {{ item.tahunMasuk + " / " + item.term }}
-                        </td>
-                        <td>
-                        <router-link
-                            :to="'residen/' + item.idResiden"
-                        >
-                            <button class="btn btn-secondary">Lihat</button>
-                        </router-link>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
             </div>
             <!-- END LULUS -->
 
@@ -182,7 +139,9 @@ export default {
       listOnGoing: Array,
       listLulus: Array,
       isMounted: false,
-      ready: false
+      ready: false,
+      mainList: null,
+      subtitle: null,
     };
   },
   components: {
@@ -192,9 +151,16 @@ export default {
   computed:{
     isDataTableReady(){
       return this.ready
-    }
+    },
+    getMainList(){
+      return this.mainList
+    },
+            getnamaPA(){
+            return JSON.parse(localStorage.getItem("userData")).pengurusAkademik.pengguna.name;
+        }
   },
   mounted() {
+    this.subtitle = this.getNamaPA;
     axios
       .get("http://localhost:8000/api/dashboardPengurusAkademik/residen/", { headers: authHeader() })
       .then((resp) => {
@@ -207,8 +173,18 @@ export default {
         this.listLulus = resp.data.listResidenLulus;
         this.isMounted = true;
         this.ready = true;
+        this.mainList = this.listOnGoing;
         dataTableLoader();
       });
+  },
+  methods:{
+    changeData(num){
+      if(num == 1){
+        this.mainList = this.listOnGoing;
+      }else{
+        this.mainList = this.listLulus;
+      }
+    }
   }
 };
 </script>

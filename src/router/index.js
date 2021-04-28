@@ -16,7 +16,6 @@ import PageNotFound from '../views/errors/404'
 import LaporanPasienRoute from "@/router/LaporanPasienRoute.js" 
 import MengelolaAkunRoute from "@/router/MengelolaAkunRoute.js"
 import DashboardPengurusAkademikRoute from "@/router/DashboardPengurusAkademikRoute.js" 
-import MengelolaAkunRoute from "@/router/MengelolaAkunRoute.js"
 import LaporanTugasRoute from "@/router/LaporanTugasRoute.js" 
 import DashboardResidenRoute from "@/router/DashboardResidenRoute.js" 
 

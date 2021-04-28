@@ -97,7 +97,7 @@
                   name="judul"
                   v-model="posts.judulMakalah"
                   type="text"
-                  placeholder="Masukkan judul presentasi"
+                  placeholder="Masukkan judul presentasi" required
                 />
               </div>
               <!-- LINK -->
@@ -243,7 +243,7 @@
               <div v-if="status == 1"></div>
               <div v-if="status == 2">
                 <router-link
-                  :to="'/tugaspresentasidetail/' + posts.idLaporanTugas"
+                  :to="'/detailtugas/tugaspresentasi/' + posts.idLaporanTugas"
                   ><button class="btn btn-primary" data-dismiss="modal">
                     Ok
                   </button></router-link

@@ -65,6 +65,7 @@
 import axios from "axios";
 import MainHeader from "@/components/MainHeader.vue";
 import dataTableLoader from "@/js/datatable";
+import authHeader from "@/services/auth-header";
 
 export default {
   name: "MenuModul",
@@ -85,7 +86,7 @@ export default {
   },
   mounted() {
     axios
-      .get("http://localhost:8000/api/dashboardPengurusAkademik/modul/")
+      .get("http://localhost:8000/api/dashboardPengurusAkademik/modul/", { headers: authHeader() })
       .then((resp) => {
         console.warn(resp.data);
         this.listModul = resp.data.listModul;

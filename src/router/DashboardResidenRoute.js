@@ -15,7 +15,7 @@ import DashboardProgressTest from "@/views/DashboardResiden/DashboardProgressTes
 import DashboardModul from "@/views/DashboardResiden/DashboardModul.vue"
 
 let routes = [{
-        path: '/dashboardresiden',
+        path: '/dashboardresiden/:idResiden',
         name: 'DashboardResidenMenu',
         component: DashboardResidenMenu
     }, {

@@ -346,6 +346,7 @@ import MainHeader from "@/components/MainHeader.vue";
 import PieChart from "@/components/PieChart.vue";
 import BarChart from "@/components/BarChart.vue";
 import dataTableLoader from "@/js/datatable";
+import authHeader from "@/services/auth-header";
 
 export default {
   name: "MenuLaporanTugas",
@@ -377,7 +378,7 @@ export default {
   },
   mounted() {
     axios
-      .get("http://localhost:8000/api/dashboardPengurusAkademik/laporantugas/")
+      .get("http://localhost:8000/api/dashboardPengurusAkademik/laporantugas/", { headers: authHeader() })
       .then((resp) => {
         console.warn(resp.data);
         this.labelBar = resp.data.labelJenisTugas;

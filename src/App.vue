@@ -137,6 +137,7 @@
 
                 <!-- PENGURUS AKADEMIK [BEKA] -->
                 <!-- ----------------------------------------------------------------------------------------- -->
+                  <div v-if="userRoles.includes('ROLE_PENGURUSAKADEMIK')">
                   <!-- Home -->
                   <div class="sidenav-menu-heading">Menu</div>
                   <router-link to="/dashboardpengurusakademik" class="nav-link">
@@ -145,8 +146,6 @@
                     </div>
                     Dashboard Choice</router-link
                   >
-                  <!-- Dashbooard -->
-                  <div v-if="userRoles.includes('ROLE_PENGURUSAKADEMIK')">
                   <!-- Dashbooard -->
                   <div class="sidenav-menu-heading">Dashboard</div>
                   <a
