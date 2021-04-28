@@ -139,6 +139,7 @@ export default {
     methods: {
 
         handleResidenResgister(){
+            console.log(this.$store.state.auth.user);
             if (this.rePassword != this.residen.password) {
                 this.message = "Masukan pada 'Re-Enter Password' tidak sama dengan password baru";
                 return

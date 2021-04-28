@@ -17,6 +17,12 @@ class UserService {
     .then(response => { return response.data;});
   }
 
+  getAllPenggunaStaff() {
+    return axios
+    .get(API_URL + 'pengguna/staff/all', { headers: authHeader() })
+    .then(response => { return response.data;});
+  }
+
   getAllPengguna() {
     return axios
     .get(API_URL + 'pengguna/all', { headers: authHeader() })

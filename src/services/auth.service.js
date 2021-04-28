@@ -1,4 +1,5 @@
 import axios from 'axios';
+import authHeader from './auth-header';
 
 const API_URL = 'http://localhost:8000/api/auth/';
 
@@ -46,7 +47,7 @@ class AuthService {
       term: residen.term,
       noTelepon: residen.nomorTelepon,
       idPembimbing: residen.idPembimbing
-    })
+    }, { headers: authHeader() })
   }
 
   registerStaff(staff) {
@@ -58,7 +59,7 @@ class AuthService {
       role: staff.role,
       tempatLahir: staff.tempatLahir,
       tanggalLahir: staff.tanggalLahir
-    })
+    }, { headers: authHeader() })
   }
 
   updateResiden(residen) {
@@ -77,7 +78,7 @@ class AuthService {
       noTelepon: residen.noTelepon,
       idPembimbing: residen.idPembimbing,
       oldPassword: residen.oldPassword
-    })
+    }, { headers: authHeader() })
   }
 
   updateStaff(staff) {
@@ -90,11 +91,11 @@ class AuthService {
       tempatLahir: staff.tempatLahir,
       tanggalLahir: staff.tanggalLahir,
       oldPassword: staff.oldPassword
-    })
+    }, { headers: authHeader() })
   }
 
   deletePengguna(username) {
-    return axios.delete(API_URL + 'delete/' + username);
+    return axios.delete(API_URL + 'delete/' + username, { headers: authHeader() });
   }
 }
 

@@ -17,8 +17,8 @@
     </header>
 
 
-    <div class="number-card container mt-n10">
-        <div class="card">
+    <div class="number-card-container container mt-n10">
+        <div class="number-card card">
             <div class="card-header">Jumlah Akun Residen</div>
             <div class="card-body text-center">
                 <p class="n-residen">
@@ -27,8 +27,7 @@
                 <button @click="redirectToResidenRegister" class="btn btn-teal">Buat Akun Residen</button>
             </div>
         </div>
-    </div
-	>
+    </div>
 
 	<div class="container mt-4">
 
@@ -138,8 +137,12 @@ export default {
 .user-email {
     color: rgb(255, 255, 255);
 }
+.number-card-container {
+	display: flex;
+	justify-content: center;
+}
 .number-card {
-	max-width: 30% !important;
+	min-width: 20rem !important;
 }
 .n-residen {
     font-size: 5rem;

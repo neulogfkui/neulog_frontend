@@ -25,6 +25,17 @@ export const user = {
       );
     },
 
+    getAllPenggunaStaff({ commit }) {
+      return UserService.getAllPenggunaStaff().then(
+        datas => {
+          return Promise.resolve(datas);
+        },
+        error => {
+          return Promise.reject(error);
+        }
+      );
+    },
+
     getAllPengguna({ commit }) {
       return UserService.getAllPengguna().then(
         datas => {

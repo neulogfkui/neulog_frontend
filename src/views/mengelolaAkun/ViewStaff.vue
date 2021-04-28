@@ -58,7 +58,7 @@
                     </div>
 
                     <!-- Buttons -->
-                    <button class="btn btn-primary" type="button">Edit Account</button>
+                    <button class="btn btn-primary" type="button" @click="redirectToUpdate">Edit Account</button>
                     <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#deleteConfirmation">Delete Account</button>
                 </form>
             </div>
@@ -120,6 +120,10 @@ export default {
     },
 
     methods: {
+        redirectToUpdate() {
+            this.$router.push("/mengelola-akun/staff-update/"+this.user.username);
+        },
+        
         deletePengguna() {
             this.$store.dispatch('auth/deletePengguna', this.$route.params.username).then(
             success => {
