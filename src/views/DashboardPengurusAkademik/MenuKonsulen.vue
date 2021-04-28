@@ -1,10 +1,11 @@
 <template>
   <MainHeader
     title= "Dashboard Konsulen"
+    :subtitle="this.subtitle"
     icon= "users">
   </MainHeader>
   <div class="container">
-    <div class="row upper">
+    <div class="row upper justify-content-center">
       <BigNumberCard
         title="Rata - Rata Laporan Pasien Per Bulan"
         :count="avgLaporanPasien"
@@ -70,6 +71,7 @@ import axios from "axios";
 import MainHeader from "@/components/MainHeader.vue";
 import BigNumberCard from "@/components/BigNumberCard.vue";
 import dataTableLoader from "@/js/datatable";
+import authHeader from "@/services/auth-header";
 
 export default {
   name: "MenuKonsulen",
@@ -79,7 +81,8 @@ export default {
       avgLaporanTugas: Number,
       listKonsulen: Array,
       isMounted: false,
-      ready: false
+      ready: false,
+      subtitle: String,
     };
   },
   components: {
@@ -89,11 +92,15 @@ export default {
   computed:{
     isDataTableReady(){
       return this.ready
+    },
+    getNamaPA(){
+      return JSON.parse(localStorage.getItem("userData")).pengurusAkademik.pengguna.name;
     }
   },
   mounted() {
+    this.subtitle = this.getNamaPA;
     axios
-      .get("http://localhost:8000/api/dashboardPengurusAkademik/konsulen/")
+      .get("http://localhost:8000/api/dashboardPengurusAkademik/konsulen/", { headers: authHeader() })
       .then((resp) => {
         console.warn(resp.data);
         this.avgLaporanPasien = resp.data.averageLaporanPasien;

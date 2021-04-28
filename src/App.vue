@@ -1,7 +1,8 @@
 <template>
   <body class="nav-fixed">
     <div v-if="!isLoggedIn">
-      <Login />
+      <!-- <Login /> -->
+      <LoginSocial />
     </div>
     <div v-if="isLoggedIn">
     <nav
@@ -137,6 +138,7 @@
 
                 <!-- PENGURUS AKADEMIK [BEKA] -->
                 <!-- ----------------------------------------------------------------------------------------- -->
+                  <div v-if="userRoles.includes('ROLE_PENGURUSAKADEMIK')">
                   <!-- Home -->
                   <div class="sidenav-menu-heading">Menu</div>
                   <router-link to="/dashboardpengurusakademik" class="nav-link">
@@ -145,8 +147,6 @@
                     </div>
                     Dashboard Choice</router-link
                   >
-                  <!-- Dashbooard -->
-                  <div v-if="userRoles.includes('ROLE_PENGURUSAKADEMIK')">
                   <!-- Dashbooard -->
                   <div class="sidenav-menu-heading">Dashboard</div>
                   <a
@@ -174,7 +174,7 @@
                       class="sidenav-menu-nested nav accordion"
                       id="accordionSidenavPages"
                     >
-                      <router-link class="nav-link" to="/dashboardpengurusakademik/residen"
+                      <router-link class="nav-link" to="/dashboardpengurusakademik/residen/ongoing"
                         >Dashboard Residen</router-link
                       >
                       <router-link class="nav-link" to="/dashboardpengurusakademik/konsulen"
@@ -183,7 +183,7 @@
                       <router-link class="nav-link" to="/dashboardpengurusakademik/laporanpasien"
                         >Dashboard Laporan Pasien</router-link
                       >
-                      <router-link class="nav-link" to="/dashboardpengurusakademik/laporantugas"
+                      <router-link class="nav-link" to="/dashboardpengurusakademik/laporantugas/tugaspresentasi"
                         >Dashboard Laporan Tugas</router-link
                       >
                       <router-link class="nav-link" to="/dashboardpengurusakademik/modul"
@@ -364,11 +364,12 @@
 
 <script>
 import Login from './components/Login';
+import LoginSocial from './components/LoginSocial';
 import loadScript from './js/scripts';
 
 export default {
   name: "App",
-  components: {Login},
+  components: {Login, LoginSocial},
   data: function () {
     return {
       role: [],

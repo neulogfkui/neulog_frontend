@@ -1,11 +1,10 @@
 <template>
   <LightHeader
     v-if="getReady"
-    title="Detail Tugas Presentasi"
+    title="Detail Tugas Penelitian Akhir"
     :subtitle="this.subtitle"
     icon="file-text"
   />
-
   <div class="container" v-if="getReady">
     <div class="row mr-2 mb-4 justify-content-end upper">
       <!-- BUTTON UNTUK MENAMPILKAN MODAL -->
@@ -21,7 +20,7 @@
         Hapus
       </button>
       <router-link
-        :to="'/tugaspresentasiform/' + this.data.laporanTugas.idLaporanTugas"
+        :to="'/tugaspenelitianakhirform/' + this.data.laporanTugas.idLaporanTugas"
       >
         <button
           class="btn btn-warning"
@@ -46,26 +45,19 @@
                   </th>
                 </tr>
                 <tr>
-                  <th>Modul&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                  <th>Judul Proposal&nbsp;&nbsp;&nbsp;&nbsp;</th>
                   <th>
                     <b>{{
-                      data.laporanTugas.tugasPresentasiModel.modulModel
-                        .namaModul
+                      data.laporanTugas.tugasPenelitianAkhirModel.judulProposal
                     }}</b>
                   </th>
                 </tr>
                 <tr>
-                  <th>Judul&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                  <th>Stage&nbsp;&nbsp;&nbsp;&nbsp;</th>
                   <th>
                     <b>{{
-                      data.laporanTugas.tugasPresentasiModel.judulMakalah
+                      data.laporanTugas.tugasPenelitianAkhirModel.stage
                     }}</b>
-                  </th>
-                </tr>
-                <tr>
-                  <th>Jenis Tugas&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                  <th>
-                    <b>{{ data.laporanTugas.tugasPresentasiModel.jenis }}</b>
                   </th>
                 </tr>
                 <tr>
@@ -111,7 +103,6 @@
       ></CardTimelineEnter>
     </div>
   </div>
-
   <!-- START MODAL -->
   <!-- ------------------------------------------------ -->
 
@@ -210,7 +201,7 @@ import CardTimelineEnter from "@/components/CardTimelineEnter";
 import authHeader from "@/services/auth-header"
 
 export default {
-  name: "TugasPresentasiDetail",
+  name: "TugasPenelitianAkhirDetail",
   components: { LightHeader, CardTimelineEnter, CardTimeline },
   data() {
     return {
@@ -246,7 +237,7 @@ export default {
     axios
       .get(
         "http://localhost:8000/api/dashboardPengurusAkademik/getResiden/" +
-          this.$route.params.idLaporanTugas, 
+          this.$route.params.idLaporanTugas
       ) // nanti diganti ini angka 1 nya
       .then((resp) => {
         console.warn(resp.data);
@@ -259,10 +250,10 @@ export default {
   methods: {
     deleteLaporanTugas(e) {
       this.status = 1;
-      console.warn(this.$route.params.idLaporanTugas);
+      console.warn(this.posts);
       axios
         .post(
-          "http://localhost:8000/laporantugas/deletetugaspresentasi/",
+          "http://localhost:8000/laporantugas/deletetugaspenelitianakhir/",
           this.delete
         )
         .then((result) => {
@@ -278,9 +269,3 @@ export default {
   },
 };
 </script>
-
-<style>
-th {
-  font-weight: normal;
-}
-</style>

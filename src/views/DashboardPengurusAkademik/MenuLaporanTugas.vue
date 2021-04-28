@@ -1,10 +1,11 @@
 <template>
   <MainHeader
     title= "Dashboard Laporan Tugas"
+    :subtitle="this.subtitle"
     icon= "book-open">
   </MainHeader>
   <div class="container">
-    <div class="row upper">
+    <div class="row upper justify-content-center">
       <BarChart
         v-if="isMounted"
         :label="this.labelBar"
@@ -346,6 +347,7 @@ import MainHeader from "@/components/MainHeader.vue";
 import PieChart from "@/components/PieChart.vue";
 import BarChart from "@/components/BarChart.vue";
 import dataTableLoader from "@/js/datatable";
+import authHeader from "@/services/auth-header";
 
 export default {
   name: "MenuLaporanTugas",
@@ -362,7 +364,8 @@ export default {
       listTugasPublikasi: Array,
       listTugasPenelitianAkhir: Array,
       isMounted: false,
-      ready: false
+      ready: false,
+      subtitle: String,
     };
   },
   components: {
@@ -373,11 +376,15 @@ export default {
   computed:{
     isDataTableReady(){
       return this.ready
+    },
+    getNamaPA(){
+      return JSON.parse(localStorage.getItem("userData")).pengurusAkademik.pengguna.name;
     }
   },
   mounted() {
+    this.subtitle = this.getNamaPA;
     axios
-      .get("http://localhost:8000/api/dashboardPengurusAkademik/laporantugas/")
+      .get("http://localhost:8000/api/dashboardPengurusAkademik/laporantugas/", { headers: authHeader() })
       .then((resp) => {
         console.warn(resp.data);
         this.labelBar = resp.data.labelJenisTugas;

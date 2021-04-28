@@ -35,6 +35,6 @@ export default {
 
 <style scoped>
 .page-header{
-    background: none
+    background: none !important
 }
 </style>

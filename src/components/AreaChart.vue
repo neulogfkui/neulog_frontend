@@ -1,20 +1,27 @@
 <template>
+<div class="col-lg-8">
   <div class="card mb-4">
-    <div class="card-header">Area Chart Example</div>
+    <div class="card-header">{{ title }}</div>
     <div class="card-body">
       <div class="chart-area">
         <canvas id="myAreaChart" width="100%" height="30"></canvas>
       </div>
     </div>
-    <div class="card-footer small text-muted">
+    <!-- <div class="card-footer small text-muted">
       Updated yesterday at 11:59 PM
-    </div>
+    </div> -->
+  </div>
   </div>
 </template>
 
 <script>
 export default {
   name: "AreaChart",
+  props:{
+    label: [],
+    title: null,
+    data: []
+  },
   mounted() {
     // Set new default font family and font color to mimic Bootstrap's default styling
     (Chart.defaults.global.defaultFontFamily = "Metropolis"),
@@ -51,23 +58,10 @@ export default {
     var myLineChart = new Chart(ctx, {
       type: "line",
       data: {
-        labels: [
-          "Jan",
-          "Feb",
-          "Mar",
-          "Apr",
-          "May",
-          "Jun",
-          "Jul",
-          "Aug",
-          "Sep",
-          "Oct",
-          "Nov",
-          "Dec",
-        ],
+        labels: this.label,
         datasets: [
           {
-            label: "Earnings",
+            label: "Nilai",
             lineTension: 0.3,
             backgroundColor: "rgba(0, 97, 242, 0.05)",
             borderColor: "rgba(0, 97, 242, 1)",
@@ -79,20 +73,7 @@ export default {
             pointHoverBorderColor: "rgba(0, 97, 242, 1)",
             pointHitRadius: 10,
             pointBorderWidth: 2,
-            data: [
-              0,
-              10000,
-              5000,
-              15000,
-              10000,
-              20000,
-              15000,
-              25000,
-              20000,
-              30000,
-              25000,
-              40000,
-            ],
+            data: this.data,
           },
         ],
       },
@@ -128,7 +109,7 @@ export default {
                 padding: 10,
                 // Include a dollar sign in the ticks
                 callback: function (value, index, values) {
-                  return "$" + number_format(value);
+                  return number_format(value);
                 },
               },
               gridLines: {
@@ -162,7 +143,7 @@ export default {
             label: function (tooltipItem, chart) {
               var datasetLabel =
                 chart.datasets[tooltipItem.datasetIndex].label || "";
-              return datasetLabel + ": $" + number_format(tooltipItem.yLabel);
+              return datasetLabel + ": " + number_format(tooltipItem.yLabel);
             },
           },
         },

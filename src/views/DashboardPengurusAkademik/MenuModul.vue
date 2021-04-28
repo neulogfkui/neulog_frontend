@@ -1,9 +1,10 @@
 <template>
   <MainHeader
     title= "Dashboard Modul"
+    :subtitle="this.subtitle"
     icon= "briefcase">
   </MainHeader>
-  <div class="container">
+  <div class="container upper">
       <!-- Tabel Modul -->
       <div class="col-xxl-12 col-xl-12 mb-4 mt-4">
         <div class="card card-header-actions h-100">
@@ -65,6 +66,7 @@
 import axios from "axios";
 import MainHeader from "@/components/MainHeader.vue";
 import dataTableLoader from "@/js/datatable";
+import authHeader from "@/services/auth-header";
 
 export default {
   name: "MenuModul",
@@ -72,7 +74,8 @@ export default {
     return {
       listModul: Array,
       isMounted: false,
-      ready: false
+      ready: false,
+      subtitle: String,
     };
   },
   components: {
@@ -81,11 +84,15 @@ export default {
   computed:{
     isDataTableReady(){
       return this.ready
+    },
+    getNamaPA(){
+      return JSON.parse(localStorage.getItem("userData")).pengurusAkademik.pengguna.name;
     }
   },
   mounted() {
+    this.subtitle = this.getNamaPA;
     axios
-      .get("http://localhost:8000/api/dashboardPengurusAkademik/modul/")
+      .get("http://localhost:8000/api/dashboardPengurusAkademik/modul/", { headers: authHeader() })
       .then((resp) => {
         console.warn(resp.data);
         this.listModul = resp.data.listModul;
