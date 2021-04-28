@@ -8,10 +8,11 @@ import DetailMenuResiden from '../views/DashboardPengurusAkademik/DetailMenuResi
 import DetailMenuKonsulen from '../views/DashboardPengurusAkademik/DetailMenuKonsulen.vue'
 import DetailMenuModul from '../views/DashboardPengurusAkademik/DetailMenuModul.vue'
 import DetailMenuLaporanPasien from '../views/DashboardPengurusAkademik/DetailMenuLaporanPasien.vue'
-import DetailMenuTugasPresentasi from '../views/DashboardPengurusAkademik/DetailMenuTugasPresentasi.vue'
-import DetailMenuTugasPublikasi from '../views/DashboardPengurusAkademik/DetailMenuTugasPublikasi.vue'
-import DetailMenuTugasKasusSulit from '../views/DashboardPengurusAkademik/DetailMenuTugasKasusSulit.vue'
-import DetailMenuTugasAkhir from '../views/DashboardPengurusAkademik/DetailMenuTugasAkhir.vue'
+import TugasPresentasiDetail from "@/views/Details/TugasPresentasiDetail.vue"
+import TugasPublikasiDetail from "@/views/Details/TugasPublikasiDetail.vue"
+import TugasPenelitianAkhirDetail from "@/views/Details/TugasPenelitianAkhirDetail.vue"
+import KasusSulitDetail from "@/views/Details/KasusSulitDetail.vue"
+
 
 let routes = [
     {
@@ -67,22 +68,22 @@ let routes = [
       {
         path: '/dashboardpengurusakademik/laporantugas/tugaspresentasi/:idLaporanTugas',
         name: 'DetailMenuTugasPresentasi',
-        component: DetailMenuTugasPresentasi
+        component: TugasPresentasiDetail
       },
       {
         path: '/dashboardpengurusakademik/laporantugas/tugaspublikasi/:idLaporanTugas',
         name: 'DetailMenuTugasPublikasi',
-        component: DetailMenuTugasPublikasi
+        component: TugasPublikasiDetail
       },
       {
         path: '/dashboardpengurusakademik/laporantugas/tugaskasussulit/:idLaporanTugas',
         name: 'DetailMenuTugasKasusSulit',
-        component: DetailMenuTugasKasusSulit
+        component: KasusSulitDetail
       },
       {
         path: '/dashboardpengurusakademik/laporantugas/tugasakhir/:idLaporanTugas',
         name: 'DetailMenuTugasAkhir',
-        component: DetailMenuTugasAkhir
+        component: TugasPenelitianAkhirDetail
       }
 ]
 

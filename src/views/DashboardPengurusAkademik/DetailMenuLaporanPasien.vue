@@ -6,10 +6,21 @@
     icon="file-text"
   >
   </LightHeader>
-  <div class="container">
+  <div class="container" v-if="isMounted">
     <div class="row mr-2 mb-4 justify-content-end upper">
-      <button class="btn btn-danger mr-3">Delete</button>
-      <button class="btn btn-warning">Edit</button>
+      <button
+        id="completeButton"
+        class="btn btn-danger mr-4"
+        type="button"
+        data-toggle="modal"
+        data-target="#exampleModal"
+        v-if="this.posts.status == 'DITOLAK'"
+      >
+        Delete
+      </button>
+      <router-link :to="'/laporanpasienform/'+this.posts.idLaporanPasien">
+          <button class="btn btn-warning" v-if="this.posts.status != 'DITERIMA'">Edit</button>
+      </router-link>
     </div>
     <div class="row">
       <div class="col-xxl-4 col-xl-4 mb-4" v-if="isMounted">
@@ -130,6 +141,91 @@
         </div>
       </div>
     </div>
+    <!-- DIV BESAR MODAL -->
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <!-- HEADER MODAL -->
+          <div class="modal-header">
+            <h5 v-if="status == 0" class="modal-title" id="exampleModalLabel">
+              Apakah anda yakin untuk menghapus laporan pasien?
+            </h5>
+            <h5 v-if="status == 1" class="modal-title" id="exampleModalLabel">
+              Loading...
+            </h5>
+            <h5 v-if="status == 2" class="modal-title" id="exampleModalLabel">
+              Laporan Pasien Berhasil Dihapus!
+            </h5>
+            <h5 v-if="status == 3" class="modal-title" id="exampleModalLabel">
+              Laporan Pasien Gagal Dihapus!
+            </h5>
+            <button
+              class="close"
+              type="button"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&#xD7;</span>
+            </button>
+          </div>
+          <!-- BODY MODAL -->
+          <div class="modal-body">
+            <h5 v-if="status == 0" class="modal-title" id="exampleModalLabel">
+              Laporan pasien akan dihapus dari sistem Neulog. Anda tidak dapat
+              mengakses laporan tugas ini kembali
+            </h5>
+            <h5 v-if="status == 1" class="modal-title" id="exampleModalLabel">
+              Harap tunggu sebentar
+            </h5>
+            <h5 v-if="status == 2" class="modal-title" id="exampleModalLabel">
+              Laporan pasien Anda sudah dihapus dari sistem Neulog
+            </h5>
+            <h5 v-if="status == 3" class="modal-title" id="exampleModalLabel">
+              Terjadi kesalahan pada sistem.
+            </h5>
+          </div>
+          <!-- FOOTER MODAL -->
+          <div class="modal-footer">
+            <div v-if="status == 0">
+              <button class="btn btn-primary mr-4" @click="deleteLaporanPasien">
+                Ya
+              </button>
+
+              <button class="btn btn-danger" type="button" data-dismiss="modal">
+                Tidak
+              </button>
+            </div>
+            <div v-if="status == 1"></div>
+            <div v-if="status == 2">
+              <router-link to="/"
+                ><button class="btn btn-primary" data-dismiss="modal">
+                  Ok
+                </button></router-link
+              >
+            </div>
+            <div v-if="status == 3">
+              <button
+                class="btn btn-primary"
+                id="buttonFailed"
+                type="button"
+                data-dismiss="modal"
+              >
+                Ya
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- END MODAL -->
+    <!-- ------------------------------------------------ -->
   </div>
 </template>
 
@@ -154,8 +250,7 @@ export default {
         isJaga: false,
         tanggalJaga: null,
         idKonsulen: null,
-        idResiden: JSON.parse(localStorage.getItem("userData")).residen
-          .idResiden,
+        idResiden: null,
         strKompetensi: null,
         strTindakan: null,
         strTindakanLain: null,
@@ -170,6 +265,7 @@ export default {
       isMounted: false,
       listKompetensi: [],
       listKategoriTindakan: [],
+      status: 0,
     };
   },
   components: {
@@ -205,6 +301,22 @@ export default {
       }
       return newList;
     },
+    deleteLaporanPasien(e) {
+      this.status = 1;
+      console.warn(this.$route.params.idLaporanPasien);
+      axios
+        .get("http://localhost:8000/api/laporan-pasien/delete/" + this.$route.params.idLaporanPasien
+        )
+        .then((result) => {
+          if (result.data == "Success") {
+            this.status = 2;
+          } else {
+            this.status = 3;
+          }
+          console.warn(result.data);
+        });
+      e.preventDefault();
+    },
   },
   mounted() {
     axios
@@ -230,6 +342,7 @@ export default {
         this.posts.status = resp.data.status;
         this.posts.konsulen = resp.data.konsulen;
         this.posts.feedback = resp.data.feedback;
+        this.posts.idResiden = resp.data.residen.idResiden;
         this.tempKompetensi = this.strToListNumber(this.posts.strKompetensi);
         this.tempTindakan = this.strToListNumber(this.posts.strTindakan);
         this.tempTindakanLain = this.strToList(this.posts.strTindakanLain);

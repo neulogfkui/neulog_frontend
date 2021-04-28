@@ -1,11 +1,10 @@
 <template>
   <LightHeader
     v-if="getReady"
-    title="Detail Tugas Presentasi"
+    title="Detail Tugas Publikasi"
     :subtitle="this.subtitle"
     icon="file-text"
   />
-
   <div class="container" v-if="getReady">
     <div class="row mr-2 mb-4 justify-content-end upper">
       <!-- BUTTON UNTUK MENAMPILKAN MODAL -->
@@ -20,7 +19,7 @@
         Hapus
       </button>
       <router-link
-        :to="'/tugaspresentasiform/' + this.data.laporanTugas.idLaporanTugas"
+        :to="'/tugaspublikasiform/' + this.data.laporanTugas.idLaporanTugas"
       >
         <button
           class="btn btn-warning"
@@ -44,26 +43,19 @@
                   </th>
                 </tr>
                 <tr>
-                  <th>Modul&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                  <th>Judul Publikasi&nbsp;&nbsp;&nbsp;&nbsp;</th>
                   <th>
                     <b>{{
-                      data.laporanTugas.tugasPresentasiModel.modulModel
-                        .namaModul
+                      data.laporanTugas.tugasPublikasiModel.judulPublikasi
                     }}</b>
                   </th>
                 </tr>
                 <tr>
-                  <th>Judul&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                  <th>Event Publikasi&nbsp;&nbsp;&nbsp;&nbsp;</th>
                   <th>
                     <b>{{
-                      data.laporanTugas.tugasPresentasiModel.judulMakalah
+                      data.laporanTugas.tugasPublikasiModel.eventPublikasi
                     }}</b>
-                  </th>
-                </tr>
-                <tr>
-                  <th>Jenis Tugas&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                  <th>
-                    <b>{{ data.laporanTugas.tugasPresentasiModel.jenis }}</b>
                   </th>
                 </tr>
                 <tr>
@@ -103,13 +95,12 @@
       ></CardTimeline>
       <!-- CARD 3 -->
       <CardTimelineEnter
-        title="Feedback"
         v-if="this.data.laporanTugas.feedback != null"
+        title="Feedback"
         :updateStatus="this.data.laporanTugas.feedback"
       ></CardTimelineEnter>
     </div>
   </div>
-
   <!-- START MODAL -->
   <!-- ------------------------------------------------ -->
 
@@ -207,7 +198,7 @@ import CardTimeline from "@/components/CardTimeline";
 import CardTimelineEnter from "@/components/CardTimelineEnter";
 
 export default {
-  name: "TugasPresentasiDetail",
+  name: "TugasPublikasiDetail",
   components: { LightHeader, CardTimelineEnter, CardTimeline },
   data() {
     return {
@@ -235,7 +226,6 @@ export default {
       .then((resp) => {
         console.warn(resp.data);
         this.data = resp.data;
-        console.warn(this.data);
       });
     axios
       .get(
@@ -256,7 +246,7 @@ export default {
       console.warn(this.$route.params.idLaporanTugas);
       axios
         .post(
-          "http://localhost:8000/laporantugas/deletetugaspresentasi/",
+          "http://localhost:8000/laporantugas/deletetugaspublikasi/",
           this.delete
         )
         .then((result) => {
@@ -272,9 +262,3 @@ export default {
   },
 };
 </script>
-
-<style>
-th {
-  font-weight: normal;
-}
-</style>

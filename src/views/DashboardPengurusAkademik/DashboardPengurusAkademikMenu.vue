@@ -1,7 +1,8 @@
 <template>
 <MainHeader
     title= "Dashboard Pengurus Akademik"
-    :subtitle= "this.subtitle"
+    :subtitle="this.subtitle"
+    isSmall="true"
     icon= "home">
 </MainHeader>
 <div class="container">
