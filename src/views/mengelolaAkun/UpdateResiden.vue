@@ -1,5 +1,5 @@
 <template>
-<div class="container mt-10 align-items-center justify-content-center">
+<div v-if="isReady" class="container mt-10 align-items-center justify-content-center">
         <!-- Account details card-->
         <div class="card mb-4">
             <div class="card-header">Account Details</div>
@@ -7,35 +7,35 @@
                 <form>
                     <div class="form-group">
                         <label class="small mb-1" for="inputNamaLengkap">Nama Lengkap (Sesuai Kartu Mahasiswa)</label>
-                        <input v-model="residen.name" class="form-control" id="inputNamaLengkap" type="text" placeholder="Enter your fullname"/>
+                        <input v-model="residen.name" class="form-control" id="inputNamaLengkap" type="text" placeholder="Cth: Ardiaf Rizky"/>
                     </div>
 
                     <!-- Form Group (username)-->
                     <div class="form-row">
                         <div class="form-group col">
-                            <label class="small mb-1" for="inputUsername">Username (gunakan huruf kecil tanpa spasi)</label>
-                            <input v-model="residen.username" class="form-control" id="inputUsername" type="text" placeholder="Enter your username"/>
+                            <label class="small mb-1" for="inputUsername">Username (huruf kecil tanpa spasi, min: 3 huruf)</label>
+                            <input v-model="residen.username" class="form-control" id="inputUsername" type="text" placeholder="Cth: ardiafrizky"/>
                         </div>
                         <div class="form-group col">
                             <label class="small mb-1" for="inputEmailAddress">Email address</label>
-                            <input v-model="residen.email" class="form-control" id="inputEmailAddress" type="email" placeholder="Enter your email address"/>
+                            <input v-model="residen.email" class="form-control" id="inputEmailAddress" type="email" placeholder="Cth: ardiaf@gmail.com"/>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="small mb-1" for="inputOldPassword">Old Password</label>
-                        <input v-model="oldPassword" class="form-control" id="inputOldPassword" type="password" placeholder="Enter Password" >
+                        <input v-model="oldPassword" class="form-control" id="inputOldPassword" type="password" placeholder="Masukkan Password Lama" >
                     </div>
 
                     <!-- Form Row-->
                     <div class="form-row">
                         <div class="form-group col">
                             <label class="small mb-1" for="inputPassword">New Password</label>
-                            <input v-model="residen.password" class="form-control" id="inputPassword" type="password" placeholder="Enter Password" >
+                            <input v-model="residen.password" class="form-control" id="inputPassword" type="password" placeholder="Masukkan Password Baru" >
                         </div>
                         <div class="form-group col">
                             <label class="small mb-1" for="inputRePassword">Re-Enter Password</label>
-                            <input v-model="rePassword" class="form-control" id="inputRePassword" type="password" placeholder="Enter Password" >
+                            <input v-model="rePassword" class="form-control" id="inputRePassword" type="password" placeholder="Masukkan Lagi Password" >
                         </div>
                     </div>
 
@@ -43,11 +43,11 @@
                     <div class="form-row">
                         <div class="form-group col">
                             <label class="small mb-1" for="inputTempatLahir">Tempat Lahir</label>
-                            <input v-model="residen.tempatLahir" class="form-control" id="inputTempatLahir" type="text" placeholder="Enter your tempat lahir"/>
+                            <input v-model="residen.tempatLahir" class="form-control" id="inputTempatLahir" type="text" placeholder="Cth: Cilincing, DKI Jakarta"/>
                         </div>
                         <div class="form-group col">
                             <label class="small mb-1" for="inputBirthday">Tanggal Lahir (yyyy-mm-dd)</label>
-                            <input v-model="residen.tanggalLahir" class="form-control" id="inputBirthday" type="text" name="birthday" placeholder="Enter your birthday"/>
+                            <input v-model="residen.tanggalLahir" class="form-control" id="inputBirthday" type="date" name="birthday"/>
                         </div>
                     </div>
 
@@ -55,11 +55,11 @@
                     <div class="form-row">
                         <div class="form-group col">
                             <label class="small mb-1" for="inputAlamat">Alamat</label>
-                            <input v-model="residen.alamatRumah" class="form-control" id="inputAlamat" type="text" placeholder="Enter your Alamat"/>
+                            <input v-model="residen.alamatRumah" class="form-control" id="inputAlamat" type="text" placeholder="ECth: Jl.Astiri, no.24 RT01/02 Koja, DKI Jakarta"/>
                         </div>
                         <div class="form-group col">
                             <label class="small mb-1" for="inputNomorTelepon">Nomor Telepon</label>
-                            <input v-model="residen.noTelepon" class="form-control" id="inputNomorTelepon" type="text" name="NomorTelepon" placeholder="Enter your Nomor Telepon"/>
+                            <input v-model="residen.noTelepon" class="form-control" id="inputNomorTelepon" type="text" name="NomorTelepon" placeholder="Cth: 08123123XXX"/>
                         </div>
                     </div>
 
@@ -67,11 +67,11 @@
                     <div class="form-row">
                         <div class="form-group col">
                             <label class="small mb-1" for="inputTahunMasuk">Tahun Masuk</label>
-                            <input v-model="residen.tahunMasuk" class="form-control" id="inputTahunMasuk" type="number" placeholder="Tahun masuk universitas"/>
+                            <input v-model="residen.tahunMasuk" class="form-control" id="inputTahunMasuk" type="number" placeholder="Cth: 2018"/>
                         </div>
                         <div class="form-group col">
                             <label class="small mb-1" for="inputTerm">Term Perkuliahan</label>
-                            <input v-model="residen.term" class="form-control" id="inputTerm" type="text" name="Term" placeholder="Enter your Term"/>
+                            <input v-model="residen.term" class="form-control" id="inputTerm" type="number" name="Term" placeholder="Cth: 3"/>
                         </div>
                     </div>
 
@@ -79,11 +79,17 @@
                     <div class="form-row">
                         <div class="form-group col">
                             <label class="small mb-1" for="inputNpm">NPM</label>
-                            <input v-model="residen.npm" class="form-control" id="inputNpm" type="text" placeholder="NPM"/>
+                            <input v-model="residen.npm" class="form-control" id="inputNpm" type="number" placeholder="Cth: 180619XXXX"/>
                         </div>
-                        <div class="form-group col">
+                        <!-- <div class="form-group col">
                             <label class="small mb-1" for="inputIdPembimbing">IdPembimbing Perkuliahan</label>
                             <input v-model="residen.idPembimbing" class="form-control" id="inputIdPembimbing" type="text" name="IdPembimbing" placeholder="Enter your IdPembimbing"/>
+                        </div> -->
+                        <div class="form-group col">
+                            <label class="small mb-1" for="inputIdPembimbing">Konsulen Pembimbing</label>
+                            <select class="form-control" id="inputIdPembimbing" v-model="residen.idPembimbing">
+                                <option v-for="konsulen in konsulens" :key="konsulen.idKonsulen" v-bind:value="konsulen.idKonsulen">{{ konsulen.name }}</option>
+                            </select>
                         </div>
                     </div>
 
@@ -115,7 +121,8 @@
                     Akun {{ residen.name }} ({{residen.username}}) gagal diperbaharui. Mohon periksa kembali data yang dimasukkan.
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-light" type="button" data-dismiss="modal">Tutup</button>
+                    <button v-if="successful" @click="redirectToHome" class="btn btn-light" type="button" data-dismiss="modal">Tutup</button>
+                    <button v-if="!successful" class="btn btn-light" type="button" data-dismiss="modal">Tutup</button>
                 </div>
             </div>
         </div>
@@ -137,20 +144,38 @@ export default {
             successful: false,
             message: '',
             namaKonsulen: "",
+            konsulens: Array,
+            ready: false
         }
     },
     computed: {
         loggedIn(){
             return this.$store.state.auth.status.loggedIn
+        },
+        isReady() {
+            return this.ready;
         }
     },
 
     created() {
         this.fetchDatas();
+        this.ready = true;
+        console.log(this.residen);
     },
 
     methods: {
+        redirectToHome() {
+            this.$router.push('/mengelola-akun/residen');
+        },
+
         handleUpdateResiden(){
+             if (!(this.residen.name && this.residen.username && this.residen.password && this.residen.alamatRumah
+                    && this.residen.email && this.residen.tempatLahir && this.residen.tanggalLahir && this.residen.noTelepon
+                    && this.residen.tahunMasuk && this.residen.term && this.residen.npm && this.residen.idPembimbing && this.oldPassword)) {
+                this.message = "Mohon lengkapi semua field pada formulir.";
+                return
+            }
+
             if (this.rePassword != this.residen.password) {
                 this.message = "Masukan pada 'Re-Enter Password' tidak sama dengan password baru";
                 return
@@ -159,17 +184,16 @@ export default {
             this.message = '';
             this.submitted = true;
             this.residen.oldPassword = this.oldPassword;
-            console.log(this.residen);
             this.$store.dispatch('auth/updateResiden', this.residen).then(
             success => {
                 this.successful = true;
                 this.message = success.message || success.response || success.toString();
             },
             error => {
-                this.message =
-                    (error.response && error.response.data && error.response.data.message) ||
-                    error.message ||
-                    error.toString();
+                this.message = "Error pada Server, cek kembali data yang dimasukkan. Jika error berlanjut, laporkan pada admin/programmer"
+                    // (error.response && error.response.data && error.response.data.message) ||
+                    // error.message ||
+                    // error.toString();
                 this.successful = false
                 }
             );
@@ -207,7 +231,19 @@ export default {
                 this.$router.push('/404');
                 }
             );
-            console.log(this.residen);
+            this.$store.dispatch('user/getAllPenggunaKonsulen', this.$route.params.username).then(
+            success => {
+                this.konsulens = success;
+            },
+            error => {
+                this.message =
+                    (error.response && error.response.data && error.response.data.message) ||
+                    error.message ||
+                    error.toString();
+                this.successful = false;
+                this.$router.push('/404');
+            }
+        );
         }
     }
 }

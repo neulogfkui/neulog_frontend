@@ -116,7 +116,8 @@
                     Akun {{ residen.name }} ({{residen.username}}) gagal ditambahkan. Mohon periksa kembali data yang dimasukkan.
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-light" type="button" data-dismiss="modal">Tutup</button>
+                    <button v-if="successful" @click="redirectToHome" class="btn btn-light" type="button" data-dismiss="modal">Tutup</button>
+                    <button v-if="!successful" class="btn btn-light" type="button" data-dismiss="modal">Tutup</button>
                 </div>
             </div>
         </div>
@@ -160,6 +161,9 @@ export default {
         );
     },
     methods: {
+        redirectToHome() {
+            this.$router.push('/mengelola-akun/residen');
+        },
         handleResidenResgister(){
             console.log(this.residen);
              if (!(this.residen.name && this.residen.username && this.residen.password && this.residen.alamatRumah
@@ -183,10 +187,10 @@ export default {
                 this.message = success.message || success.response || success.toString();
             },
             error => {
-                this.message =
-                    (error.response && error.response.data && error.response.data.message) ||
-                    error.message ||
-                    error.toString();
+                this.message = "Error pada Server, cek kembali data yang dimasukkan. Jika error berlanjut, laporkan pada admin/programmer"
+                    // (error.response && error.response.data && error.response.data.message) ||
+                    // error.message ||
+                    // error.toString();
                 this.successful = false
                 }
             );

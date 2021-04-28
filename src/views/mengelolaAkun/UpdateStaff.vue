@@ -7,35 +7,35 @@
                 <form>
                     <div class="form-group">
                         <label class="small mb-1" for="inputNamaLengkap">Nama Lengkap</label>
-                        <input v-model="staff.name" class="form-control" id="inputNamaLengkap" type="text" placeholder="Enter your fullname"/>
+                        <input v-model="staff.name" class="form-control" id="inputNamaLengkap" type="text" placeholder="Cth: Ardiaf Rizky"/>
                     </div>
 
                     <!-- Form Group (username)-->
                     <div class="form-row">
                         <div class="form-group col">
                             <label class="small mb-1" for="inputUsername">Username (gunakan huruf kecil tanpa spasi)</label>
-                            <input v-model="staff.username" class="form-control" id="inputUsername" type="text" placeholder="Enter your username"/>
+                            <input v-model="staff.username" class="form-control" id="inputUsername" type="text" placeholder="Cth: ardiafrizky"/>
                         </div>
                         <div class="form-group col">
                             <label class="small mb-1" for="inputEmailAddress">Email</label>
-                            <input v-model="staff.email" class="form-control" id="inputEmailAddress" type="email" placeholder="Enter your email address"/>
+                            <input v-model="staff.email" class="form-control" id="inputEmailAddress" type="email" placeholder="Cth: ardiaf@gmail.com"/>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="small mb-1" for="inputOldPassword">Password Lama</label>
-                        <input v-model="oldPassword" class="form-control" id="inputOldPassword" type="password" placeholder="Enter Password" >
+                        <input v-model="oldPassword" class="form-control" id="inputOldPassword" type="password" placeholder="Masukkan Password Lama" >
                     </div>
 
                     <!-- Form Row-->
                     <div class="form-row">
                         <div class="form-group col">
                             <label class="small mb-1" for="inputPassword">Password Baru</label>
-                            <input v-model="staff.password" class="form-control" id="inputPassword" type="password" placeholder="Enter Password" >
+                            <input v-model="staff.password" class="form-control" id="inputPassword" type="password" placeholder="Masukkan Password Baru" >
                         </div>
                         <div class="form-group col">
                             <label class="small mb-1" for="inputRePassword">Re-Enter Password</label>
-                            <input v-model="rePassword" class="form-control" id="inputRePassword" type="password" placeholder="Enter Password" >
+                            <input v-model="rePassword" class="form-control" id="inputRePassword" type="password" placeholder="Masukkan Lagi Password" >
                         </div>
                     </div>
 
@@ -43,11 +43,11 @@
                     <div class="form-row">
                         <div class="form-group col">
                             <label class="small mb-1" for="inputTempatLahir">Tempat Lahir</label>
-                            <input v-model="staff.tempatLahir" class="form-control" id="inputTempatLahir" type="text" placeholder="Enter your tempat lahir"/>
+                            <input v-model="staff.tempatLahir" class="form-control" id="inputTempatLahir" type="text" placeholder="Cth: Cilincing, DKI Jakarta"/>
                         </div>
                         <div class="form-group col">
-                            <label class="small mb-1" for="inputBirthday">Tanggal Lahir (yyyy-mm-dd)</label>
-                            <input v-model="staff.tanggalLahir" class="form-control" id="inputBirthday" type="text" name="birthday" placeholder="Enter your birthday"/>
+                            <label class="small mb-1" for="inputBirthday">Tanggal Lahir</label>
+                            <input v-model="staff.tanggalLahir" class="form-control" id="inputBirthday" type="date" name="birthday"/>
                         </div>
                     </div>
 
@@ -124,7 +124,8 @@
                     Akun {{ staff.name }} ({{staff.username}}) gagal diperbaharui. Mohon periksa kembali data yang dimasukkan.
                 </div>
                 <div class="modal-footer">
-                    <button @click="redirectToView" class="btn btn-light" type="button" data-dismiss="modal">Tutup</button>
+                    <button v-if="successful" @click="redirectToView" class="btn btn-light" type="button" data-dismiss="modal">Tutup</button>
+                    <button v-if="!successful" class="btn btn-light" type="button" data-dismiss="modal">Tutup</button>
                 </div>
             </div>
         </div>
@@ -159,7 +160,17 @@ export default {
     },
 
     methods: {
+        redirectToView() {
+            this.$router.push('/mengelola-akun/view-staff/'+this.staff.username);
+        },
+
         handleUpdateStaff(){
+            if (!(this.staff.name && this.staff.username && this.staff.password
+                    && this.roles.length!=0 && this.staff.email && this.staff.tempatLahir
+                    && this.staff.tanggalLahir && this.oldPassword)) {
+                this.message = "Mohon lengkapi semua field pada formulir.";
+                return
+            }
             if (this.rePassword != this.staff.password) {
                 this.message = "Masukan pada 'Re-Enter Password' tidak sama dengan password baru";
                 return
@@ -176,10 +187,10 @@ export default {
                 this.message = success.message || success.response || success.toString();
             },
             error => {
-                this.message =
-                    (error.response && error.response.data && error.response.data.message) ||
-                    error.message ||
-                    error.toString();
+                this.message = "Error pada Server, cek kembali data yang dimasukkan. Jika error berlanjut, laporkan pada admin/programmer"
+                    // (error.response && error.response.data && error.response.data.message) ||
+                    // error.message ||
+                    // error.toString();
                 this.successful = false
                 }
             );
