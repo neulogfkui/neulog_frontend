@@ -130,23 +130,24 @@
                       >Kelulusan Modul</router-link
                     >
                   </nav>
-                </div>
-				</div>
+              </div>
+				      </div>
                 <!-- END OF RESIDEN -->
                 <!-- ----------------------------------------------------------------------------------------- -->
 
-                <!-- KONSULEN -->
+                <!-- PENGURUS AKADEMIK [BEKA] -->
                 <!-- ----------------------------------------------------------------------------------------- -->
                   <!-- Home -->
-                  <!-- <div class="sidenav-menu-heading">Home</div>
-                  <router-link to="/" class="nav-link">
+                  <div class="sidenav-menu-heading">Menu</div>
+                  <router-link to="/dashboardpengurusakademik" class="nav-link">
                     <div class="nav-link-icon">
                       <i data-feather="bar-chart"></i>
                     </div>
-                    Home</router-link
-                  > -->
+                    Dashboard Choice</router-link
+                  >
                   <!-- Dashbooard -->
-                  <div v-if="userRoles.includes('RESIDEN_KONSULEN')">
+                  <div v-if="userRoles.includes('ROLE_PENGURUSAKADEMIK')">
+                  <!-- Dashbooard -->
                   <div class="sidenav-menu-heading">Dashboard</div>
                   <a
                     class="nav-link collapsed"
@@ -157,9 +158,9 @@
                     aria-controls="collapseDashboards"
                   >
                     <div class="nav-link-icon">
-                      <i data-feather="activity"></i>
+                      <i class="fas fa-th-large"></i>
                     </div>
-                    Dashboard Konsulen
+                    Dashboard Pengurus Akademik
                     <div class="sidenav-collapse-arrow">
                       <i class="fas fa-angle-down"></i>
                     </div>
@@ -173,14 +174,20 @@
                       class="sidenav-menu-nested nav accordion"
                       id="accordionSidenavPages"
                     >
-                      <router-link class="nav-link" to="/components"
-                        >Sudah Dievaluasi</router-link
+                      <router-link class="nav-link" to="/dashboardpengurusakademik/residen"
+                        >Dashboard Residen</router-link
                       >
-                      <router-link class="nav-link" to="/components"
-                        >Belum Dievaluasi</router-link
+                      <router-link class="nav-link" to="/dashboardpengurusakademik/konsulen"
+                        >Dashboard Konsulen</router-link
                       >
-                      <router-link class="nav-link" to="/components"
-                        >Tugas Bimbingan</router-link
+                      <router-link class="nav-link" to="/dashboardpengurusakademik/laporanpasien"
+                        >Dashboard Laporan Pasien</router-link
+                      >
+                      <router-link class="nav-link" to="/dashboardpengurusakademik/laporantugas"
+                        >Dashboard Laporan Tugas</router-link
+                      >
+                      <router-link class="nav-link" to="/dashboardpengurusakademik/modul"
+                        >Dashboard Modul</router-link
                       >
                     </nav>
                   </div>
@@ -240,7 +247,66 @@
                     </nav>
                   </div>
                   <!-- END OF RESIDEN -->
+
+                  <!-- PENGURUS AKADEMIK MENU [BEKA] -->
+                <!-- ----------------------------------------------------------------------------------------- -->
                 
+                  <!-- Home -->
+                  <!-- <div class="sidenav-menu-heading">Home</div>
+                  <router-link to="/mengelola-akun" class="nav-link">
+                    <div class="nav-link-icon">
+                      <i class="fas fa-home"></i>
+                    </div>
+                    Admin Home</router-link
+                  > -->
+                  <div v-if="userRoles.includes('ROLE_PENGURUSAKADEMIK')">
+                  <!-- Dashbooard -->
+                  <div class="sidenav-menu-heading">Dashboard</div>
+                  <a
+                    class="nav-link collapsed"
+                    href="javascript:void(0);"
+                    data-toggle="collapse"
+                    data-target="#collapseDashboards"
+                    aria-expanded="false"
+                    aria-controls="collapseDashboards"
+                  >
+                    <div class="nav-link-icon">
+                      <i class="fas fa-th-large"></i>
+                    </div>
+                    Dashboard Pengurus Akademik
+                    <div class="sidenav-collapse-arrow">
+                      <i class="fas fa-angle-down"></i>
+                    </div>
+                  </a>
+                  <div
+                    class="collapse"
+                    id="collapseDashboards"
+                    data-parent="#accordionSidenav"
+                  >
+                    <nav
+                      class="sidenav-menu-nested nav accordion"
+                      id="accordionSidenavPages"
+                    >
+                      <router-link class="nav-link" to="/dashboardpengurusakademik/residen"
+                        >Dashboard Residen</router-link
+                      >
+                      <router-link class="nav-link" to="/dashboardpengurusakademik/konsulen"
+                        >Dashboard Konsulen</router-link
+                      >
+                      <router-link class="nav-link" to="/dashboardpengurusakademik/laporanpasien"
+                        >Dashboard Laporan Pasien</router-link
+                      >
+                      <router-link class="nav-link" to="/dashboardpengurusakademik/laporantugas"
+                        >Dashboard Laporan Tugas</router-link
+                      >
+                      <router-link class="nav-link" to="/dashboardpengurusakademik/modul"
+                        >Dashboard Modul</router-link
+                      >
+                    </nav>
+                  </div>
+                  <!-- END OF PENGURUS AKADEMIK -->
+                
+                </div>
                 </div>
               </div>
             </div>
