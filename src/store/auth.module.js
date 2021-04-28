@@ -11,7 +11,7 @@ export const auth = {
   state: initialState,
   actions: {
     login({ commit }, user) {
-      AuthService.login(user).then(
+      return AuthService.login(user).then(
         user => {
           return UserService.getPenggunaRolesByUsername(user.username)
           .then(userData => {
