@@ -155,7 +155,7 @@
                 </thead>
                 <tbody>
                   <tr
-                    v-for="(item, index) in listKasus"
+                    v-for="(item, index) in listReferat"
                     v-bind:key="item.id"
                   >
                     <td>
@@ -212,7 +212,7 @@
                 </thead>
                 <tbody>
                   <tr
-                    v-for="(item, index) in listKasus"
+                    v-for="(item, index) in listBook"
                     v-bind:key="item.id"
                   >
                     <td>
@@ -269,7 +269,7 @@
                 </thead>
                 <tbody>
                   <tr
-                    v-for="(item, index) in listKasus"
+                    v-for="(item, index) in listJournal"
                     v-bind:key="item.id"
                   >
                     <td>
