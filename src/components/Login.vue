@@ -1,11 +1,7 @@
 <template>
   <div class="col-md-12">
     <div class="card card-container">
-      <img
-        id="profile-img"
-        src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-        class="profile-img-card"
-      />
+
       <form name="form" @submit.prevent="handleLogin">
         <div class="form-group">
           <label for="username">Username</label>
@@ -93,6 +89,7 @@ export default {
               error.message ||
               error.toString();
               this.$store.commit("auth/loginFailure");
+              console.log(this.message);
             }
           );
         };

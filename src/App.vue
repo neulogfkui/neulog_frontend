@@ -1,7 +1,8 @@
 <template>
   <body class="nav-fixed">
     <div v-if="!isLoggedIn">
-      <Login />
+      <!-- <Login /> -->
+      <LoginSocial />
     </div>
     <div v-if="isLoggedIn">
     <nav
@@ -363,11 +364,12 @@
 
 <script>
 import Login from './components/Login';
+import LoginSocial from './components/LoginSocial';
 import loadScript from './js/scripts';
 
 export default {
   name: "App",
-  components: {Login},
+  components: {Login, LoginSocial},
   data: function () {
     return {
       role: [],
