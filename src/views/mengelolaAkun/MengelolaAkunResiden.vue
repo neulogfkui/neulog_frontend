@@ -67,7 +67,10 @@
 							<td>{{ residen.username }}</td>
 							<td>{{ residen.email }}</td>
 							<td>{{ residen.tahunMasuk }}/{{ residen.term }}</td>
-							<td><button @click="redirectToView(residen.id)" class="btn btn-primary">Lihat Detail</button></td>
+							<td>
+								<button @click="redirectToView(residen.id)" class="btn btn-primary mr-2">Detail</button>
+								<button @click="redirectToUpdate(residen.id)" class="btn btn-warning">Update</button>
+							</td>
 							</tr>
 						</tbody>
 					</table>
@@ -118,6 +121,10 @@ export default {
     },
 
     methods: {
+        redirectToUpdate(id) {
+            this.$router.push("/mengelola-akun/residen-update/"+id);
+        },
+
         redirectToResidenRegister() {
             this.$router.push('/mengelola-akun/residen-register');
 		},
@@ -149,5 +156,9 @@ export default {
     background: -webkit-linear-gradient(rgb(31, 223, 159), rgb(59, 104, 226));
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
+}
+tr td:last-child {
+    width: 1%;
+    white-space: nowrap;
 }
 </style>

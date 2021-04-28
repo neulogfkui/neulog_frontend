@@ -13,8 +13,8 @@
                     <!-- Form Group (username)-->
                     <div class="form-row">
                         <div class="form-group col">
-                            <label class="small mb-1" for="inputUsername">Username (gunakan huruf kecil tanpa spasi)</label>
-                            <input v-model="staff.username" class="form-control" id="inputUsername" type="text" placeholder="Cth: ardiafrizky"/>
+                            <label class="small mb-1" for="inputUsername">Username</label>
+                            <input disabled v-model="staff.username" class="form-control" id="inputUsername" type="text" placeholder="Cth: ardiafrizky"/>
                         </div>
                         <div class="form-group col">
                             <label class="small mb-1" for="inputEmailAddress">Email</label>
@@ -30,7 +30,7 @@
                     <!-- Form Row-->
                     <div class="form-row">
                         <div class="form-group col">
-                            <label class="small mb-1" for="inputPassword">Password Baru</label>
+                            <label class="small mb-1" for="inputPassword">Password Baru (min: 8 karakter)</label>
                             <input v-model="staff.password" class="form-control" id="inputPassword" type="password" placeholder="Masukkan Password Baru" >
                         </div>
                         <div class="form-group col">
@@ -192,6 +192,7 @@ export default {
                     // error.message ||
                     // error.toString();
                 this.successful = false
+                console.log(error);
                 }
             );
             this.fetchDatas();

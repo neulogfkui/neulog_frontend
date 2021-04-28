@@ -73,13 +73,17 @@
                     <h5 class="modal-title" id="deleteConfirmationTitle">Penghapusan akun {{ user.username }}</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                 </div>
-                <div v-if="!deleted" class="modal-body">Apakah anda yakin? Akun {{ user.name }} ({{user.username}}) akan terhapus secara permanen dan tidak dapat dikembalikan lagi.</div>
-                <div v-if="deleted" class="modal-body success-body">
-                    <i class="far fa-check-circle check-success"></i>
+                <div v-if="isDeleteFail" class="modal-body fail-body">
+                    <i class="fas fa-times-circle fail-icon"></i>
+                    {{ message }}
+                </div>
+                <div v-if="!deleted && !isDeleteFail" class="modal-body">Apakah anda yakin? Akun {{ user.name }} ({{user.username}}) akan terhapus secara permanen dan tidak dapat dikembalikan lagi.</div>
+                <div v-if="deleted && !isDeleteFail" class="modal-body success-body">
+                    <i class="far fa-check-circle check-icon"></i>
                     Akun {{ user.name }} ({{user.username}}) berhasil dihapus. Halaman ini tidak akan dapat diakses lagi setelah anda menutupnya.
                 </div>
                 <div class="modal-footer">
-                    <button v-if="!deleted" @click="deletePengguna" class="btn btn-danger" type="button">Hapus</button>
+                    <button v-if="!deleted && !isDeleteFail" @click="deletePengguna" class="btn btn-danger" type="button">Hapus</button>
                     <button class="btn btn-light" type="button" data-dismiss="modal">Tutup</button>
                 </div>
             </div>
@@ -99,7 +103,8 @@ export default {
             submitted: false,
             successful: false,
             message: '',
-            deleted: false
+            deleted: false,
+            isDeleteFail: false
         }
     },
     mounted() {
@@ -130,12 +135,11 @@ export default {
                 this.deleted = true;
             },
             error => {
-                this.message =
-                    (error.response && error.response.data && error.response.data.message) ||
-                    error.message ||
-                    error.toString();
-                this.successful = false;
-                this.$router.push('/404');
+                this.message = "Akun ini tidak dapat dihapus karena masih terhubung dengan entitas lain."
+                    // (error.response && error.response.data && error.response.data.message) ||
+                    // error.message ||
+                    // error.toString();
+                this.isDeleteFail = true;
                 }
             );
         }
@@ -160,8 +164,11 @@ i, #label-roles{
     justify-self: center;
     align-self: center;
 }
-i {
+.check-icon {
     color: rgba(54, 138, 54, 0.781);
+}
+.fail-icon {
+    color: rgb(173, 20, 20);
 }
 .btn {
     margin: 2rem .75rem 0 0;
@@ -172,12 +179,12 @@ i {
 .modal-title {
     color: rgb(14, 91, 207);
 }
-.success-body {
+.success-body, .fail-body {
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.check-success {
+.check-icon, .fail-icon {
     margin: 2rem;
     font-size: 3rem;
 }

@@ -25,7 +25,7 @@
                     <!-- Form Row-->
                     <div class="form-row">
                         <div class="form-group col">
-                            <label class="small mb-1" for="inputPassword">Password</label>
+                            <label class="small mb-1" for="inputPassword">Password (min: 8 karakter)</label>
                             <input v-model="staff.password" class="form-control" id="inputPassword" type="password" placeholder="Masukkan Password" >
                         </div>
                         <div class="form-group col">

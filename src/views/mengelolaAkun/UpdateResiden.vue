@@ -13,8 +13,8 @@
                     <!-- Form Group (username)-->
                     <div class="form-row">
                         <div class="form-group col">
-                            <label class="small mb-1" for="inputUsername">Username (huruf kecil tanpa spasi, min: 3 huruf)</label>
-                            <input v-model="residen.username" class="form-control" id="inputUsername" type="text" placeholder="Cth: ardiafrizky"/>
+                            <label class="small mb-1" for="inputUsername">Username</label>
+                            <input v-model="residen.username" disabled class="form-control" id="inputUsername" type="text" placeholder="Cth: ardiafrizky"/>
                         </div>
                         <div class="form-group col">
                             <label class="small mb-1" for="inputEmailAddress">Email address</label>
@@ -30,7 +30,7 @@
                     <!-- Form Row-->
                     <div class="form-row">
                         <div class="form-group col">
-                            <label class="small mb-1" for="inputPassword">New Password</label>
+                            <label class="small mb-1" for="inputPassword">New Password (min: 8 karakter)</label>
                             <input v-model="residen.password" class="form-control" id="inputPassword" type="password" placeholder="Masukkan Password Baru" >
                         </div>
                         <div class="form-group col">
@@ -46,7 +46,7 @@
                             <input v-model="residen.tempatLahir" class="form-control" id="inputTempatLahir" type="text" placeholder="Cth: Cilincing, DKI Jakarta"/>
                         </div>
                         <div class="form-group col">
-                            <label class="small mb-1" for="inputBirthday">Tanggal Lahir (yyyy-mm-dd)</label>
+                            <label class="small mb-1" for="inputBirthday">Tanggal Lahir</label>
                             <input v-model="residen.tanggalLahir" class="form-control" id="inputBirthday" type="date" name="birthday"/>
                         </div>
                     </div>

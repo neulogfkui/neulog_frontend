@@ -73,7 +73,10 @@
 									<span v-if="role.name=='ROLE_KETUAMODUL'" class="badge badge-secondary role-tag">K. Modul</span>
 								</div>
 							</td>
-							<td><button @click="redirectToView(staff.username)" class="btn btn-primary">Lihat Detail</button></td>
+							<td>
+								<button @click="redirectToView(staff.username)" class="btn btn-primary mr-2">Detail</button>
+								<button @click="redirectToUpdate(staff.username)" class="btn btn-warning">Update</button>
+							</td>
 							</tr>
 						</tbody>
 					</table>
@@ -118,13 +121,16 @@ export default {
                     error.message ||
                     error.toString();
                 this.successful = false
-				// this.loadDataTable();
 				dataTableLoader();
             }
 		);
     },
 
     methods: {
+		redirectToUpdate(username) {
+            this.$router.push("/mengelola-akun/staff-update/"+username);
+        },
+
         redirectToStaffRegister() {
             this.$router.push('/mengelola-akun/staff-register');
 		},
@@ -164,5 +170,9 @@ export default {
 }
 .role-tag {
 	font-size: .7rem;
+}
+tr td:last-child {
+    width: 1%;
+    white-space: nowrap;
 }
 </style>
