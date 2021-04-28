@@ -12,6 +12,12 @@ import TugasPresentasiDetail from "@/views/Details/TugasPresentasiDetail.vue"
 import TugasPublikasiDetail from "@/views/Details/TugasPublikasiDetail.vue"
 import TugasPenelitianAkhirDetail from "@/views/Details/TugasPenelitianAkhirDetail.vue"
 import KasusSulitDetail from "@/views/Details/KasusSulitDetail.vue"
+import MenuTugasPresentasi from '../views/DashboardPengurusAkademik/MenuTugasPresentasi.vue'
+import MenuKasusSulit from '../views/DashboardPengurusAkademik/MenuKasusSulit.vue'
+import MenuTugasPublikasi from '../views/DashboardPengurusAkademik/MenuTugasPublikasi.vue'
+import MenuTugasAkhir from '../views/DashboardPengurusAkademik/MenuTugasAkhir.vue'
+import MenuResidenOnGoing from '../views/DashboardPengurusAkademik/MenuResidenOnGoing.vue'
+import MenuResidenLulus from '../views/DashboardPengurusAkademik/MenuResidenLulus.vue'
 
 
 let routes = [
@@ -25,20 +31,50 @@ let routes = [
         name: 'MenuLaporanPasien',
         component: MenuLaporanPasien
       },
+      // {
+      //   path: '/dashboardpengurusakademik/residen',
+      //   name: 'MenuResiden',
+      //   component: MenuResiden
+      // },
       {
-        path: '/dashboardpengurusakademik/residen',
-        name: 'MenuResiden',
-        component: MenuResiden
+        path: '/dashboardpengurusakademik/residen/ongoing',
+        name: 'MenuResidenOnGoing',
+        component: MenuResidenOnGoing
+      },
+      {
+        path: '/dashboardpengurusakademik/residen/lulus',
+        name: 'MenuResidenLulus',
+        component: MenuResidenLulus
       },
       {
         path: '/dashboardpengurusakademik/konsulen',
         name: 'MenuKonsulen',
         component: MenuKonsulen
       },
+      // {
+      //   path: '/dashboardpengurusakademik/laporantugas',
+      //   name: 'MenuLaporanTugas',
+      //   component: MenuLaporanTugas
+      // },
       {
-        path: '/dashboardpengurusakademik/laporantugas',
-        name: 'MenuLaporanTugas',
-        component: MenuLaporanTugas
+        path: '/dashboardpengurusakademik/laporantugas/tugaspresentasi',
+        name: 'MenuTugasPresentasi',
+        component: MenuTugasPresentasi
+      },
+      {
+        path: '/dashboardpengurusakademik/laporantugas/kasussulit',
+        name: 'MenuKasusSulit',
+        component: MenuKasusSulit
+      },
+      {
+        path: '/dashboardpengurusakademik/laporantugas/tugaspublikasi',
+        name: 'MenuTugasPublikasi',
+        component: MenuTugasPublikasi
+      },
+      {
+        path: '/dashboardpengurusakademik/laporantugas/tugasakhir',
+        name: 'MenuTugasAkhir',
+        component: MenuTugasAkhir
       },
       {
         path: '/dashboardpengurusakademik/modul',

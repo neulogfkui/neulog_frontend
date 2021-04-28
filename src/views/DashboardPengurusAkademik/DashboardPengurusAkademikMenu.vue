@@ -8,11 +8,11 @@
 <div class="container">
     <SingleTab title="Daftar Dashboard"/>
     <div class="row">
-        <ColorCard title="Residen" subtitle="Dashboard" color="bg-primary" link="/dashboardpengurusakademik/residen" action="View Dashboard" icon="user"/>
+        <ColorCard title="Residen" subtitle="Dashboard" color="bg-primary" link="/dashboardpengurusakademik/residen/ongoing" action="View Dashboard" icon="user"/>
         <ColorCard title="Konsulen" subtitle="Dashboard" color="bg-secondary" link="/dashboardpengurusakademik/konsulen" action="View Dashboard" icon="users"/>
         <ColorCard title="Modul" subtitle="Dashboard" color="bg-success" link="/dashboardpengurusakademik/modul" action="View Dashboard" icon="briefcase"/>
         <ColorCard title="Laporan Pasien" subtitle="Dashboard" color="bg-warning" link="/dashboardpengurusakademik/laporanpasien" action="View Dashboard" icon="file-text"/>
-        <ColorCard title="Laporan Tugas" subtitle="Dashboard" color="bg-info" link="/dashboardpengurusakademik/laporantugas" action="View Dashboard" icon="book-open"/>
+        <ColorCard title="Laporan Tugas" subtitle="Dashboard" color="bg-info" link="/dashboardpengurusakademik/laporantugas/tugaspresentasi" action="View Dashboard" icon="book-open"/>
     </div>
 </div>
     

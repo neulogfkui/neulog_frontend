@@ -174,7 +174,7 @@
                       class="sidenav-menu-nested nav accordion"
                       id="accordionSidenavPages"
                     >
-                      <router-link class="nav-link" to="/dashboardpengurusakademik/residen"
+                      <router-link class="nav-link" to="/dashboardpengurusakademik/residen/ongoing"
                         >Dashboard Residen</router-link
                       >
                       <router-link class="nav-link" to="/dashboardpengurusakademik/konsulen"
@@ -183,7 +183,7 @@
                       <router-link class="nav-link" to="/dashboardpengurusakademik/laporanpasien"
                         >Dashboard Laporan Pasien</router-link
                       >
-                      <router-link class="nav-link" to="/dashboardpengurusakademik/laporantugas"
+                      <router-link class="nav-link" to="/dashboardpengurusakademik/laporantugas/tugaspresentasi"
                         >Dashboard Laporan Tugas</router-link
                       >
                       <router-link class="nav-link" to="/dashboardpengurusakademik/modul"

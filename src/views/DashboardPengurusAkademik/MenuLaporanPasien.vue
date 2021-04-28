@@ -1,10 +1,11 @@
 <template>
   <MainHeader
     title= "Dashboard Laporan Pasien"
+    :subtitle="this.subtitle"
     icon= "file-text">
   </MainHeader>
   <div class="container">
-    <div class="row upper">
+    <div class="row upper justify-content-center">
       <!-- <BarChart
         v-if="isMounted"
         :label="this.labelBarTindakan"
@@ -127,7 +128,8 @@ export default {
       dataBarLaporan: [],
       listLaporanPasien: [],
       isMounted: false,
-      ready: false
+      ready: false,
+      subtitle: String,
     };
   },
   components: {
@@ -138,9 +140,13 @@ export default {
   computed:{
     isDataTableReady(){
       return this.ready
+    },
+    getNamaPA(){
+      return JSON.parse(localStorage.getItem("userData")).pengurusAkademik.pengguna.name;
     }
   },
   created() {
+    this.subtitle = this.getNamaPA;
     axios
       .get("http://localhost:8000/api/dashboardPengurusAkademik/laporanpasien/", { headers: authHeader() })
       .then((resp) => {

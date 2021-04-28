@@ -9,6 +9,7 @@
   <div class="container" v-if="getReady">
     <div class="row mr-2 mb-4 justify-content-end upper">
       <!-- BUTTON UNTUK MENAMPILKAN MODAL -->
+      <div v-if="isResiden">
       <button
         id="completeButton"
         class="btn btn-danger mr-4"
@@ -29,6 +30,7 @@
           Edit
         </button>
       </router-link>
+      </div>
     </div>
     <div class="row justify-content-center">
       <div class="col-xxl-4 col-xl-4 mb-4">
@@ -225,6 +227,9 @@ export default {
     getReady() {
       return this.ready;
     },
+    isResiden(){
+      return JSON.parse(localStorage.getItem('user')).roles.includes('ROLE_RESIDEN')
+    }
   },
   mounted() {
     this.delete.idLaporanTugas = this.$route.params.idLaporanTugas;

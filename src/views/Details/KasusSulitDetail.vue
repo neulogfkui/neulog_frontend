@@ -8,6 +8,7 @@
   <div class="container" v-if="getReady">
     <div class="row mr-2 mb-4 justify-content-end upper">
       <!-- BUTTON UNTUK MENAMPILKAN MODAL -->
+      <div v-if="isResiden">
       <button
         id="completeButton"
         class="btn btn-danger mr-4"
@@ -28,8 +29,9 @@
           Edit
         </button>
       </router-link>
+      </div>
     </div>
-    <div class="row">
+    <div class="row justify-content-center">
       <div class="col-xxl-4 col-xl-4 mb-4">
         <div class="card card-header-actions h-100">
           <div class="card-header">Data Tugas Presentasi</div>
@@ -195,6 +197,7 @@ import VueAxios from "vue-axios";
 import LightHeader from "@/components/LightHeader";
 import CardTimeline from "@/components/CardTimeline";
 import CardTimelineEnter from "@/components/CardTimelineEnter";
+import authHeader from "@/services/auth-header"
 
 export default {
   name: "KasusSulitDetail",
@@ -215,13 +218,16 @@ export default {
     getReady() {
       return this.ready;
     },
+    isResiden(){
+      return JSON.parse(localStorage.getItem('user')).roles.includes('ROLE_RESIDEN')
+    }
   },
   mounted() {
     this.delete.idLaporanTugas = this.$route.params.idLaporanTugas;
     axios
       .get(
         "http://localhost:8000/api/dashboardPengurusAkademik/laporantugas/" +
-          this.$route.params.idLaporanTugas
+          this.$route.params.idLaporanTugas, { headers : authHeader()}
       ) // nanti diganti ini angka 1 nya
       .then((resp) => {
         console.warn(resp.data);

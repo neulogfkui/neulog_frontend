@@ -1,10 +1,11 @@
 <template>
   <MainHeader
     title= "Dashboard Laporan Tugas"
+    :subtitle="this.subtitle"
     icon= "book-open">
   </MainHeader>
   <div class="container">
-    <div class="row upper">
+    <div class="row upper justify-content-center">
       <BarChart
         v-if="isMounted"
         :label="this.labelBar"
@@ -363,7 +364,8 @@ export default {
       listTugasPublikasi: Array,
       listTugasPenelitianAkhir: Array,
       isMounted: false,
-      ready: false
+      ready: false,
+      subtitle: String,
     };
   },
   components: {
@@ -374,9 +376,13 @@ export default {
   computed:{
     isDataTableReady(){
       return this.ready
+    },
+    getNamaPA(){
+      return JSON.parse(localStorage.getItem("userData")).pengurusAkademik.pengguna.name;
     }
   },
   mounted() {
+    this.subtitle = this.getNamaPA;
     axios
       .get("http://localhost:8000/api/dashboardPengurusAkademik/laporantugas/", { headers: authHeader() })
       .then((resp) => {

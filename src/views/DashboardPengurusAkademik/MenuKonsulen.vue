@@ -1,10 +1,11 @@
 <template>
   <MainHeader
     title= "Dashboard Konsulen"
+    :subtitle="this.subtitle"
     icon= "users">
   </MainHeader>
   <div class="container">
-    <div class="row upper">
+    <div class="row upper justify-content-center">
       <BigNumberCard
         title="Rata - Rata Laporan Pasien Per Bulan"
         :count="avgLaporanPasien"
@@ -80,7 +81,8 @@ export default {
       avgLaporanTugas: Number,
       listKonsulen: Array,
       isMounted: false,
-      ready: false
+      ready: false,
+      subtitle: String,
     };
   },
   components: {
@@ -90,9 +92,13 @@ export default {
   computed:{
     isDataTableReady(){
       return this.ready
+    },
+    getNamaPA(){
+      return JSON.parse(localStorage.getItem("userData")).pengurusAkademik.pengguna.name;
     }
   },
   mounted() {
+    this.subtitle = this.getNamaPA;
     axios
       .get("http://localhost:8000/api/dashboardPengurusAkademik/konsulen/", { headers: authHeader() })
       .then((resp) => {
