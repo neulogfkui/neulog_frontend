@@ -317,9 +317,9 @@
           <div class="sidenav-footer">
             <div class="sidenav-footer-content">
               <div class="sidenav-footer-subtitle">Logged in as:</div>
-              <div class="sidenav-footer-title">Valerie Luna</div>
+              <div class="sidenav-footer-title">{{userData.name}} ({{userData.username}}}</div>
               <button 
-                class="btn btn-danger m-1" 
+                class="btn btn-danger" 
                 style="margin-bottom:2rem!important;"
                 @click="logOut">Logout</button>
             </div>
@@ -381,9 +381,9 @@ export default {
     isLoggedIn() {
       return this.$store.state.auth.status.loggedIn;
     },
-    // isUserDataLoaded() {
-    //   return (this.$store.state.auth.user!=undefined);
-    // },
+    userData() {
+      return (JSON.parse(localStorage.getItem('userData')));
+    },
     userRoles() {
       if (this.isLoggedIn) return this.$store.state.auth.user.roles;
       else return ["ROLE_DEFAULT"];
@@ -406,3 +406,9 @@ export default {
   }
 }
 </script>
+<style>
+.sidenav-footer {
+  padding-top: 1rem !important;
+  height: fit-content !important;
+}
+</style>
