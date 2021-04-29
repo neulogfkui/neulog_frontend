@@ -145,7 +145,9 @@ export default {
             message: '',
             namaKonsulen: "",
             konsulens: Array,
-            ready: false
+            isUserReady: false,
+            isResidenReady: false,
+            isKonsulenReady: false
         }
     },
     computed: {
@@ -153,14 +155,13 @@ export default {
             return this.$store.state.auth.status.loggedIn
         },
         isReady() {
-            return this.ready;
+            return (this.isUserReady && this.isResidenReady && this.isKonsulenReady);
         }
     },
 
     created() {
         this.fetchDatas();
-        this.ready = true;
-        console.log(this.residen);
+        if(this.isReady) console.log(this.residen)
     },
 
     methods: {
@@ -202,8 +203,15 @@ export default {
         fetchDatas() {
             this.$store.dispatch('user/getResidenById', this.$route.params.idResiden).then(
             success => {
-                this.residen = success;
+                this.residen.alamatRumah = success.alamatRumah;
                 this.residen.idPembimbing = success.konsulen.idKonsulen;
+                this.residen.noTelepon = success.noTelepon;
+                this.residen.npm = success.npm;
+                this.residen.status = success.status;
+                this.residen.tahunMasuk = success.tahunMasuk;
+                this.residen.term = success.term;
+
+                this.isResidenReady = true;
             },
             error => {
                 this.message =
@@ -212,38 +220,42 @@ export default {
                     error.toString();
                 this.$router.push('/404');
                 }
-            );
-            
+            ); 
+
             this.$store.dispatch('user/getPenggunaByResidenId', this.$route.params.idResiden).then(
-            success => {
-                this.residen.username = success.username;
-                this.residen.name = success.name;
-                this.residen.email = success.email;
-                this.residen.tanggalLahir = success.tanggalLahir;
-                this.residen.tempatLahir = success.tempatLahir;
-            },
-            error => {
-                this.message =
-                    (error.response && error.response.data && error.response.data.message) ||
-                    error.message ||
-                    error.toString();
-                this.successful = false;
-                this.$router.push('/404');
+                success => {
+                    this.residen.username = success.username;
+                    this.residen.name = success.name;
+                    this.residen.email = success.email;
+                    this.residen.tanggalLahir = success.tanggalLahir;
+                    this.residen.tempatLahir = success.tempatLahir;
+
+                    this.isUserReady = true;
+                },
+                error => {
+                    this.message =
+                        (error.response && error.response.data && error.response.data.message) ||
+                        error.message ||
+                        error.toString();
+                    this.successful = false;
+                    this.$router.push('/404');
                 }
             );
+
             this.$store.dispatch('user/getAllPenggunaKonsulen', this.$route.params.username).then(
-            success => {
-                this.konsulens = success;
-            },
-            error => {
-                this.message =
-                    (error.response && error.response.data && error.response.data.message) ||
-                    error.message ||
-                    error.toString();
-                this.successful = false;
-                this.$router.push('/404');
-            }
-        );
+                success => {
+                    this.konsulens = success;
+                    this.isKonsulenReady = true;
+                },
+                error => {
+                    this.message =
+                        (error.response && error.response.data && error.response.data.message) ||
+                        error.message ||
+                        error.toString();
+                    this.successful = false;
+                    this.$router.push('/404');
+                }
+            );
         }
     }
 }
