@@ -21,6 +21,7 @@
                   class="form-control"
                   name="namaPertemuan"
                   v-model="posts.namaPertemuan"
+                  required
                 >
                   <option
                     v-for="item in listNamaPertemuan"
@@ -39,6 +40,7 @@
                   class="form-control"
                   name="kasusYangDibahas"
                   v-model="posts.kasusYangDibahas"
+                  required
                 >
                   <option
                     v-for="item in listKasusYangDibahas"
@@ -58,7 +60,7 @@
                   name="link"
                   v-model="posts.linkTugas"
                   type="text"
-                  placeholder="Masukkan judul presentasi"
+                  placeholder="Masukkan link tugas"
                 />
               </div>
 
@@ -70,6 +72,7 @@
                   type="date"
                   name="tanggal"
                   v-model="posts.tanggal"
+                  required
                 />
               </div>
 
@@ -80,6 +83,7 @@
                   class="form-control"
                   name="konsulen"
                   v-model="posts.idKonsulen"
+                  required
                 >
                   <option
                     v-for="item in listKonsulen"
@@ -221,7 +225,7 @@
               </div>
               <div v-if="status == 1"></div>
               <div v-if="status == 2">
-                <router-link :to="'/kasussulitdetail/' + posts.idLaporanTugas"
+                <router-link :to="'/detailtugas/pksm/' + posts.idLaporanTugas"
                   ><button class="btn btn-primary" data-dismiss="modal">
                     Ok
                   </button></router-link
