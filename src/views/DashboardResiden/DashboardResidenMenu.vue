@@ -69,11 +69,8 @@ export default {
   name: "DashboardResidenMenu",
   data() {
     return {
-      subtitleHeader:
-        JSON.parse(localStorage.getItem("userData")).name +
-        " - " +
-        JSON.parse(localStorage.getItem("userData")).residen.npm,
-        idResiden: JSON.parse(localStorage.getItem("userData")).residen.idResiden,
+      subtitleHeader: String,
+      idResiden: String,
     };
   },
   components: {
@@ -81,5 +78,22 @@ export default {
     ColorCard,
     MainHeader,
   },
+  computed: {
+    isLoggedIn() {
+      return this.$store.state.auth.status.loggedIn;
+    },
+    userRoles() {
+      if (this.isLoggedIn) return this.$store.state.auth.user.roles;
+      else return ["ROLE_DEFAULT"];
+    },
+  },
+  mounted(){
+    if(this.userRoles == "ROLE_RESIDEN"){
+      this.subtitleHeader = JSON.parse(localStorage.getItem("userData")).name +
+        " - " +
+      JSON.parse(localStorage.getItem("userData")).residen.npm;
+      this.idResiden = JSON.parse(localStorage.getItem("userData")).residen.idResiden;
+    }
+  }
 };
 </script>

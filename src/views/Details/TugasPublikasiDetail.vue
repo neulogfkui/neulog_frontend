@@ -34,7 +34,7 @@
     <div class="row justify-content-center">
       <div class="col-xxl-4 col-xl-4 mb-4">
         <div class="card card-header-actions h-100">
-          <div class="card-header">Data Tugas Presentasi</div>
+          <div class="card-header">Data Tugas Publikasi</div>
           <div class="card-body">
             <table cellpadding="5">
               <tbody>

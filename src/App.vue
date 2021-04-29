@@ -68,28 +68,28 @@
                     class="sidenav-menu-nested nav accordion"
                     id="accordionSidenavPages"
                   >
-                    <router-link class="nav-link" to="/components"
+                    <router-link class="nav-link" :to="this.linkMenuResiden"
                       >Menu</router-link
                     >
-                    <router-link class="nav-link" to="/components"
+                    <router-link class="nav-link" :to="this.linkLaporanPasien"
                       >Pasien</router-link
                     >
-                    <router-link class="nav-link" to="/components"
+                    <router-link class="nav-link" :to="this.linkLaporanTugas"
                       >Tugas</router-link
                     >
-                    <router-link class="nav-link" to="/components"
+                    <router-link class="nav-link" :to="this.linkProgressTest"
                       >Progress Test</router-link
                     >
-                    <router-link class="nav-link" to="/components"
+                    <router-link class="nav-link" :to="this.linkKompetensi"
                       >Kompetensi</router-link
                     >
-                    <router-link class="nav-link" to="/components"
+                    <router-link class="nav-link" :to="this.linkModul"
                       >Modul</router-link
                     >
-                    <router-link class="nav-link" to="/components"
+                    <router-link class="nav-link" :to="this.linkJaga"
                       >Jaga</router-link
                     >
-                    <router-link class="nav-link" to="/components"
+                    <router-link class="nav-link" :to="this.linkTindakan"
                       >Tindakan</router-link
                     >
                   </nav>
@@ -121,10 +121,10 @@
                     class="sidenav-menu-nested nav accordion"
                     id="accordionSidenavPages"
                   >
-                    <router-link class="nav-link" to="/components"
+                    <router-link class="nav-link" to="/laporanpasienform/0"
                       >Pasien</router-link
                     >
-                    <router-link class="nav-link" to="/components"
+                    <router-link class="nav-link" to="/addlaporantugas"
                       >Tugas</router-link
                     >
                     <router-link class="nav-link" to="/components"
@@ -373,7 +373,15 @@ export default {
   data: function () {
     return {
       role: [],
-      id: Array
+      id: Array,
+      linkMenuResiden: String,
+      linkLaporanPasien: String,
+      linkLaporanTugas: String,
+      linkProgressTest: String,
+      linkKompetensi: String,
+      linkModul: String,
+      linkJaga: String,
+      linkTindakan: String,
     };
   },
 
@@ -392,6 +400,16 @@ export default {
   
   mounted() {
     loadScript();
+    if(this.userRoles == "ROLE_RESIDEN"){
+      this.linkMenuResiden = "/dashboardresiden/" + this.userData.residen.idResiden;
+      this.linkLaporanPasien = "/dashboardlaporanpasien/" + this.userData.residen.idResiden;
+      this.linkLaporanTugas = "/dashboardlaporantugas/" + this.userData.residen.idResiden;
+      this.linkProgressTest = "/dashboardprogresstest/" + this.userData.residen.idResiden;
+      this.linkKompetensi = "/dashboardkompetensi/" + this.userData.residen.idResiden;
+      this.linkModul = "/dashboardmodul/" + this.userData.residen.idResiden;
+      this.linkJaga = "/dashboardjaga/" + this.userData.residen.idResiden;
+      this.linkTindakan = "/dashboardtindakan/" + this.userData.residen.idResiden;
+    }
   },
 
   methods: {

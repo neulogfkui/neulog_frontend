@@ -260,7 +260,7 @@ export default {
         eventPublikasi: null,
         judulPublikasi: null,
         linkTugas: null,
-        idResiden: 1,
+        idResiden: null,
         listReviewer: [],
         idLaporanTugas: 0,
         idChild: 0,
@@ -338,6 +338,7 @@ export default {
   },
   methods: {
     postData(e) {
+      this.posts.idResiden = this.getIdResiden;
       this.status = 1;
       console.warn(this.posts);
 
