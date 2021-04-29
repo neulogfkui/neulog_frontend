@@ -23,6 +23,7 @@
                   v-model="posts.eventPublikasi"
                   type="text"
                   placeholder="Masukkan event publikasi"
+                  required
                 />
               </div>
 
@@ -35,6 +36,7 @@
                   v-model="posts.judulPublikasi"
                   type="text"
                   placeholder="Masukkan judul publikasi"
+                  required
                 />
               </div>
 
@@ -45,6 +47,7 @@
                   class="form-control"
                   name="konsulen"
                   v-model="posts.idKonsulen"
+                  required
                 >
                   <option
                     v-for="item in listKonsulen"
@@ -63,6 +66,7 @@
                   type="date"
                   name="tanggal"
                   v-model="posts.tanggal"
+                  required
                 />
               </div>
 
@@ -74,7 +78,8 @@
                   name="link"
                   v-model="posts.linkTugas"
                   type="text"
-                  placeholder="Masukkan judul presentasi"
+                  placeholder="Masukkan link tugas"
+                  required
                 />
               </div>
             </div>

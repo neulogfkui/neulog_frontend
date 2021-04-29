@@ -34,6 +34,7 @@
                     v-for="item in listStage"
                     v-bind:key="item.id"
                     :value="item"
+                    required
                   >
                     {{ item }}
                   </option>
@@ -46,6 +47,7 @@
                     class="form-control"
                     name="konsulen"
                     v-model="posts.idKonsulen"
+                    required
                   >
                     <option
                       v-for="item in listKonsulen"
@@ -65,6 +67,7 @@
                     type="date"
                     name="tanggal"
                     v-model="posts.tanggal"
+                    required
                   />
                 </div>
 

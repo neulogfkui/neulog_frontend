@@ -1,4 +1,9 @@
 <template>
+<LightHeader
+    title="Tambah Laporan Tugas"
+    icon="file-text"
+    :subtitle="subtitleHeader"
+  />
 <div class="container">
     <SingleTab title="Pilih Tugas"/> 
     <div class="row">
@@ -15,12 +20,24 @@
 <script>
 import SingleTab from '@/components/SingleTab.vue'
 import ColorCard from '@/components/ColorCard.vue'
+import LightHeader from "@/components/LightHeader.vue";
 
 export default {
     name: "LaporanTugasChoice",
+     data(){
+        return {
+            subtitleHeader:
+        JSON.parse(localStorage.getItem("userData")).name +
+        " - " +
+        JSON.parse(localStorage.getItem("userData")).residen.npm,
+        }
+    },
     components: {
         SingleTab,
-        ColorCard
+        ColorCard, 
+        LightHeader,
     }
+   
+
 }
 </script>

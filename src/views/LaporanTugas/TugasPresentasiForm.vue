@@ -20,6 +20,7 @@
                   class="form-control"
                   name="modul"
                   v-model="posts.idModul"
+                  required
                 >
                   <option
                     v-for="item in listModul"
@@ -38,6 +39,7 @@
                   class="form-control"
                   name="jenisTugas"
                   v-model="posts.jenis"
+                  required
                   v-if="this.$route.params.operation != '0'"
                   disabled
                 >
@@ -68,6 +70,7 @@
                   class="form-control"
                   name="konsulen"
                   v-model="posts.idKonsulen"
+                  required
                   :disabled="this.$route.params.operation != '0'"
                 >
                   <option
@@ -87,6 +90,7 @@
                   type="date"
                   name="tanggal"
                   v-model="posts.tanggal"
+                  required
                 />
               </div>
               <!-- JUDUL -->
@@ -97,7 +101,7 @@
                   name="judul"
                   v-model="posts.judulMakalah"
                   type="text"
-                  placeholder="Masukkan judul presentasi" required
+                  placeholder="Masukkan judul makalah" required
                 />
               </div>
               <!-- LINK -->
@@ -108,7 +112,7 @@
                   name="link"
                   v-model="posts.linkTugas"
                   type="text"
-                  placeholder="Masukkan judul presentasi"
+                  placeholder="Masukkan link tugas"
                 />
               </div>
             </div>
