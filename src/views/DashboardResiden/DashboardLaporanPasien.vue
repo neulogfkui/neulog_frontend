@@ -30,7 +30,7 @@
       <div class="col-xxl-12 col-xl-12 mb-4 mt-4">
         <div class="card card-header-actions h-100">
           <div class="card-header">
-            <b>List Reviewer</b>
+            <b>List Laporan Pasien</b>
           </div>
           <div class="card-body">
             <div class="datatable" v-if="isMounted">
