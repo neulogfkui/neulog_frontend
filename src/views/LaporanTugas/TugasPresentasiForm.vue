@@ -34,25 +34,12 @@
               <!-- JENIS TUGAS -->
               <div class="form-group">
                 <label for="sel1">Jenis Tugas</label>
-                <!-- disabled -->
-                <select
-                  class="form-control"
-                  name="jenisTugas"
-                  v-model="posts.jenis"
-                  required
-                  v-if="this.$route.params.operation != '0'"
-                  disabled
-                >
-                  <option>
-                    {{ posts.jenis }}
-                  </option>
-                </select>
                 <!-- not disabled -->
                 <select
                   class="form-control"
                   name="jenisTugas"
                   v-model="posts.jenis"
-                  v-if="this.$route.params.operation == '0'"
+                  required
                 >
                   <option
                     v-for="item in listJenisTugas"
@@ -71,7 +58,7 @@
                   name="konsulen"
                   v-model="posts.idKonsulen"
                   required
-                  :disabled="this.$route.params.operation != '0'"
+                  
                 >
                   <option
                     v-for="item in listKonsulen"

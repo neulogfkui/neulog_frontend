@@ -225,7 +225,7 @@
               </div>
               <div v-if="status == 1"></div>
               <div v-if="status == 2">
-                <router-link :to="'/kasussulitdetail/' + posts.idLaporanTugas"
+                <router-link :to="'/detailtugas/pksm/' + posts.idLaporanTugas"
                   ><button class="btn btn-primary" data-dismiss="modal">
                     Ok
                   </button></router-link

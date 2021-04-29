@@ -11,7 +11,7 @@
         <div class="col-xxl-6 col-xl-6 mb-4">
           <div class="card card-header-actions h-100">
             <div class="card-header">
-              <b>Data Tugas Publikasi</b>
+              <b>Data Tugas Penelitian Akhir</b>
             </div>
             <div class="card-body">
               <!-- JUDUL PROPOSAL -->
@@ -23,6 +23,7 @@
                   v-model="posts.judulProposal"
                   type="text"
                   placeholder="Masukkan judul proposal"
+                  required
                 />
               </div>
 
@@ -215,7 +216,7 @@
               <div v-if="status == 1"></div>
               <div v-if="status == 2">
                 <router-link
-                  :to="'/tugaspenelitianakhirdetail/' + posts.idLaporanTugas"
+                  :to="'/detailtugas/tpa/' + posts.idLaporanTugas"
                   ><button class="btn btn-primary" data-dismiss="modal">
                     Ok
                   </button></router-link
