@@ -93,9 +93,9 @@ let routes = [
         component: DetailMenuKonsulen
       },
       {
-        path: '/dashboardpengurusakademik/modul/:idModulResiden',
-        name: 'DetailModulResiden_PA',
-        component: DetailModulResiden
+        path: '/dashboardpengurusakademik/modul/:idModul',
+        name: 'DetailMenuModul',
+        component: DetailMenuModul
       },
       {
         path: '/dashboardpengurusakademik/laporanpasien/:idLaporanPasien',
