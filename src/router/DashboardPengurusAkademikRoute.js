@@ -18,6 +18,7 @@ import MenuTugasPublikasi from '../views/DashboardPengurusAkademik/MenuTugasPubl
 import MenuTugasAkhir from '../views/DashboardPengurusAkademik/MenuTugasAkhir.vue'
 import MenuResidenOnGoing from '../views/DashboardPengurusAkademik/MenuResidenOnGoing.vue'
 import MenuResidenLulus from '../views/DashboardPengurusAkademik/MenuResidenLulus.vue'
+import DetailModulResiden from '../views/DashboardResiden/DetailModulResiden.vue'
 
 
 let routes = [
@@ -92,9 +93,9 @@ let routes = [
         component: DetailMenuKonsulen
       },
       {
-        path: '/dashboardpengurusakademik/modul/:idModul',
-        name: 'DetailMenuModul',
-        component: DetailMenuModul
+        path: '/dashboardpengurusakademik/modul/:idModulResiden',
+        name: 'DetailModulResiden_PA',
+        component: DetailModulResiden
       },
       {
         path: '/dashboardpengurusakademik/laporanpasien/:idLaporanPasien',

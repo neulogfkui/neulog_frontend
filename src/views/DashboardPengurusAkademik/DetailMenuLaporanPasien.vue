@@ -25,7 +25,7 @@
       </div>
     </div>
     <div class="row justify-content-center">
-      <div class="col-xxl-4 col-xl-4 mb-4" v-if="isMounted">
+      <div class="col-xxl-4 col-xl-4 mb-4">
         <div class="card card-header-actions h-100">
           <div class="card-header">
             <b>Data Laporan Pasien</b>

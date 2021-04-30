@@ -93,6 +93,8 @@ export default {
         " - " +
       JSON.parse(localStorage.getItem("userData")).residen.npm;
       this.idResiden = JSON.parse(localStorage.getItem("userData")).residen.idResiden;
+    }else{
+      this.idResiden = this.$route.params.idResiden
     }
   }
 };

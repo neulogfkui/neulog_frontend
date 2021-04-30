@@ -13,31 +13,37 @@ import TugasPenelitianAkhirDetail from "@/views/Details/TugasPenelitianAkhirDeta
 import DashboardJaga from "@/views/DashboardResiden/DashboardJaga.vue"
 import DashboardProgressTest from "@/views/DashboardResiden/DashboardProgressTest.vue"
 import DashboardModul from "@/views/DashboardResiden/DashboardModul.vue"
+import DetailModulResiden from "@/views/DashboardResiden/DetailModulResiden.vue"
+import DashboardTindakan from "@/views/DashboardResiden/DashboardTindakan.vue"
+import DashboardKompetensi from "@/views/DashboardResiden/DashboardKompetensi.vue"
+import DetailKompetensi from "@/views/DashboardResiden/DetailKompetensi.vue"
+import DetailTindakan from "@/views/DashboardResiden/DetailTindakan.vue"
+
 
 let routes = [{
         path: '/dashboardresiden/:idResiden',
         name: 'DashboardResidenMenu',
         component: DashboardResidenMenu
-    }, {
+    },
+    // DASHBOARD JAGA
+    {
         path: '/dashboardjaga/:idResiden',
         name: 'DashboardJaga',
         component: DashboardJaga
     },
+    // DASHBOARD PROGRESS TEST
     {
         path: '/dashboardprogresstest/:idResiden',
         name: 'DashboardProgressTest',
         component: DashboardProgressTest
     },
-    {
-        path: '/dashboardmodul/:idResiden',
-        name: 'DashboardModul',
-        component: DashboardModul
-    },
+    // LAPORAN PASIEN
     {
         path: '/dashboardlaporanpasien/:idResiden',
         name: 'DashboardLaporanPasien',
         component: DashboardLaporanPasien
     },
+    //LAPORAN TUGAS
     {
         path: '/dashboardlaporantugas/:idResiden',
         name: 'DashboardLaporanTugas',
@@ -90,6 +96,39 @@ let routes = [{
         path: '/laporanpasiendetail/:idLaporanPasien',
         name: 'DetailMenuLaporanPasien_Residen',
         component: DetailMenuLaporanPasien
+    },
+    // MODUL
+    {
+        path: '/dashboardmodul/:idResiden',
+        name: 'DashboardModul',
+        component: DashboardModul
+    },
+    {
+        path: '/detailmodulresiden/:idModulResiden',
+        name: 'DetailModulResiden_Residen',
+        component: DetailModulResiden
+    },
+    // TINDAKAN
+    {
+        path: '/dashboardtindakan/:idResiden',
+        name: 'DashboardTindakan',
+        component: DashboardTindakan
+    },
+    {
+        path: '/detailtindakan/:idKategoriTindakan/:idResiden',
+        name: 'DetailTindakan',
+        component: DetailTindakan
+    },
+    // KOMPETENSI
+    {
+        path: '/dashboardkompetensi/:idResiden',
+        name: 'DashboardKompetensi',
+        component: DashboardKompetensi
+    },
+    {
+        path: '/detailkompetensi/:idKompetensiLaporan',
+        name: 'DetailKompetensi',
+        component: DetailKompetensi
     },
 ]
 

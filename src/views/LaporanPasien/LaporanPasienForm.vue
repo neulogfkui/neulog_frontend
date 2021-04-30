@@ -78,6 +78,7 @@
                     class="form-control"
                     name="konsulen"
                     v-model="posts.idKonsulen"
+                    required
                   >
                     <option
                       v-for="item in listKonsulen"
@@ -97,8 +98,8 @@
                         type="checkbox"
                         class="custom-control-input"
                         id="checkbox-1"
-                        v-model="isJaga"
                         @change="changeShowTanggal"
+                        :checked="this.posts.isJaga"
                       />
                       <label class="custom-control-label" for="checkbox-1"
                         >Sedang jam jaga</label
@@ -545,6 +546,7 @@ export default {
   },
   mounted() {
     if (this.$route.params.operation != 0) {
+      this.showTanggal = true;
       axios
         .get(
           "http://localhost:8000/api/laporan-pasien/" +
