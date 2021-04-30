@@ -1,31 +1,19 @@
 <template>
-  <MainHeader
+  <LightHeader
     v-if="getReady"
-    title="Dashboard Kompetensi"
+    :title="'Detail ' +  this.data.kategoriTindakan.namaKategoriTindakan"
     :subtitle="this.subtitle"
     icon="file-text"
-    :withLogo="false"
   />
-  <div class="container" v-if="getReady">
-    <div class="row container justify-content-center upper">
-      <PieChart
-        keterangan="Target Tercapai"
-        :persentase="this.data.persentase"
-        :total="this.data.jumlah[0]"
-        :label="this.data.label"
-        :data="this.data.jumlah"
-        title="Pencapaian Kompetensi"
-      >
-      </PieChart>
-    </div>
-    <div class="row container">
-      <div class="col-xxl-12 col-xl-12 mb-4 mt-4">
-        <div class="card card-header-actions h-100">
-          <div class="card-header">
-            <b>List Laporan Pasien</b>
-          </div>
-          <div class="card-body">
-            <div class="datatable" v-if="getReady">
+  <div class="container justify-content-center" v-if="getReady">
+  <div class="row container">
+    <div class="col-xxl-12 col-xl-12 mb-4 mt-4">
+      <div class="card card-header-actions h-100">
+        <div class="card-header">
+          <b>Daftar Pasien Dengan Tindakan {{ data.kategoriTindakan.namaKategoriTindakan }}</b>
+        </div>
+        <div class="card-body">
+          <div class="datatable" v-if="getReady">
               <table
                 class="table table-bordered table-hover"
                 id="dataTable"
@@ -35,39 +23,45 @@
                 <thead>
                   <tr>
                     <th>No</th>
-                    <th>Nama Kompetensi</th>
-                    <th>Target</th>
-                    <th>Tercapai</th>
-                    <th>Persentase</th>
+                    <th>Tanggal</th>
+                    <th>Inisial Pasien</th>
+                    <th>Usia</th>
+                    <th>No Rekam Medis</th>
+                    <th>Konsulen</th>
+                    <th>Jaga</th>
+                    <th>Status</th>
                     <th>Detail</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr
-                    v-for="(item, index) in data.listKompetensi"
+                    v-for="(item, index) in data.listLaporanPasien"
                     v-bind:key="item.id"
                   >
                     <td>
                       {{ index + 1 }}
                     </td>
                     <td>
-                      {{ item.kompetensi.namaKompetensi }}
+                      {{ item.tanggalDibuat }}
                     </td>
                     <td>
-                      {{ item.kompetensi.jumlahMinimal }}
+                      {{ item.inisialPasien }}
                     </td>
                     <td>
-                      {{ data.listFreq[index] }}
+                      {{ item.usiaPasien }}
                     </td>
                     <td>
-                      {{ data.listPersentase[index] }}
+                      {{ item.noRekamMedis }}
                     </td>
+                    <td>
+                      {{ item.konsulen.pengguna.name }}
+                    </td>
+                    <td v-if="item.isFromJaga">Ya</td>
+                    <td v-if="!item.isFromJaga">Tidak</td>
+                    <td>{{ item.status }}</td>
                     <td>
                       <router-link
-                        :to="
-                          '/detailkompetensi/' +
-                          item.idKompetensiLaporan 
-                        "
+                        :to="'/laporanpasiendetail/' + item.idLaporanPasien"
                       >
                         <button class="btn btn-secondary">Lihat</button>
                       </router-link>
@@ -75,23 +69,23 @@
                   </tr>
                 </tbody>
               </table>
-            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+  </div>
+
 </template>
 
 <script>
-import axios from "axios";
+import axios from "axios"
+import LightHeader from "@/components/LightHeader";
 import dataTableLoader from "@/js/datatable.js";
-import MainHeader from "@/components/MainHeader.vue";
-import PieChart from "@/components/PieChart";
 
 export default {
-  name: "DashboardKompetensi",
-  components: { PieChart, MainHeader },
+  name: "DetailTindakan",
+  components: { LightHeader },
   data() {
     return {
       data: null,
@@ -108,7 +102,8 @@ export default {
   mounted() {
     axios
       .get(
-        "http://localhost:8000/api/dashboardResiden/kompetensi/" +
+        "http://localhost:8000/api/dashboardResiden/tindakandetail/" +
+          this.$route.params.idKategoriTindakan + "/"  +
           this.$route.params.idResiden
       )
       .then((resp) => {

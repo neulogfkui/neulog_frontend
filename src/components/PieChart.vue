@@ -81,6 +81,7 @@ export default {
     // alert(this.list2);
   },
   mounted() {
+    // console.log("masssssuuuuuuuukkk");
     // console.warn(this.label);
     // Set new default font family and font color to mimic Bootstrap's default styling
     (Chart.defaults.global.defaultFontFamily = "Metropolis"),

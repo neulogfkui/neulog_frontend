@@ -109,7 +109,7 @@
                         </p>
                     </div>
                 </div>
-                <!-- <div class="row">
+                <div class="row">
                     <div class="col-xxl-12 col-xl-12 mb-4 mt-4 text-center">
                         <router-link
                         :to="'/dashboardresiden/' + idResiden"
@@ -117,7 +117,7 @@
                         <button class="btn btn-primary">Lihat Dashboard</button>
                       </router-link>
                     </div>
-                </div> -->
+                </div>
                 </div>
             </div>
             </div>

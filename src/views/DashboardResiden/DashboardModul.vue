@@ -6,7 +6,7 @@
     icon="file-text"
   />
   <div class="container" v-if="isDataTableReady">
-    <div class="row upper">
+    <div class="row upper justify-content-center">
       <BigNumberCard
         title="Total Modul Selesai"
         :count="total"
@@ -21,11 +21,11 @@
         :data="this.persentase"
         title="Persentase Lulus Tepat Waktu"
       />
-      <BigNumberCard
+      <!-- <BigNumberCard
         title="Rata-Rata Lama Prolong"
         :count="persenAvgProlongDays"
         caption="Hari"
-      />
+      /> -->
       <!-- Tabel -->
       <div class="col-xxl-12 col-xl-12 mb-4 mt-4">
         <div class="card card-header-actions h-100">
@@ -61,7 +61,7 @@
                     </td>
                     <td>{{ item.status }}</td>
                     <td>
-                      <router-link :to="'/moduldetail/' + item.idModulResiden">
+                      <router-link :to="'/detailmodulresiden/' + item.idModulResiden">
                         <button class="btn btn-secondary">Lihat</button>
                       </router-link>
                     </td>
