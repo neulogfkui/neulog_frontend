@@ -189,6 +189,9 @@
                       <router-link class="nav-link" to="/dashboardpengurusakademik/modul"
                         >Dashboard Modul</router-link
                       >
+                      <router-link class="nav-link" to="/dashboardpengurusakademik/tes-formatif"
+                        >Dashboard Tes Formatif</router-link
+                      >
                     </nav>
                   </div>
                 </div>

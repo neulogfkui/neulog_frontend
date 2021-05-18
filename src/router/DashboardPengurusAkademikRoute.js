@@ -4,6 +4,7 @@ import MenuResiden from '../views/DashboardPengurusAkademik/MenuResiden.vue'
 import MenuKonsulen from '../views/DashboardPengurusAkademik/MenuKonsulen.vue'
 import MenuLaporanTugas from '../views/DashboardPengurusAkademik/MenuLaporanTugas.vue'
 import MenuModul from '../views/DashboardPengurusAkademik/MenuModul.vue'
+import MenuTesFormatif from '../views/DashboardPengurusAkademik/MenuTesFormatif'
 import DetailMenuResiden from '../views/DashboardPengurusAkademik/DetailMenuResiden.vue'
 import DetailMenuKonsulen from '../views/DashboardPengurusAkademik/DetailMenuKonsulen.vue'
 import DetailMenuModul from '../views/DashboardPengurusAkademik/DetailMenuModul.vue'
@@ -19,6 +20,7 @@ import MenuTugasAkhir from '../views/DashboardPengurusAkademik/MenuTugasAkhir.vu
 import MenuResidenOnGoing from '../views/DashboardPengurusAkademik/MenuResidenOnGoing.vue'
 import MenuResidenLulus from '../views/DashboardPengurusAkademik/MenuResidenLulus.vue'
 import DetailModulResiden from '../views/DashboardResiden/DetailModulResiden.vue'
+
 
 
 let routes = [
@@ -81,6 +83,11 @@ let routes = [
         path: '/dashboardpengurusakademik/modul',
         name: 'MenuModul',
         component: MenuModul
+      },
+      {
+        path: '/dashboardpengurusakademik/tes-formatif',
+        name: 'MenuTesFormatif',
+        component: MenuTesFormatif
       },
       {
         path: '/dashboardpengurusakademik/residen/:idResiden',
