@@ -17,7 +17,7 @@
       >
       </PieChart>
       <BigNumberCard
-        title="Rata - Rata Laporan Pasien Per Bulan"
+        title="Rata-Rata Laporan Pasien Per Bulan"
         :count="avgPasienPerMonth"
         caption="Pasien / Bulan"
       />

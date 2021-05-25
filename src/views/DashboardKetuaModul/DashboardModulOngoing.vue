@@ -2,7 +2,6 @@
     <MainHeader
         v-if="isDataTableReady"
         title=this.title
-        :subtitle="this.subtitle"
         icon="briefcase"
     />
     <!-- TAB NAVBAR -->	
@@ -79,13 +78,12 @@ import authHeader from "@/services/auth-header";
 import dataTableLoader from "@/js/datatable";
 
 export default {
-  name: "DashboardLaporanPasien",
+  name: "DashboardModulOngoing",
   data() {
     return {
       listResidenOngoing: Array,
       isMounted: false,
       ready: false,
-      subtitle: null,
     };
   },
   components: {
@@ -108,7 +106,6 @@ export default {
       .then((resp) => {
         console.warn(resp);
         this.listResidenOngoing = resp.data.listResidenOngoing;
-        this.subtitle = this.residen.pengguna.name + " - " + this.residen.npm;
         this.isMounted = true;
         dataTableLoader();
         this.ready = true;
