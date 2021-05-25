@@ -1,20 +1,20 @@
 <template>
   <MainHeader
-    title= "Dashboard Modul"
+    title= "Dashboard Kompetensi"
     :subtitle="this.subtitle"
-    icon= "briefcase"
+    icon= "trending-up"
     isSmall=true>
   </MainHeader>
   <div class="container">
       <div class="row mt-3">
-          <ColorCardNoFooter title="Modul" subtitle="Tambah" color="bg-warning" link="/modulform/0" icon="briefcase"/>
+          <ColorCardNoFooter title="Kompetensi" subtitle="Tambah" color="bg-warning" link="/kompetensiform/0" icon="trending-up"/>
       </div>
-      <!-- Tabel Modul -->
+      <!-- Tabel Kompetensi -->
       <div class="row mt-0">
       <div class="col-xxl-12 col-xl-12">
         <div class="card card-header-actions h-100">
           <div class="card-header">
-            <b>Daftar Seluruh Modul</b>
+            <b>Daftar Seluruh Kompetensi</b>
           </div>
           <div class="card-body">
             <div class="datatable" v-if="isDataTableReady">
@@ -29,13 +29,14 @@
                     <th>No</th>
                     <th>Tanggal</th>
                     <th>Nama</th>
-                    <th>Ketua Modul</th>
+                    <th>Target Pencapaian</th>
+                    <th>Kompetensi Lanjut</th>
                     <th>Detail</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr
-                    v-for="(item, index) in listModul"
+                    v-for="(item, index) in listKompetensi"
                     v-bind:key="item.id"
                   >
                     <td>
@@ -45,17 +46,20 @@
                       {{ item.tanggalDibuat }}
                     </td>
                     <td>
-                      {{ item.namaModul }}
+                      {{ item.namaKompetensi }}
                     </td>
-                    <td v-if="item.ketuaModul != null">
-                      {{ item.ketuaModul.pengguna.name }}
+                    <td>
+                      {{ item.jumlahMinimal }}
                     </td>
-                    <td v-if="item.ketuaModul == null">
-                      None
+                    <td v-if="item.kompetensiLanjut">
+                        Ya
+                    </td>
+                    <td v-if="!item.kompetensiLanjut">
+                        Tidak
                     </td>
                     <td>
                       <router-link
-                        :to="'/dashboardpengurusakademik/modul/' + item.idModul"
+                        :to="'/dashboardpengurusakademik/kompetensi/' + item.idKompetensi"
                       >
                         <button class="btn btn-secondary">Lihat</button>
                       </router-link>
@@ -79,10 +83,10 @@ import dataTableLoader from "@/js/datatable";
 import authHeader from "@/services/auth-header";
 
 export default {
-  name: "MenuModul",
+  name: "MenuKompetensi",
   data() {
     return {
-      listModul: Array,
+      listKompetensi: Array,
       isMounted: false,
       ready: false,
       subtitle: String,
@@ -103,10 +107,10 @@ export default {
   mounted() {
     this.subtitle = this.getNamaPA;
     axios
-      .get("http://localhost:8000/api/dashboardPengurusAkademik/modul/", { headers: authHeader() })
+      .get("http://localhost:8000/api/dashboardPengurusAkademik/kompetensi/", { headers: authHeader() })
       .then((resp) => {
         console.warn(resp.data);
-        this.listModul = resp.data.listModul;
+        this.listKompetensi = resp.data.listKompetensi;
         this.isMounted = true;
         this.ready = true;
         dataTableLoader();

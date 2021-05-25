@@ -140,15 +140,15 @@
                 <!-- ----------------------------------------------------------------------------------------- -->
                   <div v-if="userRoles.includes('ROLE_PENGURUSAKADEMIK')">
                   <!-- Home -->
-                  <div class="sidenav-menu-heading">Menu</div>
+                  <!-- <div class="sidenav-menu-heading">Menu</div>
                   <router-link to="/dashboardpengurusakademik" class="nav-link">
                     <div class="nav-link-icon">
                       <i data-feather="bar-chart"></i>
                     </div>
                     Dashboard Choice</router-link
-                  >
+                  > -->
                   <!-- Dashbooard -->
-                  <div class="sidenav-menu-heading">Dashboard</div>
+                  <div class="sidenav-menu-heading">Dashboard Pengurus Akademik</div>
                   <a
                     class="nav-link collapsed"
                     href="javascript:void(0);"
@@ -160,7 +160,7 @@
                     <div class="nav-link-icon">
                       <i class="fas fa-th-large"></i>
                     </div>
-                    Dashboard Pengurus Akademik
+                    Dashboard
                     <div class="sidenav-collapse-arrow">
                       <i class="fas fa-angle-down"></i>
                     </div>
@@ -174,23 +174,29 @@
                       class="sidenav-menu-nested nav accordion"
                       id="accordionSidenavPages"
                     >
+                      <router-link class="nav-link" to="/dashboardpengurusakademik"
+                        >Menu</router-link
+                      >
                       <router-link class="nav-link" to="/dashboardpengurusakademik/residen/ongoing"
-                        >Dashboard Residen</router-link
+                        >Residen</router-link
                       >
                       <router-link class="nav-link" to="/dashboardpengurusakademik/konsulen"
-                        >Dashboard Konsulen</router-link
+                        >Konsulen</router-link
                       >
                       <router-link class="nav-link" to="/dashboardpengurusakademik/laporanpasien"
-                        >Dashboard Laporan Pasien</router-link
+                        >Laporan Pasien</router-link
                       >
                       <router-link class="nav-link" to="/dashboardpengurusakademik/laporantugas/tugaspresentasi"
-                        >Dashboard Laporan Tugas</router-link
+                        >Laporan Tugas</router-link
                       >
                       <router-link class="nav-link" to="/dashboardpengurusakademik/modul"
-                        >Dashboard Modul</router-link
+                        >Modul</router-link
+                      >
+                      <router-link class="nav-link" to="/dashboardpengurusakademik/kompetensi"
+                        >Kompetensi</router-link
                       >
                       <router-link class="nav-link" to="/dashboardpengurusakademik/tes-formatif"
-                        >Dashboard Tes Formatif</router-link
+                        >Tes Formatif</router-link
                       >
                     </nav>
                   </div>

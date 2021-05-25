@@ -20,6 +20,8 @@ import MenuTugasAkhir from '../views/DashboardPengurusAkademik/MenuTugasAkhir.vu
 import MenuResidenOnGoing from '../views/DashboardPengurusAkademik/MenuResidenOnGoing.vue'
 import MenuResidenLulus from '../views/DashboardPengurusAkademik/MenuResidenLulus.vue'
 import DetailModulResiden from '../views/DashboardResiden/DetailModulResiden.vue'
+import MenuKompetensi from '../views/DashboardPengurusAkademik/MenuKompetensi.vue'
+import DetailMenuKompetensi from '../views/DashboardPengurusAkademik/DetailMenuKompetensi.vue'
 
 
 
@@ -90,6 +92,11 @@ let routes = [
         component: MenuTesFormatif
       },
       {
+        path: '/dashboardpengurusakademik/kompetensi',
+        name: 'MenuKompetensi',
+        component: MenuKompetensi
+      },
+      {
         path: '/dashboardpengurusakademik/residen/:idResiden',
         name: 'DetailMenuResiden',
         component: DetailMenuResiden
@@ -128,7 +135,12 @@ let routes = [
         path: '/dashboardpengurusakademik/laporantugas/tugasakhir/:idLaporanTugas',
         name: 'DetailMenuTugasAkhir',
         component: TugasPenelitianAkhirDetail
-      }
+      },
+      {
+        path: '/dashboardpengurusakademik/kompetensi/:idKompetensi',
+        name: 'DetailMenuKompetensi',
+        component: DetailMenuKompetensi
+      },
 ]
 
 export default routes;
