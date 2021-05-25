@@ -15,15 +15,18 @@ import PageNotFound from '../views/errors/404'
 import LaporanPasienRoute from "@/router/LaporanPasienRoute.js" 
 import MengelolaAkunRoute from "@/router/MengelolaAkunRoute.js"
 import DashboardPengurusAkademikRoute from "@/router/DashboardPengurusAkademikRoute.js" 
+import DashboardKonsulen from "@/router/DashboardKonsulen.js"
 import LaporanTugasRoute from "@/router/LaporanTugasRoute.js" 
 import DashboardResidenRoute from "@/router/DashboardResidenRoute.js" 
 
 const routes = [
   ...LaporanPasienRoute,
   ...DashboardPengurusAkademikRoute,
+  ...DashboardKonsulen,
   ...MengelolaAkunRoute,
   ...LaporanTugasRoute,
   ...DashboardResidenRoute,
+
 
   //ALL
   //AUTHOR: ALL
