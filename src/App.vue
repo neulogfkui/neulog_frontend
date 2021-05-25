@@ -133,23 +133,69 @@
                   </nav>
               </div>
 				      </div>
+
+              <div v-if="userRoles.includes('ROLE_KONSULEN')">
+                <!-- Dashbooard -->
+                <div class="sidenav-menu-heading">Dashboard</div>
+                <a
+                  class="nav-link collapsed"
+                  href="javascript:void(0);"
+                  data-toggle="collapse"
+                  data-target="#collapseDashboards"
+                  aria-expanded="false"
+                  aria-controls="collapseDashboards"
+                >
+                  <div class="nav-link-icon">
+                    <i data-feather="activity"></i>
+                  </div>
+                  Dashboard Konsulen
+                  <div class="sidenav-collapse-arrow">
+                    <i class="fas fa-angle-down"></i>
+                  </div>
+                </a>
+                <div
+                  class="collapse"
+                  id="collapseDashboards"
+                  data-parent="#accordionSidenav"
+                >
+                  <nav
+                    class="sidenav-menu-nested nav accordion"
+                    id="accordionSidenavPages"
+                  >
+                    <router-link class="nav-link" to="/dashboard-konsulen/laporan-pasien/belum-dievaluasi"
+                      >Laporan Pasien</router-link
+                    >
+                    <router-link class="nav-link" to="/dashboard-konsulen/tugas-presentasi/belum-dievaluasi"
+                      >Tugas Presentasi</router-link
+                    >
+                    <router-link class="nav-link" to="/dashboard-konsulen/tugas-publikasi/belum-dievaluasi"
+                      >Tugas Publikasi</router-link
+                    >
+                    <router-link class="nav-link" to="/dashboard-konsulen/penelitian-akhir/belum-dievaluasi"
+                      >Tugas Penelitian Akhir</router-link
+                    >
+                    <router-link class="nav-link" to="/dashboard-konsulen/kasus-sulit/belum-dievaluasi"
+                      >Pembahasan Kasus Sulit</router-link
+                    >
+                  </nav>
+                </div>
+              </div>
                 <!-- END OF RESIDEN -->
                 <!-- ----------------------------------------------------------------------------------------- -->
 
                 <!-- PENGURUS AKADEMIK [BEKA] -->
                 <!-- ----------------------------------------------------------------------------------------- -->
                   <!-- Home -->
-                  <div class="sidenav-menu-heading">Menu</div>
+                  <!-- Dashbooard -->
+                  <div v-if="userRoles.includes('ROLE_PENGURUSAKADEMIK')">
+                  <!-- Dashbooard -->
+                  <div class="sidenav-menu-heading">Dashboard</div>
                   <router-link to="/dashboardpengurusakademik" class="nav-link">
                     <div class="nav-link-icon">
                       <i data-feather="bar-chart"></i>
                     </div>
                     Dashboard Choice</router-link
                   >
-                  <!-- Dashbooard -->
-                  <div v-if="userRoles.includes('ROLE_PENGURUSAKADEMIK')">
-                  <!-- Dashbooard -->
-                  <div class="sidenav-menu-heading">Dashboard</div>
                   <a
                     class="nav-link collapsed"
                     href="javascript:void(0);"
@@ -213,7 +259,6 @@
                   > -->
                   <div v-if="userRoles.includes('ROLE_ADMIN')">
                   <!-- Dashbooard -->
-                  <div class="sidenav-menu-heading">Dashboard</div>
                   <a
                     class="nav-link collapsed"
                     href="javascript:void(0);"
@@ -395,6 +440,10 @@ export default {
   },
   
   mounted() {
+    loadScript();
+  },
+
+  updated() {
     loadScript();
   },
 
