@@ -109,7 +109,7 @@
                         </p>
                     </div>
                 </div>
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col-xxl-12 col-xl-12 mb-4 mt-4 text-center">
                         <router-link
                         :to="'/dashboardresiden/' + idResiden"
@@ -117,7 +117,7 @@
                         <button class="btn btn-primary">Lihat Dashboard</button>
                       </router-link>
                     </div>
-                </div>
+                </div> -->
                 </div>
             </div>
             </div>
@@ -130,6 +130,7 @@
 import axios from "axios";
 import MainHeader from "@/components/MainHeader.vue";
 import LightHeader from "@/components/LightHeader.vue";
+import authHeader from "@/services/auth-header";
 
 export default {
   name: "DetailMenuResiden",
@@ -157,7 +158,7 @@ export default {
   },
   mounted() {
     axios
-      .get("http://localhost:8000/api/dashboardPengurusAkademik/residen/" + this.$route.params.idResiden) // nanti diganti ini angka 1 nya
+      .get("http://localhost:8000/api/dashboardPengurusAkademik/residen/" + this.$route.params.idResiden, { headers: authHeader() }) // nanti diganti ini angka 1 nya
       .then((resp) => {
         console.warn(resp.data);
         this.data = resp.data;

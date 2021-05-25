@@ -68,28 +68,28 @@
                     class="sidenav-menu-nested nav accordion"
                     id="accordionSidenavPages"
                   >
-                    <router-link class="nav-link" to="/components"
+                    <router-link class="nav-link" :to="this.linkMenuResiden"
                       >Menu</router-link
                     >
-                    <router-link class="nav-link" to="/components"
+                    <router-link class="nav-link" :to="this.linkLaporanPasien"
                       >Pasien</router-link
                     >
-                    <router-link class="nav-link" to="/components"
+                    <router-link class="nav-link" :to="this.linkLaporanTugas"
                       >Tugas</router-link
                     >
-                    <router-link class="nav-link" to="/components"
+                    <router-link class="nav-link" :to="this.linkProgressTest"
                       >Progress Test</router-link
                     >
-                    <router-link class="nav-link" to="/components"
+                    <router-link class="nav-link" :to="this.linkKompetensi"
                       >Kompetensi</router-link
                     >
-                    <router-link class="nav-link" to="/components"
+                    <router-link class="nav-link" :to="this.linkModul"
                       >Modul</router-link
                     >
-                    <router-link class="nav-link" to="/components"
+                    <router-link class="nav-link" :to="this.linkJaga"
                       >Jaga</router-link
                     >
-                    <router-link class="nav-link" to="/components"
+                    <router-link class="nav-link" :to="this.linkTindakan"
                       >Tindakan</router-link
                     >
                   </nav>
@@ -121,10 +121,10 @@
                     class="sidenav-menu-nested nav accordion"
                     id="accordionSidenavPages"
                   >
-                    <router-link class="nav-link" to="/components"
+                    <router-link class="nav-link" to="/laporanpasienform/0"
                       >Pasien</router-link
                     >
-                    <router-link class="nav-link" to="/components"
+                    <router-link class="nav-link" to="/addlaporantugas"
                       >Tugas</router-link
                     >
                     <router-link class="nav-link" to="/components"
@@ -185,6 +185,7 @@
 
                 <!-- PENGURUS AKADEMIK [BEKA] -->
                 <!-- ----------------------------------------------------------------------------------------- -->
+                  <div v-if="userRoles.includes('ROLE_PENGURUSAKADEMIK')">
                   <!-- Home -->
                   <!-- Dashbooard -->
                   <div v-if="userRoles.includes('ROLE_PENGURUSAKADEMIK')">
@@ -221,7 +222,7 @@
                       class="sidenav-menu-nested nav accordion"
                       id="accordionSidenavPages"
                     >
-                      <router-link class="nav-link" to="/dashboardpengurusakademik/residen"
+                      <router-link class="nav-link" to="/dashboardpengurusakademik/residen/ongoing"
                         >Dashboard Residen</router-link
                       >
                       <router-link class="nav-link" to="/dashboardpengurusakademik/konsulen"
@@ -230,7 +231,7 @@
                       <router-link class="nav-link" to="/dashboardpengurusakademik/laporanpasien"
                         >Dashboard Laporan Pasien</router-link
                       >
-                      <router-link class="nav-link" to="/dashboardpengurusakademik/laporantugas"
+                      <router-link class="nav-link" to="/dashboardpengurusakademik/laporantugas/tugaspresentasi"
                         >Dashboard Laporan Tugas</router-link
                       >
                       <router-link class="nav-link" to="/dashboardpengurusakademik/modul"
@@ -366,9 +367,9 @@
           <div class="sidenav-footer">
             <div class="sidenav-footer-content">
               <div class="sidenav-footer-subtitle">Logged in as:</div>
-              <div class="sidenav-footer-title">Valerie Luna</div>
+              <div class="sidenav-footer-title">{{userData.name}} ({{userData.username}}}</div>
               <button 
-                class="btn btn-danger m-1" 
+                class="btn btn-danger" 
                 style="margin-bottom:2rem!important;"
                 @click="logOut">Logout</button>
             </div>
@@ -422,7 +423,15 @@ export default {
   data: function () {
     return {
       role: [],
-      id: Array
+      id: Array,
+      linkMenuResiden: String,
+      linkLaporanPasien: String,
+      linkLaporanTugas: String,
+      linkProgressTest: String,
+      linkKompetensi: String,
+      linkModul: String,
+      linkJaga: String,
+      linkTindakan: String,
     };
   },
 
@@ -430,9 +439,9 @@ export default {
     isLoggedIn() {
       return this.$store.state.auth.status.loggedIn;
     },
-    // isUserDataLoaded() {
-    //   return (this.$store.state.auth.user!=undefined);
-    // },
+    userData() {
+      return (JSON.parse(localStorage.getItem('userData')));
+    },
     userRoles() {
       if (this.isLoggedIn) return this.$store.state.auth.user.roles;
       else return ["ROLE_DEFAULT"];
@@ -441,6 +450,16 @@ export default {
   
   mounted() {
     loadScript();
+    if(this.userRoles == "ROLE_RESIDEN"){
+      this.linkMenuResiden = "/dashboardresiden/" + this.userData.residen.idResiden;
+      this.linkLaporanPasien = "/dashboardlaporanpasien/" + this.userData.residen.idResiden;
+      this.linkLaporanTugas = "/dashboardlaporantugas/" + this.userData.residen.idResiden;
+      this.linkProgressTest = "/dashboardprogresstest/" + this.userData.residen.idResiden;
+      this.linkKompetensi = "/dashboardkompetensi/" + this.userData.residen.idResiden;
+      this.linkModul = "/dashboardmodul/" + this.userData.residen.idResiden;
+      this.linkJaga = "/dashboardjaga/" + this.userData.residen.idResiden;
+      this.linkTindakan = "/dashboardtindakan/" + this.userData.residen.idResiden;
+    }
   },
 
   updated() {
@@ -459,3 +478,9 @@ export default {
   }
 }
 </script>
+<style>
+.sidenav-footer {
+  padding-top: 1rem !important;
+  height: fit-content !important;
+}
+</style>

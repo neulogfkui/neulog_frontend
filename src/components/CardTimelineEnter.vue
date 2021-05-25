@@ -5,12 +5,11 @@
         <b>{{ title }}</b>
       </div>
       <div class="card-body">
-        <div class="timeline timeline-xs" v-for="(item, index) in getUpdateStatusList" v-bind:key="item.id">
+        <div v-for="(item, index) in getUpdateStatusList" v-bind:key="item.id">
           <!-- Timeline Item -->
-          <div class="timeline-item" v-if="index % 2 == 0">
-            <p>{{item}}</p>
-            <p>&nbsp;&nbsp;&nbsp;&nbsp;</p>
-            <p><b>{{ getUpdateStatusList[index+1] }}</b></p>
+          <div class="col" v-if="index % 2 == 0">
+            <p><b>{{item}}</b></p>
+            <p>{{ getUpdateStatusList[index+1] }}</p>
           </div>
           <!-- Timeline Item -->
         </div>
@@ -21,7 +20,7 @@
 
 <script>
 export default {
-  name: "CardTimeline",
+  name: "CardTimelineEnter",
   props: {
     title: String,
     updateStatus: String,

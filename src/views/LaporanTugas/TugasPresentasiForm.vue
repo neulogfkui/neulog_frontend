@@ -1,6 +1,10 @@
 <template>
-  <MainHeader />
-  <div class="container upper">
+  <LightHeader
+    title="Tambah Laporan Tugas - Tugas Presentasi"
+    icon="file-text"
+    :subtitle="subtitleHeader"
+  />
+  <div class="container">
     <form @submit="postData" method="POST">
       <div class="row">
         <div class="col-xxl-6 col-xl-6 mb-4">
@@ -16,7 +20,7 @@
                   class="form-control"
                   name="modul"
                   v-model="posts.idModul"
-                  :disabled="this.$route.params.operation != '0'"
+                  required
                 >
                   <option
                     v-for="item in listModul"
@@ -30,25 +34,12 @@
               <!-- JENIS TUGAS -->
               <div class="form-group">
                 <label for="sel1">Jenis Tugas</label>
-                <!-- disabled -->
-                <select
-                  class="form-control"
-                  name="jenisTugas"
-                  v-model="posts.jenis"
-                  v-if="this.$route.params.operation != '0'"
-                  disabled
-                >
-                  <option
-                  >
-                    {{ posts.jenis }}
-                  </option>
-                </select>
                 <!-- not disabled -->
                 <select
                   class="form-control"
                   name="jenisTugas"
                   v-model="posts.jenis"
-                  v-if="this.$route.params.operation == '0'"
+                  required
                 >
                   <option
                     v-for="item in listJenisTugas"
@@ -66,16 +57,15 @@
                   class="form-control"
                   name="konsulen"
                   v-model="posts.idKonsulen"
-                  :disabled="this.$route.params.operation != '0'"
+                  required
+                  
                 >
                   <option
                     v-for="item in listKonsulen"
                     v-bind:key="item.id"
                     :value="item.idKonsulen"
                   >
-                    {{
-                      item.pengguna.name
-                    }}
+                    {{ item.pengguna.name }}
                   </option>
                 </select>
               </div>
@@ -87,6 +77,7 @@
                   type="date"
                   name="tanggal"
                   v-model="posts.tanggal"
+                  required
                 />
               </div>
               <!-- JUDUL -->
@@ -97,7 +88,7 @@
                   name="judul"
                   v-model="posts.judulMakalah"
                   type="text"
-                  placeholder="Masukkan judul presentasi"
+                  placeholder="Masukkan judul makalah" required
                 />
               </div>
               <!-- LINK -->
@@ -108,7 +99,7 @@
                   name="link"
                   v-model="posts.linkTugas"
                   type="text"
-                  placeholder="Masukkan judul presentasi"
+                  placeholder="Masukkan link tugas"
                 />
               </div>
             </div>
@@ -137,15 +128,15 @@
                   <tbody>
                     <tr v-for="item in listKonsulen" v-bind:key="item.id">
                       <td>
-                        {{
-                          item.pengguna.name
-                        }}
+                        {{ item.pengguna.name }}
                       </td>
                       <td>
                         <input
                           type="checkbox"
                           @change="check(item.idKonsulen)"
-                          :checked="posts.listReviewer.includes(item.idKonsulen)"
+                          :checked="
+                            this.posts.listReviewer.includes(item.idKonsulen)
+                          "
                         />
                       </td>
                     </tr>
@@ -243,7 +234,7 @@
               <div v-if="status == 1"></div>
               <div v-if="status == 2">
                 <router-link
-                  :to="'/tugaspresentasidetail/' + posts.idLaporanTugas"
+                  :to="'/detailtugas/tugaspresentasi/' + posts.idLaporanTugas"
                   ><button class="btn btn-primary" data-dismiss="modal">
                     Ok
                   </button></router-link
@@ -272,15 +263,15 @@
 <script>
 import axios from "axios";
 import VueAxios from "vue-axios";
-import MainHeader from "@/components/MainHeader.vue";
+import LightHeader from "@/components/LightHeader.vue";
 import App from "@/App.vue";
 import dataTableLoader from "@/js/datatable";
-import { computed } from 'vue';
+import { computed } from "vue";
 
 export default {
   name: "TugasPresentasiForm",
   components: {
-    MainHeader,
+    LightHeader,
   },
   data() {
     return {
@@ -294,21 +285,40 @@ export default {
         idResiden: null,
         listReviewer: [],
         idLaporanTugas: 0,
-        idChild:0,
+        idChild: 0,
       },
       listModul: null,
       listJenisTugas: null,
       listKonsulen: null,
       status: 0,
       isMounted: false,
-      ready: false
+      ready: false,
+      subtitleHeader:
+        JSON.parse(localStorage.getItem("userData")).name +
+        " - " +
+        JSON.parse(localStorage.getItem("userData")).residen.npm,
     };
   },
-  computed:{
-    isDataTableReady(){
-      return this.ready
+  created() {
+    Array.prototype.remove = function () {
+      var what,
+        a = arguments,
+        L = a.length,
+        ax;
+      while (L && this.length) {
+        what = a[--L];
+        while ((ax = this.indexOf(what)) !== -1) {
+          this.splice(ax, 1);
+        }
+      }
+      return this;
+    };
+  },
+  computed: {
+    isDataTableReady() {
+      return this.ready;
     },
-    getIdResiden(){
+    getIdResiden() {
       return JSON.parse(localStorage.getItem("userData")).residen.idResiden;
     },
     // isLoggedIn(){
@@ -316,7 +326,7 @@ export default {
     // }
   },
   mounted() {
-    console.warn(this.$route.params.operation)
+    console.warn(this.$route.params.operation);
     if (this.$route.params.operation != 0) {
       axios
         .get(
@@ -324,20 +334,19 @@ export default {
         )
         .then((resp) => {
           console.warn(resp.data);
-          this.posts.idModul = resp.data.child.modulModel.idModul;
-          this.posts.jenis = resp.data.child.jenis;
+          this.posts.idModul = resp.data.tugas.tugasPresentasiModel.modulModel.idModul;
+          this.posts.jenis = resp.data.tugas.tugasPresentasiModel.jenis;
           this.posts.idKonsulen = resp.data.idKonsulen;
           this.posts.tanggal = resp.data.tugas.tanggalDibuat;
-          this.posts.judulMakalah = resp.data.child.judulMakalah;
+          this.posts.judulMakalah = resp.data.tugas.tugasPresentasiModel.judulMakalah;
           this.posts.linkTugas = resp.data.tugas.linkTugas;
           this.posts.listReviewer = resp.data.listReviewer;
           this.posts.idLaporanTugas = resp.data.tugas.idLaporanTugas;
-          this.posts.idChild = resp.data.child.idTugasPresentasi;
+          this.posts.idChild = resp.data.tugas.tugasPresentasiModel.idTugasPresentasi;
           console.log(this.posts);
         });
-        // this.isMounted = true;
+      // this.isMounted = true;
     }
-    console.log(this.target);
     axios
       .get("http://localhost:8000/LaporanPresentasiFormAttribute")
       .then((resp) => {
@@ -360,31 +369,25 @@ export default {
       this.status = 1;
       console.warn(this.posts);
       var url = "";
-      if(this.$route.params.operation == 0){
+      if (this.$route.params.operation == 0) {
         url = "http://localhost:8000/laporantugas/addtugaspresentasi/";
-      }else{
+      } else {
         url = "http://localhost:8000/laporantugas/updatetugaspresentasi/";
       }
-      axios
-        .post(
-          url,
-          this.posts
-        )
-        .then((result) => {
-          if (result.data != "0") {
-            this.posts.idLaporanTugas = result.data;
-            this.status = 2;
-            this.target = result;
-          } else {
-            this.status = 3;
-          }
-          console.warn(result.data);
-        });
+      axios.post(url, this.posts).then((result) => {
+        if (result.data != "0") {
+          this.posts.idLaporanTugas = result.data;
+          this.status = 2;
+        } else {
+          this.status = 3;
+        }
+        console.warn(result.data);
+      });
       e.preventDefault();
     },
     check(item) {
       if (this.posts.listReviewer.includes(item)) {
-        this.posts.listReviewer.pop(item);
+        this.posts.listReviewer.remove(item);
       } else {
         this.posts.listReviewer.push(item);
       }
@@ -399,4 +402,6 @@ export default {
 
 <style>
 </style>
+
+
 

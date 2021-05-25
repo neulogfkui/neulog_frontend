@@ -1,11 +1,10 @@
 <template>
   <LightHeader
     v-if="getReady"
-    title="Detail Tugas Presentasi"
+    title="Detail Tugas Publikasi"
     :subtitle="this.subtitle"
     icon="file-text"
   />
-
   <div class="container" v-if="getReady">
     <div class="row mr-2 mb-4 justify-content-end upper">
       <!-- BUTTON UNTUK MENAMPILKAN MODAL -->
@@ -21,7 +20,7 @@
         Hapus
       </button>
       <router-link
-        :to="'/tugaspresentasiform/' + this.data.laporanTugas.idLaporanTugas"
+        :to="'/tugaspublikasiform/' + this.data.laporanTugas.idLaporanTugas"
       >
         <button
           class="btn btn-warning"
@@ -35,7 +34,7 @@
     <div class="row justify-content-center">
       <div class="col-xxl-4 col-xl-4 mb-4">
         <div class="card card-header-actions h-100">
-          <div class="card-header">Data Tugas Presentasi</div>
+          <div class="card-header">Data Tugas Publikasi</div>
           <div class="card-body">
             <table cellpadding="5">
               <tbody>
@@ -46,26 +45,19 @@
                   </th>
                 </tr>
                 <tr>
-                  <th>Modul&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                  <th>Judul Publikasi&nbsp;&nbsp;&nbsp;&nbsp;</th>
                   <th>
                     <b>{{
-                      data.laporanTugas.tugasPresentasiModel.modulModel
-                        .namaModul
+                      data.laporanTugas.tugasPublikasiModel.judulPublikasi
                     }}</b>
                   </th>
                 </tr>
                 <tr>
-                  <th>Judul&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                  <th>Event Publikasi&nbsp;&nbsp;&nbsp;&nbsp;</th>
                   <th>
                     <b>{{
-                      data.laporanTugas.tugasPresentasiModel.judulMakalah
+                      data.laporanTugas.tugasPublikasiModel.eventPublikasi
                     }}</b>
-                  </th>
-                </tr>
-                <tr>
-                  <th>Jenis Tugas&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                  <th>
-                    <b>{{ data.laporanTugas.tugasPresentasiModel.jenis }}</b>
                   </th>
                 </tr>
                 <tr>
@@ -105,13 +97,12 @@
       ></CardTimeline>
       <!-- CARD 3 -->
       <CardTimelineEnter
-        title="Feedback"
         v-if="this.data.laporanTugas.feedback != null"
+        title="Feedback"
         :updateStatus="this.data.laporanTugas.feedback"
       ></CardTimelineEnter>
     </div>
   </div>
-
   <!-- START MODAL -->
   <!-- ------------------------------------------------ -->
 
@@ -210,7 +201,7 @@ import CardTimelineEnter from "@/components/CardTimelineEnter";
 import authHeader from "@/services/auth-header"
 
 export default {
-  name: "TugasPresentasiDetail",
+  name: "TugasPublikasiDetail",
   components: { LightHeader, CardTimelineEnter, CardTimeline },
   data() {
     return {
@@ -241,12 +232,11 @@ export default {
       .then((resp) => {
         console.warn(resp.data);
         this.data = resp.data;
-        console.warn(this.data);
       });
     axios
       .get(
         "http://localhost:8000/api/dashboardPengurusAkademik/getResiden/" +
-          this.$route.params.idLaporanTugas, 
+          this.$route.params.idLaporanTugas
       ) // nanti diganti ini angka 1 nya
       .then((resp) => {
         console.warn(resp.data);
@@ -262,7 +252,7 @@ export default {
       console.warn(this.$route.params.idLaporanTugas);
       axios
         .post(
-          "http://localhost:8000/laporantugas/deletetugaspresentasi/",
+          "http://localhost:8000/laporantugas/deletetugaspublikasi/",
           this.delete
         )
         .then((result) => {
@@ -278,9 +268,3 @@ export default {
   },
 };
 </script>
-
-<style>
-th {
-  font-weight: normal;
-}
-</style>

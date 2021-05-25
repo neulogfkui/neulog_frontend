@@ -1,11 +1,10 @@
 <template>
   <LightHeader
     v-if="getReady"
-    title="Detail Tugas Presentasi"
+    title="Detail Kasus Sulit dan Multidisiplin"
     :subtitle="this.subtitle"
     icon="file-text"
   />
-
   <div class="container" v-if="getReady">
     <div class="row mr-2 mb-4 justify-content-end upper">
       <!-- BUTTON UNTUK MENAMPILKAN MODAL -->
@@ -21,7 +20,7 @@
         Hapus
       </button>
       <router-link
-        :to="'/tugaspresentasiform/' + this.data.laporanTugas.idLaporanTugas"
+        :to="'/kasussulitform/' + this.data.laporanTugas.idLaporanTugas"
       >
         <button
           class="btn btn-warning"
@@ -35,62 +34,55 @@
     <div class="row justify-content-center">
       <div class="col-xxl-4 col-xl-4 mb-4">
         <div class="card card-header-actions h-100">
-          <div class="card-header">Data Tugas Presentasi</div>
+          <div class="card-header">Data Tugas Kasus Sulit</div>
           <div class="card-body">
             <table cellpadding="5">
               <tbody>
                 <tr>
-                  <th>Tanggal&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                  <th>
+                  <td>Tanggal&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                  <td>
                     <b>{{ data.laporanTugas.tanggalDibuat }}</b>
-                  </th>
+                  </td>
                 </tr>
                 <tr>
-                  <th>Modul&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                  <th>
+                  <td>Nama Pertemuan&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                  <td>
                     <b>{{
-                      data.laporanTugas.tugasPresentasiModel.modulModel
-                        .namaModul
+                      data.laporanTugas.pembahasanKasusSulitMultidisiplinModel.namaPertemuan
                     }}</b>
-                  </th>
+                  </td>
                 </tr>
                 <tr>
-                  <th>Judul&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                  <th>
+                  <td>Kasus yang Dibahas&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                  <td>
                     <b>{{
-                      data.laporanTugas.tugasPresentasiModel.judulMakalah
+                      data.laporanTugas.pembahasanKasusSulitMultidisiplinModel.kasusYangDibahas
                     }}</b>
-                  </th>
+                  </td>
                 </tr>
                 <tr>
-                  <th>Jenis Tugas&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                  <th>
-                    <b>{{ data.laporanTugas.tugasPresentasiModel.jenis }}</b>
-                  </th>
-                </tr>
-                <tr>
-                  <th>Konsulen&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                  <th>
+                  <td>Konsulen&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                  <td>
                     <b>{{ data.laporanTugas.konsulenModel.pengguna.name }}</b>
-                  </th>
+                  </td>
                 </tr>
                 <tr>
-                  <th>Link&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                  <th>
+                  <td>Link&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                  <td>
                     <b>{{ data.laporanTugas.linkTugas }}</b>
-                  </th>
+                  </td>
                 </tr>
                 <tr>
-                  <th>Status&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                  <th>
+                  <td>Status&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                  <td>
                     <div class="badge badge-primary badge-pill">
                       {{ data.laporanTugas.status }}
                     </div>
-                  </th>
+                  </td>
                 </tr>
                 <tr>
-                  <th>&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                  <th><b></b></th>
+                  <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                  <td><b></b></td>
                 </tr>
               </tbody>
             </table>
@@ -105,16 +97,14 @@
       ></CardTimeline>
       <!-- CARD 3 -->
       <CardTimelineEnter
-        title="Feedback"
         v-if="this.data.laporanTugas.feedback != null"
+        title="Feedback"
         :updateStatus="this.data.laporanTugas.feedback"
       ></CardTimelineEnter>
     </div>
   </div>
-
   <!-- START MODAL -->
   <!-- ------------------------------------------------ -->
-
   <!-- DIV BESAR MODAL -->
   <div
     class="modal fade"
@@ -210,15 +200,16 @@ import CardTimelineEnter from "@/components/CardTimelineEnter";
 import authHeader from "@/services/auth-header"
 
 export default {
-  name: "TugasPresentasiDetail",
+  name: "KasusSulitDetail",
   components: { LightHeader, CardTimelineEnter, CardTimeline },
   data() {
     return {
+      delete: { idLaporanTugas: this.$route.params.idLaporanTugas },
       data: null,
       feedback: String,
       subtitle: String,
       residen: null,
-      delete: { idLaporanTugas: this.$route.params.idLaporanTugas },
+      delete: { idLaporanTugas: null },
       status: 0,
       ready: false,
     };
@@ -241,12 +232,11 @@ export default {
       .then((resp) => {
         console.warn(resp.data);
         this.data = resp.data;
-        console.warn(this.data);
       });
     axios
       .get(
         "http://localhost:8000/api/dashboardPengurusAkademik/getResiden/" +
-          this.$route.params.idLaporanTugas, 
+          this.$route.params.idLaporanTugas
       ) // nanti diganti ini angka 1 nya
       .then((resp) => {
         console.warn(resp.data);
@@ -259,10 +249,10 @@ export default {
   methods: {
     deleteLaporanTugas(e) {
       this.status = 1;
-      console.warn(this.$route.params.idLaporanTugas);
+      console.warn(this.posts);
       axios
         .post(
-          "http://localhost:8000/laporantugas/deletetugaspresentasi/",
+          "http://localhost:8000/laporantugas/deletepembahasankasussulit/",
           this.delete
         )
         .then((result) => {
@@ -278,9 +268,8 @@ export default {
   },
 };
 </script>
-
 <style>
-th {
-  font-weight: normal;
+th{
+  word-wrap: break-word;
 }
 </style>

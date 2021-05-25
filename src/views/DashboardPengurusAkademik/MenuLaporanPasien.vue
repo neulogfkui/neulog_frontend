@@ -1,10 +1,11 @@
 <template>
   <MainHeader
     title= "Dashboard Laporan Pasien"
+    :subtitle="this.subtitle"
     icon= "file-text">
   </MainHeader>
   <div class="container">
-    <div class="row upper">
+    <div class="row upper justify-content-center">
       <!-- <BarChart
         v-if="isMounted"
         :label="this.labelBarTindakan"
@@ -111,6 +112,7 @@ import MainHeader from "@/components/MainHeader.vue";
 import PieChart from "@/components/PieChart.vue";
 import BarChart from "@/components/BarChart.vue";
 import dataTableLoader from "@/js/datatable";
+import authHeader from "@/services/auth-header";
 
 export default {
   name: "MenuLaporanPasien",
@@ -124,9 +126,10 @@ export default {
       persentase: Number,
       labelBarLaporan: [],
       dataBarLaporan: [],
-      listLaporanPasien: Array,
+      listLaporanPasien: [],
       isMounted: false,
-      ready: false
+      ready: false,
+      subtitle: String,
     };
   },
   components: {
@@ -137,11 +140,15 @@ export default {
   computed:{
     isDataTableReady(){
       return this.ready
+    },
+    getNamaPA(){
+      return JSON.parse(localStorage.getItem("userData")).pengurusAkademik.pengguna.name;
     }
   },
-  mounted() {
+  created() {
+    this.subtitle = this.getNamaPA;
     axios
-      .get("http://localhost:8000/api/dashboardPengurusAkademik/laporanpasien/")
+      .get("http://localhost:8000/api/dashboardPengurusAkademik/laporanpasien/", { headers: authHeader() })
       .then((resp) => {
         console.warn(resp.data);
         this.labelBarTindakan = resp.data.labelTindakan;
@@ -154,8 +161,8 @@ export default {
         this.dataBarLaporan = resp.data.listJumlahLaporanPasienPerTipe;
         this.listLaporanPasien = resp.data.listLaporanPasien;
         this.isMounted = true;
-        this.ready = true;
         dataTableLoader();
+        this.ready = true;
       });
   }
 };
