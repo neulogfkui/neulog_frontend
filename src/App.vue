@@ -185,7 +185,7 @@
 
                 <!-- PENGURUS AKADEMIK [BEKA] -->
                 <!-- ----------------------------------------------------------------------------------------- -->
-                  <div v-if="userRoles.includes('ROLE_PENGURUSAKADEMIK')">
+                  <!-- <div v-if="userRoles.includes('ROLE_PENGURUSAKADEMIK')"> -->
                   <!-- Home -->
                   <!-- Dashbooard -->
                   <div v-if="userRoles.includes('ROLE_PENGURUSAKADEMIK')">

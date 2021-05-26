@@ -6,7 +6,7 @@
                     <div class="col-auto mt-4">
                         <h1 class="page-header-title">
                             <div class="page-header-icon"><i class="fas fa-id-card mr-3"></i></div>
-                            Dashboard Konsulen
+                            Dashboard Konsulen | Tugas Presentasi
                         </h1>
                         <div class="page-header-subtitle mt-2">Selamat datang, {{ user.username }}.</div>
                     </div>
@@ -31,17 +31,18 @@
 	<div class="container mt-4">
         <!-- TAB NAVBAR -->	
         <nav class="nav nav-borders">
-            <a class="nav-link active ml-0" href="#">Belum Dievaluasi</a>
-            <a class="nav-link" href="/dashboard-konsulen/laporan-pasien/sudah-dievaluasi">Sudah Dievaluasi</a>
+            <a class="nav-link" href="/dashboard-konsulen/tugas-presentasi/belum-dievaluasi">Belum Dievaluasi</a>
+            <a class="nav-link" href="/dashboard-konsulen/tugas-presentasi/sudah-dievaluasi">Sudah Dievaluasi</a>
+            <a class="nav-link active ml-0" href="#" >Review</a>
         </nav>
         <hr class="nav-underline mt-0 mb-4"/>
 
 
-        <!-- LAPORAN PASIEN DATATABLE -->
+        <!-- TUGAS PRESENTASI DATATABLE -->
         <div v-if="dataTableReady" class="container mt-5">
             <div class="card mb-4 mt-4">
             <div class="card card-header-actions">
-            <div class="card-header">Laporan Pasien (Belum Dievaluasi)</div>
+            <div class="card-header">Tugas Presentasi (Review)</div>
                 <div class="card-body">
                     <div class="datatable">
                         <table
@@ -53,28 +54,22 @@
                             <thead>
                                 <tr>
                                 <th>Dibuat</th>
-                                <th>Tanggal Jaga</th>
-                                <th>Inisial Pasien</th>
-                                <th>Usia</th>
-                                <th>No. Rekam Medis</th>
-                                <th>DPJP</th>
-                                <th>Jaga</th>
+                                <th>Residen</th>
+                                <th>Judul Makalah</th>
+                                <th>Jenis</th>
                                 <th>Status</th>
                                 <th>Detail</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="laporan in this.laporans" v-bind:key="laporan.id">
-                                <td>{{ laporan.tanggalPembuatan }}</td>
-                                <td>{{ laporan.tanggalJaga }}</td>
-                                <td>{{ laporan.inisialPasien }}</td>
-                                <td>{{ laporan.usia }}</td>
-                                <td>{{ laporan.norekammedis }}</td>
-                                <td>{{ laporan.dpjp }}</td>
-                                <td>{{ laporan.isJaga }}</td>
+                                <tr v-for="laporan in this.laporans" v-bind:key="laporan.idPresentasi">
+                                <td>{{ laporan.tanggalDibuat }}</td>
+                                <td>{{ laporan.residen }}</td>
+                                <td>{{ laporan.judulMakalah }}</td>
+                                <td>{{ laporan.jenis }}</td>
                                 <td>{{ laporan.status }}</td>
                                 <td>
-                                    <button @click="redirectToView(laporan.id)" class="btn btn-primary mr-2">Lihat</button>
+                                    <button @click="redirectToView(laporan.idPresentasi)" class="btn btn-primary mr-2">Lihat</button>
                                 </td>
                                 </tr>
                             </tbody>
@@ -109,7 +104,7 @@ export default {
 
     created() {
         axios
-            .get("http://localhost:8000/api/laporan-pasien/belum-dievaluasi/"+JSON.parse(localStorage.getItem("userData")).konsulen.idKonsulen, { headers: authHeader() })
+            .get("http://localhost:8000/api/laporantugas/tugaspresentasi/review/"+JSON.parse(localStorage.getItem("userData")).konsulen.idKonsulen, { headers: authHeader() })
             .then(success => {
                     this.successful = true;
                     this.laporans = success.data;
@@ -135,7 +130,7 @@ export default {
 
     methods: {
 		redirectToView(idLaporan) {
-            this.$router.push('/laporanpasiendetail/'+idLaporan);
+            this.$router.push('/tugasPresentasiDetail/'+idLaporan);
             // TODO: UC04 NOT YET IMPLEMENTED
 		}
 	}
