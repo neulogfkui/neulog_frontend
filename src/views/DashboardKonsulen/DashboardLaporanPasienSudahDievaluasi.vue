@@ -136,7 +136,7 @@ export default {
 
     methods: {
 		redirectToView(idLaporan) {
-            this.$router.push('/laporan-pasien/'+idLaporan);
+            this.$router.push('/laporanpasiendetail/'+idLaporan);
             // TODO: UC04 NOT YET IMPLEMENTED
 		}
 	}

@@ -8,6 +8,10 @@ import KasusSulitBelumDievaluasi from "@/views/DashboardKonsulen/DashboardKasusS
 import KasusSulitSudahDievaluasi from "@/views/DashboardKonsulen/DashboardKasusSulitSudahDievaluasi"
 import PenelitianAkhirBelumDievaluasi from "@/views/DashboardKonsulen/DashboardPenelitianAkhirBelumDievaluasi"
 import PenelitianAkhirSudahDievaluasi from "@/views/DashboardKonsulen/DashboardPenelitianAkhirSudahDievaluasi"
+import TugasPresentasiReview from "@/views/DashboardKonsulen/DashboardTugasPresentasiReview"
+import TugasPublikasiReview from "@/views/DashboardKonsulen/DashboardTugasPublikasiReview"
+import KasusSulitReview from "@/views/DashboardKonsulen/DashboardTugasPresentasiReview"
+import PenelitianAkhirReview from "@/views/DashboardKonsulen/DashboardPenelitianAkhirReview"
 
 let routes = [
     {
@@ -21,6 +25,11 @@ let routes = [
         component: LaporanPasienSudahDievaluasi,
     },
     {
+        path: '/dashboard-konsulen/tugas-presentasi/review',
+        name: 'TugasPresentasiReview',
+        component: TugasPresentasiReview,
+    },
+    {
         path: '/dashboard-konsulen/tugas-presentasi/belum-dievaluasi',
         name: 'TugasPresentasiBelumDievaluasi',
         component: TugasPresentasiBelumDievaluasi,
@@ -29,7 +38,13 @@ let routes = [
         path: '/dashboard-konsulen/tugas-presentasi/sudah-dievaluasi',
         name: 'TugasPresentasiSudahDievaluasi',
         component: TugasPresentasiSudahDievaluasi,
-    },    {
+    },   
+    {
+        path: '/dashboard-konsulen/tugas-publikasi/review',
+        name: 'TugasPublikasiReview',
+        component: TugasPublikasiReview,
+    },
+    {
         path: '/dashboard-konsulen/tugas-publikasi/belum-dievaluasi',
         name: 'TugasPublikasiBelumDievaluasi',
         component: TugasPublikasiBelumDievaluasi,
@@ -38,7 +53,13 @@ let routes = [
         path: '/dashboard-konsulen/tugas-publikasi/sudah-dievaluasi',
         name: 'TugasPublikasiSudahDievaluasi',
         component: TugasPublikasiSudahDievaluasi,
-    },    {
+    },
+    {
+        path: '/dashboard-konsulen/kasus-sulit/review',
+        name: 'KasusSulitReview',
+        component: KasusSulitReview,
+    },
+    {
         path: '/dashboard-konsulen/kasus-sulit/belum-dievaluasi',
         name: 'KasusSulitBelumDievaluasi',
         component: KasusSulitBelumDievaluasi,
@@ -47,6 +68,11 @@ let routes = [
         path: '/dashboard-konsulen/kasus-sulit/sudah-dievaluasi',
         name: 'KasusSulitSudahDievaluasi',
         component: KasusSulitSudahDievaluasi,
+    },
+    {
+        path: '/dashboard-konsulen/penelitian-akhir/review',
+        name: 'PenelitianAkhirReview',
+        component: PenelitianAkhirReview,
     },
     {
         path: '/dashboard-konsulen/penelitian-akhir/belum-dievaluasi',

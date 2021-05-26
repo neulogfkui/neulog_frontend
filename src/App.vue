@@ -185,6 +185,7 @@
 
                 <!-- PENGURUS AKADEMIK [BEKA] -->
                 <!-- ----------------------------------------------------------------------------------------- -->
+
                   <div v-if="userRoles.includes('ROLE_PENGURUSAKADEMIK')">
                   <!-- Dashbooard -->
                   <div class="sidenav-menu-heading">Dashboard Pengurus Akademik</div>
