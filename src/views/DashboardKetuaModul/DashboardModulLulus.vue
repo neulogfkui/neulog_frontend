@@ -13,11 +13,18 @@
     
     <div class="container" v-if="isDataTableReady">
         <div class="row upper">
-            <!-- DIAGRAM 1 BELUM -->
-            <!-- DIAGRAM 1 BELUM -->
-            <!-- DIAGRAM 1 BELUM -->
-            <!-- DIAGRAM 1 BELUM -->
-            <!-- DIAGRAM 1 BELUM -->
+            <!-- START DIAGRAM 1 (MASIH ADA 2 CARD, BELUM DISATUIN JADI 1 CARD) -->
+            <BigNumberCard
+                title="Total Residen Lulus"
+                :count="this.listJumlah[0]"
+                caption="Lulus Tepat Waktu"
+            />
+            <BigNumberCard
+                title="Total Residen Lulus"
+                :count="this.listJumlah[1]"
+                caption="Lulus Prolong"
+            />
+            <!-- END DIAGRAM 1 (MASIH ADA 2 CARD, BELUM DISATUIN JADI 1 CARD) -->
             <PieChart
                 :persen="this.persen"
                 :total="this.jmlModulSelesai"
@@ -28,7 +35,7 @@
             </PieChart>
             <BigNumberCard
                 title="Rata-Rata Durasi Residen di Modul"
-                :count="strAvgDurasi"
+                :count="this.strAvgDurasi"
                 caption="Hari"
             />
         <div class="col-xxl-12 col-xl-12 mb-4 mt-4">
