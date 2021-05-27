@@ -1,6 +1,6 @@
 <template>
   <div class="col-xxl-3 col-lg-3">
-    <router-link to="/about" custom v-slot="{ navigate }">
+    <router-link :to="link"  custom v-slot="{ navigate }">
       <div
         class="card bg-primary text-white mb-4"
         :class="color"
@@ -12,7 +12,7 @@
               <div class="text-white-75 small">{{ subtitle }}</div>
               <div class="text-lg font-weight-bold">{{ title }}</div>
             </div>
-            <i class="feather-xl text-white-50" data-feather="calendar"></i>
+            <i class="feather-xl text-white-50" :data-feather="icon"></i>
           </div>
         </div>
       </div>
@@ -28,6 +28,7 @@ export default {
     title: String,
     color: String,
     link: String,
+    icon: String,
   },
 };
 </script>

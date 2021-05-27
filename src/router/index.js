@@ -18,6 +18,8 @@ import DashboardPengurusAkademikRoute from "@/router/DashboardPengurusAkademikRo
 import DashboardKonsulen from "@/router/DashboardKonsulen.js"
 import LaporanTugasRoute from "@/router/LaporanTugasRoute.js" 
 import DashboardResidenRoute from "@/router/DashboardResidenRoute.js" 
+import ModulRoute from "@/router/ModulRoute.js" 
+import KompetensiRoute from "@/router/KompetensiRoute.js" 
 
 const routes = [
   ...LaporanPasienRoute,
@@ -26,6 +28,8 @@ const routes = [
   ...MengelolaAkunRoute,
   ...LaporanTugasRoute,
   ...DashboardResidenRoute,
+  ...ModulRoute,
+  ...KompetensiRoute,
 
 
   //ALL

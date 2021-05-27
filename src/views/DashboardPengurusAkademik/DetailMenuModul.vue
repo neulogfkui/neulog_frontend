@@ -5,6 +5,11 @@
     icon= "briefcase">
 </LightHeader>
 <div class="container upper">
+    <div class="row mr-2 mb-4 justify-content-end upper">
+        <router-link :to="'/modulform/'+ this.idModul">
+          <button class="btn btn-warning">Edit</button>
+      </router-link>
+    </div>
     <div class="row">
         <div class="col-xxl-7 col-xl-7 mb-4 mt-4">
             <div class="card card-header-actions h-100">
@@ -159,6 +164,7 @@ export default {
   name: "DetailMenuModul",
   data() {
     return {
+      idModul: Number,
       title: String,
       detailModul: Array,
       namaModul: String,
@@ -189,8 +195,14 @@ export default {
       .get("http://localhost:8000/api/dashboardPengurusAkademik/modul/" + this.$route.params.idModul, { headers: authHeader() }) // nanti diganti ini angka 1 nya
       .then((resp) => {
         console.warn(resp.data);
+        this.idModul = resp.data.detailModul.idModul
         this.namaModul = resp.data.detailModul.namaModul
-        this.ketuaModulName = resp.data.detailModul.ketuaModul.pengguna.name
+        if(resp.data.detailModul.ketuaModul != null){
+            this.ketuaModulName = resp.data.detailModul.ketuaModul.pengguna.name
+        }
+        else{
+            this.ketuaModulName = "None"
+        }
         this.jumlahResiden = resp.data.jumlahResiden
         this.tanggalDibuat = resp.data.detailModul.tanggalDibuat
         this.deskripsi = resp.data.detailModul.deskripsi
