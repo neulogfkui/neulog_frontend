@@ -133,22 +133,62 @@
                   </nav>
               </div>
 				      </div>
+
+              <div v-if="userRoles.includes('ROLE_KONSULEN')">
+                <!-- Dashbooard -->
+                <div class="sidenav-menu-heading">Dashboard</div>
+                <a
+                  class="nav-link collapsed"
+                  href="javascript:void(0);"
+                  data-toggle="collapse"
+                  data-target="#collapseDashboards"
+                  aria-expanded="false"
+                  aria-controls="collapseDashboards"
+                >
+                  <div class="nav-link-icon">
+                    <i data-feather="activity"></i>
+                  </div>
+                  Dashboard Konsulen
+                  <div class="sidenav-collapse-arrow">
+                    <i class="fas fa-angle-down"></i>
+                  </div>
+                </a>
+                <div
+                  class="collapse"
+                  id="collapseDashboards"
+                  data-parent="#accordionSidenav"
+                >
+                  <nav
+                    class="sidenav-menu-nested nav accordion"
+                    id="accordionSidenavPages"
+                  >
+                    <router-link class="nav-link" to="/dashboard-konsulen/laporan-pasien/belum-dievaluasi"
+                      >Laporan Pasien</router-link
+                    >
+                    <router-link class="nav-link" to="/dashboard-konsulen/tugas-presentasi/belum-dievaluasi"
+                      >Tugas Presentasi</router-link
+                    >
+                    <router-link class="nav-link" to="/dashboard-konsulen/tugas-publikasi/belum-dievaluasi"
+                      >Tugas Publikasi</router-link
+                    >
+                    <router-link class="nav-link" to="/dashboard-konsulen/penelitian-akhir/belum-dievaluasi"
+                      >Tugas Penelitian Akhir</router-link
+                    >
+                    <router-link class="nav-link" to="/dashboard-konsulen/kasus-sulit/belum-dievaluasi"
+                      >Pembahasan Kasus Sulit</router-link
+                    >
+                  </nav>
+                </div>
+              </div>
                 <!-- END OF RESIDEN -->
                 <!-- ----------------------------------------------------------------------------------------- -->
 
                 <!-- PENGURUS AKADEMIK [BEKA] -->
                 <!-- ----------------------------------------------------------------------------------------- -->
+
                   <div v-if="userRoles.includes('ROLE_PENGURUSAKADEMIK')">
-                  <!-- Home -->
-                  <div class="sidenav-menu-heading">Menu</div>
-                  <router-link to="/dashboardpengurusakademik" class="nav-link">
-                    <div class="nav-link-icon">
-                      <i data-feather="bar-chart"></i>
-                    </div>
-                    Dashboard Choice</router-link
-                  >
                   <!-- Dashbooard -->
-                  <div class="sidenav-menu-heading">Dashboard</div>
+                  <div class="sidenav-menu-heading">Dashboard Pengurus Akademik</div>
                   <a
                     class="nav-link collapsed"
                     href="javascript:void(0);"
@@ -160,7 +200,7 @@
                     <div class="nav-link-icon">
                       <i class="fas fa-th-large"></i>
                     </div>
-                    Dashboard Pengurus Akademik
+                    Dashboard
                     <div class="sidenav-collapse-arrow">
                       <i class="fas fa-angle-down"></i>
                     </div>
@@ -174,23 +214,29 @@
                       class="sidenav-menu-nested nav accordion"
                       id="accordionSidenavPages"
                     >
+                      <router-link class="nav-link" to="/dashboardpengurusakademik"
+                        >Menu</router-link
+                      >
                       <router-link class="nav-link" to="/dashboardpengurusakademik/residen/ongoing"
-                        >Dashboard Residen</router-link
+                        >Residen</router-link
                       >
                       <router-link class="nav-link" to="/dashboardpengurusakademik/konsulen"
-                        >Dashboard Konsulen</router-link
+                        >Konsulen</router-link
                       >
                       <router-link class="nav-link" to="/dashboardpengurusakademik/laporanpasien"
-                        >Dashboard Laporan Pasien</router-link
+                        >Laporan Pasien</router-link
                       >
                       <router-link class="nav-link" to="/dashboardpengurusakademik/laporantugas/tugaspresentasi"
-                        >Dashboard Laporan Tugas</router-link
+                        >Laporan Tugas</router-link
                       >
                       <router-link class="nav-link" to="/dashboardpengurusakademik/modul"
-                        >Dashboard Modul</router-link
+                        >Modul</router-link
+                      >
+                      <router-link class="nav-link" to="/dashboardpengurusakademik/kompetensi"
+                        >Kompetensi</router-link
                       >
                       <router-link class="nav-link" to="/dashboardpengurusakademik/tes-formatif"
-                        >Dashboard Tes Formatif</router-link
+                        >Tes Formatif</router-link
                       >
                     </nav>
                   </div>
@@ -212,7 +258,6 @@
                   > -->
                   <div v-if="userRoles.includes('ROLE_ADMIN')">
                   <!-- Dashbooard -->
-                  <div class="sidenav-menu-heading">Dashboard</div>
                   <a
                     class="nav-link collapsed"
                     href="javascript:void(0);"
@@ -413,6 +458,10 @@ export default {
       this.linkJaga = "/dashboardjaga/" + this.userData.residen.idResiden;
       this.linkTindakan = "/dashboardtindakan/" + this.userData.residen.idResiden;
     }
+  },
+
+  updated() {
+    loadScript();
   },
 
   methods: {
