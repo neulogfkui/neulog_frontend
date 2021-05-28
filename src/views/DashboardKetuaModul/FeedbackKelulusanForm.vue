@@ -1,36 +1,65 @@
 <template>
+<LightHeader
+    :title="titleHeader"
+    icon="user"
+></LightHeader>
 <div class="container mt-10 align-items-center justify-content-center">
     <div class="card mb-4">
         <div class="card-header">Data Kelulusan Residen</div>
         <div class="card-body">
-                <!-- Nama -->
-                <!-- NPM -->
-                <!-- TAHUN / TERM -->
-            <form>
-                <!-- Form Row -->
-                <div class="form-row" id="role-checkbox">
-                    <div class="form-group">
-                        <input class="custom-control custom-checkbox" type="checkbox" id="konsulen" value="ROLE_KONSULEN" v-model="roles">
-                        <label for="konsulen">Konsulen</label>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text">Nama</p>
                     </div>
-                    <div class="form-group">
-                        <input class="custom-control custom-checkbox" type="checkbox" id="admin" value="ROLE_ADMIN" v-model="roles">
-                        <label for="admin">Admin</label>
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text">{{ residen.name }}</p>
                     </div>
                 </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label class="small mb-1" for="inputNamaLengkap">Nama Lengkap</label>
-                        <input v-model="staff.name" class="form-control" id="inputNamaLengkap" type="text" placeholder="Cth: Ardiaf Rizky"/>
+                <div class="row">
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text">NPM</p>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text">{{ residen.npm }}</p>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text">Tahun / Term</p>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text">{{ residen.tahunMasuk + " / " + residen.term }}</p>
+                    </div>
+                </div>
+            </div>
+            <form @submit="postData" method="POST">
+                <div class="container" v-if="getReady">
+                    <!-- Form Row -->
+                    <div class="form-row" id="role-checkbox">
+                        <div class="form-group">
+                            <input class="custom-control custom-checkbox" type="checkbox" id="lulus" value="Lulus" v-model="status">
+                            <label for="lulus">Lulus</label>
+                        </div>
+                        <div class="form-group">
+                            <input class="custom-control custom-checkbox" type="checkbox" id="tidak_lulus" value="Tidak Lulus" v-model="status">
+                            <label for="tidak_lulus">Tidak Lulus</label>
+                        </div>
+                    </div>
 
-                <!-- Save changes button-->
-                <button @click="handleStaffResgister" class="btn btn-primary" type="button" data-toggle="modal" data-target="#saveModal">Buat Staff Baru</button>
-                <div class="form-group">
-                    <div v-if="successful && message" class="alert alert-success mt-3" role="alert">{{message}}</div>
-                    <div v-if="!successful && message" class="alert alert-danger mt-3" role="alert">{{message}}</div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="small mb-1" for="inputFeedback">Feedback</label>
+                            <input v-model="feedback" class="form-control" id="inputFeedback" type="text" placeholder="Masukkan feedback Anda untuk residen mengenai modul ini"/>
+                        </div>
+                    </div>
+
+                    <!-- Save changes button-->
+                    <button @click="handleKelulusan" class="btn btn-primary" type="button" data-toggle="modal" data-target="#saveModal">Simpan</button>
+                    <div class="form-group">
+                        <div v-if="successful && message" class="alert alert-success mt-3" role="alert">{{message}}</div>
+                        <div v-if="!successful && message" class="alert alert-danger mt-3" role="alert">{{message}}</div>
+                    </div>
                 </div>
             </form>
         </div>
@@ -42,20 +71,20 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="saveModalTitle">Pesan Perubahan Data</h5>
+                <h5 class="modal-title" id="saveModalTitle">Status berhasil diubah!</h5>
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
             </div>
             <div v-if="successful" class="modal-body success-body">
                 <i class="far fa-check-circle check-success"></i>
-                Akun {{ staff.name }} ({{staff.username}}) berhasil ditambahkan.
+                Status kelulusan {{ residen.name }} pada modul {{ modul.namaModul }} berhasil diubah.
             </div>
             <div v-if="!successful" class="modal-body fail-body">
                 <i class="far fa-times-circle check-fail"></i>
-                Akun {{ staff.name }} ({{staff.username}}) gagal ditambahkan. Mohon periksa kembali data yang dimasukkan.
+                Status kelulusan {{ residen.name }} pada modul {{ modul.namaModul }} gagal diubah. Silakan coba lagi.
             </div>
             <div class="modal-footer">
-                <button v-if="successful" @click="redirectToView" class="btn btn-light" type="button" data-dismiss="modal">Tutup</button>
-                <button v-if="!successful" class="btn btn-light" type="button" data-dismiss="modal">Tutup</button>
+                <button v-if="successful" @click="redirectToView" class="btn btn-light" type="button" data-dismiss="modal">OK</button>
+                <button v-if="!successful" class="btn btn-light" type="button" data-dismiss="modal">OK</button>
             </div>
         </div>
     </div>
@@ -63,15 +92,14 @@
 </template>
 
 <script>
-import Staff from '../../models/staff';
 
 export default {
-    name: "StaffRegister",
+    name: "FeedbackKelulusanForm",
+    components: { LightHeader },
     data() {
         return {
-            rePassword: "",
-            staff: new Staff(),
-            roles: [],
+            title: String,
+            status: [],
             submitted: false,
             successful: false,
             message: ''
@@ -83,17 +111,7 @@ export default {
             this.$router.push('/mengelola-akun/view-staff/'+this.staff.username);
         },
 
-        handleStaffResgister(){
-            if (!(this.staff.name && this.staff.username && this.staff.password && this.roles.length!=0
-                    && this.staff.email && this.staff.tempatLahir && this.staff.tanggalLahir)) {
-                this.message = "Mohon lengkapi semua field pada formulir.";
-                return
-            }
-            if (this.rePassword != this.staff.password) {
-                this.message = "Masukan pada 'Re-Enter Password' tidak sama dengan password baru.";
-                return
-            }
-
+        handleKelulusan(){
             this.staff.role = this.roles;
             console.log(this.staff);
             this.message = '';
@@ -105,9 +123,6 @@ export default {
             },
             error => {
                 this.message = "Error pada Server, cek kembali data yang dimasukkan. Jika error berlanjut, laporkan pada admin/programmer"
-                    // (error.response && error.response.data && error.response.data.message) ||
-                    // error.message ||
-                    // error.toString();
                 this.successful = false
                 }
             );

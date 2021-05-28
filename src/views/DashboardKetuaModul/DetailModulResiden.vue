@@ -51,7 +51,7 @@
                         <div class="row">
                             <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
                                 <p class="card-text">
-                                    TTL
+                                    Tempat dan Tanggal Lahir
                                 </p>
                             </div>
                             <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
@@ -116,7 +116,7 @@
                             </div>
                             <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
                                 <p class="card-text">
-                                    {{ pembimbingName }}
+                                    {{ namaModul }}
                                 </p>
                             </div>
                         </div>
@@ -128,7 +128,7 @@
                             </div>
                             <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
                                 <p class="card-text">
-                                    {{ pembimbingName }}
+                                    {{ tanggalMulai }}
                                 </p>
                             </div>
                         </div>
@@ -140,7 +140,7 @@
                             </div>
                             <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
                                 <p class="card-text">
-                                    {{ pembimbingName }}
+                                    {{ tanggalSelesai }}
                                 </p>
                             </div>
                         </div>
@@ -152,7 +152,7 @@
                             </div>
                             <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
                                 <p class="card-text">
-                                    {{ pembimbingName }}
+                                    {{ durasi }}
                                 </p>
                             </div>
                         </div>
@@ -164,8 +164,17 @@
                             </div>
                             <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
                                 <p class="card-text">
-                                    {{ pembimbingName }}
+                                    {{ status }}
                                 </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xxl-12 col-xl-12 mb-4 mt-4">
+                                <div v-if="this.status == 'Belum Lulus'">
+                                    <router-link :to="'/feedbackkelulusanform/'+this.idModulResiden">
+                                        <button class="btn btn-primary">Beri Kelulusan</button>
+                                    </router-link>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -176,14 +185,14 @@
             <div class="row">
                 <CardTimeline
                     title="Update Status"
-                    :updateStatus="this.posts.updateStatus"
+                    :status="this.status"
                     v-if="isMounted">
                 </CardTimeline>
             </div>
             <div class="row">
                 <CardTimelineEnter
-                    title="Feedback Ketua Modul" v-if="this.posts.feedback != null"
-                    :updateStatus="this.posts.feedback">
+                    title="Feedback Ketua Modul" v-if="this.feedback != null"
+                    :status="this.feedback">
                 </CardTimelineEnter>
             </div>
         </div> 
@@ -212,6 +221,13 @@ export default {
       telepon: String,
       email: String,
       pembimbingName: String,
+      namaModul: String,
+      tanggalMulai: String,
+      tanggalSelesai: String,
+      durasi: Number,
+      feedback: String,
+      status: String,
+      updateStatus: null,
       isMounted: false,
     };
   },
@@ -224,18 +240,25 @@ export default {
       .then((resp) => {
         console.warn(resp.data);
         this.data = resp.data;
-        this.title = "Detail Residen " + this.name + " di Modul " + this.modul
-        this.idResiden = resp.data.idResiden
-        this.name = resp.data.pengguna.name
-        this.npm = resp.data.npm
-        this.tahunMasuk = resp.data.tahunMasuk
-        this.term = resp.data.term
-        this.tempatLahir = resp.data.pengguna.tempatLahir
-        this.tanggalLahir = resp.data.pengguna.tanggalLahir
-        this.alamat = resp.data.alamatRumah
-        this.telepon = resp.data.noTelepon
-        this.email = resp.data.pengguna.email
-        this.pembimbingName = resp.data.konsulen.pengguna.name
+        this.idModulResiden = resp.data.idModulResiden;
+        this.name = resp.data.residen.pengguna.name;
+        this.npm = resp.data.residen.npm;
+        this.tahunMasuk = resp.data.residen.tahunMasuk;
+        this.term = resp.data.residen.term;
+        this.tempatLahir = resp.data.residen.pengguna.tempatLahir;
+        this.tanggalLahir = resp.data.residen.pengguna.tanggalLahir;
+        this.alamat = resp.data.residen.alamatRumah;
+        this.telepon = resp.data.residen.noTelepon;
+        this.email = resp.data.residen.pengguna.email;
+        this.pembimbingName = resp.data.residen.konsulen.pengguna.name;
+        this.namaModul = resp.data.modul.namaModul;
+        this.tanggalMulai = resp.data.tanggalMulai;
+        this.tanggalSelesai = resp.data.tanggalSelesai;
+        this.durasi = resp.data.durasi;
+        this.feedback = resp.data.feedback;
+        this.status = resp.data.status;
+        this.updateStatus = resp.data.updateStatus;
+        this.title = "Detail Residen " + this.name + " di Modul " + this.namaModul;
         this.isMounted = true;
       });
   },
