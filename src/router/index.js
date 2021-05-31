@@ -17,6 +17,7 @@ import MengelolaAkunRoute from "@/router/MengelolaAkunRoute.js"
 import DashboardPengurusAkademikRoute from "@/router/DashboardPengurusAkademikRoute.js" 
 import LaporanTugasRoute from "@/router/LaporanTugasRoute.js" 
 import DashboardResidenRoute from "@/router/DashboardResidenRoute.js" 
+import DashboardKetuaModulRoute from "@/router/DashboardKetuaModulRoute.js" 
 
 const routes = [
   ...LaporanPasienRoute,
@@ -24,6 +25,7 @@ const routes = [
   ...MengelolaAkunRoute,
   ...LaporanTugasRoute,
   ...DashboardResidenRoute,
+  ...DashboardKetuaModulRoute,
 
   //ALL
   //AUTHOR: ALL

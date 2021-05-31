@@ -1,7 +1,7 @@
 <template>
     <LightHeader 
         v-if="isMounted"
-        :title=this.title
+        :title= this.title
         icon="user">
     </LightHeader>
     <div class="container upper">
@@ -159,19 +159,19 @@
                         <div class="row">
                             <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
                                 <p class="card-text">
-                                    Status
+                                    Statuszzzzzz
                                 </p>
                             </div>
                             <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
-                                <p class="card-text">
+                                <p class="status-blm-lulus">
                                     {{ status }}
                                 </p>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-xxl-12 col-xl-12 mb-4 mt-4">
-                                <div v-if="this.status == 'Belum Lulus'">
-                                    <router-link :to="'/feedbackkelulusanform/'+this.idModulResiden">
+                                <div>
+                                    <router-link :to="'/feedbackkelulusanform/'">
                                         <button class="btn btn-primary">Beri Kelulusan</button>
                                     </router-link>
                                 </div>
@@ -189,27 +189,28 @@
                     v-if="isMounted">
                 </CardTimeline>
             </div>
-            <div class="row">
+            <!-- <div class="row">
                 <CardTimelineEnter
                     title="Feedback Ketua Modul" v-if="this.feedback != null"
                     :status="this.feedback">
                 </CardTimelineEnter>
-            </div>
+            </div> -->
         </div> 
     </div>
 </template>
 
 <script>
 import axios from "axios";
+import MainHeader from "@/components/MainHeader.vue";
 import LightHeader from "@/components/LightHeader.vue";
 import authHeader from "@/services/auth-header";
 
 export default {
-  name: "DetailModulResiden",
+  name: "DetailModulResidenKetua",
   data() {
     return {
       title: String,
-      data: Array,
+      data: null,
       idModulResiden: Number,
       name: String,
       npm: String,
@@ -232,13 +233,15 @@ export default {
     };
   },
   components: {
+    MainHeader,
     LightHeader,
   },
   mounted() {
+      console.log(authHeader());
     axios
       .get("http://localhost:8000/api/dashboardKetuaModul/detail/" + this.$route.params.idModulResiden, { headers: authHeader() })
       .then((resp) => {
-        console.warn(resp.data);
+        console.log(resp.data);
         this.data = resp.data;
         this.idModulResiden = resp.data.idModulResiden;
         this.name = resp.data.residen.pengguna.name;
@@ -260,7 +263,14 @@ export default {
         this.updateStatus = resp.data.updateStatus;
         this.title = "Detail Residen " + this.name + " di Modul " + this.namaModul;
         this.isMounted = true;
+        console.log(this.title);
       });
   },
 };
 </script>
+
+<style scoped>
+.status-blm-lulus {
+    color: rgb(202, 39, 39);
+}
+</style>

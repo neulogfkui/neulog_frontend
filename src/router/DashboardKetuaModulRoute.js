@@ -1,13 +1,9 @@
 import DashboardModulLulus from "@/views/DashboardKetuaModul/DashboardModulLulus.vue"
 import DashboardModulOngoing from "@/views/DashboardKetuaModul/DashboardModulOngoing.vue"
-import DetailModulResiden from "@/views/DashboardKetuaModul/DetailModulResiden.vue"
+import DetailModulResidenKetua from "@/views/DashboardKetuaModul/DetailModulResidenKetua.vue"
 import FeedbackKelulusanForm from "@/views/DashboardKetuaModul/FeedbackKelulusanForm.vue"
 
-let routes = [{
-    path: '/dashboardketuamodul/:idKetuaModul',
-    name: 'DashboardKetuaModul',
-    component: DashboardKetuaModul
-},
+let routes = [
 // DASHBOARD MODUL LULUS
 {
     path: '/dashboardmodullulus/:idModul',
@@ -22,9 +18,9 @@ let routes = [{
 },
 // DETAIL MODUL RESIDEN
 {
-    path: '/detailmodulresiden/:idModulResiden',
-    name: 'DetailModulResiden',
-    component: DetailModulResiden
+    path: '/detailmodulresidenketua/:idModulResiden',
+    name: 'DetailModulResidenKetua',
+    component: DetailModulResidenKetua
 },
 // FEEDBACK KELULUSAN FORM
 {

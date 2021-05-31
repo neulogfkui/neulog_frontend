@@ -38,11 +38,11 @@
                     <!-- Form Row -->
                     <div class="form-row" id="role-checkbox">
                         <div class="form-group">
-                            <input class="custom-control custom-checkbox" type="checkbox" id="lulus" value="Lulus" v-model="status">
+                            <input class="custom-control" type="radio" id="lulus" value="Lulus" v-model="status">
                             <label for="lulus">Lulus</label>
                         </div>
                         <div class="form-group">
-                            <input class="custom-control custom-checkbox" type="checkbox" id="tidak_lulus" value="Tidak Lulus" v-model="status">
+                            <input class="custom-control" type="radio" id="tidak_lulus" value="Tidak Lulus" v-model="status">
                             <label for="tidak_lulus">Tidak Lulus</label>
                         </div>
                     </div>
@@ -92,10 +92,11 @@
 </template>
 
 <script>
-
+import axios from "axios";
+import LightHeader from "@/components/LightHeader.vue";
 export default {
     name: "FeedbackKelulusanForm",
-    components: { LightHeader },
+    components: { LightHeader, },
     data() {
         return {
             title: String,
