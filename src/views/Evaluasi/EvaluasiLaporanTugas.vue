@@ -34,30 +34,64 @@
                       <b>{{ data.tugas.linkTugas }}</b>
                     </th>
                   </tr>
-                  <!-- <tr :v-if="!(this.data.tugas.tugasPresentasiModel == null)">
+                  <!-- TUGAS PRESENTASI -->
+                  <tr v-if="!(this.data.tugas.tugasPresentasiModel == null)">
                   <th>Jenis Presentasi</th>
                   <th>
                     <b>{{ data.tugas.tugasPresentasiModel.jenis }}</b>
                   </th>
                 </tr>
-                <tr :v-if="!(this.data.tugas.tugasPresentasiModel == null)">
+                <tr v-if="!(this.data.tugas.tugasPresentasiModel == null)">
                   <th>Modul</th>
                   <th>
                     <b>{{ data.tugas.tugasPresentasiModel.modulModel.namaModul }}</b>
                   </th>
                 </tr>
-                <tr :v-if="!(this.data.tugas.tugasPresentasiModel == null)">
+                <tr v-if="!(this.data.tugas.tugasPresentasiModel == null)">
                   <th>Judul Makalah</th>
                   <th>
                     <b>{{ data.tugas.tugasPresentasiModel.judulMakalah }}</b>
                   </th>
                 </tr>
-                <tr :v-if="!(this.data.tugas.pembahasanKasusSulitMultidisiplinModel == null)">
+                <!-- KASUS SULIT -->
+                <tr v-if="!(this.data.tugas.pembahasanKasusSulitMultidisiplinModel == null)">
                   <th>Kasus Yang Dibahas</th>
                   <th>
                     <b>{{ data.tugas.pembahasanKasusSulitMultidisiplinModel.kasusYangDibahas }}</b>
                   </th>
-                </tr> -->
+                </tr>
+                <tr v-if="!(this.data.tugas.pembahasanKasusSulitMultidisiplinModel == null)">
+                  <th>Nama Pertemuan</th>
+                  <th>
+                    <b>{{ data.tugas.pembahasanKasusSulitMultidisiplinModel.namaPertemuan }}</b>
+                  </th>
+                </tr>
+                <!-- TUGAS PUBLIKASI -->
+                <tr v-if="!(this.data.tugas.tugasPublikasiModel == null)">
+                  <th>Event Publikasi</th>
+                  <th>
+                    <b>{{ data.tugas.tugasPublikasiModel.eventPublikasi }}</b>
+                  </th>
+                </tr>
+                <tr v-if="!(this.data.tugas.tugasPublikasiModel == null)">
+                  <th>Judul Publikasi</th>
+                  <th>
+                    <b>{{ data.tugas.tugasPublikasiModel.judulPublikasi }}</b>
+                  </th>
+                </tr>
+                <!-- TUGAS PENELITIAN AKHIR -->
+                <tr v-if="!(this.data.tugas.tugasPenelitianAkhirModel == null)">
+                  <th>Judul Proposal</th>
+                  <th>
+                    <b>{{ data.tugas.tugasPenelitianAkhirModel.judulProposal }}</b>
+                  </th>
+                </tr>
+                <tr v-if="!(this.data.tugas.tugasPenelitianAkhirModel == null)">
+                  <th>Jenis Tugas</th>
+                  <th>
+                    <b>{{ data.tugas.tugasPenelitianAkhirModel.jenisTugas }}</b>
+                  </th>
+                </tr>
                 </tbody>
               </table>
             </div>
@@ -253,6 +287,7 @@
 import axios from "axios";
 import VueAxios from "vue-axios";
 import LightHeader from "@/components/LightHeader.vue";
+import authHeader from "@/services/auth-header";
 
 export default {
   name: "EvaluasiLaporanTugas",
@@ -285,7 +320,6 @@ export default {
         this.subtitleHeader =
           this.data.residen.npm + " - " + this.data.penggunaresiden.name;
         this.ready = true;
-        console.log(this.data.tugas.tugasPresentasiModel == null);
       });
   },
   computed: {

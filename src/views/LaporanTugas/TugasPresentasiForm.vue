@@ -267,6 +267,7 @@ import LightHeader from "@/components/LightHeader.vue";
 import App from "@/App.vue";
 import dataTableLoader from "@/js/datatable";
 import { computed } from "vue";
+import authHeader from "@/services/auth-header";
 
 export default {
   name: "TugasPresentasiForm",
@@ -374,7 +375,7 @@ export default {
       } else {
         url = "http://localhost:8000/laporantugas/updatetugaspresentasi/";
       }
-      axios.post(url, this.posts).then((result) => {
+      axios.post(url, this.posts, { headers: authHeader() }).then((result) => {
         if (result.data != "0") {
           this.posts.idLaporanTugas = result.data;
           this.status = 2;
