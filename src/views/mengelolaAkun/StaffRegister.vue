@@ -85,11 +85,15 @@
                     <h5 class="modal-title" id="saveModalTitle">Pesan Perubahan Data</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                 </div>
-                <div v-if="successful" class="modal-body success-body">
+                <div v-if="isLoading" class="modal-body success-body">
+                    <span v-show="isLoading" class="spinner-border spinner-border-sm"></span>
+                    File sedang dikirimkan...
+                </div>
+                <div v-if="successful && !isLoading" class="modal-body success-body">
                     <i class="far fa-check-circle check-success"></i>
                     Akun {{ staff.name }} ({{staff.username}}) berhasil ditambahkan.
                 </div>
-                <div v-if="!successful" class="modal-body fail-body">
+                <div v-if="!successful && !isLoading" class="modal-body fail-body">
                     <i class="far fa-times-circle check-fail"></i>
                     Akun {{ staff.name }} ({{staff.username}}) gagal ditambahkan. Mohon periksa kembali data yang dimasukkan.
                 </div>
@@ -114,7 +118,8 @@ export default {
             roles: [],
             submitted: false,
             successful: false,
-            message: ''
+            message: '',
+            isLoading: false
         }
     },
 
@@ -124,6 +129,7 @@ export default {
         },
 
         handleStaffResgister(){
+            this.isLoading = true
             if (!(this.staff.name && this.staff.username && this.staff.password && this.roles.length!=0
                     && this.staff.email && this.staff.tempatLahir && this.staff.tanggalLahir)) {
                 this.message = "Mohon lengkapi semua field pada formulir.";
@@ -142,13 +148,15 @@ export default {
             success => {
                 this.successful = true;
                 this.message = success.message || success.response || success.toString();
+                this.isLoading = false;
             },
             error => {
                 this.message = "Error pada Server, cek kembali data yang dimasukkan. Jika error berlanjut, laporkan pada admin/programmer"
                     // (error.response && error.response.data && error.response.data.message) ||
                     // error.message ||
                     // error.toString();
-                this.successful = false
+                this.successful = false;
+                this.isLoading = false;
                 }
             );
         }

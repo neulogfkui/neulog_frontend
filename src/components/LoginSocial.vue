@@ -83,8 +83,8 @@ export default {
               (error.response && error.response.data && error.response.data.message) ||
               error.message ||
               error.toString();
+              this.message = this.message.includes("401")? "Akun atau password tidak valid" : this.message;
               this.$store.commit("auth/loginFailure");
-              console.log(this.message);
             }
           );
         };

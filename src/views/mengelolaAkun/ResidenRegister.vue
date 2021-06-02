@@ -107,11 +107,15 @@
                     <h5 class="modal-title" id="saveModalTitle">Pesan Perubahan Data</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                 </div>
-                <div v-if="successful" class="modal-body success-body">
+                <div v-if="isLoading" class="modal-body success-body">
+                    <span v-show="isLoading" class="spinner-border spinner-border-sm"></span>
+                    File sedang dikirimkan...
+                </div>
+                <div v-if="successful && !isLoading" class="modal-body success-body">
                     <i class="far fa-check-circle check-success"></i>
                     Akun {{ residen.name }} ({{residen.username}}) berhasil ditambahkan.
                 </div>
-                <div v-if="!successful" class="modal-body fail-body">
+                <div v-if="!successful && !isLoading" class="modal-body fail-body">
                     <i class="far fa-times-circle check-fail"></i>
                     Akun {{ residen.name }} ({{residen.username}}) gagal ditambahkan. Mohon periksa kembali data yang dimasukkan.
                 </div>
@@ -131,6 +135,7 @@ export default {
     name: "ResidenRegister",
     data() {
         return {
+            isLoading: false,
             rePassword: "",
             residen: new Residen(),
             submitted: false,
@@ -165,8 +170,8 @@ export default {
             this.$router.push('/mengelola-akun/residen');
         },
         handleResidenResgister(){
-            console.log(this.residen);
-             if (!(this.residen.name && this.residen.username && this.residen.password && this.residen.alamatRumah
+            this.isLoading = true;
+            if (!(this.residen.name && this.residen.username && this.residen.password && this.residen.alamatRumah
                     && this.residen.email && this.residen.tempatLahir && this.residen.tanggalLahir && this.residen.noTelepon
                     && this.residen.tahunMasuk && this.residen.term && this.residen.npm && this.residen.idPembimbing)) {
                 this.message = "Mohon lengkapi semua field pada formulir.";
@@ -185,13 +190,15 @@ export default {
             success => {
                 this.successful = true;
                 this.message = success.message || success.response || success.toString();
+                this.isLoading = false;
             },
             error => {
                 this.message = "Error pada Server, cek kembali data yang dimasukkan. Jika error berlanjut, laporkan pada admin/programmer"
                     // (error.response && error.response.data && error.response.data.message) ||
                     // error.message ||
                     // error.toString();
-                this.successful = false
+                this.successful = false;
+                this.isLoading = false;
                 }
             );
         }

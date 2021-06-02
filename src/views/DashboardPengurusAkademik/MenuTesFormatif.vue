@@ -212,7 +212,7 @@ export default {
         },
 
         refreshPage(){
-            window.location.reload();
+            this.$router.push("/dashboardpengurusakademik/tes-formatif");
         },
 
         handleFileUpload(){
