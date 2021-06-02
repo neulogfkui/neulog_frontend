@@ -1,6 +1,6 @@
 <template>
   <div class="card mb-4">
-    <div class="card-header">Area Chart Example</div>
+    <div class="card-header">Grafik Rerata Nilai Tes Formatif</div>
     <div class="card-body">
       <div class="chart-area">
         <canvas id="myAreaChart" width="100%" height="30"></canvas>

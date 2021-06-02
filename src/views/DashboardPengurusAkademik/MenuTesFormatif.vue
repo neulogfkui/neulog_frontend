@@ -85,12 +85,15 @@
                     <h5 class="modal-title" id="saveModalTitle">Pesan Pengunggahan File</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                 </div>
-                <span v-show="loading" class="spinner-border spinner-border-sm"></span>
-                <div v-if="successful" class="modal-body success-body">
+                <div v-if="isLoading" class="modal-body success-body">
+                    <span v-show="isLoading" class="spinner-border spinner-border-sm"></span>
+                    File sedang dikirimkan...
+                </div>
+                <div v-if="successful && !isLoading" class="modal-body success-body">
                     <i class="far fa-check-circle check-success"></i>
                     File tes formatif berhasil ditambahkan ke dalam database.
                 </div>
-                <div v-if="!successful" class="modal-body fail-body">
+                <div v-if="!successful && !isLoading" class="modal-body fail-body">
                     <i class="far fa-times-circle check-fail"></i>
                     File tes formatif gagal ditambahkan ke database. Periksa kembali ekstensi, format, ukuran, dan nama file.
                 </div>
@@ -214,7 +217,6 @@ export default {
 
         handleFileUpload(){
             this.file = this.$refs.file.files[0];
-            console.log(this.file)
         },
 
         submitFile(){
