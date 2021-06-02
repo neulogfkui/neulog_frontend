@@ -309,7 +309,7 @@ export default {
       this.status = 1;
       console.warn(this.$route.params.idLaporanPasien);
       axios
-        .get("http://localhost:8000/api/laporan-pasien/delete/" + this.$route.params.idLaporanPasien
+        .get("https://neulogfkui.herokuapp.com/api/laporan-pasien/delete/" + this.$route.params.idLaporanPasien
         )
         .then((result) => {
           if (result.data == "Success") {
@@ -325,7 +325,7 @@ export default {
   mounted() {
     axios
       .get(
-        "http://localhost:8000/api/laporan-pasien/" +
+        "https://neulogfkui.herokuapp.com/api/laporan-pasien/" +
           this.$route.params.idLaporanPasien
       ) // nanti diganti ini angka 1 nya
       .then((resp) => {
@@ -357,7 +357,7 @@ export default {
         // dataTableLoader();
       });
     axios
-      .get("http://localhost:8000/api/laporan-pasien/getformattribute")
+      .get("https://neulogfkui.herokuapp.com/api/laporan-pasien/getformattribute")
       .then((resp) => {
         this.listKompetensi = resp.data.listKompetensi;
         this.listKategoriTindakan = resp.data.listKategoriTindakan;

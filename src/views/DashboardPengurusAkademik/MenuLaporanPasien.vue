@@ -148,7 +148,7 @@ export default {
   created() {
     this.subtitle = this.getNamaPA;
     axios
-      .get("http://localhost:8000/api/dashboardPengurusAkademik/laporanpasien/", { headers: authHeader() })
+      .get("https://neulogfkui.herokuapp.com/api/dashboardPengurusAkademik/laporanpasien/", { headers: authHeader() })
       .then((resp) => {
         console.warn(resp.data);
         this.labelBarTindakan = resp.data.labelTindakan;
