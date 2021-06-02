@@ -170,7 +170,7 @@ export default {
   },
   mounted() {
     axios
-        .get("http://localhost:8000/api/tes-formatif", { headers: authHeader() })
+        .get("https://neulogfkui.herokuapp.com/api/tes-formatif", { headers: authHeader() })
         .then(success => {
                 this.tesformatif = success.data;
                 this.isMounted = true;
@@ -188,7 +188,7 @@ export default {
             }
         );
     axios
-        .get("http://localhost:8000/api/tes-formatif/summary", { headers: authHeader() })
+        .get("https://neulogfkui.herokuapp.com/api/tes-formatif/summary", { headers: authHeader() })
         .then(success => {
                 this.labels = Object.keys(success.data).map((label) => new Date(label).toUTCString().substring(0,16));
                 this.datas = Object.values(success.data);
@@ -225,7 +225,7 @@ export default {
             this.isLoading = true
 
             axios
-                .post('http://localhost:8000/api/tes-formatif/upload', formData, { headers: header})
+                .post('https://neulogfkui.herokuapp.com/api/tes-formatif/upload', formData, { headers: header})
                 .then(success => {
                         this.successful = true;
                         this.message = success.message || success.response || success.toString();
@@ -243,7 +243,7 @@ export default {
         },
         deleteNTF(id) {
             this.isLoading = true;
-            axios.delete('http://localhost:8000/api/tes-formatif/' + id, {headers: authHeader()}).then(
+            axios.delete('https://neulogfkui.herokuapp.com/api/tes-formatif/' + id, {headers: authHeader()}).then(
                 success => {
                     this.deleted = true;
                     this.isLoading = false;
