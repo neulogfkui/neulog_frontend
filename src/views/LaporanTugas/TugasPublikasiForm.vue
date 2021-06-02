@@ -248,6 +248,7 @@ import axios from "axios";
 import VueAxios from "vue-axios";
 import LightHeader from "@/components/LightHeader.vue";
 import dataTableLoader from "@/js/datatable";
+import authHeader from "@/services/auth-header";
 
 export default {
   components: { LightHeader },
@@ -308,7 +309,7 @@ export default {
     if (this.$route.params.operation != 0) {
       axios
         .get(
-          "http://localhost:8000/laporantugas/" + this.$route.params.operation
+          "http://localhost:8000/laporantugas/" + this.$route.params.operation, { headers: authHeader() }
         )
         .then((resp) => {
           console.warn(resp.data);
@@ -349,7 +350,7 @@ export default {
         url = "http://localhost:8000/laporantugas/updatetugaspublikasi/";
       }
 
-      axios.post(url, this.posts).then((result) => {
+      axios.post(url, this.posts, { headers: authHeader() }).then((result) => {
         if (result.data != "0") {
           this.posts.idLaporanTugas = result.data;
           this.status = 2;
@@ -357,6 +358,7 @@ export default {
           this.status = 3;
         }
         console.warn(result);
+        e.preventDefault();
       });
       e.preventDefault();
     },

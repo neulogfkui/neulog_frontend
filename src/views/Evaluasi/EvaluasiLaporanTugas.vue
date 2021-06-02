@@ -5,16 +5,16 @@
     :subtitle="subtitleHeader"
   />
   <div class="container" v-if="isReady">
-    <div class="row">
-      <form @submit="postData">
+    <form @submit="postData">
+      <div class="row">
         <!-- CARD KIRI -->
-        <div class="col-xxl-4 col-xl-4 mb-4">
+        <div class="col-xxl-6 col-xl-6 mb-4">
           <div class="card card-header-actions h-100">
             <div class="card-header">
               <b>Data Tugas</b>
             </div>
             <div class="card-body">
-              <table cellpadding="5">
+              <table cellpadding="10">
                 <tbody>
                   <tr>
                     <th>Residen</th>
@@ -36,101 +36,135 @@
                   </tr>
                   <!-- TUGAS PRESENTASI -->
                   <tr v-if="!(this.data.tugas.tugasPresentasiModel == null)">
-                  <th>Jenis Presentasi</th>
-                  <th>
-                    <b>{{ data.tugas.tugasPresentasiModel.jenis }}</b>
-                  </th>
-                </tr>
-                <tr v-if="!(this.data.tugas.tugasPresentasiModel == null)">
-                  <th>Modul</th>
-                  <th>
-                    <b>{{ data.tugas.tugasPresentasiModel.modulModel.namaModul }}</b>
-                  </th>
-                </tr>
-                <tr v-if="!(this.data.tugas.tugasPresentasiModel == null)">
-                  <th>Judul Makalah</th>
-                  <th>
-                    <b>{{ data.tugas.tugasPresentasiModel.judulMakalah }}</b>
-                  </th>
-                </tr>
-                <!-- KASUS SULIT -->
-                <tr v-if="!(this.data.tugas.pembahasanKasusSulitMultidisiplinModel == null)">
-                  <th>Kasus Yang Dibahas</th>
-                  <th>
-                    <b>{{ data.tugas.pembahasanKasusSulitMultidisiplinModel.kasusYangDibahas }}</b>
-                  </th>
-                </tr>
-                <tr v-if="!(this.data.tugas.pembahasanKasusSulitMultidisiplinModel == null)">
-                  <th>Nama Pertemuan</th>
-                  <th>
-                    <b>{{ data.tugas.pembahasanKasusSulitMultidisiplinModel.namaPertemuan }}</b>
-                  </th>
-                </tr>
-                <!-- TUGAS PUBLIKASI -->
-                <tr v-if="!(this.data.tugas.tugasPublikasiModel == null)">
-                  <th>Event Publikasi</th>
-                  <th>
-                    <b>{{ data.tugas.tugasPublikasiModel.eventPublikasi }}</b>
-                  </th>
-                </tr>
-                <tr v-if="!(this.data.tugas.tugasPublikasiModel == null)">
-                  <th>Judul Publikasi</th>
-                  <th>
-                    <b>{{ data.tugas.tugasPublikasiModel.judulPublikasi }}</b>
-                  </th>
-                </tr>
-                <!-- TUGAS PENELITIAN AKHIR -->
-                <tr v-if="!(this.data.tugas.tugasPenelitianAkhirModel == null)">
-                  <th>Judul Proposal</th>
-                  <th>
-                    <b>{{ data.tugas.tugasPenelitianAkhirModel.judulProposal }}</b>
-                  </th>
-                </tr>
-                <tr v-if="!(this.data.tugas.tugasPenelitianAkhirModel == null)">
-                  <th>Jenis Tugas</th>
-                  <th>
-                    <b>{{ data.tugas.tugasPenelitianAkhirModel.jenisTugas }}</b>
-                  </th>
-                </tr>
+                    <th>Jenis Presentasi</th>
+                    <th>
+                      <b>{{ data.tugas.tugasPresentasiModel.jenis }}</b>
+                    </th>
+                  </tr>
+                  <tr v-if="!(this.data.tugas.tugasPresentasiModel == null)">
+                    <th>Modul</th>
+                    <th>
+                      <b>{{
+                        data.tugas.tugasPresentasiModel.modulModel.namaModul
+                      }}</b>
+                    </th>
+                  </tr>
+                  <tr v-if="!(this.data.tugas.tugasPresentasiModel == null)">
+                    <th>Judul Makalah</th>
+                    <th>
+                      <b>{{ data.tugas.tugasPresentasiModel.judulMakalah }}</b>
+                    </th>
+                  </tr>
+                  <!-- KASUS SULIT -->
+                  <tr
+                    v-if="
+                      !(
+                        this.data.tugas
+                          .pembahasanKasusSulitMultidisiplinModel == null
+                      )
+                    "
+                  >
+                    <th>Kasus Yang Dibahas</th>
+                    <th>
+                      <b>{{
+                        data.tugas.pembahasanKasusSulitMultidisiplinModel
+                          .kasusYangDibahas
+                      }}</b>
+                    </th>
+                  </tr>
+                  <tr
+                    v-if="
+                      !(
+                        this.data.tugas
+                          .pembahasanKasusSulitMultidisiplinModel == null
+                      )
+                    "
+                  >
+                    <th>Nama Pertemuan</th>
+                    <th>
+                      <b>{{
+                        data.tugas.pembahasanKasusSulitMultidisiplinModel
+                          .namaPertemuan
+                      }}</b>
+                    </th>
+                  </tr>
+                  <!-- TUGAS PUBLIKASI -->
+                  <tr v-if="!(this.data.tugas.tugasPublikasiModel == null)">
+                    <th>Event Publikasi</th>
+                    <th>
+                      <b>{{ data.tugas.tugasPublikasiModel.eventPublikasi }}</b>
+                    </th>
+                  </tr>
+                  <tr v-if="!(this.data.tugas.tugasPublikasiModel == null)">
+                    <th>Judul Publikasi</th>
+                    <th>
+                      <b>{{ data.tugas.tugasPublikasiModel.judulPublikasi }}</b>
+                    </th>
+                  </tr>
+                  <!-- TUGAS PENELITIAN AKHIR -->
+                  <tr
+                    v-if="!(this.data.tugas.tugasPenelitianAkhirModel == null)"
+                  >
+                    <th>Judul Proposal</th>
+                    <th>
+                      <b>{{
+                        data.tugas.tugasPenelitianAkhirModel.judulProposal
+                      }}</b>
+                    </th>
+                  </tr>
+                  <tr
+                    v-if="!(this.data.tugas.tugasPenelitianAkhirModel == null)"
+                  >
+                    <th>Jenis Tugas</th>
+                    <th>
+                      <b>{{
+                        data.tugas.tugasPenelitianAkhirModel.jenisTugas
+                      }}</b>
+                    </th>
+                  </tr>
                 </tbody>
               </table>
             </div>
           </div>
         </div>
         <!-- CARD KANAN -->
-        <div class="col-xxl-8 col-xl-8 mb-4">
+        <div class="col-xxl-6 col-xl-6 mb-4">
           <div class="card card-header-actions h-100">
             <div class="card-header">
               <b>Formulir Evaluasi</b>
             </div>
             <div class="card-body">
               <div class="container">
-                <p>Status Evaluasi</p>
+                <h4 class="text-secondary"><b>Status Evaluasi</b></h4>
               </div>
-              <div class="container">
-                <input
-                  type="radio"
-                  name="status"
-                  value="DISETUJUI"
-                  v-model="posts.status"
-                />
-                <label>DISETUJUI</label>
-                <br />
+              <div class="row container">
+                <div class="col container m-2">
+                  <input
+                    class="mr-4"
+                    type="radio"
+                    name="status"
+                    value="DISETUJUI"
+                    v-model="posts.status"
+                  />
+                  <label>DISETUJUI</label>
+                </div>
+                <div class="col container m-2">
+                  <input
+                   class="mr-4"
+                    type="radio"
+                    name="status"
+                    value="DITOLAK"
+                    v-model="posts.status"
+                  />
+                  <label>DITOLAK</label>
+                </div>
               </div>
-              <div class="container">
-                <label>DITOLAK</label>
-                <input
-                  type="radio"
-                  name="status"
-                  value="DITOLAK"
-                  v-model="posts.status"
-                />
-                <br />
-              </div>
-              <div class="container">
-                <label>Feedback Konsulen</label>
-                <input
-                  type="text-area"
+
+              <div class="col container">
+                <label class="text-primary">Feedback Konsulen</label>
+                <br>
+                <textarea
+                  class="form-control form-control-lg h-10"
                   placeholder="Masukan Feedback"
                   v-model="posts.feedback"
                 />
@@ -142,7 +176,7 @@
         <!-- START MODAL -->
         <!-- ------------------------------------------------ -->
         <!-- BUTTON UNTUK MENAMPILKAN MODAL -->
-        <div class="row justify-content-center align-self-center">
+        <div class="row container justify-content-center align-self-center">
           <button
             id="completeButton"
             class="btn btn-primary mr-4"
@@ -230,7 +264,7 @@
                   class="modal-title"
                   id="exampleModalLabel"
                 >
-                  Konsulen dan reviewer telah diberikan notifikasi
+                  Residen telah diberikan notifikasi
                 </h5>
                 <h5
                   v-if="status == 3"
@@ -256,7 +290,7 @@
                 </div>
                 <div v-if="status == 1"></div>
                 <div v-if="status == 2">
-                  <router-link :to="'/detailtugas/pksm/' + posts.idLaporanTugas"
+                  <router-link :to="'/'"
                     ><button class="btn btn-primary" data-dismiss="modal">
                       Ok
                     </button></router-link
@@ -278,8 +312,8 @@
         </div>
         <!-- END MODAL -->
         <!-- ------------------------------------------------ -->
-      </form>
-    </div>
+      </div>
+    </form>
   </div>
 </template>
 
@@ -312,7 +346,8 @@ export default {
     axios
       .get(
         "http://localhost:8000/laporantugas/" +
-          this.$route.params.idLaporanTugas
+          this.$route.params.idLaporanTugas,
+        { headers: authHeader() }
       )
       .then((resp) => {
         this.data = resp.data;
@@ -334,7 +369,7 @@ export default {
 
       var url = "http://localhost:8000/laporantugas/evaluasitugas/";
 
-      axios.post(url, this.posts).then((result) => {
+      axios.post(url, this.posts, { headers: authHeader() }).then((result) => {
         if (result.data == "Success") {
           this.status = 2;
         } else {
@@ -344,6 +379,6 @@ export default {
       });
       e.preventDefault();
     },
-  }
+  },
 };
 </script>

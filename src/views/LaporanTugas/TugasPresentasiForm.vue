@@ -331,10 +331,10 @@ export default {
     if (this.$route.params.operation != 0) {
       axios
         .get(
-          "http://localhost:8000/laporantugas/" + this.$route.params.operation
+          "http://localhost:8000/laporantugas/" + this.$route.params.operation, { headers: authHeader() }
         )
         .then((resp) => {
-          console.warn(resp.data);
+          console.warn(resp);
           this.posts.idModul = resp.data.tugas.tugasPresentasiModel.modulModel.idModul;
           this.posts.jenis = resp.data.tugas.tugasPresentasiModel.jenis;
           this.posts.idKonsulen = resp.data.idKonsulen;
@@ -349,7 +349,7 @@ export default {
       // this.isMounted = true;
     }
     axios
-      .get("http://localhost:8000/LaporanPresentasiFormAttribute")
+      .get("http://localhost:8000/LaporanPresentasiFormAttribute", { headers: authHeader() })
       .then((resp) => {
         console.warn(resp.data);
         this.listKonsulen = resp.data.listKonsulen;

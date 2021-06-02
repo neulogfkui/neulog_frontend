@@ -30,6 +30,16 @@
           Edit
         </button>
       </router-link>
+      <router-link
+        :to="'/evaluasilaporantugas/' + this.data.laporanTugas.idLaporanTugas"
+      >
+        <button
+          class="btn btn-warning"
+          v-if="userRoles.includes('ROLE_KONSULEN')"
+        >
+          Evaluasi
+        </button>
+      </router-link>
       </div>
     </div>
     <div class="row justify-content-center">
@@ -227,12 +237,20 @@ export default {
     getReady() {
       return this.ready;
     },
+    isLoggedIn() {
+      return this.$store.state.auth.status.loggedIn;
+    },
     isResiden(){
       return JSON.parse(localStorage.getItem('user')).roles.includes('ROLE_RESIDEN')
+    },
+    userRoles() {
+      if (this.isLoggedIn) return this.$store.state.auth.user.roles;
+      else return ["ROLE_DEFAULT"];
     }
   },
   mounted() {
     this.delete.idLaporanTugas = this.$route.params.idLaporanTugas;
+    console.log(this.userRoles.includes('ROLE_KONSULEN'));
     axios
       .get(
         "http://localhost:8000/api/dashboardPengurusAkademik/laporantugas/" +
@@ -263,7 +281,7 @@ export default {
       axios
         .post(
           "http://localhost:8000/laporantugas/deletetugaspresentasi/",
-          this.delete
+          this.delete, { headers : authHeader()}
         )
         .then((result) => {
           if (result.data == "Success") {
