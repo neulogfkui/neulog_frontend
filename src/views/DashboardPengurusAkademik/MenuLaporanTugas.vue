@@ -384,7 +384,7 @@ export default {
   mounted() {
     this.subtitle = this.getNamaPA;
     axios
-      .get("http://localhost:8000/api/dashboardPengurusAkademik/laporantugas/", { headers: authHeader() })
+      .get("https://neulogfkui.herokuapp.com/api/dashboardPengurusAkademik/laporantugas/", { headers: authHeader() })
       .then((resp) => {
         console.warn(resp.data);
         this.labelBar = resp.data.labelJenisTugas;

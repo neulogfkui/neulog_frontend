@@ -277,9 +277,9 @@ export default {
       
       var url;
       if (this.$route.params.operation != 0) {
-        url = "http://localhost:8000/api/modul/update";
+        url = "https://neulogfkui.herokuapp.com/api/modul/update";
       } else {
-        url = "http://localhost:8000/api/modul/create";
+        url = "https://neulogfkui.herokuapp.com/api/modul/create";
       }
       axios.post(url, this.posts, { headers: authHeader() }).then((result) => {
         console.log(this.posts);
@@ -299,7 +299,7 @@ export default {
     if (this.$route.params.operation != 0) {
       axios
         .get(
-          "http://localhost:8000/api/modul/" +
+          "https://neulogfkui.herokuapp.com/api/modul/" +
             this.$route.params.operation, { headers: authHeader() }
         )
         .then((resp) => {
@@ -317,7 +317,7 @@ export default {
         console.log(this.posts);
     }
     axios
-      .get("http://localhost:8000/api/modul/getformattribute", { headers: authHeader() })
+      .get("https://neulogfkui.herokuapp.com/api/modul/getformattribute", { headers: authHeader() })
       .then((resp) => {
         this.listKetuaModulNoModul = resp.data.listKetuaModulNoModul;
         this.listKetuaModul = resp.data.listKetuaModul;

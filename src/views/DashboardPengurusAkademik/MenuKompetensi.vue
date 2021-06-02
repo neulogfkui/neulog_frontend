@@ -107,7 +107,7 @@ export default {
   mounted() {
     this.subtitle = this.getNamaPA;
     axios
-      .get("http://localhost:8000/api/dashboardPengurusAkademik/kompetensi/", { headers: authHeader() })
+      .get("https://neulogfkui.herokuapp.com/api/dashboardPengurusAkademik/kompetensi/", { headers: authHeader() })
       .then((resp) => {
         console.warn(resp.data);
         this.listKompetensi = resp.data.listKompetensi;
