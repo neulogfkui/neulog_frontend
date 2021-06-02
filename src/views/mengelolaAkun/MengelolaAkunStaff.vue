@@ -32,7 +32,7 @@
 
 	<!-- TAB NAVBAR -->	
 	<nav class="nav nav-borders">
-		<a class="nav-link" href="/mengelola-akun/residen">Akun Residen</a>
+		<a class="nav-link" href="https://neulogfkui.netlify.app/mengelola-akun/residen">Akun Residen</a>
 		<a class="nav-link  active ml-0" href="#">Akun Staff</a>
 	</nav>
 	<hr class="nav-underline mt-0 mb-4"/>
@@ -42,7 +42,7 @@
     <div v-if="dataTableReady" class="container mt-5">
 		<div class="card mb-4 mt-4">
         <div class="card card-header-actions">
-		<div class="card-header">Extended DataTables</div>
+		<div class="card-header">Daftar Data Staff</div>
 			<div class="card-body">
 				<div class="datatable">
 					<table
