@@ -125,7 +125,7 @@
                 </div>
                 <div class="modal-footer">
                     <button v-if="!deleted && !isDeleteFail" @click="deleteNTF(selectedItem.idNilaiTesFormatif)" class="btn btn-danger" type="button">Hapus</button>
-                    <button @click="refreshPage" class="btn btn-light" type="button" data-dismiss="modal">Tutup</button>
+                    <router-link class="btn btn-light" type="button" data-dismiss="modal" to="/dashboardpengurusakademik/tes-formatif">Tutup</router-link>
                 </div>
             </div>
         </div>
