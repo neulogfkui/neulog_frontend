@@ -31,8 +31,8 @@
 	<div class="container mt-4">
         <!-- TAB NAVBAR -->	
         <nav class="nav nav-borders">
-            <a class="nav-link active ml-0" href="#">Belum Dievaluasi</a>
-            <a class="nav-link" href="/dashboard-konsulen/laporan-pasien/sudah-dievaluasi">Sudah Dievaluasi</a>
+            <router-link class="nav-link active ml-0" to="/dashboard-konsulen/laporan-pasien/belum-dievaluasi">Belum Dievaluasi</router-link>
+		    <router-link class="nav-link" to="/dashboard-konsulen/laporan-pasien/sudah-dievaluasi">Sudah Dievaluasi</router-link>
         </nav>
         <hr class="nav-underline mt-0 mb-4"/>
 

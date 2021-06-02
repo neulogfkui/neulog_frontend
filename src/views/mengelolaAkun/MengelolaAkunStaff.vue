@@ -33,7 +33,7 @@
 	<!-- TAB NAVBAR -->	
 	<nav class="nav nav-borders">
 		<router-link class="nav-link" to="/mengelola-akun/residen">Akun Residen</router-link>
-		<router-link class="nav-link" to="/mengelola-akun/staff">Akun Staff</router-link>
+		<router-link class="nav-link active ml-0" to="/mengelola-akun/staff">Akun Staff</router-link>
 	</nav>
 	<hr class="nav-underline mt-0 mb-4"/>
 

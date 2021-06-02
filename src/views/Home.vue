@@ -4,6 +4,7 @@
 
 <script>
 import MainHeader from "@/components/MainHeader";
+import loadScript from "@/js/scripts.js";
 
 export default {
  name: "Home",
@@ -12,7 +13,10 @@ export default {
      title() {
          return "Selamat Datang, "+(this.$store.state.auth.user.username);
      }
- }
+ },
+ created() {
+   loadScript();
+ } 
 }
 </script>
 
