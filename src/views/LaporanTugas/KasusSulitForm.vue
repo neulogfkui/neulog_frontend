@@ -256,6 +256,7 @@ import axios from "axios";
 import VueAxios from "vue-axios";
 import LightHeader from "@/components/LightHeader.vue";
 import dataTableLoader from "@/js/datatable";
+import authHeader from "@/services/auth-header";
 
 export default {
   name: "KasusSulitForm",
@@ -319,7 +320,7 @@ export default {
     if (this.$route.params.operation != 0) {
       axios
         .get(
-          "http://localhost:8000/laporantugas/" + this.$route.params.operation
+          "http://localhost:8000/laporantugas/" + this.$route.params.operation, { headers: authHeader() }
         )
         .then((resp) => {
           console.warn(resp.data);
@@ -337,7 +338,7 @@ export default {
           console.log(this.posts);
         });
     }
-    axios.get("http://localhost:8000/KasusSulitFormAttribute").then((resp) => {
+    axios.get("http://localhost:8000/KasusSulitFormAttribute", { headers: authHeader() }).then((resp) => {
       console.warn(resp.data);
       this.listKonsulen = resp.data.listKonsulen;
       this.listNamaPertemuan = resp.data.listNamaPertemuan;
@@ -359,7 +360,7 @@ export default {
         url = "http://localhost:8000/laporantugas/updatepembahasankasussulit/";
       }
 
-      axios.post(url, this.posts).then((result) => {
+      axios.post(url, this.posts,{ headers: authHeader() }).then((result) => {
         if (result.data != "0") {
           this.posts.idLaporanTugas = result.data;
           this.status = 2;

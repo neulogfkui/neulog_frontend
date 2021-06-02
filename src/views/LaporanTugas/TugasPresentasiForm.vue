@@ -267,6 +267,7 @@ import LightHeader from "@/components/LightHeader.vue";
 import App from "@/App.vue";
 import dataTableLoader from "@/js/datatable";
 import { computed } from "vue";
+import authHeader from "@/services/auth-header";
 
 export default {
   name: "TugasPresentasiForm",
@@ -330,10 +331,10 @@ export default {
     if (this.$route.params.operation != 0) {
       axios
         .get(
-          "http://localhost:8000/laporantugas/" + this.$route.params.operation
+          "http://localhost:8000/laporantugas/" + this.$route.params.operation, { headers: authHeader() }
         )
         .then((resp) => {
-          console.warn(resp.data);
+          console.warn(resp);
           this.posts.idModul = resp.data.tugas.tugasPresentasiModel.modulModel.idModul;
           this.posts.jenis = resp.data.tugas.tugasPresentasiModel.jenis;
           this.posts.idKonsulen = resp.data.idKonsulen;
@@ -348,7 +349,7 @@ export default {
       // this.isMounted = true;
     }
     axios
-      .get("http://localhost:8000/LaporanPresentasiFormAttribute")
+      .get("http://localhost:8000/LaporanPresentasiFormAttribute", { headers: authHeader() })
       .then((resp) => {
         console.warn(resp.data);
         this.listKonsulen = resp.data.listKonsulen;
@@ -374,7 +375,7 @@ export default {
       } else {
         url = "http://localhost:8000/laporantugas/updatetugaspresentasi/";
       }
-      axios.post(url, this.posts).then((result) => {
+      axios.post(url, this.posts, { headers: authHeader() }).then((result) => {
         if (result.data != "0") {
           this.posts.idLaporanTugas = result.data;
           this.status = 2;

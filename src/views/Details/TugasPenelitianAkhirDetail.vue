@@ -254,7 +254,7 @@ export default {
       axios
         .post(
           "http://localhost:8000/laporantugas/deletetugaspenelitianakhir/",
-          this.delete
+          this.delete, { headers : authHeader()}
         )
         .then((result) => {
           if (result.data == "Success") {

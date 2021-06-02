@@ -3,6 +3,8 @@ import KasusSulitForm from '@/views/LaporanTugas/KasusSulitForm.vue'
 import TugasPublikasiForm from '@/views/LaporanTugas/TugasPublikasiForm.vue'
 import TugasPenelitianAkhirForm from '@/views/LaporanTugas/TugasPenelitianAkhirForm.vue'
 import LaporanTugasChoice from '@/views/LaporanTugas/LaporanTugasChoice.vue'
+import EvaluasiLaporanTugas from '@/views/Evaluasi/EvaluasiLaporanTugas.vue'
+
 
 
 let routes = [
@@ -30,6 +32,11 @@ let routes = [
         path: '/addlaporantugas',
         name: 'laporanTugasChoice',
         component: LaporanTugasChoice
+      },
+      {
+        path: '/evaluasilaporantugas/:idLaporanTugas',
+        name: 'EvaluasiLaporanTugas',
+        component: EvaluasiLaporanTugas
       },
 ]
 
