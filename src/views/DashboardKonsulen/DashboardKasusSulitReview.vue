@@ -62,14 +62,14 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="laporan in this.laporans" v-bind:key="laporan.idPresentasi">
+                                <tr v-for="laporan in this.laporans" v-bind:key="laporan.idLaporanTugas">
                                 <td>{{ laporan.tanggalDibuat }}</td>
                                 <td>{{ laporan.residen }}</td>
                                 <td>{{ laporan.namaPertemuan }}</td>
                                 <td>{{ laporan.kasus }}</td>
                                 <td>{{ laporan.status }}</td>
                                 <td>
-                                    <button @click="redirectToView(laporan.idPresentasi)" class="btn btn-primary mr-2">Lihat</button>
+                                    <button @click="redirectToView(laporan.idLaporanTugas)" class="btn btn-primary mr-2">Lihat</button>
                                 </td>
                                 </tr>
                             </tbody>
@@ -130,7 +130,7 @@ export default {
 
     methods: {
 		redirectToView(idLaporan) {
-            this.$router.push('/kasussulitdetail/'+idLaporan);
+            this.$router.push('/detailtugas/pksm/'+idLaporan);
             // TODO: UC04 NOT YET IMPLEMENTED
 		}
 	}
