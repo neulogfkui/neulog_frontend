@@ -4,7 +4,7 @@
     :title= this.title
     icon= "briefcase">
 </LightHeader>
-<div class="container upper">
+<div class="container upper" v-if="isMounted">
     <div class="row mr-2 mb-4 justify-content-end upper">
         <router-link :to="'/modulform/'+ this.idModul">
           <button class="btn btn-warning">Edit</button>
@@ -18,66 +18,40 @@
                 </div>
             <div class="card-body">
                 <div class="container-fluid">
-                <div class="row">
-                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
-                        <p class="card-text">
-                            Nama Modul
-                        </p>
-                    </div>
-                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
-                        <p class="card-text">
-                            {{ namaModul }}
-                        </p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
-                        <p class="card-text">
-                            Ketua Modul
-                        </p>
-                    </div>
-                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
-                        <p class="card-text">
-                            {{ ketuaModulName }}
-                        </p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
-                        <p class="card-text">
-                            Jumlah Residen
-                        </p>
-                    </div>
-                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
-                        <p class="card-text">
-                            {{ jumlahResiden }}
-                        </p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
-                        <p class="card-text">
-                            Tanggal Dibuat
-                        </p>
-                    </div>
-                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
-                        <p class="card-text">
-                            {{ tanggalDibuat }}
-                        </p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
-                        <p class="card-text">
-                            Deskripsi
-                        </p>
-                    </div>
-                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
-                        <p class="card-text">
-                            {{ deskripsi }}
-                        </p>
-                    </div>
-                </div>
+                <table cellpadding="5">
+                    <tbody>
+                        <tr>
+                            <td>Nama Modul</td>
+                            <td>
+                                <b>{{ namaModul }}</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Ketua Modul</td>
+                            <td>
+                                <b>{{ ketuaModulName }}</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Jumlah Residen</td>
+                            <td>
+                                <b>{{ jumlahResiden }}</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Tanggal Dibuat</td>
+                            <td>
+                                <b>{{ tanggalDibuat }}</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Deskripsi</td>
+                            <td>
+                                <b>{{ deskripsi }}</b>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
                 </div>
             </div>
             </div>
