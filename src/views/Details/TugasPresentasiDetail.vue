@@ -30,6 +30,10 @@
           Edit
         </button>
       </router-link>
+
+      </div>
+
+      <div v-if="isKonsulen">
       <router-link
         :to="'/evaluasilaporantugas/' + this.data.laporanTugas.idLaporanTugas"
       >
@@ -242,6 +246,9 @@ export default {
     },
     isResiden(){
       return JSON.parse(localStorage.getItem('user')).roles.includes('ROLE_RESIDEN')
+    },
+    isKonsulen(){
+      return JSON.parse(localStorage.getItem('user')).roles.includes('ROLE_KONSULEN')
     },
     userRoles() {
       if (this.isLoggedIn) return this.$store.state.auth.user.roles;

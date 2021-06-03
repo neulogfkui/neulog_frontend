@@ -9,26 +9,39 @@
     <div class="row mr-2 mb-4 justify-content-end upper">
       <!-- BUTTON UNTUK MENAMPILKAN MODAL -->
       <div v-if="isResiden">
-      <button
-        id="completeButton"
-        class="btn btn-danger mr-4"
-        type="button"
-        data-toggle="modal"
-        data-target="#exampleModal"
-        v-if="this.data.laporanTugas.status == 'DITOLAK'"
-      >
-        Hapus
-      </button>
-      <router-link
-        :to="'/tugaspublikasiform/' + this.data.laporanTugas.idLaporanTugas"
-      >
         <button
-          class="btn btn-warning"
-          v-if="this.data.laporanTugas.status != 'DISETUJUI'"
+          id="completeButton"
+          class="btn btn-danger mr-4"
+          type="button"
+          data-toggle="modal"
+          data-target="#exampleModal"
+          v-if="this.data.laporanTugas.status == 'DITOLAK'"
         >
-          Edit
+          Hapus
         </button>
-      </router-link>
+        <router-link
+          :to="'/tugaspublikasiform/' + this.data.laporanTugas.idLaporanTugas"
+        >
+          <button
+            class="btn btn-warning"
+            v-if="this.data.laporanTugas.status != 'DISETUJUI'"
+          >
+            Edit
+          </button>
+        </router-link>
+      </div>
+
+      <div v-if="isKonsulen">
+        <router-link
+          :to="'/evaluasilaporantugas/' + this.data.laporanTugas.idLaporanTugas"
+        >
+          <button
+            class="btn btn-warning"
+            v-if="userRoles.includes('ROLE_KONSULEN')"
+          >
+            Evaluasi
+          </button>
+        </router-link>
       </div>
     </div>
     <div class="row justify-content-center">
@@ -198,7 +211,7 @@ import VueAxios from "vue-axios";
 import LightHeader from "@/components/LightHeader";
 import CardTimeline from "@/components/CardTimeline";
 import CardTimelineEnter from "@/components/CardTimelineEnter";
-import authHeader from "@/services/auth-header"
+import authHeader from "@/services/auth-header";
 
 export default {
   name: "TugasPublikasiDetail",
@@ -218,16 +231,24 @@ export default {
     getReady() {
       return this.ready;
     },
-    isResiden(){
-      return JSON.parse(localStorage.getItem('user')).roles.includes('ROLE_RESIDEN')
-    }
+    isResiden() {
+      return JSON.parse(localStorage.getItem("user")).roles.includes(
+        "ROLE_RESIDEN"
+      );
+    },
+    isKonsulen() {
+      return JSON.parse(localStorage.getItem("user")).roles.includes(
+        "ROLE_KONSULEN"
+      );
+    },
   },
   mounted() {
     this.delete.idLaporanTugas = this.$route.params.idLaporanTugas;
     axios
       .get(
         "https://neulogfkui.herokuapp.com/api/dashboardPengurusAkademik/laporantugas/" +
-          this.$route.params.idLaporanTugas, { headers : authHeader()}
+          this.$route.params.idLaporanTugas,
+        { headers: authHeader() }
       ) // nanti diganti ini angka 1 nya
       .then((resp) => {
         console.warn(resp.data);
@@ -253,7 +274,8 @@ export default {
       axios
         .post(
           "https://neulogfkui.herokuapp.com/laporantugas/deletetugaspublikasi/",
-          this.delete, { headers : authHeader()}
+          this.delete,
+          { headers: authHeader() }
         )
         .then((result) => {
           if (result.data == "Success") {
