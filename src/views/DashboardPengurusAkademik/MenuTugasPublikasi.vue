@@ -23,6 +23,7 @@
         title="Sebaran Status Laporan Tugas"
       >
       </PieChart>
+    </div>
       <!-- Tabel Laporan Tugas -->
 
       <!-- TAB NAVBAR -->	
@@ -95,7 +96,6 @@
         </div>
         </div>
       </div>
-  </div>
   <!-- END PRESENTASI -->
 
 </template>

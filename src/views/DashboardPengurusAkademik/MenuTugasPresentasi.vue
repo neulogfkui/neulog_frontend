@@ -24,6 +24,7 @@
       >
       </PieChart>
       <!-- Tabel Laporan Tugas -->
+    </div>
 
     <!-- TAB NAVBAR -->	
     <nav class="nav nav-borders">
@@ -36,7 +37,7 @@
 
     <div v-if="isDataTableReady" class="container">
 		<div class="card mb-4">
-        <div class="card card-header-actions">
+      <div class="card card-header-actions">
 			<div class="card-body">
 				<div class="datatable">
 					<table
@@ -93,12 +94,11 @@
                     </tr>
                     </tbody>
                     </table>
-                </div>
-            </div>
-        </div>
-        </div>
         </div>
       </div>
+      </div>
+    </div>
+    </div>
   </div>
   <!-- END PRESENTASI -->
 

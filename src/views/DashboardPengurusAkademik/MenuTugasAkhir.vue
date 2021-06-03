@@ -24,6 +24,7 @@
       >
       </PieChart>
       <!-- Tabel Laporan Tugas -->
+    </div>
 
       <!-- TAB NAVBAR -->	
     <nav class="nav nav-borders">
@@ -95,7 +96,6 @@
         </div>
         </div>
       </div>
-  </div>
   <!-- END PRESENTASI -->
 
 </template>
