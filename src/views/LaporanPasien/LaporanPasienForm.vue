@@ -551,7 +551,7 @@ export default {
       this.showTanggal = true;
       axios
         .get(
-          "http://neulogfkui.herokuapp.com/api/laporan-pasien/" +
+          "https://neulogfkui.herokuapp.com/api/laporan-pasien/" +
             this.$route.params.operation
         )
         .then((resp) => {
@@ -581,7 +581,7 @@ export default {
         });
     }
     axios
-      .get("http://neulogfkui.herokuapp.com/api/laporan-pasien/getformattribute")
+      .get("https://neulogfkui.herokuapp.com/api/laporan-pasien/getformattribute")
       .then((resp) => {
         this.listKonsulen = resp.data.listKonsulen;
         this.listKompetensi = resp.data.listKompetensi;

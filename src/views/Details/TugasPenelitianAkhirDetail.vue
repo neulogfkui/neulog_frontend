@@ -226,7 +226,7 @@ export default {
     this.delete.idLaporanTugas = this.$route.params.idLaporanTugas;
     axios
       .get(
-        "http://localhost:8000/api/dashboardPengurusAkademik/laporantugas/" +
+        "https://neulogfkui.herokuapp.com/api/dashboardPengurusAkademik/laporantugas/" +
           this.$route.params.idLaporanTugas, { headers : authHeader()}
       ) // nanti diganti ini angka 1 nya
       .then((resp) => {
@@ -236,7 +236,7 @@ export default {
       });
     axios
       .get(
-        "http://localhost:8000/api/dashboardPengurusAkademik/getResiden/" +
+        "https://neulogfkui.herokuapp.com/api/dashboardPengurusAkademik/getResiden/" +
           this.$route.params.idLaporanTugas
       ) // nanti diganti ini angka 1 nya
       .then((resp) => {
@@ -253,7 +253,7 @@ export default {
       console.warn(this.posts);
       axios
         .post(
-          "http://localhost:8000/laporantugas/deletetugaspenelitianakhir/",
+          "https://neulogfkui.herokuapp.com/laporantugas/deletetugaspenelitianakhir/",
           this.delete, { headers : authHeader()}
         )
         .then((result) => {
