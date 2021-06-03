@@ -1,234 +1,219 @@
 <template>
   <LightHeader
-    title="Tambah Laporan Pasien"
+    title="Evaluasi Laporan Pasien"
+    icon="file-text"
+    v-if="isReady"
     :subtitle="subtitleHeader"
-    icon="user"
-  ></LightHeader>
-  <form @submit="postData">
-    <div class="container" v-if="getReady">
+  />
+  <div class="container" v-if="isReady">
+    <form @submit="postData">
       <div class="row">
-        <div class="col-xxl-12 col-xl-12 mb-4">
-          <div class="card card-header-actions h-100">
+        <!-- CARD KIRI -->
+        <div class="col-xxl-6 col-xl-6 mb-4">
+          <div class="card card-header-actions h-40">
             <div class="card-header">
-              <b>Data Laporan Pasien</b>
+              <b>Data Tugas</b>
             </div>
             <div class="card-body">
-              <div class="row container">
-                <!-- INISIAL PASIEN -->
-                <div class="form-group col-md-4">
-                  <label class="medium mb-1">Inisial Pasien</label>
-                  <input
-                    class="form-control"
-                    name="inisialPasien"
-                    v-model="posts.inisialPasien"
-                    type="text"
-                    placeholder="Masukkan inisial pasien"
-                    required
-                  />
-                </div>
-                <!-- END OF INISIAL PASIEN -->
-                <!-- USIA PASIEN -->
-                <div class="form-group col-md-4">
-                  <label class="medium mb-1">Usia Pasien</label>
-                  <input
-                    class="form-control"
-                    name="usiaPasien"
-                    v-model="posts.usiaPasien"
-                    type="text"
-                    placeholder="Masukkan usia pasien"
-                    required
-                  />
-                </div>
-                <!-- END OF USIA PASIEN -->
-                <!-- NO REKAM MEDIS -->
-                <div class="form-group col-md-4">
-                  <label class="medium mb-1">No Rekam Medis</label>
-                  <input
-                    class="form-control"
-                    name="noRekamMedis"
-                    v-model="posts.noRekamMedis"
-                    type="text"
-                    placeholder="Masukkan no rekam medis"
-                    required
-                  />
-                </div>
-                <!-- END OF NO REKAM MEDIS -->
+              <table cellpadding="5">
+                <tbody>
+                  <tr>
+                    <th>Inisial Pasien&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                    <th>
+                      <b>{{ posts.inisialPasien }}</b>
+                    </th>
+                  </tr>
+                  <tr>
+                    <th>Usia Pasien&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                    <th>
+                      <b>{{ posts.usiaPasien }}</b>
+                    </th>
+                  </tr>
+                  <tr>
+                    <th>No Rekam Medis&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                    <th>
+                      <b>{{ posts.noRekamMedis }}</b>
+                    </th>
+                  </tr>
+                  <tr>
+                    <th>Pasien Jaga&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                    <th>
+                      <b v-if="this.posts.tanggalJaga != null">Ya</b>
+                      <b v-if="this.posts.tanggalJaga == null">Tidak</b>
+                    </th>
+                  </tr>
+                  <tr v-if="this.posts.tanggalJanga != null">
+                    <th>Tanggal Jaga&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                    <th>
+                      <b>{{ posts.tanggalJaga }}</b>
+                    </th>
+                  </tr>
+                  <tr>
+                    <th>Konsulen&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                    <th>
+                      <b>{{ posts.konsulen.pengguna.name }}</b>
+                    </th>
+                  </tr>
+                  <tr>
+                    <th>Status&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                    <th>
+                      <div class="badge badge-primary badge-pill">
+                        {{ posts.status }}
+                      </div>
+                    </th>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <!-- CARD KANAN -->
+        <div class="col-xxl-6 col-xl-6 mb-4">
+          <div class="col">
+            <div class="card card-header-actions h-100">
+              <div class="card-header">
+                <b>Formulir Evaluasi</b>
               </div>
-              <br />
-              <div class="row container">
-                <!-- DIAGNOSIS -->
-                <div class="form-group col-md-12">
-                  <label class="medium mb-1">Diagnosis</label>
-                  <textarea
-                    class="form-control input-lg"
-                    name="diagnosis"
-                    v-model="posts.diagnosis"
-                    type="text"
-                    placeholder="Masukkan diagnosis"
-                    required
-                  />
+              <div class="card-body">
+                <div class="container">
+                  <h4 class="text-secondary"><b>Status Evaluasi</b></h4>
                 </div>
-                <!-- END OF DIAGNOSIS -->
-              </div>
-              <br />
-              <div class="row container">
-                <div class="form-group col-md-4">
-                  <label>Konsulen</label>
-                  <select
-                    class="form-control"
-                    name="konsulen"
-                    v-model="posts.idKonsulen"
-                    required
-                  >
-                    <option
-                      v-for="item in listKonsulen"
-                      v-bind:key="item.id"
-                      :value="item.idKonsulen"
-                    >
-                      {{ item.pengguna.name }}
-                    </option>
-                  </select>
+                <div class="row container">
+                  <div class="col container m-2">
+                    <input
+                      class="mr-4"
+                      type="radio"
+                      name="status"
+                      value="DISETUJUI"
+                      v-model="posts.status"
+                    />
+                    <label>DISETUJUI</label>
+                  </div>
+                  <div class="col container m-2">
+                    <input
+                      class="mr-4"
+                      type="radio"
+                      name="status"
+                      value="DITOLAK"
+                      v-model="posts.status"
+                    />
+                    <label>DITOLAK</label>
+                  </div>
                 </div>
-                <!-- CHECKBOX -->
-                <div class="form-group col-md-4">
+
+                <div class="col container mt-4">
+                  <label class="text-primary">Feedback Konsulen</label>
                   <br />
-                  <div class="row ml-1 justify-content-center">
-                    <div class="custom-control custom-checkbox">
+                  <textarea
+                    class="form-control form-control-lg h-10"
+                    placeholder="Masukan Feedback"
+                    v-model="posts.feedback"
+                  />
+                  <br />
+                </div>
+
+                <div class="container mt-4">
+                  <h4 class="text-secondary"><b>Daftar Kompetensi</b></h4>
+                </div>
+
+                <div class="container mt-3">
+                  <div
+                    v-for="kompetensi in listKompetensi"
+                    v-bind:key="kompetensi.id"
+                  >
+                    <div>
                       <input
                         type="checkbox"
-                        class="custom-control-input"
-                        id="checkbox-1"
-                        @change="changeShowTanggal"
-                        :checked="this.posts.isJaga"
+                        @change="changeTempKompetensi(kompetensi.idKompetensi)"
+                        :checked="
+                          tempKompetensi.includes(kompetensi.idKompetensi)
+                        "
                       />
-                      <label class="custom-control-label" for="checkbox-1"
-                        >Sedang jam jaga</label
-                      >
+                      <label class="ml-2">{{
+                        kompetensi.namaKompetensi
+                      }}</label>
                     </div>
                   </div>
                 </div>
-                <!-- END OF HECKBOX -->
-                <!-- TANGGAL -->
-                <div class="form-group col-md-4">
-                  <div class="form-group">
-                    <label for="example-date-input">Tanggal Jaga</label>
-                    <input
-                      class="form-control"
-                      type="date"
-                      name="tanggalJaga"
-                      v-model="posts.tanggalJaga"
-                      :disabled="!showTanggal"
-                    />
-                  </div>
-                </div>
-                <!-- END OF TANGGAL -->
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
 
-      <div class="row">
-        <!-- KOMPETENSI -->
-        <div class="col-xxl-6 col-xl-6 mb-4">
-          <div class="card card-header-actions h-100">
-            <div class="card-header">
-              <b>Daftar Kompetensi yang Didapatkan</b>
-            </div>
-            <div class="card-body container">
-              <div
-                v-for="kompetensi in listKompetensi"
-                v-bind:key="kompetensi.id"
-              >
-                <div>
-                  <input
-                    type="checkbox"
-                    @change="changeTempKompetensi(kompetensi.idKompetensi)"
-                    :checked="tempKompetensi.includes(kompetensi.idKompetensi)"
-                  />
-                  <label class="ml-2">{{ kompetensi.namaKompetensi }}</label>
+                <div class="container mt-4">
+                  <h4 class="text-secondary"><b>Daftar Tindakan</b></h4>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- END KOMPETENSI -->
-        <!-- TINDAKAN -->
-        <div class="col-xxl-6 col-xl-6 mb-4">
-          <div class="card card-header-actions h-100">
-            <div class="card-header">
-              <b>Daftar Tindakan yang Didapatkan</b>
-            </div>
-            <div class="card-body">
-              <!-- KATEGORI TINDAKAN -->
-              <div
-                v-for="kategoriTindakan in listKategoriTindakan"
-                v-bind:key="kategoriTindakan.id"
-              >
-                <div>
-                  <input
-                    type="checkbox"
-                    @change="
-                      changeTempTindakan(kategoriTindakan.idKategoriTindakan)
-                    "
-                    :checked="
-                      tempTindakan.includes(kategoriTindakan.idKategoriTindakan)
-                    "
-                  />
-                  <label class="ml-2">{{
-                    kategoriTindakan.namaKategoriTindakan
-                  }}</label>
-                </div>
-              </div>
-              <!-- TINDAKAN LAIN -->
-              <div>
-                <div
-                  v-for="namaTindakan in getTindakanLainChoice"
-                  v-bind:key="namaTindakan.id"
-                >
-                  <div>
-                    <input
-                      type="checkbox"
-                      @change="changeTempTindakanLain(namaTindakan)"
-                      :checked="tempTindakanLain.includes(namaTindakan)"
-                    />
-                    <label class="ml-2">{{ namaTindakan }}</label>
+
+                <div class="container mt-3">
+                  <!-- KATEGORI TINDAKAN -->
+                  <div
+                    v-for="kategoriTindakan in listKategoriTindakan"
+                    v-bind:key="kategoriTindakan.id"
+                  >
+                    <div>
+                      <input
+                        type="checkbox"
+                        @change="
+                          changeTempTindakan(
+                            kategoriTindakan.idKategoriTindakan
+                          )
+                        "
+                        :checked="
+                          tempTindakan.includes(
+                            kategoriTindakan.idKategoriTindakan
+                          )
+                        "
+                      />
+                      <label class="ml-2">{{
+                        kategoriTindakan.namaKategoriTindakan
+                      }}</label>
+                    </div>
                   </div>
+                  <!-- TINDAKAN LAIN -->
+                  <div>
+                    <div
+                      v-for="namaTindakan in getTindakanLainChoice"
+                      v-bind:key="namaTindakan.id"
+                    >
+                      <div>
+                        <input
+                          type="checkbox"
+                          @change="changeTempTindakanLain(namaTindakan)"
+                          :checked="tempTindakanLain.includes(namaTindakan)"
+                        />
+                        <label class="ml-2">{{ namaTindakan }}</label>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Button trigger modal-->
+                  <button
+                    class="btn btn-primary btn-sm mt-2 mb-4"
+                    type="button"
+                    data-toggle="modal"
+                    data-target="#exampleModal2"
+                  >
+                    Tambah Tindakan Lain
+                  </button>
                 </div>
               </div>
-              <br />
-              <!-- Button trigger modal-->
+            </div>
+
+            <!-- BUTTON UNTUK MENAMPILKAN MODAL -->
+            <div class="row container justify-content-center pt-4">
               <button
-                class="btn btn-primary btn-sm"
+                id="completeButton"
+                class="btn btn-primary mr-4"
                 type="button"
                 data-toggle="modal"
-                data-target="#exampleModal2"
+                data-target="#exampleModal"
+                @click="refreshSubmitted"
               >
-                Tambah Tindakan Lain
+                Kirim
               </button>
+              <router-link to="/">
+                <button class="btn btn-danger">Batal</button>
+              </router-link>
             </div>
           </div>
         </div>
-        <!-- END TINDAKAN -->
-      </div>
-      <!-- START MODAL -->
-      <!-- ------------------------------------------------ -->
-      <!-- BUTTON UNTUK MENAMPILKAN MODAL -->
-      <div class="row justify-content-center align-self-center">
-        <button
-          id="completeButton"
-          class="btn btn-primary mr-4"
-          type="button"
-          data-toggle="modal"
-          data-target="#exampleModal"
-          @click="refreshSubmitted"
-        >
-          Kirim
-        </button>
-        <router-link to="/">
-          <button class="btn btn-danger">Batal</button>
-        </router-link>
-      </div>
+        <!-- START MODAL -->
+        <!-- ------------------------------------------------ -->
 
       <!-- DIV BESAR MODAL -->
       <div
@@ -317,76 +302,74 @@
         </div>
       </div>
       <!-- END MODAL -->
-      <!-- ------------------------------------------------ -->
-      <!-- BATAS MODAL -->
-      <!-- Modal-->
-      <div
-        class="modal fade"
-        id="exampleModal2"
-        tabindex="-1"
-        role="dialog"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-      >
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">
-                Tambah Tindakan
-              </h5>
-              <button
-                class="close"
-                type="button"
-                data-dismiss="modal"
-                aria-label="Close"
-              >
-                <span aria-hidden="true">&#xD7;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <label class="medium mb-1">Tambah Tindakan Lain</label>
-              <input
-                class="form-control"
-                name="newTindakan"
-                id="newTindakan"
-                type="text"
-                placeholder="Masukkan nama tindakan"
-              />
-            </div>
-            <div class="modal-footer">
-              <button
-                class="btn btn-secondary"
-                type="button"
-                data-dismiss="modal"
-              >
-                Cancel
-              </button>
-              <button
-                class="btn btn-primary"
-                @click="addTindakanLainChoice"
-                data-dismiss="modal"
-                type="button"
-              >
-                Submit
-              </button>
+        <!-- ------------------------------------------------ -->
+        <!-- Modal-->
+        <div
+          class="modal fade"
+          id="exampleModal2"
+          tabindex="-1"
+          role="dialog"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                  Tambah Tindakan
+                </h5>
+                <button
+                  class="close"
+                  type="button"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&#xD7;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <label class="medium mb-1">Tambah Tindakan Lain</label>
+                <input
+                  class="form-control"
+                  name="newTindakan"
+                  id="newTindakan"
+                  type="text"
+                  placeholder="Masukkan nama tindakan"
+                />
+              </div>
+              <div class="modal-footer">
+                <button
+                  class="btn btn-secondary"
+                  type="button"
+                  data-dismiss="modal"
+                >
+                  Cancel
+                </button>
+                <button
+                  class="btn btn-primary"
+                  @click="addTindakanLainChoice"
+                  data-dismiss="modal"
+                  type="button"
+                >
+                  Submit
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </form>
+    </form>
+  </div>
 </template>
 
 <script>
 import axios from "axios";
+import VueAxios from "vue-axios";
 import LightHeader from "@/components/LightHeader.vue";
 import authHeader from "@/services/auth-header";
 
 export default {
-  name: "LaporanPasienForm",
-  components: {
-    LightHeader,
-  },
+  name: "EvaluasiLaporanPasien",
   data() {
     return {
       posts: {
@@ -398,11 +381,14 @@ export default {
         isJaga: false,
         tanggalJaga: null,
         idKonsulen: null,
-        idResiden: JSON.parse(localStorage.getItem("userData")).residen
-          .idResiden,
+        idResiden: null,
         strKompetensi: null,
         strTindakan: null,
         strTindakanLain: null,
+        konsulen: null,
+        status: null,
+        feedback: null,
+        isDisetujui: null
       },
       tempKompetensi: [],
       tempTindakan: [],
@@ -413,10 +399,7 @@ export default {
       listKategoriTindakan: [],
       isCreated: false,
       tindakanLainChoice: [],
-      subtitleHeader:
-        JSON.parse(localStorage.getItem("userData")).name +
-        " - " +
-        JSON.parse(localStorage.getItem("userData")).residen.npm,
+      subtitleHeader: null,
       status: 0,
       ready: false,
     };
@@ -440,10 +423,11 @@ export default {
     getTindakanLainChoice() {
       return this.tindakanLainChoice;
     },
-    getReady() {
+    isReady() {
       return this.ready;
     },
   },
+  components: { LightHeader },
   methods: {
     changeShowTanggal() {
       this.showTanggal = !this.showTanggal;
@@ -492,17 +476,18 @@ export default {
     postData(e) {
       console.warn("masukk1");
       this.status = 1;
+      if(this.posts.status == "DISETUJUI"){
+        this.posts.isDisetujui = true;
+      }else{
+        this.posts.isDisetujui = false;
+      }
       this.posts.strKompetensi = this.listToStr(this.tempKompetensi);
       this.posts.strTindakan = this.listToStr(this.tempTindakan);
       this.posts.strTindakanLain = this.listToStr(this.tempTindakanLain);
       console.warn(this.posts);
 
       var url;
-      if (this.$route.params.operation != 0) {
-        url = "https://neulogfkui.herokuapp.com/api/laporan-pasien/update";
-      } else {
-        url = "https://neulogfkui.herokuapp.com/api/laporan-pasien/create";
-      }
+      url = "https://neulogfkui.herokuapp.com/api/laporan-pasien/evaluate";
       axios.post(url, this.posts, { headers: authHeader() }).then((result) => {
         if (result.data != "0") {
           this.posts.idLaporanPasien = result.data;
@@ -552,7 +537,7 @@ export default {
       axios
         .get(
           "http://neulogfkui.herokuapp.com/api/laporan-pasien/" +
-            this.$route.params.operation
+            this.$route.params.idLaporanPasien
         )
         .then((resp) => {
           console.log(resp.data);
@@ -568,12 +553,16 @@ export default {
           this.posts.strKompetensi = resp.data.strKompetensi;
           this.posts.strTindakan = resp.data.strTindakan;
           this.posts.strTindakanLain = resp.data.strTindakanLain;
+          this.posts.konsulen = resp.data.konsulen;
+          this.posts.status = resp.data.status;
           this.tempKompetensi = this.strToListNumber(this.posts.strKompetensi);
           this.tempTindakan = this.strToListNumber(this.posts.strTindakan);
-          if(this.posts.strTindakanLain != ""){
+          if (this.posts.strTindakanLain != "") {
             this.tempTindakanLain = this.strToList(this.posts.strTindakanLain);
             this.tindakanLainChoice = [...this.tempTindakanLain];
           }
+          this.subtitleHeader =
+            resp.data.residen.npm + " - " + resp.data.residen.pengguna.name;
           console.log(this.tempKompetensi);
           console.log(this.tempTindakan);
           console.log(this.tempTindakanLain);
@@ -581,7 +570,9 @@ export default {
         });
     }
     axios
-      .get("http://neulogfkui.herokuapp.com/api/laporan-pasien/getformattribute")
+      .get(
+        "http://neulogfkui.herokuapp.com/api/laporan-pasien/getformattribute"
+      )
       .then((resp) => {
         this.listKonsulen = resp.data.listKonsulen;
         this.listKompetensi = resp.data.listKompetensi;
@@ -594,5 +585,3 @@ export default {
   },
 };
 </script>
-
-

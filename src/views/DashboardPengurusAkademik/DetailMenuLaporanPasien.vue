@@ -9,19 +9,35 @@
   <div class="container" v-if="isMounted">
     <div class="row mr-2 mb-4 justify-content-end upper">
       <div v-if="isResiden">
-      <button
-        id="completeButton"
-        class="btn btn-danger mr-4"
-        type="button"
-        data-toggle="modal"
-        data-target="#exampleModal"
-        v-if="this.posts.status == 'DITOLAK'"
-      >
-        Delete
-      </button>
-      <router-link :to="'/laporanpasienform/'+this.posts.idLaporanPasien">
-          <button class="btn btn-warning" v-if="this.posts.status != 'DITERIMA'">Edit</button>
-      </router-link>
+        <button
+          id="completeButton"
+          class="btn btn-danger mr-4"
+          type="button"
+          data-toggle="modal"
+          data-target="#exampleModal"
+          v-if="this.posts.status == 'DITOLAK'"
+        >
+          Delete
+        </button>
+        <router-link :to="'/laporanpasienform/' + this.posts.idLaporanPasien">
+          <button
+            class="btn btn-warning"
+            v-if="this.posts.status != 'DISETUJUI'"
+          >
+            Edit
+          </button>
+        </router-link>
+      </div>
+
+      <div v-if="isKonsulen">
+        <router-link :to="'/laporanpasienform/' + this.posts.idLaporanPasien">
+          <button
+            class="btn btn-warning"
+            v-if="this.posts.status != 'DISETUJUI'"
+          >
+            Edit
+          </button>
+        </router-link>
       </div>
     </div>
     <div class="row justify-content-center">
@@ -54,11 +70,11 @@
                 <tr>
                   <th>Pasien Jaga&nbsp;&nbsp;&nbsp;&nbsp;</th>
                   <th>
-                    <b v-if="this.posts.isJaga">Ya</b>
-                    <b v-if="!this.posts.isJaga">Tidak</b>
+                    <b v-if="this.posts.tanggalJaga != null">Ya</b>
+                    <b v-if="this.posts.tanggalJaga == null">Tidak</b>
                   </th>
                 </tr>
-                <tr v-if="this.posts.isJaga">
+                <tr v-if="this.posts.tanggalJanga != null">
                   <th>Tanggal Jaga&nbsp;&nbsp;&nbsp;&nbsp;</th>
                   <th>
                     <b>{{ posts.tanggalJaga }}</b>
@@ -89,7 +105,8 @@
         v-if="isMounted"
       ></CardTimeline>
       <CardTimelineEnter
-        title="Feedback" v-if="this.posts.feedback != null"
+        title="Feedback"
+        v-if="this.posts.feedback != null"
         :updateStatus="this.posts.feedback"
       ></CardTimelineEnter>
     </div>
@@ -279,9 +296,16 @@ export default {
     isDataTableReady() {
       return this.ready;
     },
-    isResiden(){
-      return JSON.parse(localStorage.getItem('user')).roles.includes('ROLE_RESIDEN')
-    }
+    isResiden() {
+      return JSON.parse(localStorage.getItem("user")).roles.includes(
+        "ROLE_RESIDEN"
+      );
+    },
+    isKonsulen() {
+      return JSON.parse(localStorage.getItem("user")).roles.includes(
+        "ROLE_KONSULEN"
+      );
+    },
   },
   methods: {
     strToList(dummy) {
@@ -309,7 +333,9 @@ export default {
       this.status = 1;
       console.warn(this.$route.params.idLaporanPasien);
       axios
-        .get("https://neulogfkui.herokuapp.com/api/laporan-pasien/delete/" + this.$route.params.idLaporanPasien
+        .get(
+          "https://neulogfkui.herokuapp.com/api/laporan-pasien/delete/" +
+            this.$route.params.idLaporanPasien
         )
         .then((result) => {
           if (result.data == "Success") {
@@ -357,7 +383,9 @@ export default {
         // dataTableLoader();
       });
     axios
-      .get("https://neulogfkui.herokuapp.com/api/laporan-pasien/getformattribute")
+      .get(
+        "https://neulogfkui.herokuapp.com/api/laporan-pasien/getformattribute"
+      )
       .then((resp) => {
         this.listKompetensi = resp.data.listKompetensi;
         this.listKategoriTindakan = resp.data.listKategoriTindakan;

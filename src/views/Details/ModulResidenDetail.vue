@@ -1,7 +1,7 @@
 <template>
   <LightHeader
     v-if="getReady"
-    title="Detail Tugas Penelitian Akhir"
+    title="Detail Kasus Sulit dan Multidisiplin"
     :subtitle="this.subtitle"
     icon="file-text"
   />
@@ -15,16 +15,16 @@
         type="button"
         data-toggle="modal"
         data-target="#exampleModal"
-        v-if="this.data.laporanTugas.status == 'DITOLAK'"
+        v-if="this.data.status == 'DITOLAK'"
       >
         Hapus
       </button>
       <router-link
-        :to="'/tugaspenelitianakhirform/' + this.data.laporanTugas.idLaporanTugas"
+        :to="'/modulresidenform/' + this.data.idModulResiden"
       >
         <button
           class="btn btn-warning"
-          v-if="this.data.laporanTugas.status != 'DISETUJUI'"
+          v-if="this.data.status != 'DISETUJUI'"
         >
           Edit
         </button>
@@ -34,55 +34,37 @@
     <div class="row justify-content-center">
       <div class="col-xxl-4 col-xl-4 mb-4">
         <div class="card card-header-actions h-100">
-          <div class="card-header">Data Tugas Penelitian Akhir</div>
+          <div class="card-header">Data Modul</div>
           <div class="card-body">
             <table cellpadding="5">
               <tbody>
                 <tr>
-                  <th>Tanggal&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                  <th>
-                    <b>{{ data.laporanTugas.tanggalDibuat }}</b>
-                  </th>
+                  <td>Nama</td>
+                  <td>
+                    <b>{{ data.modul.namaModul }}</b>
+                  </td>
                 </tr>
                 <tr>
-                  <th>Judul Proposal&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                  <th>
+                  <td>Tanggal Mulai</td>
+                  <td>
                     <b>{{
-                      data.laporanTugas.tugasPenelitianAkhirModel.judulProposal
+                      data.tanggalMulai
                     }}</b>
-                  </th>
+                  </td>
                 </tr>
                 <tr>
-                  <th>Stage&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                  <th>
+                  <td>Tanggal Selesai</td>
+                  <td>
                     <b>{{
-                      data.laporanTugas.tugasPenelitianAkhirModel.stage
+                      data.tanggalSelesai
                     }}</b>
-                  </th>
+                  </td>
                 </tr>
                 <tr>
-                  <th>Konsulen&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                  <th>
-                    <b>{{ data.laporanTugas.konsulenModel.pengguna.name }}</b>
-                  </th>
-                </tr>
-                <tr>
-                  <th>Link&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                  <th>
-                    <b>{{ data.laporanTugas.linkTugas }}</b>
-                  </th>
-                </tr>
-                <tr>
-                  <th>Status&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                  <th>
-                    <div class="badge badge-primary badge-pill">
-                      {{ data.laporanTugas.status }}
-                    </div>
-                  </th>
-                </tr>
-                <tr>
-                  <th>&nbsp;&nbsp;&nbsp;&nbsp;</th>
-                  <th><b></b></th>
+                  <td>Durasi</td>
+                  <td>
+                    <b>{{ data.durasi }}</b>
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -92,20 +74,19 @@
       <!-- CARD 2 -->
       <CardTimeline
         title="Update Status"
-        :updateStatus="this.data.laporanTugas.updateStatus"
-        v-if="isMounted"
+        :updateStatus="this.data.updateStatus"
+        v-if="getReady"
       ></CardTimeline>
       <!-- CARD 3 -->
       <CardTimelineEnter
+        v-if="this.data.feedback != null"
         title="Feedback"
-        v-if="this.data.laporanTugas.feedback != null"
-        :updateStatus="this.data.laporanTugas.feedback"
+        :updateStatus="this.data.feedback"
       ></CardTimelineEnter>
     </div>
   </div>
   <!-- START MODAL -->
   <!-- ------------------------------------------------ -->
-
   <!-- DIV BESAR MODAL -->
   <div
     class="modal fade"
@@ -201,15 +182,13 @@ import CardTimelineEnter from "@/components/CardTimelineEnter";
 import authHeader from "@/services/auth-header"
 
 export default {
-  name: "TugasPenelitianAkhirDetail",
+  name: "ModulResidenDetail",
   components: { LightHeader, CardTimelineEnter, CardTimeline },
   data() {
     return {
       data: null,
-      feedback: String,
       subtitle: String,
       residen: null,
-      delete: { idLaporanTugas: this.$route.params.idLaporanTugas },
       status: 0,
       ready: false,
     };
@@ -223,27 +202,15 @@ export default {
     }
   },
   mounted() {
-    this.delete.idLaporanTugas = this.$route.params.idLaporanTugas;
     axios
       .get(
-        "http://localhost:8000/api/dashboardPengurusAkademik/laporantugas/" +
-          this.$route.params.idLaporanTugas, { headers : authHeader()}
-      ) // nanti diganti ini angka 1 nya
+        "http://neulogfkui.herokuapp.com/modulResiden/" +
+          this.$route.params.idModulResiden
+      )
       .then((resp) => {
         console.warn(resp.data);
         this.data = resp.data;
-        console.warn(this.data);
-      });
-    axios
-      .get(
-        "http://localhost:8000/api/dashboardPengurusAkademik/getResiden/" +
-          this.$route.params.idLaporanTugas
-      ) // nanti diganti ini angka 1 nya
-      .then((resp) => {
-        console.warn(resp.data);
-        this.residen = resp.data;
-        this.subtitle = this.residen.pengguna.name + " - " + this.residen.npm;
-        this.isMounted = true;
+        this.residen = resp.data.residen;
         this.ready = true;
       });
   },
@@ -252,9 +219,9 @@ export default {
       this.status = 1;
       console.warn(this.posts);
       axios
-        .post(
-          "http://localhost:8000/laporantugas/deletetugaspenelitianakhir/",
-          this.delete, { headers : authHeader()}
+        .get(
+          "http://neulogfkui.herokuapp.com/modulResiden/delete/" + this.$route.params.idModulResiden,
+           { headers: authHeader() }
         )
         .then((result) => {
           if (result.data == "Success") {
@@ -269,3 +236,8 @@ export default {
   },
 };
 </script>
+<style>
+th{
+  word-wrap: break-word;
+}
+</style>

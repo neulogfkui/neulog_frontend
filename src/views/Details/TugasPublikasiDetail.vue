@@ -24,7 +24,7 @@
       >
         <button
           class="btn btn-warning"
-          v-if="this.data.laporanTugas.status != 'DITERIMA'"
+          v-if="this.data.laporanTugas.status != 'DISETUJUI'"
         >
           Edit
         </button>
