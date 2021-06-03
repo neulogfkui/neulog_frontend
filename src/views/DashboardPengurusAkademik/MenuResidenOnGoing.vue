@@ -18,13 +18,12 @@
       </PieChart>
     </div>
 
-    <div class="container mt-5">
-	  <nav class="nav nav-borders">
-		<a class="nav-link active ml-0" href="#">On Going</a>
-		<a class="nav-link" href="/dashboardpengurusakademik/residen/lulus">Lulus</a>
-	  </nav>
+    <!-- TAB NAVBAR -->	
+    <nav class="nav nav-borders">
+      <router-link class="nav-link active" to="/dashboardpengurusakademik/residen/ongoing">On Going</router-link>
+      <router-link class="nav-link" to="/dashboardpengurusakademik/residen/lulus">Lulus</router-link>
+    </nav>
 	  <hr class="nav-underline mt-0 mb-4"/>
-    </div>
 
     <div v-if="isDataTableReady" class="container">
 		<div class="card mb-4 mt-4">

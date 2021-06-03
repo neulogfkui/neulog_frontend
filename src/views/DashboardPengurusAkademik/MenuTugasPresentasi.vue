@@ -25,18 +25,16 @@
       </PieChart>
       <!-- Tabel Laporan Tugas -->
 
-      <!-- TAB NAVBAR -->	
-      <div class="container mt-5">
-	  <nav class="nav nav-borders">
-		<a class="nav-link active ml-0" href="#">Tugas Presentasi</a>
-		<a class="nav-link" href="/dashboardpengurusakademik/laporantugas/kasussulit">Kasus Sulit dan Multidisiplin</a>
-        <a class="nav-link" href="/dashboardpengurusakademik/laporantugas/tugaspublikasi">Tugas Publikasi</a>
-        <a class="nav-link" href="/dashboardpengurusakademik/laporantugas/tugasakhir">Tugas Akhir</a>
-	  </nav>
-	  <hr class="nav-underline mt-0"/>
-      </div>
+    <!-- TAB NAVBAR -->	
+    <nav class="nav nav-borders">
+      <router-link class="nav-link active" to="/dashboardpengurusakademik/laporantugas/tugaspresentasi">Tugas Presentasi</router-link>
+      <router-link class="nav-link" to="/dashboardpengurusakademik/laporantugas/kasussulit">Kasus Sulit dan Multidisiplin</router-link>
+      <router-link class="nav-link" to="/dashboardpengurusakademik/laporantugas/tugaspublikasi">Tugas Publikasi</router-link>
+      <router-link class="nav-link" to="/dashboardpengurusakademik/laporantugas/tugasakhir">Tugas Akhir</router-link>
+    </nav>
+	  <hr class="nav-underline mt-0 mb-4"/>
 
-      <div v-if="isDataTableReady" class="container">
+    <div v-if="isDataTableReady" class="container">
 		<div class="card mb-4">
         <div class="card card-header-actions">
 			<div class="card-body">
