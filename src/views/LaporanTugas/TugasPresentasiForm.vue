@@ -331,7 +331,7 @@ export default {
     if (this.$route.params.operation != 0) {
       axios
         .get(
-          "http://neulogfkui.herokuapp.com/laporantugas/" + this.$route.params.operation, { headers: authHeader() }
+          "https://neulogfkui.herokuapp.com/laporantugas/" + this.$route.params.operation, { headers: authHeader() }
         )
         .then((resp) => {
           console.warn(resp);
@@ -349,7 +349,7 @@ export default {
       // this.isMounted = true;
     }
     axios
-      .get("http://neulogfkui.herokuapp.com/LaporanPresentasiFormAttribute", { headers: authHeader() })
+      .get("https://neulogfkui.herokuapp.com/LaporanPresentasiFormAttribute", { headers: authHeader() })
       .then((resp) => {
         console.warn(resp.data);
         this.listKonsulen = resp.data.listKonsulen;
@@ -371,9 +371,9 @@ export default {
       console.warn(this.posts);
       var url = "";
       if (this.$route.params.operation == 0) {
-        url = "http://neulogfkui.herokuapp.com/laporantugas/addtugaspresentasi/";
+        url = "https://neulogfkui.herokuapp.com/laporantugas/addtugaspresentasi/";
       } else {
-        url = "http://neulogfkui.herokuapp.com/laporantugas/updatetugaspresentasi/";
+        url = "https://neulogfkui.herokuapp.com/laporantugas/updatetugaspresentasi/";
       }
       axios.post(url, this.posts, { headers: authHeader() }).then((result) => {
         if (result.data != "0") {
