@@ -24,9 +24,10 @@
       >
       </PieChart>
       <!-- Tabel Laporan Tugas -->
+    </div>
 
       <!-- TAB NAVBAR -->	
-    <nav class="nav nav-borders">
+    <nav class="nav nav-borders mt-4" v-if="isDataTableReady">
       <router-link class="nav-link" to="/dashboardpengurusakademik/laporantugas/tugaspresentasi">Tugas Presentasi</router-link>
       <router-link class="nav-link" to="/dashboardpengurusakademik/laporantugas/kasussulit">Kasus Sulit dan Multidisiplin</router-link>
       <router-link class="nav-link" to="/dashboardpengurusakademik/laporantugas/tugaspublikasi">Tugas Publikasi</router-link>
@@ -95,7 +96,6 @@
         </div>
         </div>
       </div>
-  </div>
   <!-- END PRESENTASI -->
 
 </template>

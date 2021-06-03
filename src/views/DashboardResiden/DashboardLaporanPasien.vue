@@ -138,7 +138,7 @@ export default {
   mounted() {
     axios
       .get(
-        "http://localhost:8000/api/dashboardResiden/laporanPasien/" +
+        "https://neulogfkui.herokuapp.com/api/dashboardResiden/laporanPasien/" +
           this.$route.params.idResiden,
         {
           headers: authHeader(),

@@ -204,7 +204,7 @@ export default {
   mounted() {
     axios
       .get(
-        "http://neulogfkui.herokuapp.com/modulResiden/" +
+        "https://neulogfkui.herokuapp.com/modulResiden/" +
           this.$route.params.idModulResiden
       )
       .then((resp) => {
@@ -220,7 +220,7 @@ export default {
       console.warn(this.posts);
       axios
         .get(
-          "http://neulogfkui.herokuapp.com/modulResiden/delete/" + this.$route.params.idModulResiden,
+          "https://neulogfkui.herokuapp.com/modulResiden/delete/" + this.$route.params.idModulResiden,
            { headers: authHeader() }
         )
         .then((result) => {

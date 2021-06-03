@@ -119,7 +119,7 @@ export default {
   mounted() {
     axios
       .get(
-        "http://localhost:8000/api/dashboardResiden/modul/" +
+        "https://neulogfkui.herokuapp.com/api/dashboardResiden/modul/" +
           this.$route.params.idResiden
       )
       .then((resp) => {

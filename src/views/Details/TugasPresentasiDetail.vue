@@ -30,6 +30,10 @@
           Edit
         </button>
       </router-link>
+
+      </div>
+
+      <div v-if="isKonsulen">
       <router-link
         :to="'/evaluasilaporantugas/' + this.data.laporanTugas.idLaporanTugas"
       >
@@ -243,6 +247,9 @@ export default {
     isResiden(){
       return JSON.parse(localStorage.getItem('user')).roles.includes('ROLE_RESIDEN')
     },
+    isKonsulen(){
+      return JSON.parse(localStorage.getItem('user')).roles.includes('ROLE_KONSULEN')
+    },
     userRoles() {
       if (this.isLoggedIn) return this.$store.state.auth.user.roles;
       else return ["ROLE_DEFAULT"];
@@ -253,7 +260,7 @@ export default {
     console.log(this.userRoles.includes('ROLE_KONSULEN'));
     axios
       .get(
-        "http://localhost:8000/api/dashboardPengurusAkademik/laporantugas/" +
+        "https://neulogfkui.herokuapp.com/api/dashboardPengurusAkademik/laporantugas/" +
           this.$route.params.idLaporanTugas, { headers : authHeader()}
       ) // nanti diganti ini angka 1 nya
       .then((resp) => {
@@ -263,7 +270,7 @@ export default {
       });
     axios
       .get(
-        "http://localhost:8000/api/dashboardPengurusAkademik/getResiden/" +
+        "https://neulogfkui.herokuapp.com/api/dashboardPengurusAkademik/getResiden/" +
           this.$route.params.idLaporanTugas, 
       ) // nanti diganti ini angka 1 nya
       .then((resp) => {
@@ -280,7 +287,7 @@ export default {
       console.warn(this.$route.params.idLaporanTugas);
       axios
         .post(
-          "http://localhost:8000/laporantugas/deletetugaspresentasi/",
+          "https://neulogfkui.herokuapp.com/laporantugas/deletetugaspresentasi/",
           this.delete, { headers : authHeader()}
         )
         .then((result) => {

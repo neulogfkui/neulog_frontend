@@ -236,7 +236,7 @@ export default {
     this.posts.idModulResiden = this.$route.params.idModulResiden;
     axios
       .get(
-        "http://neulogfkui.herokuapp.com/modulResiden/" +
+        "https://neulogfkui.herokuapp.com/modulResiden/" +
           this.$route.params.idModulResiden
       )
       .then((resp) => {
@@ -266,7 +266,7 @@ export default {
       console.warn(this.posts);
 
       var url =
-        "http://neulogfkui.herokuapp.com/api/dashboardKetuaModul/kelulusan";
+        "https://neulogfkui.herokuapp.com/api/dashboardKetuaModul/kelulusan";
 
       axios.post(url, this.posts, { headers: authHeader() }).then((result) => {
         if (result.data != null) {

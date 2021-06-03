@@ -14,7 +14,9 @@
       <div
         class="card-footer d-flex align-items-center justify-content-between"
       >
-        <a class="small text-white stretched-link" :href="link">{{ action }}</a>
+      <router-link class="nav-link" :to="link">
+        <a class="small text-white stretched-link">{{ action }}</a>
+      </router-link>
 
         <div class="small text-white">
           <i class="fas fa-angle-right"></i>
@@ -25,7 +27,6 @@
 </template>
 
 <script>
-
 export default {
   name: "ColorCard",
   props: {
@@ -34,7 +35,7 @@ export default {
     color: String,
     link: String,
     action: String,
-    icon: String
+    icon: String,
   },
 };
 </script>
