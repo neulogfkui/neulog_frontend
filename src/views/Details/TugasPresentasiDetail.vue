@@ -253,7 +253,7 @@ export default {
     userRoles() {
       if (this.isLoggedIn) return this.$store.state.auth.user.roles;
       else return ["ROLE_DEFAULT"];
-    }
+    },
   },
   mounted() {
     this.delete.idLaporanTugas = this.$route.params.idLaporanTugas;

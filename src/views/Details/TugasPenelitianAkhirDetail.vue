@@ -233,6 +233,9 @@ export default {
     getReady() {
       return this.ready;
     },
+    isLoggedIn() {
+      return this.$store.state.auth.status.loggedIn;
+    },
     isResiden() {
       return JSON.parse(localStorage.getItem("user")).roles.includes(
         "ROLE_RESIDEN"
@@ -243,6 +246,10 @@ export default {
         "ROLE_KONSULEN"
       ) && (this.data.laporanTugas.status != "DISETUJUI");
     },
+    userRoles() {
+      if (this.isLoggedIn) return this.$store.state.auth.user.roles;
+      else return ["ROLE_DEFAULT"];
+    }
   },
   mounted() {
     this.delete.idLaporanTugas = this.$route.params.idLaporanTugas;
