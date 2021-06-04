@@ -168,7 +168,10 @@
                     <router-link class="nav-link" to="/dashboard-konsulen/tugas-presentasi/belum-dievaluasi"
                       >Tugas Presentasi</router-link
                     >
-                    <router-link class="nav-link" to="/dashboard-konsulen/tugas-publikasi/belum-dievaluasi"
+                    <!-- <router-link class="nav-link" to="/dashboard-konsulen/tugas-publikasi/belum-dievaluasi"
+                      >Tugas Publikasi</router-link
+                    > -->
+                    <router-link class="nav-link" :to="linkTugas"
                       >Tugas Publikasi</router-link
                     >
                     <router-link class="nav-link" to="/dashboard-konsulen/penelitian-akhir/belum-dievaluasi"
