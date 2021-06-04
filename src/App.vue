@@ -183,7 +183,7 @@
 
               <div v-if="userRoles.includes('ROLE_KETUAMODUL')">
                 <!-- Dashbooard -->
-                <div class="sidenav-menu-heading">Dashboard</div>
+                <!-- <div class="sidenav-menu-heading">Dashboard</div> -->
                 <a
                   class="nav-link collapsed"
                   href="javascript:void(0);"
@@ -494,7 +494,7 @@ export default {
       else return ["ROLE_DEFAULT"];
     },
     links() {
-      if(this.userRoles == "ROLE_RESIDEN"){
+      if(this.userRoles == "ROLE_RESIDEN" && this.userData.residen != null){
         let link = {
           "linkMenuResiden" : "/dashboardresiden/" + this.userData.residen.idResiden,
           "linkLaporanPasien" : "/dashboardlaporanpasien/" + this.userData.residen.idResiden,
@@ -522,11 +522,12 @@ export default {
       this.linkJaga = "/dashboardjaga/" + this.userData.residen.idResiden;
       this.linkTindakan = "/dashboardtindakan/" + this.userData.residen.idResiden;
     }
+    this.userData = JSON.parse(localStorage.getItem('userData'));
   },
 
   updated() {
     loadScript();
-    this.userData = JSON.parse(localStorage.getItem('userData'));
+    // this.userData = JSON.parse(localStorage.getItem('userData'));
   },
 
   methods: {
