@@ -72,6 +72,7 @@ import MainHeader from "@/components/MainHeader.vue";
 import BigNumberCard from "@/components/BigNumberCard.vue";
 import dataTableLoader from "@/js/datatable";
 import authHeader from "@/services/auth-header";
+import loadScript from '@/js/scripts.js';
 
 export default {
   name: "MenuKonsulen",
@@ -102,14 +103,14 @@ export default {
     axios
       .get("https://neulogfkui.herokuapp.com/api/dashboardPengurusAkademik/konsulen/", { headers: authHeader() })
       .then((resp) => {
-        console.warn(resp.data);
         this.avgLaporanPasien = resp.data.averageLaporanPasien;
         this.avgLaporanTugas = resp.data.averageLaporanTugas;
         this.listKonsulen = resp.data.listKonsulen;
         this.isMounted = true;
         this.ready = true;
         dataTableLoader();
-      });
+    });
+    loadScript();
   }
 };
 </script>
