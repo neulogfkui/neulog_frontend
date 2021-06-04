@@ -19,7 +19,7 @@
     </div>
 
     <!-- TAB NAVBAR -->	
-    <nav class="nav nav-borders">
+    <nav class="nav nav-borders mt-4" v-if="isDataTableReady">
       <router-link class="nav-link" to="/dashboardpengurusakademik/residen/ongoing">On Going</router-link>
       <router-link class="nav-link active" to="/dashboardpengurusakademik/residen/lulus">Lulus</router-link>
     </nav>

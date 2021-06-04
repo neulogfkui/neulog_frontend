@@ -4,7 +4,7 @@
     :title= this.title
     icon= "trending-up">
 </LightHeader>
-<div class="container upper">
+<div class="container upper" v-if="isMounted">
     <div class="row mr-2 mb-4 justify-content-end upper">
         <router-link :to="'/kompetensiform/'+ this.idKompetensi">
           <button class="btn btn-warning">Edit</button>
@@ -18,69 +18,45 @@
                 </div>
             <div class="card-body">
                 <div class="container-fluid">
-                <div class="row">
-                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
-                        <p class="card-text">
-                            Nama Kompetensi
-                        </p>
-                    </div>
-                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
-                        <p class="card-text">
-                            {{ namaKompetensi }}
-                        </p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
-                        <p class="card-text">
-                            Target Pencapaian
-                        </p>
-                    </div>
-                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
-                        <p class="card-text">
-                            {{ jumlahMinimal }}
-                        </p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
-                        <p class="card-text">
-                            Kompetensi Lanjut
-                        </p>
-                    </div>
-                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
-                        <p class="card-text" v-if="isKompetensiLanjut">
-                            Ya
-                        </p>
-                        <p class="card-text" v-if="!isKompetensiLanjut">
-                            Tidak
-                        </p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
-                        <p class="card-text">
-                            Tanggal Dibuat
-                        </p>
-                    </div>
-                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
-                        <p class="card-text">
-                            {{ tanggalDibuat }}
-                        </p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
-                        <p class="card-text">
-                            Deskripsi
-                        </p>
-                    </div>
-                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
-                        <p class="card-text">
-                            {{ deskripsi }}
-                        </p>
-                    </div>
-                </div>
+                    <table cellpadding="5">
+                        <tbody>
+                            <tr>
+                                <td>Nama Kompetensi</td>
+                                <td>
+                                    <b>{{ namaKompetensi }}</b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Target Pencapaian</td>
+                                <td>
+                                    <b>{{ jumlahMinimal }}</b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Kompetensi Lanjut</td>
+                                <td><b>
+                                    <p class="card-text" v-if="isKompetensiLanjut">
+                                        Ya
+                                    </p>
+                                    <p class="card-text" v-if="!isKompetensiLanjut">
+                                        Tidak
+                                    </p>
+                                </b></td>
+                            </tr>
+                            <tr>
+                                <td>Tanggal Dibuat</td>
+                                <td>
+                                    <b>{{ tanggalDibuat }}</b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Deskripsi</td>
+                                <td>
+                                    <b>{{ deskripsi }}</b>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
             </div>
