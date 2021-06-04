@@ -248,7 +248,7 @@ export default {
       return JSON.parse(localStorage.getItem('user')).roles.includes('ROLE_RESIDEN')
     },
     isKonsulen(){
-      return JSON.parse(localStorage.getItem('user')).roles.includes('ROLE_KONSULEN')
+      return JSON.parse(localStorage.getItem('user')).roles.includes('ROLE_KONSULEN') && (this.data.laporanTugas.status != "DISETUJUI")
     },
     userRoles() {
       if (this.isLoggedIn) return this.$store.state.auth.user.roles;
