@@ -136,6 +136,7 @@
 <script>
 import Residen from '../../models/residen';
 import User from '../../models/user';
+import loadScript from "@/js/scripts.js";
 
 export default {
     name: "UpdateResiden",
@@ -168,7 +169,12 @@ export default {
     created() {
         this.fetchDatas();
         if(this.isReady) console.log(this.residen)
+    	loadScript();
     },
+
+	updated() {
+		loadScript();
+	},
 
     methods: {
         redirectToHome() {

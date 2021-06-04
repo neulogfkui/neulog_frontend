@@ -93,6 +93,7 @@
 
 <script>
 import User from  '../../models/user';
+import loadScript from "@/js/scripts.js";
 
 export default {
     name: "ViewResiden",
@@ -122,7 +123,12 @@ export default {
             this.$router.push('/404');
             }
         );
+		loadScript();
     },
+
+	updated() {
+		loadScript();
+	},
 
     methods: {
         redirectToUpdate() {
