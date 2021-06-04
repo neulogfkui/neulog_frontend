@@ -4,7 +4,7 @@
     :subtitle="this.subtitle"
     icon= "users">
   </MainHeader>
-  <div class="container">
+  <div class="container" v-if="isDataTableReady">
     <div class="row upper justify-content-center">
       <BigNumberCard
         title="Rata - Rata Laporan Pasien Per Bulan"

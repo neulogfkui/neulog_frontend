@@ -68,29 +68,32 @@
                     class="sidenav-menu-nested nav accordion"
                     id="accordionSidenavPages"
                   >
-                    <router-link class="nav-link" :to="this.linkMenuResiden"
+                    <router-link class="nav-link" :to="linkMenuResiden"
                       >Menu</router-link
                     >
-                    <router-link class="nav-link" :to="this.linkLaporanPasien"
+                    <router-link class="nav-link" :to="linkLaporanPasien"
                       >Pasien</router-link
                     >
-                    <router-link class="nav-link" :to="this.linkLaporanTugas"
+                    <router-link class="nav-link" :to="linkLaporanTugas"
                       >Tugas</router-link
                     >
-                    <router-link class="nav-link" :to="this.linkProgressTest"
+                    <router-link class="nav-link" :to="linkProgressTest"
                       >Progress Test</router-link
                     >
-                    <router-link class="nav-link" :to="this.linkKompetensi"
+                    <router-link class="nav-link" :to="linkKompetensi"
                       >Kompetensi</router-link
                     >
-                    <router-link class="nav-link" :to="this.linkModul"
+                    <router-link class="nav-link" :to="linkModul"
                       >Modul</router-link
                     >
-                    <router-link class="nav-link" :to="this.linkJaga"
+                    <router-link class="nav-link" :to="linkJaga"
                       >Jaga</router-link
                     >
-                    <router-link class="nav-link" :to="this.linkTindakan"
+                    <router-link class="nav-link" :to="linkTindakan"
                       >Tindakan</router-link
+                    >
+                    <router-link class="nav-link" :to="linkTindakan2"
+                      >Tindakan2</router-link
                     >
                   </nav>
                 </div>
@@ -141,9 +144,9 @@
                   class="nav-link collapsed"
                   href="javascript:void(0);"
                   data-toggle="collapse"
-                  data-target="#collapseDashboards"
+                  data-target="#collapseDashboardKonsulen"
                   aria-expanded="false"
-                  aria-controls="collapseDashboards"
+                  aria-controls="collapseDashboardKonsulen"
                 >
                   <div class="nav-link-icon">
                     <i data-feather="activity"></i>
@@ -155,7 +158,7 @@
                 </a>
                 <div
                   class="collapse"
-                  id="collapseDashboards"
+                  id="collapseDashboardKonsulen"
                   data-parent="#accordionSidenav"
                 >
                   <nav
@@ -262,9 +265,9 @@
                     class="nav-link collapsed"
                     href="javascript:void(0);"
                     data-toggle="collapse"
-                    data-target="#collapseDashboards"
+                    data-target="#collapseDashboardAdmin"
                     aria-expanded="false"
-                    aria-controls="collapseDashboards"
+                    aria-controls="collapseDashboardAdmin"
                   >
                     <div class="nav-link-icon">
                       <i data-feather="layout"></i>
@@ -276,7 +279,7 @@
                   </a>
                   <div
                     class="collapse"
-                    id="collapseDashboards"
+                    id="collapseDashboardAdmin"
                     data-parent="#accordionSidenav"
                   >
                     <nav
@@ -316,9 +319,9 @@
                     class="nav-link collapsed"
                     href="javascript:void(0);"
                     data-toggle="collapse"
-                    data-target="#collapseDashboards"
+                    data-target="#collapseDashboardPengurusAkademik"
                     aria-expanded="false"
-                    aria-controls="collapseDashboards"
+                    aria-controls="collapseDashboardPengurusAkademik"
                   >
                     <div class="nav-link-icon">
                       <i class="fas fa-th-large"></i>
@@ -330,7 +333,7 @@
                   </a>
                   <div
                     class="collapse"
-                    id="collapseDashboards"
+                    id="collapseDashboardPengurusAkademik"
                     data-parent="#accordionSidenav"
                   >
                     <nav
@@ -367,13 +370,15 @@
                 
                 </div>
                 </div>
+
+                
               </div>
             </div>
           <!-- Sidenav Footer-->
           <div class="sidenav-footer">
             <div class="sidenav-footer-content">
               <div class="sidenav-footer-subtitle">Logged in as:</div>
-              <div class="sidenav-footer-title">{{userData.name}} ({{userData.username}}}</div>
+              <div class="sidenav-footer-title">{{userData.name}} ({{userData.username}})</div>
               <button 
                 class="btn btn-danger" 
                 style="margin-bottom:2rem!important;"
@@ -430,6 +435,7 @@ export default {
     return {
       role: [],
       id: Array,
+      userData: JSON.parse(localStorage.getItem('userData')),
       linkMenuResiden: String,
       linkLaporanPasien: String,
       linkLaporanTugas: String,
@@ -445,12 +451,15 @@ export default {
     isLoggedIn() {
       return this.$store.state.auth.status.loggedIn;
     },
-    userData() {
-      return (JSON.parse(localStorage.getItem('userData')));
-    },
+    // userData() {
+    //   return (JSON.parse(localStorage.getItem('userData')));
+    // },
     userRoles() {
       if (this.isLoggedIn) return this.$store.state.auth.user.roles;
       else return ["ROLE_DEFAULT"];
+    },
+    linkTindakan2() {
+      return "/dashboardtindakan/" + this.userData.residen.idResiden;
     }
   },
   
@@ -470,6 +479,7 @@ export default {
 
   updated() {
     loadScript();
+    this.userData = JSON.parse(localStorage.getItem('userData'));
   },
 
   methods: {
