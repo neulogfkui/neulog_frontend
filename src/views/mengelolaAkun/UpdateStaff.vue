@@ -108,7 +108,7 @@
     </div>
 
     <!-- Confirmation Modal -->
-    <div class="modal fade" id="saveModal" tabindex="-1" role="dialog" aria-labelledby="saveModalTitle" aria-hidden="true">
+    <div v-if="!error" class="modal fade" id="saveModal" tabindex="-1" role="dialog" aria-labelledby="saveModalTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -146,7 +146,8 @@ export default {
             roles: [],
             submitted: false,
             successful: false,
-            message: ''
+            message: '',
+            error: false
         }
     },
     computed: {
@@ -169,17 +170,21 @@ export default {
                     && this.roles.length!=0 && this.staff.email && this.staff.tempatLahir
                     && this.staff.tanggalLahir && this.oldPassword)) {
                 this.message = "Mohon lengkapi semua field pada formulir.";
+                this.error = true;
                 return
             }
             if (this.rePassword != this.staff.password) {
                 this.message = "Masukan pada 'Re-Enter Password' tidak sama dengan password baru";
+                this.error = true;
                 return
             }
             if (this.roles.length == 0) {
                 this.message = "Harap masukkan minimal satu role.";
+                this.error = true;
                 return
             }
 
+            this.error = false;
             this.message = '';
             this.submitted = true;
             this.staff.role = this.roles;
