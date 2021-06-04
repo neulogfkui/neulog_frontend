@@ -127,7 +127,7 @@
                     <router-link class="nav-link" to="/addlaporantugas"
                       >Tugas</router-link
                     >
-                    <router-link class="nav-link" to="/components"
+                    <router-link class="nav-link" to="/modulresidenform/0"
                       >Kelulusan Modul</router-link
                     >
                   </nav>
@@ -176,6 +176,44 @@
                     >
                     <router-link class="nav-link" to="/dashboard-konsulen/kasus-sulit/belum-dievaluasi"
                       >Pembahasan Kasus Sulit</router-link
+                    >
+                  </nav>
+                </div>
+              </div>
+
+              <div v-if="userRoles.includes('ROLE_KETUAMODUL')">
+                <!-- Dashbooard -->
+                <div class="sidenav-menu-heading">Dashboard</div>
+                <a
+                  class="nav-link collapsed"
+                  href="javascript:void(0);"
+                  data-toggle="collapse"
+                  data-target="#collapseDashboardKetuaModul"
+                  aria-expanded="false"
+                  aria-controls="collapseDashboardKetuaModul"
+                >
+                  <div class="nav-link-icon">
+                    <i data-feather="activity"></i>
+                  </div>
+                  Dashboard Ketua Modul
+                  <div class="sidenav-collapse-arrow">
+                    <i class="fas fa-angle-down"></i>
+                  </div>
+                </a>
+                <div
+                  class="collapse"
+                  id="collapseDashboardKetuaModul"
+                  data-parent="#accordionSidenav"
+                >
+                  <nav
+                    class="sidenav-menu-nested nav accordion"
+                    id="accordionSidenavPages"
+                  >
+                    <router-link class="nav-link" to="/dashboard-ketua-modul/belum-lulus"
+                      >Belum Lulus</router-link
+                    >
+                    <router-link class="nav-link" to="/dashboard-ketua-modul/sudah-lulus"
+                      >Sudah Lulus</router-link
                     >
                   </nav>
                 </div>
