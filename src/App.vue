@@ -484,11 +484,12 @@ export default {
       this.linkJaga = "/dashboardjaga/" + this.userData.residen.idResiden;
       this.linkTindakan = "/dashboardtindakan/" + this.userData.residen.idResiden;
     }
+    this.userData = JSON.parse(localStorage.getItem('userData'));
   },
 
   updated() {
     loadScript();
-    this.userData = JSON.parse(localStorage.getItem('userData'));
+    // this.userData = JSON.parse(localStorage.getItem('userData'));
   },
 
   methods: {
