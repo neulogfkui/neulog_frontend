@@ -92,9 +92,6 @@
                     <router-link class="nav-link" :to="links.linkTindakan"
                       >Tindakan</router-link
                     >
-                    <router-link class="nav-link" :to="links.linkTindakan2"
-                      >Tindakan2</router-link
-                    >
                   </nav>
                 </div>
                 <!-- Buat Laporan -->
