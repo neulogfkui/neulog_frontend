@@ -92,6 +92,9 @@
                     <router-link class="nav-link" :to="linkTindakan"
                       >Tindakan</router-link
                     >
+                    <router-link class="nav-link" :to="linkTindakan2"
+                      >Tindakan2</router-link
+                    >
                   </nav>
                 </div>
                 <!-- Buat Laporan -->
@@ -454,6 +457,9 @@ export default {
     userRoles() {
       if (this.isLoggedIn) return this.$store.state.auth.user.roles;
       else return ["ROLE_DEFAULT"];
+    },
+    linkTindakan2() {
+      return "/dashboardtindakan/" + this.userData.residen.idResiden;
     }
   },
   
