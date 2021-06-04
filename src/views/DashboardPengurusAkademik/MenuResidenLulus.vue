@@ -87,6 +87,7 @@ import MainHeader from "@/components/MainHeader.vue";
 import PieChart from "@/components/PieChart.vue";
 import dataTableLoader from "@/js/datatable";
 import authHeader from "@/services/auth-header";
+import loadScript from '@/js/scripts.js';
 
 export default {
   name: "MenuResiden",
@@ -120,7 +121,6 @@ export default {
     axios
       .get("https://neulogfkui.herokuapp.com/api/dashboardPengurusAkademik/residen/", { headers: authHeader() })
       .then((resp) => {
-        console.warn(resp.data);
         this.labelPie = resp.data.labelStatus;
         this.dataPie = resp.data.listJumlahResidenPerStatus;
         this.totalResiden = resp.data.totalResiden;
@@ -131,6 +131,7 @@ export default {
         this.ready = true;
         dataTableLoader();
     });
+    loadScript();
   }
 };
 </script>

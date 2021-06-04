@@ -256,6 +256,7 @@ import LightHeader from "@/components/LightHeader.vue";
 import CardTimeline from "@/components/CardTimeline.vue";
 import CardTimelineEnter from "@/components/CardTimelineEnter.vue";
 import authHeader from "@/services/auth-header";
+import loadScript from '@/js/scripts.js';
 
 export default {
   name: "DetailMenuLaporanPasien",
@@ -311,7 +312,6 @@ export default {
   },
   methods: {
     strToList(dummy) {
-      console.log(dummy);
       if (dummy == undefined) {
         return [];
       }
@@ -319,7 +319,6 @@ export default {
       return list;
     },
     strToListNumber(dummy) {
-      console.log(dummy);
       if (dummy == undefined) {
         return [];
       }
@@ -333,7 +332,6 @@ export default {
     },
     deleteLaporanPasien(e) {
       this.status = 1;
-      console.warn(this.$route.params.idLaporanPasien);
       axios
         .get(
           "https://neulogfkui.herokuapp.com/api/laporan-pasien/delete/" +
@@ -345,7 +343,6 @@ export default {
           } else {
             this.status = 3;
           }
-          console.warn(result.data);
         });
       e.preventDefault();
     },
@@ -357,7 +354,6 @@ export default {
           this.$route.params.idLaporanPasien
       ) // nanti diganti ini angka 1 nya
       .then((resp) => {
-        console.warn(resp.data);
         this.posts.idLaporanPasien = resp.data.idLaporanPasien;
         this.posts.inisialPasien = resp.data.inisialPasien;
         this.posts.usiaPasien = resp.data.usiaPasien;
@@ -392,8 +388,8 @@ export default {
         this.listKompetensi = resp.data.listKompetensi;
         this.listKategoriTindakan = resp.data.listKategoriTindakan;
         this.isMounted = true;
-        console.warn(this.listKompetensi);
       });
+    loadScript();
   },
 };
 </script>

@@ -4,7 +4,7 @@
     :title= this.title
     icon= "user">
 </LightHeader>
-<div class="container upper">
+<div class="container upper" v-if="isMounted">
     <div class="row">
         <div class="col-xxl-12 col-xl-12 mb-4 mt-4">
             <div class="card card-header-actions h-100">
@@ -13,82 +13,102 @@
                 </div>
             <div class="card-body">
                 <div class="container-fluid">
-                <table cellpadding="5">
-                    <tbody>
-                        <tr>
-                            <td>
-                                Nama Lengkap
-                            </td>
-                            <td>
-                                <b>{{ name }}</b>
-                            </td>
-                        </tr>
-                                                <tr>
-                            <td>
-                                NPM
-                            </td>
-                            <td>
-                                <b>{{ npm }}</b>
-                            </td>
-                        </tr>
-
-                                                <tr>
-                            <td>
-                                Tahun Masuk / Term
-                            </td>
-                            <td>
-                                <b>{{ tahunMasuk + " / " + term }}</b>
-                            </td>
-                        </tr>
-
-
-                                                                        <tr>
-                            <td>
-                                TTL
-                            </td>
-                            <td>
-                                <b>{{ tempatLahir + ", " + tanggalLahir }}</b>
-                            </td>
-                        </tr>
-
-                                                                        <tr>
-                            <td>
-                                Alamat Rumah
-                            </td>
-                            <td>
-                                <b>{{ alamat }}</b>
-                            </td>
-                        </tr>
-
-                                                                        <tr>
-                            <td>
-                                Telepon
-                            </td>
-                            <td>
-                                <b>{{ telepon }}</b>
-                            </td>
-                        </tr>
-
-                                                                        <tr>
-                            <td>
-                                Email
-                            </td>
-                            <td>
-                                <b>{{ email }}</b>
-                            </td>
-                        </tr>
-
-                                                                        <tr>
-                            <td>
-                                Pembimbing
-                            </td>
-                            <td>
-                                <b>{{ pembimbingName }}</b>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-
+                <div class="row">
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text">
+                            Nama Lengkap
+                        </p>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <b><p class="card-text">
+                            {{ name }}
+                        </p></b>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text">
+                            NPM
+                        </p>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <b><p class="card-text">
+                            {{ npm }}
+                        </p></b>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text">
+                            Tahun Masuk/Term
+                        </p>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <b><p class="card-text">
+                            {{ tahunMasuk + " / " + term }}
+                        </p></b>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text">
+                            TTL
+                        </p>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <b><p class="card-text">
+                            {{ tempatLahir + ", " + tanggalLahir }}
+                        </p></b>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text">
+                            Alamat Rumah
+                        </p>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <b><p class="card-text">
+                            {{ alamat }}
+                        </p></b>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text">
+                            Telepon
+                        </p>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <b><p class="card-text">
+                            {{ telepon }}
+                        </p></b>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text">
+                            Email
+                        </p>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <b><p class="card-text">
+                            {{ email }}
+                        </p></b>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text">
+                            Pembimbing
+                        </p>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <b><p class="card-text">
+                            {{ pembimbingName }}
+                        </p></b>
+                    </div>
+                </div>
                 <!-- <div class="row">
                     <div class="col-xxl-12 col-xl-12 mb-4 mt-4 text-center">
                         <router-link
@@ -111,6 +131,7 @@ import axios from "axios";
 import MainHeader from "@/components/MainHeader.vue";
 import LightHeader from "@/components/LightHeader.vue";
 import authHeader from "@/services/auth-header";
+import loadScript from '@/js/scripts.js';
 
 export default {
   name: "DetailMenuResiden",
@@ -140,7 +161,6 @@ export default {
     axios
       .get("https://neulogfkui.herokuapp.com/api/dashboardPengurusAkademik/residen/" + this.$route.params.idResiden, { headers: authHeader() }) // nanti diganti ini angka 1 nya
       .then((resp) => {
-        console.warn(resp.data);
         this.data = resp.data;
         this.idResiden = resp.data.idResiden
         this.name = resp.data.pengguna.name
@@ -155,7 +175,8 @@ export default {
         this.pembimbingName = resp.data.konsulen.pengguna.name
         this.title = "Detail Residen " + this.name
         this.isMounted = true;
-      });
+    });
+    loadScript();
   },
 };
 </script>

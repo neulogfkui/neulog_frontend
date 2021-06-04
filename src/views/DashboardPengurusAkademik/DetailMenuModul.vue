@@ -18,40 +18,66 @@
                 </div>
             <div class="card-body">
                 <div class="container-fluid">
-                <table cellpadding="5">
-                    <tbody>
-                        <tr>
-                            <td>Nama Modul</td>
-                            <td>
-                                <b>{{ namaModul }}</b>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Ketua Modul</td>
-                            <td>
-                                <b>{{ ketuaModulName }}</b>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Jumlah Residen</td>
-                            <td>
-                                <b>{{ jumlahResiden }}</b>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Tanggal Dibuat</td>
-                            <td>
-                                <b>{{ tanggalDibuat }}</b>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Deskripsi</td>
-                            <td>
-                                <b>{{ deskripsi }}</b>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="row">
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text">
+                            Nama Modul
+                        </p>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <b><p class="card-text">
+                            {{ namaModul }}
+                        </p></b>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text">
+                            Ketua Modul
+                        </p>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <b><p class="card-text">
+                            {{ ketuaModulName }}
+                        </p></b>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text">
+                            Jumlah Residen
+                        </p>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <b><p class="card-text">
+                            {{ jumlahResiden }}
+                        </p></b>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text">
+                            Tanggal Dibuat
+                        </p>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <b><p class="card-text">
+                            {{ tanggalDibuat }}
+                        </p></b>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text">
+                            Deskripsi
+                        </p>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <b><p class="card-text">
+                            {{ deskripsi }}
+                        </p></b>
+                    </div>
+                </div>
                 </div>
             </div>
             </div>
@@ -133,6 +159,7 @@ import LightHeader from "@/components/LightHeader.vue";
 import BigNumberCardModul from "@/components/BigNumberCardModul.vue";
 import dataTableLoader from "@/js/datatable";
 import authHeader from "@/services/auth-header";
+import loadScript from '@/js/scripts.js';
 
 export default {
   name: "DetailMenuModul",
@@ -168,7 +195,6 @@ export default {
     axios
       .get("https://neulogfkui.herokuapp.com/api/dashboardPengurusAkademik/modul/" + this.$route.params.idModul, { headers: authHeader() }) // nanti diganti ini angka 1 nya
       .then((resp) => {
-        console.warn(resp.data);
         this.idModul = resp.data.detailModul.idModul
         this.namaModul = resp.data.detailModul.namaModul
         if(resp.data.detailModul.ketuaModul != null){
@@ -188,7 +214,8 @@ export default {
         this.ready = true;
         this.title = "Detail Modul " + this.namaModul
         dataTableLoader();
-      });
+    });
+    loadScript();
   }
 };
 </script>

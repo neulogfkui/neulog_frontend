@@ -26,6 +26,7 @@ import MainHeader from "@/components/MainHeader.vue";
 import SingleTab from '@/components/SingleTab.vue';
 import ColorCard from '@/components/ColorCard.vue';
 import { computed } from 'vue';
+import loadScript from '@/js/scripts.js';
 
 export default {
     name: "DashboardPengurusAkademikMenu",
@@ -46,6 +47,7 @@ export default {
     },
     mounted(){
         this.subtitle = this.getnamaPA
+        loadScript();
     }
 }
 </script>

@@ -18,45 +18,69 @@
                 </div>
             <div class="card-body">
                 <div class="container-fluid">
-                    <table cellpadding="5">
-                        <tbody>
-                            <tr>
-                                <td>Nama Kompetensi</td>
-                                <td>
-                                    <b>{{ namaKompetensi }}</b>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Target Pencapaian</td>
-                                <td>
-                                    <b>{{ jumlahMinimal }}</b>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Kompetensi Lanjut</td>
-                                <td><b>
-                                    <p class="card-text" v-if="isKompetensiLanjut">
-                                        Ya
-                                    </p>
-                                    <p class="card-text" v-if="!isKompetensiLanjut">
-                                        Tidak
-                                    </p>
-                                </b></td>
-                            </tr>
-                            <tr>
-                                <td>Tanggal Dibuat</td>
-                                <td>
-                                    <b>{{ tanggalDibuat }}</b>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Deskripsi</td>
-                                <td>
-                                    <b>{{ deskripsi }}</b>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="row">
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text">
+                            Nama Kompetensi
+                        </p>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <b><p class="card-text">
+                            {{ namaKompetensi }}
+                        </p></b>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text">
+                            Target Pencapaian
+                        </p>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <b><p class="card-text">
+                            {{ jumlahMinimal }}
+                        </p></b>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text">
+                            Kompetensi Lanjut
+                        </p>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <b><p class="card-text" v-if="isKompetensiLanjut">
+                            Ya
+                        </p></b>
+                        <b><p class="card-text" v-if="!isKompetensiLanjut">
+                            Tidak
+                        </p></b>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text">
+                            Tanggal Dibuat
+                        </p>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <b><p class="card-text">
+                            {{ tanggalDibuat }}
+                        </p></b>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text">
+                            Deskripsi
+                        </p>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <b><p class="card-text">
+                            {{ deskripsi }}
+                        </p></b>
+                    </div>
+                </div>
                 </div>
             </div>
             </div>
@@ -71,6 +95,7 @@ import MainHeader from "@/components/MainHeader.vue";
 import LightHeader from "@/components/LightHeader.vue";
 import dataTableLoader from "@/js/datatable";
 import authHeader from "@/services/auth-header";
+import loadScript from '@/js/scripts.js';
 
 export default {
   name: "DetailMenuKompetensi",
@@ -101,7 +126,6 @@ export default {
     axios
       .get("https://neulogfkui.herokuapp.com/api/dashboardPengurusAkademik/kompetensi/" + this.$route.params.idKompetensi, { headers: authHeader() }) // nanti diganti ini angka 1 nya
       .then((resp) => {
-        console.warn(resp.data);
         this.idKompetensi = resp.data.idKompetensi
         this.namaKompetensi = resp.data.namaKompetensi
         this.jumlahMinimal = resp.data.jumlahMinimal
@@ -112,7 +136,8 @@ export default {
         this.ready = true;
         this.title = "Detail Kompetensi " + this.namaKompetensi
         dataTableLoader();
-      });
+    });
+    loadScript();
   }
 };
 </script>
