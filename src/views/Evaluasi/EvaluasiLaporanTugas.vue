@@ -322,6 +322,7 @@ import axios from "axios";
 import VueAxios from "vue-axios";
 import LightHeader from "@/components/LightHeader.vue";
 import authHeader from "@/services/auth-header";
+import loadScript from "@/js/scripts.js";
 
 export default {
   name: "EvaluasiLaporanTugas",
@@ -356,6 +357,7 @@ export default {
           this.data.residen.npm + " - " + this.data.penggunaresiden.name;
         this.ready = true;
       });
+      loadScript();
   },
   computed: {
     isReady() {

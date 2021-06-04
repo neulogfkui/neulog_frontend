@@ -257,6 +257,7 @@ import VueAxios from "vue-axios";
 import LightHeader from "@/components/LightHeader.vue";
 import dataTableLoader from "@/js/datatable";
 import authHeader from "@/services/auth-header";
+import loadScript from "@/js/scripts.js";
 
 export default {
   name: "KasusSulitForm",
@@ -300,7 +301,13 @@ export default {
       }
       return this;
     };
+    loadScript();
   },
+
+  updated(){
+    loadScript();
+  },
+
 
   computed: {
     isDataTableReady() {
@@ -323,7 +330,6 @@ export default {
           "https://neulogfkui.herokuapp.com/laporantugas/" + this.$route.params.operation, { headers: authHeader() }
         )
         .then((resp) => {
-          console.warn(resp.data);
           this.posts.idKonsulen = resp.data.idKonsulen;
           this.posts.tanggal = resp.data.tugas.tanggalDibuat;
           this.posts.kasusYangDibahas =
@@ -335,23 +341,21 @@ export default {
           this.posts.idLaporanTugas = resp.data.tugas.idLaporanTugas;
           this.posts.idChild =
             resp.data.tugas.pembahasanKasusSulitMultidisiplinModel.idKasusSulit;
-          console.log(this.posts);
         });
     }
     axios.get("https://neulogfkui.herokuapp.com/KasusSulitFormAttribute", { headers: authHeader() }).then((resp) => {
-      console.warn(resp.data);
       this.listKonsulen = resp.data.listKonsulen;
       this.listNamaPertemuan = resp.data.listNamaPertemuan;
       this.listKasusYangDibahas = resp.data.listKasusYangDibahas;
       this.ready = true;
       dataTableLoader();
     });
+    loadScript();
   },
   methods: {
     postData(e) {
       this.posts.idResiden = this.getIdResiden;
       this.status = 1;
-      console.warn(this.posts);
 
       var url = "";
       if (this.$route.params.operation == 0) {
@@ -367,7 +371,6 @@ export default {
         } else {
           this.status = 3;
         }
-        console.warn(result);
       });
       e.preventDefault();
     },
@@ -377,7 +380,6 @@ export default {
       } else {
         this.posts.listReviewer.push(item);
       }
-      console.log(this.posts.listReviewer);
     },
     refreshSubmitted() {
       this.status = 0;

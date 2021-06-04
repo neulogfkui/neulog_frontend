@@ -268,6 +268,7 @@ import App from "@/App.vue";
 import dataTableLoader from "@/js/datatable";
 import { computed } from "vue";
 import authHeader from "@/services/auth-header";
+import loadScript from "@/js/scripts.js";
 
 export default {
   name: "TugasPresentasiForm",
@@ -331,10 +332,10 @@ export default {
     if (this.$route.params.operation != 0) {
       axios
         .get(
-          "https://neulogfkui.herokuapp.com/laporantugas/" + this.$route.params.operation, { headers: authHeader() }
+          "http://localhost:8000/laporantugas/" + this.$route.params.operation, { headers: authHeader() }
         )
         .then((resp) => {
-          console.warn(resp);
+          console.warn(resp.data);
           this.posts.idModul = resp.data.tugas.tugasPresentasiModel.modulModel.idModul;
           this.posts.jenis = resp.data.tugas.tugasPresentasiModel.jenis;
           this.posts.idKonsulen = resp.data.idKonsulen;
@@ -349,7 +350,7 @@ export default {
       // this.isMounted = true;
     }
     axios
-      .get("https://neulogfkui.herokuapp.com/LaporanPresentasiFormAttribute", { headers: authHeader() })
+      .get("http://localhost:8000/LaporanPresentasiFormAttribute", { headers: authHeader() })
       .then((resp) => {
         console.warn(resp.data);
         this.listKonsulen = resp.data.listKonsulen;
@@ -371,9 +372,9 @@ export default {
       console.warn(this.posts);
       var url = "";
       if (this.$route.params.operation == 0) {
-        url = "https://neulogfkui.herokuapp.com/laporantugas/addtugaspresentasi/";
+        url = "http://localhost:8000/laporantugas/addtugaspresentasi/";
       } else {
-        url = "https://neulogfkui.herokuapp.com/laporantugas/updatetugaspresentasi/";
+        url = "http://localhost:8000/laporantugas/updatetugaspresentasi/";
       }
       axios.post(url, this.posts, { headers: authHeader() }).then((result) => {
         if (result.data != "0") {

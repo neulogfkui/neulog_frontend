@@ -249,6 +249,7 @@ import VueAxios from "vue-axios";
 import LightHeader from "@/components/LightHeader.vue";
 import dataTableLoader from "@/js/datatable";
 import authHeader from "@/services/auth-header";
+import loadScript from "@/js/scripts.js";
 
 export default {
   components: { LightHeader },
@@ -291,6 +292,11 @@ export default {
       }
       return this;
     };
+    loadScript();
+  },
+
+  updated(){
+    loadScript();
   },
 
   computed: {
@@ -312,7 +318,6 @@ export default {
           "https://neulogfkui.herokuapp.com/laporantugas/" + this.$route.params.operation, { headers: authHeader() }
         )
         .then((resp) => {
-          console.warn(resp.data);
           this.posts.idKonsulen = resp.data.idKonsulen;
           this.posts.tanggal = resp.data.tugas.tanggalDibuat;
           this.posts.eventPublikasi =
@@ -324,24 +329,22 @@ export default {
           this.posts.idLaporanTugas = resp.data.tugas.idLaporanTugas;
           this.posts.idChild =
             resp.data.tugas.tugasPublikasiModel.idTugasPublikasi;
-          console.log(this.posts);
         });
       this.isMounted = true;
     }
     axios
       .get("https://neulogfkui.herokuapp.com/TugasPublikasiFormAttribute")
       .then((resp) => {
-        console.warn(resp.data);
         this.listKonsulen = resp.data.listKonsulen;
         dataTableLoader();
         this.ready = true;
       });
+      loadScript();
   },
   methods: {
     postData(e) {
       this.posts.idResiden = this.getIdResiden;
       this.status = 1;
-      console.warn(this.posts);
 
       var url = "";
       if (this.$route.params.operation == 0) {
@@ -357,7 +360,7 @@ export default {
         } else {
           this.status = 3;
         }
-        console.warn(result);
+
         e.preventDefault();
       });
       e.preventDefault();
@@ -368,7 +371,6 @@ export default {
       } else {
         this.posts.listReviewer.push(item);
       }
-      console.log(this.posts.listReviewer);
     },
     refreshSubmitted() {
       this.status = 0;

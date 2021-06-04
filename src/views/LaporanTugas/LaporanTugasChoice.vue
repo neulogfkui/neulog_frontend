@@ -21,6 +21,7 @@
 import SingleTab from '@/components/SingleTab.vue'
 import ColorCard from '@/components/ColorCard.vue'
 import LightHeader from "@/components/LightHeader.vue";
+import loadScript from "@/js/scripts.js";
 
 export default {
     name: "LaporanTugasChoice",
