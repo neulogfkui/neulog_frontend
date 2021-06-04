@@ -177,9 +177,12 @@ export default {
                 this.message = "Mohon lengkapi semua field pada formulir.";
                 return
             }
-            console.log(this.$store.state.auth.user);
             if (this.rePassword != this.residen.password) {
                 this.message = "Masukan pada 'Re-Enter Password' tidak sama dengan password baru";
+                return
+            }
+            if (this.residen.npm.length != 10) {
+                this.message = "Format NPM tidak valid.";
                 return
             }
 

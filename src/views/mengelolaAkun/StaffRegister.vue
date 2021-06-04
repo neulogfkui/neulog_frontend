@@ -139,9 +139,12 @@ export default {
                 this.message = "Masukan pada 'Re-Enter Password' tidak sama dengan password baru.";
                 return
             }
+            if (this.roles.length == 0) {
+                this.message = "Harap masukkan minimal satu role.";
+                return
+            }
 
             this.staff.role = this.roles;
-            console.log(this.staff);
             this.message = '';
             this.submitted = true;
             this.$store.dispatch('auth/registerStaff', this.staff).then(

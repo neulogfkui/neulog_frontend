@@ -175,6 +175,10 @@ export default {
                 this.message = "Masukan pada 'Re-Enter Password' tidak sama dengan password baru";
                 return
             }
+            if (this.roles.length == 0) {
+                this.message = "Harap masukkan minimal satu role.";
+                return
+            }
 
             this.message = '';
             this.submitted = true;
