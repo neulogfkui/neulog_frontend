@@ -221,6 +221,7 @@
 import axios from "axios";
 import LightHeader from "@/components/LightHeader.vue";
 import authHeader from "@/services/auth-header";
+import loadScript from '@/js/scripts.js';
 
 export default {
   name: "ModulForm",
@@ -282,14 +283,14 @@ export default {
         url = "https://neulogfkui.herokuapp.com/api/modul/create";
       }
       axios.post(url, this.posts, { headers: authHeader() }).then((result) => {
-        console.log(this.posts);
+        // console.log(this.posts);
         if (result.data != "0") {
           this.posts.idModul = result.data;
           this.status = 2;
         } else {
           this.status = 3;
         }
-        console.warn(result.data);
+        // console.warn(result.data);
       });
       e.preventDefault();
     },
@@ -303,7 +304,7 @@ export default {
             this.$route.params.operation, { headers: authHeader() }
         )
         .then((resp) => {
-          console.log(resp.data);
+          // console.log(resp.data);
           this.posts.idModul = resp.data.idModul;
           this.posts.namaModul = resp.data.namaModul;
           this.posts.deskripsi = resp.data.deskripsi;
@@ -313,8 +314,8 @@ export default {
           else{
             this.posts.idKetuaModul = 0;
           }
-        });
-        console.log(this.posts);
+      });
+      // console.log(this.posts);
     }
     axios
       .get("https://neulogfkui.herokuapp.com/api/modul/getformattribute", { headers: authHeader() })
@@ -324,6 +325,7 @@ export default {
         this.isCreated = true;
         this.ready = true;
       });
+      loadScript();
   },
 };
 </script>
