@@ -33,7 +33,7 @@
 
       </div>
 
-      <div v-if="isKonsulen">
+      <div v-if="this.data.laporanTugas.status != 'DISETUJUI'">
       <router-link
         :to="'/evaluasilaporantugas/' + this.data.laporanTugas.idLaporanTugas"
       >
@@ -45,6 +45,7 @@
         </button>
       </router-link>
       </div>
+
     </div>
     <div class="row justify-content-center">
       <div class="col-xxl-4 col-xl-4 mb-4">

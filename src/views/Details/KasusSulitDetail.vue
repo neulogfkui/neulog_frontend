@@ -31,17 +31,17 @@
         </router-link>
       </div>
 
-      <div v-if="isKonsulen">
-        <router-link
-          :to="'/evaluasilaporantugas/' + this.data.laporanTugas.idLaporanTugas"
+      <div v-if="this.data.laporanTugas.status != 'DISETUJUI'">
+      <router-link
+        :to="'/evaluasilaporantugas/' + this.data.laporanTugas.idLaporanTugas"
+      >
+        <button
+          class="btn btn-warning"
+          v-if="userRoles.includes('ROLE_KONSULEN')"
         >
-          <button
-            class="btn btn-warning"
-            v-if="userRoles.includes('ROLE_KONSULEN')"
-          >
-            Evaluasi
-          </button>
-        </router-link>
+          Evaluasi
+        </button>
+      </router-link>
       </div>
     </div>
     <div class="row justify-content-center">
