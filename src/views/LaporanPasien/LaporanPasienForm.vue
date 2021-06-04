@@ -1,6 +1,6 @@
 <template>
   <LightHeader
-    title="Tambah Laporan Pasien"
+    :title="title"
     :subtitle="subtitleHeader"
     icon="user"
   ></LightHeader>
@@ -419,6 +419,7 @@ export default {
         JSON.parse(localStorage.getItem("userData")).residen.npm,
       status: 0,
       ready: false,
+      title: null,
     };
   },
   created() {
@@ -547,7 +548,9 @@ export default {
     },
   },
   mounted() {
+    this.title = "Tambah Laporan Pasien"
     if (this.$route.params.operation != 0) {
+      this.title = "Ubah Laporan Pasien"
       this.showTanggal = true;
       axios
         .get(

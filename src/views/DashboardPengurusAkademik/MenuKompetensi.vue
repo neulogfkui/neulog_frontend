@@ -81,6 +81,7 @@ import MainHeader from "@/components/MainHeader.vue";
 import ColorCardNoFooter from "@/components/ColorCardNoFooter.vue";
 import dataTableLoader from "@/js/datatable";
 import authHeader from "@/services/auth-header";
+import loadScript from '@/js/scripts.js';
 
 export default {
   name: "MenuKompetensi",
@@ -109,12 +110,12 @@ export default {
     axios
       .get("https://neulogfkui.herokuapp.com/api/dashboardPengurusAkademik/kompetensi/", { headers: authHeader() })
       .then((resp) => {
-        console.warn(resp.data);
         this.listKompetensi = resp.data.listKompetensi;
         this.isMounted = true;
         this.ready = true;
         dataTableLoader();
-      });
+    });
+    loadScript();
   }
 };
 </script>

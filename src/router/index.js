@@ -19,6 +19,7 @@ import DashboardPengurusAkademikRoute from "@/router/DashboardPengurusAkademikRo
 import DashboardKonsulen from "@/router/DashboardKonsulen.js"
 import LaporanTugasRoute from "@/router/LaporanTugasRoute.js" 
 import DashboardResidenRoute from "@/router/DashboardResidenRoute.js" 
+import DashboardKetuaModul from "@/router/DashboardKetuaModul.js" 
 import ModulRoute from "@/router/ModulRoute.js" 
 import KompetensiRoute from "@/router/KompetensiRoute.js" 
 
@@ -32,6 +33,7 @@ const routes = [
   ...ModulRoute,
   ...KompetensiRoute,
   ...ModulResidenRoute,
+  ...DashboardKetuaModul,
 
 
   //ALL

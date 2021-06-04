@@ -125,7 +125,8 @@
                 </div>
                 <div class="modal-footer">
                     <button v-if="!deleted && !isDeleteFail" @click="deleteNTF(selectedItem.idNilaiTesFormatif)" class="btn btn-danger" type="button">Hapus</button>
-                    <router-link class="btn btn-light" type="button" data-dismiss="modal" to="/dashboardpengurusakademik/tes-formatif">Tutup</router-link>
+                    <!-- <router-link class="btn btn-light" type="button" data-dismiss="modal" to="/dashboardpengurusakademik">Tutup</router-link> -->
+                    <button @click="refreshPage" class="btn btn-light" type="button" data-dismiss="modal">Tutup</button>
                 </div>
             </div>
         </div>
@@ -203,7 +204,11 @@ export default {
                     error.message || error.toString();
             }
         );
-    loadScript();
+        loadScript();
+    },
+
+    updated() {
+        loadScript();
     },
 
     methods: {
@@ -212,7 +217,8 @@ export default {
         },
 
         refreshPage(){
-            this.$router.push("/dashboardpengurusakademik/tes-formatif");
+            // this.$router.push("/dashboardpengurusakademik");
+            window.location.reload();
         },
 
         handleFileUpload(){

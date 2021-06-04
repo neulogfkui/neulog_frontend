@@ -6,7 +6,7 @@
     :withLogo="false"
   />
   <div class="container" v-if="isDataTableReady">
-    <div class="row upper">
+    <div class="row upper justify-content-center">
       <PieChart
         keterangan="Laporan Pasien"
         :persentase="this.persentase"
@@ -16,11 +16,11 @@
         title="Sebaran Status Laporan Pasien"
       >
       </PieChart>
-      <BigNumberCard
+      <!-- <BigNumberCard
         title="Rata - Rata Laporan Pasien Per Bulan"
         :count="avgPasienPerMonth"
         caption="Pasien / Bulan"
-      />
+      /> -->
       <BarChart
         :label="this.labelBar"
         :data="this.dataBar"

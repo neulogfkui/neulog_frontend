@@ -137,6 +137,7 @@ import axios from "axios";
 import MainHeader from "@/components/MainHeader.vue";
 import LightHeader from "@/components/LightHeader.vue";
 import authHeader from "@/services/auth-header";
+import loadScript from '@/js/scripts.js';
 
 export default {
   name: "DetailMenuTugasKasusSulit",
@@ -162,7 +163,6 @@ export default {
     axios
       .get("https://neulogfkui.herokuapp.com/api/dashboardPengurusAkademik/laporantugas/" + this.$route.params.idLaporanTugas, { headers: authHeader() }) // nanti diganti ini angka 1 nya
       .then((resp) => {
-        console.warn(resp.data);
         this.laporanPasien = resp.data.laporanPasien;
         this.tanggal = resp.data.laporanTugas.tanggalDibuat
         this.nama = resp.data.laporanTugas.pembahasanKasusSulitMultidisiplinModel.namaPertemuan
@@ -174,7 +174,8 @@ export default {
         this.feedback = resp.data.laporanTugas.feedback
         this.isMounted = true;
         this.subtitle = ""
-      });
+    });
+    loadScript();
   },
 };
 </script>

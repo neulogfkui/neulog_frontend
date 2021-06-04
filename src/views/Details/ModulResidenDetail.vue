@@ -1,7 +1,7 @@
 <template>
   <LightHeader
     v-if="getReady"
-    title="Detail Kasus Sulit dan Multidisiplin"
+    :title="this.title"
     :subtitle="this.subtitle"
     icon="file-text"
   />
@@ -9,26 +9,35 @@
     <div class="row mr-2 mb-4 justify-content-end upper">
       <!-- BUTTON UNTUK MENAMPILKAN MODAL -->
       <div v-if="isResiden">
-      <button
-        id="completeButton"
-        class="btn btn-danger mr-4"
-        type="button"
-        data-toggle="modal"
-        data-target="#exampleModal"
-        v-if="this.data.status == 'DITOLAK'"
-      >
-        Hapus
-      </button>
-      <router-link
-        :to="'/modulresidenform/' + this.data.idModulResiden"
-      >
         <button
-          class="btn btn-warning"
-          v-if="this.data.status != 'DISETUJUI'"
+          id="completeButton"
+          class="btn btn-danger mr-4"
+          type="button"
+          data-toggle="modal"
+          data-target="#exampleModal"
+          v-if="this.data.status == 'DITOLAK'"
         >
-          Edit
+          Hapus
         </button>
-      </router-link>
+        <router-link :to="'/modulresidenform/' + this.data.idModulResiden">
+          <button
+            class="btn btn-warning"
+            v-if="this.data.status != 'DISETUJUI'"
+          >
+            Edit
+          </button>
+        </router-link>
+      </div>
+
+      <div v-if="isKetuaModul">
+        <router-link :to="'/evaluasimodulresiden/' + this.data.idModulResiden">
+          <button
+            class="btn btn-warning"
+            v-if="this.data.status != 'DISETUJUI'"
+          >
+            Evaluasi
+          </button>
+        </router-link>
       </div>
     </div>
     <div class="row justify-content-center">
@@ -39,7 +48,19 @@
             <table cellpadding="5">
               <tbody>
                 <tr>
-                  <td>Nama</td>
+                  <td>Nama Residen</td>
+                  <td>
+                    <b>{{ data.residen.pengguna.name }}</b>
+                  </td>
+                </tr>
+                                <tr>
+                  <td>NPM Residen</td>
+                  <td>
+                    <b>{{ data.residen.npm }}</b>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Nama Modul</td>
                   <td>
                     <b>{{ data.modul.namaModul }}</b>
                   </td>
@@ -47,17 +68,13 @@
                 <tr>
                   <td>Tanggal Mulai</td>
                   <td>
-                    <b>{{
-                      data.tanggalMulai
-                    }}</b>
+                    <b>{{ data.tanggalMulai }}</b>
                   </td>
                 </tr>
                 <tr>
                   <td>Tanggal Selesai</td>
                   <td>
-                    <b>{{
-                      data.tanggalSelesai
-                    }}</b>
+                    <b>{{ data.tanggalSelesai }}</b>
                   </td>
                 </tr>
                 <tr>
@@ -179,7 +196,7 @@ import VueAxios from "vue-axios";
 import LightHeader from "@/components/LightHeader";
 import CardTimeline from "@/components/CardTimeline";
 import CardTimelineEnter from "@/components/CardTimelineEnter";
-import authHeader from "@/services/auth-header"
+import authHeader from "@/services/auth-header";
 
 export default {
   name: "ModulResidenDetail",
@@ -187,7 +204,8 @@ export default {
   data() {
     return {
       data: null,
-      subtitle: String,
+      subtitle: null,
+      title:null,
       residen: null,
       status: 0,
       ready: false,
@@ -197,9 +215,16 @@ export default {
     getReady() {
       return this.ready;
     },
-    isResiden(){
-      return JSON.parse(localStorage.getItem('user')).roles.includes('ROLE_RESIDEN')
-    }
+    isResiden() {
+      return JSON.parse(localStorage.getItem("user")).roles.includes(
+        "ROLE_RESIDEN"
+      );
+    },
+    isKetuaModul() {
+      return JSON.parse(localStorage.getItem("user")).roles.includes(
+        "ROLE_KETUAMODUL"
+      );
+    },
   },
   mounted() {
     axios
@@ -211,6 +236,8 @@ export default {
         console.warn(resp.data);
         this.data = resp.data;
         this.residen = resp.data.residen;
+        this.title = "Modul " + resp.data.modul.namaModul;
+        this.subtitle = resp.data.residen.npm + " - " + resp.data.residen.pengguna.name;
         this.ready = true;
       });
   },
@@ -220,8 +247,9 @@ export default {
       console.warn(this.posts);
       axios
         .get(
-          "https://neulogfkui.herokuapp.com/modulResiden/delete/" + this.$route.params.idModulResiden,
-           { headers: authHeader() }
+          "https://neulogfkui.herokuapp.com/modulResiden/delete/" +
+            this.$route.params.idModulResiden,
+          { headers: authHeader() }
         )
         .then((result) => {
           if (result.data == "Success") {
@@ -237,7 +265,7 @@ export default {
 };
 </script>
 <style>
-th{
+th {
   word-wrap: break-word;
 }
 </style>

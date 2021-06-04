@@ -107,6 +107,7 @@ import PieChart from "@/components/PieChart.vue";
 import BarChart from "@/components/BarChart.vue";
 import dataTableLoader from "@/js/datatable";
 import authHeader from "@/services/auth-header";
+import loadScript from '@/js/scripts.js';
 
 export default {
   name: "MenuLaporanTugas",
@@ -145,7 +146,6 @@ export default {
     axios
       .get("https://neulogfkui.herokuapp.com/api/dashboardPengurusAkademik/laporantugas/", { headers: authHeader() })
       .then((resp) => {
-        console.warn(resp.data);
         this.labelBar = resp.data.labelJenisTugas;
         this.dataBar = resp.data.listJumlahTugasPerJenis;
         this.labelPie = resp.data.labelStatus;
@@ -159,7 +159,8 @@ export default {
         this.isMounted = true;
         dataTableLoader();
         this.ready = true;
-      });
+    });
+    loadScript();
   }
 };
 </script>

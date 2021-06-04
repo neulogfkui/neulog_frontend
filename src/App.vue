@@ -68,28 +68,28 @@
                     class="sidenav-menu-nested nav accordion"
                     id="accordionSidenavPages"
                   >
-                    <router-link class="nav-link" :to="this.linkMenuResiden"
+                    <router-link class="nav-link" :to="links.linkMenuResiden"
                       >Menu</router-link
                     >
-                    <router-link class="nav-link" :to="this.linkLaporanPasien"
+                    <router-link class="nav-link" :to="links.linkLaporanPasien"
                       >Pasien</router-link
                     >
-                    <router-link class="nav-link" :to="this.linkLaporanTugas"
+                    <router-link class="nav-link" :to="links.linkLaporanTugas"
                       >Tugas</router-link
                     >
-                    <router-link class="nav-link" :to="this.linkProgressTest"
+                    <router-link class="nav-link" :to="links.linkProgressTest"
                       >Progress Test</router-link
                     >
-                    <router-link class="nav-link" :to="this.linkKompetensi"
+                    <router-link class="nav-link" :to="links.linkKompetensi"
                       >Kompetensi</router-link
                     >
-                    <router-link class="nav-link" :to="this.linkModul"
+                    <router-link class="nav-link" :to="links.linkModul"
                       >Modul</router-link
                     >
-                    <router-link class="nav-link" :to="this.linkJaga"
+                    <router-link class="nav-link" :to="links.linkJaga"
                       >Jaga</router-link
                     >
-                    <router-link class="nav-link" :to="this.linkTindakan"
+                    <router-link class="nav-link" :to="links.linkTindakan"
                       >Tindakan</router-link
                     >
                   </nav>
@@ -127,7 +127,7 @@
                     <router-link class="nav-link" to="/addlaporantugas"
                       >Tugas</router-link
                     >
-                    <router-link class="nav-link" to="/components"
+                    <router-link class="nav-link" to="/modulresidenform/0"
                       >Kelulusan Modul</router-link
                     >
                   </nav>
@@ -141,9 +141,9 @@
                   class="nav-link collapsed"
                   href="javascript:void(0);"
                   data-toggle="collapse"
-                  data-target="#collapseDashboards"
+                  data-target="#collapseDashboardKonsulen"
                   aria-expanded="false"
-                  aria-controls="collapseDashboards"
+                  aria-controls="collapseDashboardKonsulen"
                 >
                   <div class="nav-link-icon">
                     <i data-feather="activity"></i>
@@ -155,7 +155,7 @@
                 </a>
                 <div
                   class="collapse"
-                  id="collapseDashboards"
+                  id="collapseDashboardKonsulen"
                   data-parent="#accordionSidenav"
                 >
                   <nav
@@ -176,6 +176,44 @@
                     >
                     <router-link class="nav-link" to="/dashboard-konsulen/kasus-sulit/belum-dievaluasi"
                       >Pembahasan Kasus Sulit</router-link
+                    >
+                  </nav>
+                </div>
+              </div>
+
+              <div v-if="userRoles.includes('ROLE_KETUAMODUL')">
+                <!-- Dashbooard -->
+                <!-- <div class="sidenav-menu-heading">Dashboard</div> -->
+                <a
+                  class="nav-link collapsed"
+                  href="javascript:void(0);"
+                  data-toggle="collapse"
+                  data-target="#collapseDashboardKetuaModul"
+                  aria-expanded="false"
+                  aria-controls="collapseDashboardKetuaModul"
+                >
+                  <div class="nav-link-icon">
+                    <i data-feather="activity"></i>
+                  </div>
+                  Dashboard Ketua Modul
+                  <div class="sidenav-collapse-arrow">
+                    <i class="fas fa-angle-down"></i>
+                  </div>
+                </a>
+                <div
+                  class="collapse"
+                  id="collapseDashboardKetuaModul"
+                  data-parent="#accordionSidenav"
+                >
+                  <nav
+                    class="sidenav-menu-nested nav accordion"
+                    id="accordionSidenavPages"
+                  >
+                    <router-link class="nav-link" to="/dashboard-ketua-modul/belum-lulus"
+                      >Belum Lulus</router-link
+                    >
+                    <router-link class="nav-link" to="/dashboard-ketua-modul/sudah-lulus"
+                      >Sudah Lulus</router-link
                     >
                   </nav>
                 </div>
@@ -262,9 +300,9 @@
                     class="nav-link collapsed"
                     href="javascript:void(0);"
                     data-toggle="collapse"
-                    data-target="#collapseDashboards"
+                    data-target="#collapseDashboardAdmin"
                     aria-expanded="false"
-                    aria-controls="collapseDashboards"
+                    aria-controls="collapseDashboardAdmin"
                   >
                     <div class="nav-link-icon">
                       <i data-feather="layout"></i>
@@ -276,7 +314,7 @@
                   </a>
                   <div
                     class="collapse"
-                    id="collapseDashboards"
+                    id="collapseDashboardAdmin"
                     data-parent="#accordionSidenav"
                   >
                     <nav
@@ -316,9 +354,9 @@
                     class="nav-link collapsed"
                     href="javascript:void(0);"
                     data-toggle="collapse"
-                    data-target="#collapseDashboards"
+                    data-target="#collapseDashboardPengurusAkademik"
                     aria-expanded="false"
-                    aria-controls="collapseDashboards"
+                    aria-controls="collapseDashboardPengurusAkademik"
                   >
                     <div class="nav-link-icon">
                       <i class="fas fa-th-large"></i>
@@ -330,7 +368,7 @@
                   </a>
                   <div
                     class="collapse"
-                    id="collapseDashboards"
+                    id="collapseDashboardPengurusAkademik"
                     data-parent="#accordionSidenav"
                   >
                     <nav
@@ -367,13 +405,15 @@
                 
                 </div>
                 </div>
+
+                
               </div>
             </div>
           <!-- Sidenav Footer-->
           <div class="sidenav-footer">
             <div class="sidenav-footer-content">
               <div class="sidenav-footer-subtitle">Logged in as:</div>
-              <div class="sidenav-footer-title">{{userData.name}} ({{userData.username}}}</div>
+              <div class="sidenav-footer-title">{{userData.name}} ({{userData.username}})</div>
               <button 
                 class="btn btn-danger" 
                 style="margin-bottom:2rem!important;"
@@ -430,6 +470,7 @@ export default {
     return {
       role: [],
       id: Array,
+      userData: JSON.parse(localStorage.getItem('userData')),
       linkMenuResiden: String,
       linkLaporanPasien: String,
       linkLaporanTugas: String,
@@ -445,12 +486,27 @@ export default {
     isLoggedIn() {
       return this.$store.state.auth.status.loggedIn;
     },
-    userData() {
-      return (JSON.parse(localStorage.getItem('userData')));
-    },
+    // userData() {
+    //   return (JSON.parse(localStorage.getItem('userData')));
+    // },
     userRoles() {
       if (this.isLoggedIn) return this.$store.state.auth.user.roles;
       else return ["ROLE_DEFAULT"];
+    },
+    links() {
+      if(this.userRoles == "ROLE_RESIDEN" && this.userData.residen != null){
+        let link = {
+          "linkMenuResiden" : "/dashboardresiden/" + this.userData.residen.idResiden,
+          "linkLaporanPasien" : "/dashboardlaporanpasien/" + this.userData.residen.idResiden,
+          "linkLaporanTugas" : "/dashboardlaporantugas/" + this.userData.residen.idResiden,
+          "linkProgressTest" : "/dashboardprogresstest/" + this.userData.residen.idResiden,
+          "linkKompetensi" : "/dashboardkompetensi/" + this.userData.residen.idResiden,
+          "linkModul" : "/dashboardmodul/" + this.userData.residen.idResiden,
+          "linkJaga" : "/dashboardjaga/" + this.userData.residen.idResiden,
+          "linkTindakan" : "/dashboardtindakan/" + this.userData.residen.idResiden,
+        }
+        return link;
+      } else return [];
     }
   },
   
@@ -466,10 +522,12 @@ export default {
       this.linkJaga = "/dashboardjaga/" + this.userData.residen.idResiden;
       this.linkTindakan = "/dashboardtindakan/" + this.userData.residen.idResiden;
     }
+    this.userData = JSON.parse(localStorage.getItem('userData'));
   },
 
   updated() {
     loadScript();
+    // this.userData = JSON.parse(localStorage.getItem('userData'));
   },
 
   methods: {

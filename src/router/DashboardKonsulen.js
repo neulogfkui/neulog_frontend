@@ -10,7 +10,7 @@ import PenelitianAkhirBelumDievaluasi from "@/views/DashboardKonsulen/DashboardP
 import PenelitianAkhirSudahDievaluasi from "@/views/DashboardKonsulen/DashboardPenelitianAkhirSudahDievaluasi"
 import TugasPresentasiReview from "@/views/DashboardKonsulen/DashboardTugasPresentasiReview"
 import TugasPublikasiReview from "@/views/DashboardKonsulen/DashboardTugasPublikasiReview"
-import KasusSulitReview from "@/views/DashboardKonsulen/DashboardTugasPresentasiReview"
+import KasusSulitReview from "@/views/DashboardKonsulen/DashboardKasusSulitReview"
 import PenelitianAkhirReview from "@/views/DashboardKonsulen/DashboardPenelitianAkhirReview"
 
 let routes = [

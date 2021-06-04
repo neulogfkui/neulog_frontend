@@ -4,7 +4,7 @@
     :title= this.title
     icon= "user">
 </LightHeader>
-<div class="container upper">
+<div class="container upper" v-if="isMounted">
     <div class="row">
         <div class="col-xxl-12 col-xl-12 mb-4 mt-4">
             <div class="card card-header-actions h-100">
@@ -20,9 +20,9 @@
                         </p>
                     </div>
                     <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
-                        <p class="card-text">
+                        <b><p class="card-text">
                             {{ name }}
-                        </p>
+                        </p></b>
                     </div>
                 </div>
                 <div class="row">
@@ -32,9 +32,9 @@
                         </p>
                     </div>
                     <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
-                        <p class="card-text">
+                        <b><p class="card-text">
                             {{ npm }}
-                        </p>
+                        </p></b>
                     </div>
                 </div>
                 <div class="row">
@@ -44,9 +44,9 @@
                         </p>
                     </div>
                     <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
-                        <p class="card-text">
+                        <b><p class="card-text">
                             {{ tahunMasuk + " / " + term }}
-                        </p>
+                        </p></b>
                     </div>
                 </div>
                 <div class="row">
@@ -56,9 +56,9 @@
                         </p>
                     </div>
                     <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
-                        <p class="card-text">
+                        <b><p class="card-text">
                             {{ tempatLahir + ", " + tanggalLahir }}
-                        </p>
+                        </p></b>
                     </div>
                 </div>
                 <div class="row">
@@ -68,9 +68,9 @@
                         </p>
                     </div>
                     <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
-                        <p class="card-text">
+                        <b><p class="card-text">
                             {{ alamat }}
-                        </p>
+                        </p></b>
                     </div>
                 </div>
                 <div class="row">
@@ -80,9 +80,9 @@
                         </p>
                     </div>
                     <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
-                        <p class="card-text">
+                        <b><p class="card-text">
                             {{ telepon }}
-                        </p>
+                        </p></b>
                     </div>
                 </div>
                 <div class="row">
@@ -92,9 +92,9 @@
                         </p>
                     </div>
                     <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
-                        <p class="card-text">
+                        <b><p class="card-text">
                             {{ email }}
-                        </p>
+                        </p></b>
                     </div>
                 </div>
                 <div class="row">
@@ -104,9 +104,9 @@
                         </p>
                     </div>
                     <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
-                        <p class="card-text">
+                        <b><p class="card-text">
                             {{ pembimbingName }}
-                        </p>
+                        </p></b>
                     </div>
                 </div>
                 <!-- <div class="row">
@@ -131,6 +131,7 @@ import axios from "axios";
 import MainHeader from "@/components/MainHeader.vue";
 import LightHeader from "@/components/LightHeader.vue";
 import authHeader from "@/services/auth-header";
+import loadScript from '@/js/scripts.js';
 
 export default {
   name: "DetailMenuResiden",
@@ -160,7 +161,6 @@ export default {
     axios
       .get("https://neulogfkui.herokuapp.com/api/dashboardPengurusAkademik/residen/" + this.$route.params.idResiden, { headers: authHeader() }) // nanti diganti ini angka 1 nya
       .then((resp) => {
-        console.warn(resp.data);
         this.data = resp.data;
         this.idResiden = resp.data.idResiden
         this.name = resp.data.pengguna.name
@@ -175,7 +175,8 @@ export default {
         this.pembimbingName = resp.data.konsulen.pengguna.name
         this.title = "Detail Residen " + this.name
         this.isMounted = true;
-      });
+    });
+    loadScript();
   },
 };
 </script>

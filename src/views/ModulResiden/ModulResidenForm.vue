@@ -25,7 +25,7 @@
                   >
                     <option
                       v-for="item in listModul"
-                      v-bind:key="item.id"
+                      v-bind:key="item.idModul"
                       :value="item.idModul"
                     >
                       {{ item.namaModul }}

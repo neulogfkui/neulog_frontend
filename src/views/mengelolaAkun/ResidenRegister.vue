@@ -100,7 +100,7 @@
     </div>
 
     <!-- Confirmation Modal -->
-    <div class="modal fade" id="saveModal" tabindex="-1" role="dialog" aria-labelledby="saveModalTitle" aria-hidden="true">
+    <div v-if="!error" class="modal fade" id="saveModal" tabindex="-1" role="dialog" aria-labelledby="saveModalTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -130,6 +130,7 @@
 
 <script>
 import Residen from '../../models/residen';
+import loadScript from "@/js/scripts.js";
 
 export default {
     name: "ResidenRegister",
@@ -141,7 +142,8 @@ export default {
             submitted: false,
             successful: false,
             message: '',
-            konsulens: Array
+            konsulens: Array,
+            error: false
         }
     },
     computed: {
@@ -164,7 +166,12 @@ export default {
                 this.$router.push('/404');
             }
         );
+    	loadScript();
     },
+
+	updated() {
+		loadScript();
+	},
     methods: {
         redirectToHome() {
             this.$router.push('/mengelola-akun/residen');
@@ -175,15 +182,21 @@ export default {
                     && this.residen.email && this.residen.tempatLahir && this.residen.tanggalLahir && this.residen.noTelepon
                     && this.residen.tahunMasuk && this.residen.term && this.residen.npm && this.residen.idPembimbing)) {
                 this.message = "Mohon lengkapi semua field pada formulir.";
+                this.error = true;
                 return
             }
-            console.log(this.$store.state.auth.user);
             if (this.rePassword != this.residen.password) {
                 this.message = "Masukan pada 'Re-Enter Password' tidak sama dengan password baru";
+                this.error = true;
+                return
+            }
+            if (this.residen.npm.length != 10) {
+                this.message = "Format NPM tidak valid.";
+                this.error = true;
                 return
             }
 
-            console.log(this.residen);
+            this.error = false;
             this.message = '';
             this.submitted = true;
             this.$store.dispatch('auth/registerResiden', this.residen).then(

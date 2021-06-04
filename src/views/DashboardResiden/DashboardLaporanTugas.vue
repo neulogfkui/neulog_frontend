@@ -16,11 +16,11 @@
         title="Sebaran Status Laporan Tugas"
       >
       </PieChart>
-      <BigNumberCard
+      <!-- <BigNumberCard
         title="Rata - Rata Laporan Tugas Per Bulan"
         :count="avgTugasPerMonth"
         caption="Tugas / Bulan"
-      />
+      /> -->
     </div>
 
     <div class="container">

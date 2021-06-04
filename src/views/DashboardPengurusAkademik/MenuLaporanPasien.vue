@@ -113,6 +113,7 @@ import PieChart from "@/components/PieChart.vue";
 import BarChart from "@/components/BarChart.vue";
 import dataTableLoader from "@/js/datatable";
 import authHeader from "@/services/auth-header";
+import loadScript from '@/js/scripts.js';
 
 export default {
   name: "MenuLaporanPasien",
@@ -150,7 +151,6 @@ export default {
     axios
       .get("https://neulogfkui.herokuapp.com/api/dashboardPengurusAkademik/laporanpasien/", { headers: authHeader() })
       .then((resp) => {
-        console.warn(resp.data);
         this.labelBarTindakan = resp.data.labelTindakan;
         this.dataBarTindakan = resp.data.listJumlahTindakanPerKategori;
         this.labelPie = resp.data.labelStatus;
@@ -163,7 +163,8 @@ export default {
         this.isMounted = true;
         dataTableLoader();
         this.ready = true;
-      });
+    });
+    loadScript();
   }
 };
 </script>

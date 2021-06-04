@@ -61,7 +61,7 @@
                     </td>
                     <td>{{ item.status }}</td>
                     <td>
-                      <router-link :to="'/detailmodulresiden/' + item.idModulResiden">
+                      <router-link :to="'/modulresidendetail/' + item.idModulResiden">
                         <button class="btn btn-secondary">Lihat</button>
                       </router-link>
                     </td>

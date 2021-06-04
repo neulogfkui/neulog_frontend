@@ -241,7 +241,7 @@ export default {
     isKonsulen() {
       return JSON.parse(localStorage.getItem("user")).roles.includes(
         "ROLE_KONSULEN"
-      );
+      )  && (this.data.laporanTugas.status != "DISETUJUI");
     },
   },
   mounted() {
