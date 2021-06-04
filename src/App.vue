@@ -68,29 +68,32 @@
                     class="sidenav-menu-nested nav accordion"
                     id="accordionSidenavPages"
                   >
-                    <router-link :to="linkMenuResiden"
+                    <router-link class="nav-link" :to="linkMenuResiden"
                       >Menu</router-link
                     >
-                    <router-link :to="linkLaporanPasien"
+                    <router-link class="nav-link" :to="linkLaporanPasien"
                       >Pasien</router-link
                     >
-                    <router-link :to="linkLaporanTugas"
+                    <router-link class="nav-link" :to="linkLaporanTugas"
                       >Tugas</router-link
                     >
-                    <router-link :to="linkProgressTest"
+                    <router-link class="nav-link" :to="linkProgressTest"
                       >Progress Test</router-link
                     >
-                    <router-link :to="linkKompetensi"
+                    <router-link class="nav-link" :to="linkKompetensi"
                       >Kompetensi</router-link
                     >
-                    <router-link :to="linkModul"
+                    <router-link class="nav-link" :to="linkModul"
                       >Modul</router-link
                     >
-                    <router-link :to="linkJaga"
+                    <router-link class="nav-link" :to="linkJaga"
                       >Jaga</router-link
                     >
-                    <router-link :to="linkTindakan"
+                    <router-link class="nav-link" :to="linkTindakan"
                       >Tindakan</router-link
+                    >
+                    <router-link class="nav-link" :to="linkTindakan2"
+                      >Tindakan2</router-link
                     >
                   </nav>
                 </div>
@@ -452,6 +455,9 @@ export default {
     userRoles() {
       if (this.isLoggedIn) return this.$store.state.auth.user.roles;
       else return ["ROLE_DEFAULT"];
+    },
+    linkTindakan2() {
+      return "/dashboardtindakan/" + this.userData.residen.idResiden;
     }
   },
   
