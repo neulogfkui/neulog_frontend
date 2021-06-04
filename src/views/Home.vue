@@ -9,7 +9,12 @@
                 <p class="email">
                   {{ person.email }}
                 </p>
-                <button @click="redirectToResidenRegister" class="btn btn-teal">Buat Akun Residen</button>
+                <p v-if="isResiden" class="role">
+                  Sebagai Residen
+                </p>
+                <p v-if="!isResiden" class="role">
+                  Sebagai Staff
+                </p>
             </div>
         </div>
     </div>
@@ -40,5 +45,16 @@ export default {
 </script>
 
 <style>
-
+.name {
+    font-size: 2rem;
+    background: -webkit-linear-gradient(rgb(31, 223, 159), rgb(59, 104, 226));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+}
+.email {
+  color: rgb(62, 62, 196);
+}
+.role {
+  font-size: 1.2rem;
+}
 </style>
