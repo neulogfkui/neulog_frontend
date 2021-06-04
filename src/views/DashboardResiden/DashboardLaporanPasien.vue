@@ -16,11 +16,11 @@
         title="Sebaran Status Laporan Pasien"
       >
       </PieChart>
-      <BigNumberCard
+      <!-- <BigNumberCard
         title="Rata - Rata Laporan Pasien Per Bulan"
         :count="avgPasienPerMonth"
         caption="Pasien / Bulan"
-      />
+      /> -->
       <BarChart
         :label="this.labelBar"
         :data="this.dataBar"
