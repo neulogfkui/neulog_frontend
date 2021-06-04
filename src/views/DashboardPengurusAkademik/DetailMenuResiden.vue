@@ -13,102 +13,82 @@
                 </div>
             <div class="card-body">
                 <div class="container-fluid">
-                <div class="row">
-                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
-                        <p class="card-text">
-                            Nama Lengkap
-                        </p>
-                    </div>
-                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
-                        <p class="card-text">
-                            {{ name }}
-                        </p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
-                        <p class="card-text">
-                            NPM
-                        </p>
-                    </div>
-                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
-                        <p class="card-text">
-                            {{ npm }}
-                        </p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
-                        <p class="card-text">
-                            Tahun Masuk/Term
-                        </p>
-                    </div>
-                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
-                        <p class="card-text">
-                            {{ tahunMasuk + " / " + term }}
-                        </p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
-                        <p class="card-text">
-                            TTL
-                        </p>
-                    </div>
-                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
-                        <p class="card-text">
-                            {{ tempatLahir + ", " + tanggalLahir }}
-                        </p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
-                        <p class="card-text">
-                            Alamat Rumah
-                        </p>
-                    </div>
-                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
-                        <p class="card-text">
-                            {{ alamat }}
-                        </p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
-                        <p class="card-text">
-                            Telepon
-                        </p>
-                    </div>
-                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
-                        <p class="card-text">
-                            {{ telepon }}
-                        </p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
-                        <p class="card-text">
-                            Email
-                        </p>
-                    </div>
-                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
-                        <p class="card-text">
-                            {{ email }}
-                        </p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
-                        <p class="card-text">
-                            Pembimbing
-                        </p>
-                    </div>
-                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
-                        <p class="card-text">
-                            {{ pembimbingName }}
-                        </p>
-                    </div>
-                </div>
+                <table cellpadding="5">
+                    <tbody>
+                        <tr>
+                            <td>
+                                Nama Lengkap
+                            </td>
+                            <td>
+                                <b>{{ name }}</b>
+                            </td>
+                        </tr>
+                                                <tr>
+                            <td>
+                                NPM
+                            </td>
+                            <td>
+                                <b>{{ npm }}</b>
+                            </td>
+                        </tr>
+
+                                                <tr>
+                            <td>
+                                Tahun Masuk / Term
+                            </td>
+                            <td>
+                                <b>{{ tahunMasuk + " / " + term }}</b>
+                            </td>
+                        </tr>
+
+
+                                                                        <tr>
+                            <td>
+                                TTL
+                            </td>
+                            <td>
+                                <b>{{ tempatLahir + ", " + tanggalLahir }}</b>
+                            </td>
+                        </tr>
+
+                                                                        <tr>
+                            <td>
+                                Alamat Rumah
+                            </td>
+                            <td>
+                                <b>{{ alamat }}</b>
+                            </td>
+                        </tr>
+
+                                                                        <tr>
+                            <td>
+                                Telepon
+                            </td>
+                            <td>
+                                <b>{{ telepon }}</b>
+                            </td>
+                        </tr>
+
+                                                                        <tr>
+                            <td>
+                                Email
+                            </td>
+                            <td>
+                                <b>{{ email }}</b>
+                            </td>
+                        </tr>
+
+                                                                        <tr>
+                            <td>
+                                Pembimbing
+                            </td>
+                            <td>
+                                <b>{{ pembimbingName }}</b>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
                 <!-- <div class="row">
                     <div class="col-xxl-12 col-xl-12 mb-4 mt-4 text-center">
                         <router-link
