@@ -89,7 +89,7 @@
                     <router-link class="nav-link" :to="this.linkJaga"
                       >Jaga</router-link
                     >
-                    <router-link class="nav-link" :to="this.linkTindakan"
+                    <router-link class="nav-link" :to="linkTindakan"
                       >Tindakan</router-link
                     >
                   </nav>
@@ -141,9 +141,9 @@
                   class="nav-link collapsed"
                   href="javascript:void(0);"
                   data-toggle="collapse"
-                  data-target="#collapseDashboards"
+                  data-target="#collapseDashboardKonsulen"
                   aria-expanded="false"
-                  aria-controls="collapseDashboards"
+                  aria-controls="collapseDashboardKonsulen"
                 >
                   <div class="nav-link-icon">
                     <i data-feather="activity"></i>
@@ -155,7 +155,7 @@
                 </a>
                 <div
                   class="collapse"
-                  id="collapseDashboards"
+                  id="collapseDashboardKonsulen"
                   data-parent="#accordionSidenav"
                 >
                   <nav
@@ -262,9 +262,9 @@
                     class="nav-link collapsed"
                     href="javascript:void(0);"
                     data-toggle="collapse"
-                    data-target="#collapseDashboards"
+                    data-target="#collapseDashboardAdmin"
                     aria-expanded="false"
-                    aria-controls="collapseDashboards"
+                    aria-controls="collapseDashboardAdmin"
                   >
                     <div class="nav-link-icon">
                       <i data-feather="layout"></i>
@@ -276,7 +276,7 @@
                   </a>
                   <div
                     class="collapse"
-                    id="collapseDashboards"
+                    id="collapseDashboardAdmin"
                     data-parent="#accordionSidenav"
                   >
                     <nav
@@ -316,9 +316,9 @@
                     class="nav-link collapsed"
                     href="javascript:void(0);"
                     data-toggle="collapse"
-                    data-target="#collapseDashboards"
+                    data-target="#collapseDashboardPengurusAkademik"
                     aria-expanded="false"
-                    aria-controls="collapseDashboards"
+                    aria-controls="collapseDashboardPengurusAkademik"
                   >
                     <div class="nav-link-icon">
                       <i class="fas fa-th-large"></i>
@@ -330,7 +330,7 @@
                   </a>
                   <div
                     class="collapse"
-                    id="collapseDashboards"
+                    id="collapseDashboardPengurusAkademik"
                     data-parent="#accordionSidenav"
                   >
                     <nav
