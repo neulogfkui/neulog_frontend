@@ -30,7 +30,9 @@
       </div>
 
       <div v-if="isKonsulen">
-        <router-link :to="'/laporanpasienform/' + this.posts.idLaporanPasien">
+        <router-link
+          :to="'/evaluasilaporanpasien/' + this.posts.idLaporanPasien"
+        >
           <button
             class="btn btn-warning"
             v-if="this.posts.status != 'DISETUJUI'"
@@ -39,6 +41,12 @@
           </button>
         </router-link>
       </div>
+
+      <router-link :to="'/evaluasilaporanpasien/' + this.posts.idLaporanPasien">
+        <button class="btn btn-warning" v-if="this.posts.status != 'DISETUJUI'">
+          Edit
+        </button>
+      </router-link>
     </div>
     <div class="row justify-content-center">
       <div class="col-xxl-4 col-xl-4 mb-4">

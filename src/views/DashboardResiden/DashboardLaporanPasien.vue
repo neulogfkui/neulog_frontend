@@ -6,7 +6,7 @@
     :withLogo="false"
   />
   <div class="container" v-if="isDataTableReady">
-    <div class="row upper">
+    <div class="row upper justify-content-center">
       <PieChart
         keterangan="Laporan Pasien"
         :persentase="this.persentase"
