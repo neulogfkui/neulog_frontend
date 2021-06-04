@@ -1,54 +1,63 @@
 <template>
   <LightHeader v-if="isMounted" :title="this.title" icon="users"> </LightHeader>
-  <div class="container upper">
+  <div class="container upper" v-if="isMounted">
     <div class="row">
-      <div class="col-xxl-12 col-xl-12 mb-4 mt-4">
-        <div class="card card-header-actions h-100">
-          <div class="card-header">
-            <b>Data Konsulen</b>
-          </div>
-          <div class="card-body">
-            <div class="container-fluid">
-              <table cellpadding="5">
-                <tbody>
-                  <tr>
-                    <td>Nama Lengkap</td>
-                    <td>
-                      <b>{{ name }}</b>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td>TTL</td>
-                    <td>
-                      <b>{{ tempatLahir + ", " + tanggalLahir }}</b>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td>Email</td>
-                    <td>
-                      <b>{{ email }}</b>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td>Role</td>
-                    <td>
-                      <b>
-                        <p
-                          v-for="item in role"
-                          v-bind:key="item.id"
-                          class="card-text"
-                        >
-                          {{ item.name }}
-                        </p></b
-                      >
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-              <!-- <div class="row">
+        <div class="col-xxl-12 col-xl-12 mb-4 mt-4">
+            <div class="card card-header-actions h-100">
+                <div class="card-header">
+                    <b>Data Konsulen</b>
+                </div>
+            <div class="card-body">
+                <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text">
+                            Nama Lengkap
+                        </p>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <b><p class="card-text">
+                            {{ name }}
+                        </p></b>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text">
+                            TTL
+                        </p>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <b><p class="card-text">
+                            {{ tempatLahir + ", " + tanggalLahir }}
+                        </p></b>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text">
+                            Email
+                        </p>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <b><p class="card-text">
+                            {{ email }}
+                        </p></b>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <p class="card-text">
+                            Role
+                        </p>
+                    </div>
+                    <div class="col-xxl-6 col-xl-6 mb-4 mt-4">
+                        <b><p v-for="(item) in role" v-bind:key="item.id" class="card-text" >
+                            {{ item.name }}
+                        </p></b>
+                    </div>
+                </div>
+                <!-- <div class="row">
                     <div class="col-xxl-12 col-xl-12 mb-4 mt-4 text-center">
                         <router-link
                         :to="'/dashboardkonsulen/' + idKonsulen"
@@ -57,12 +66,12 @@
                       </router-link>
                     </div>
                 </div> -->
+                </div>
             </div>
-          </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
+</div>
 </template>
 
 
@@ -71,6 +80,7 @@ import axios from "axios";
 import MainHeader from "@/components/MainHeader.vue";
 import LightHeader from "@/components/LightHeader.vue";
 import authHeader from "@/services/auth-header";
+import loadScript from '@/js/scripts.js';
 
 export default {
   name: "DetailMenuKonsulen",
@@ -99,9 +109,8 @@ export default {
         " https://neulogfkui.herokuapp.com/api/dashboardPengurusAkademik/konsulen/" +
           this.$route.params.idKonsulen,
         { headers: authHeader() }
-      ) // nanti diganti ini angka 1 nya
+      )
       .then((resp) => {
-        console.warn(resp.data);
         this.data = resp.data;
         this.idKonsulen = resp.data.idKonsulen;
         this.name = resp.data.pengguna.name;
@@ -111,7 +120,8 @@ export default {
         this.role = resp.data.pengguna.roles;
         this.title = "Detail Konsulen " + this.name;
         this.isMounted = true;
-      });
+    });
+    loadScript();
   },
 };
 </script>
