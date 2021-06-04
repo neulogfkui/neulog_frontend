@@ -105,7 +105,7 @@
     </div>
     
     <!-- Confirmation Modal -->
-    <div class="modal fade" id="updateSuccess" tabindex="-1" role="dialog" aria-labelledby="updateSuccessTitle" aria-hidden="true">
+    <div v-if="!error" class="modal fade" id="updateSuccess" tabindex="-1" role="dialog" aria-labelledby="updateSuccessTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -152,7 +152,8 @@ export default {
             konsulens: Array,
             isUserReady: false,
             isResidenReady: false,
-            isKonsulenReady: false
+            isKonsulenReady: false,
+            error: false
         }
     },
     computed: {
@@ -180,14 +181,21 @@ export default {
                     && this.residen.email && this.residen.tempatLahir && this.residen.tanggalLahir && this.residen.noTelepon
                     && this.residen.tahunMasuk && this.residen.term && this.residen.npm && this.residen.idPembimbing && this.oldPassword)) {
                 this.message = "Mohon lengkapi semua field pada formulir.";
+                this.error = true;
                 return
             }
-
             if (this.rePassword != this.residen.password) {
                 this.message = "Masukan pada 'Re-Enter Password' tidak sama dengan password baru";
+                this.error = true;
+                return
+            }
+            if (this.residen.npm.length != 10) {
+                this.message = "Format NPM tidak valid.";
+                this.error = true;
                 return
             }
 
+            this.error = false;
             this.message = '';
             this.submitted = true;
             this.residen.oldPassword = this.oldPassword;
