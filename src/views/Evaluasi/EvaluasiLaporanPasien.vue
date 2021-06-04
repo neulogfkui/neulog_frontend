@@ -86,6 +86,7 @@
                       name="status"
                       value="DISETUJUI"
                       v-model="posts.status"
+                      checked
                     />
                     <label>DISETUJUI</label>
                   </div>
@@ -108,6 +109,7 @@
                     class="form-control form-control-lg h-10"
                     placeholder="Masukan Feedback"
                     v-model="posts.feedback"
+                    required
                   />
                   <br />
                 </div>
