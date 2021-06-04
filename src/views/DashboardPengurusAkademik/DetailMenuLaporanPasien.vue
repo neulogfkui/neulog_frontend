@@ -30,15 +30,16 @@
       </div>
 
       <div v-if="isKonsulen">
-        <router-link :to="'/laporanpasienform/' + this.posts.idLaporanPasien">
+        <router-link :to="'/evaluasilaporanpasien/' + this.posts.idLaporanPasien">
           <button
             class="btn btn-warning"
             v-if="this.posts.status != 'DISETUJUI'"
           >
-            Edit
+            Evaluasi
           </button>
         </router-link>
       </div>
+      
     </div>
     <div class="row justify-content-center">
       <div class="col-xxl-4 col-xl-4 mb-4">
@@ -254,6 +255,7 @@ import LightHeader from "@/components/LightHeader.vue";
 // import dataTableLoader from "@/js/datatable";
 import CardTimeline from "@/components/CardTimeline.vue";
 import CardTimelineEnter from "@/components/CardTimelineEnter.vue";
+import authHeader from "@/services/auth-header";
 
 export default {
   name: "DetailMenuLaporanPasien",
@@ -335,7 +337,7 @@ export default {
       axios
         .get(
           "https://neulogfkui.herokuapp.com/api/laporan-pasien/delete/" +
-            this.$route.params.idLaporanPasien
+            this.$route.params.idLaporanPasien,  { headers: authHeader() }
         )
         .then((result) => {
           if (result.data == "Success") {
