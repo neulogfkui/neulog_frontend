@@ -136,7 +136,7 @@
 
               <div v-if="userRoles.includes('ROLE_KONSULEN')">
                 <!-- Dashbooard -->
-                <!-- <div class="sidenav-menu-heading">Dashboard</div> -->
+                <div class="sidenav-menu-heading">Dashboard</div>
                 <a
                   class="nav-link collapsed"
                   href="javascript:void(0);"
@@ -183,7 +183,7 @@
 
               <div v-if="userRoles.includes('ROLE_KETUAMODUL')">
                 <!-- Dashbooard -->
-                <div class="sidenav-menu-heading">Dashboard</div>
+                <!-- <div class="sidenav-menu-heading">Dashboard</div> -->
                 <a
                   class="nav-link collapsed"
                   href="javascript:void(0);"
