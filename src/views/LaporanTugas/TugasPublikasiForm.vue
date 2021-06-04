@@ -1,6 +1,6 @@
 <template>
   <LightHeader
-    title="Tugas Publikasi"
+    :title="headertitle"
     icon="file-text"
     :subtitle="subtitleHeader"
   />
@@ -272,6 +272,7 @@ export default {
       target: null,
       isMounted: false,
       ready: false,
+      headertitle: null,
       subtitleHeader:
         JSON.parse(localStorage.getItem("userData")).name +
         " - " +
@@ -312,6 +313,7 @@ export default {
   },
 
   mounted() {
+    this.headertitle = "Tambah Tugas Publikasi"
     if (this.$route.params.operation != 0) {
       axios
         .get(

@@ -1,6 +1,6 @@
 <template>
   <LightHeader
-    title="Tambah Laporan Tugas - Tugas Presentasi"
+    :title="headertitle"
     icon="file-text"
     :subtitle="subtitleHeader"
   />
@@ -295,6 +295,7 @@ export default {
       status: 0,
       isMounted: false,
       ready: false,
+      headertitle: null,
       subtitleHeader:
         JSON.parse(localStorage.getItem("userData")).name +
         " - " +
@@ -315,7 +316,13 @@ export default {
       }
       return this;
     };
+    loadScript();
   },
+
+  updated(){
+    loadScript();
+  },
+
   computed: {
     isDataTableReady() {
       return this.ready;
@@ -328,7 +335,7 @@ export default {
     // }
   },
   mounted() {
-    console.warn(this.$route.params.operation);
+    this.headertitle = "Tambah Laporan Tugas Presentasi"
     if (this.$route.params.operation != 0) {
       axios
         .get(

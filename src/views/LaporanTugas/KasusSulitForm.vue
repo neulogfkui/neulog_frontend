@@ -1,6 +1,6 @@
 <template>
   <LightHeader
-    title="Pembahasan Kasus Sulit dan Multidisiplin"
+    :title="headertitle"
     icon="file-text"
     :subtitle="subtitleHeader"
   />
@@ -280,6 +280,7 @@ export default {
       status: 0,
       target: null,
       ready: false,
+      headertitle: null,
       subtitleHeader:
         JSON.parse(localStorage.getItem("userData")).name +
         " - " +
@@ -324,6 +325,7 @@ export default {
     // }
   },
   mounted() {
+    this.headertitle = "Tambah Laporan Kasus Sulit & Multidisiplin"
     if (this.$route.params.operation != 0) {
       axios
         .get(
