@@ -68,31 +68,31 @@
                     class="sidenav-menu-nested nav accordion"
                     id="accordionSidenavPages"
                   >
-                    <router-link class="nav-link" :to="linkMenuResiden"
+                    <router-link class="nav-link" :to="links.linkMenuResiden"
                       >Menu</router-link
                     >
-                    <router-link class="nav-link" :to="linkLaporanPasien"
+                    <router-link class="nav-link" :to="links.linkLaporanPasien"
                       >Pasien</router-link
                     >
-                    <router-link class="nav-link" :to="linkLaporanTugas"
+                    <router-link class="nav-link" :to="links.linkLaporanTugas"
                       >Tugas</router-link
                     >
-                    <router-link class="nav-link" :to="linkProgressTest"
+                    <router-link class="nav-link" :to="links.linkProgressTest"
                       >Progress Test</router-link
                     >
-                    <router-link class="nav-link" :to="linkKompetensi"
+                    <router-link class="nav-link" :to="links.linkKompetensi"
                       >Kompetensi</router-link
                     >
-                    <router-link class="nav-link" :to="linkModul"
+                    <router-link class="nav-link" :to="links.linkModul"
                       >Modul</router-link
                     >
-                    <router-link class="nav-link" :to="linkJaga"
+                    <router-link class="nav-link" :to="links.linkJaga"
                       >Jaga</router-link
                     >
-                    <router-link class="nav-link" :to="linkTindakan"
+                    <router-link class="nav-link" :to="links.linkTindakan"
                       >Tindakan</router-link
                     >
-                    <router-link class="nav-link" :to="linkTindakan2"
+                    <router-link class="nav-link" :to="links.linkTindakan2"
                       >Tindakan2</router-link
                     >
                   </nav>
@@ -456,8 +456,20 @@ export default {
       if (this.isLoggedIn) return this.$store.state.auth.user.roles;
       else return ["ROLE_DEFAULT"];
     },
-    linkTindakan2() {
-      return "/dashboardtindakan/" + this.userData.residen.idResiden;
+    links() {
+      if(this.userRoles == "ROLE_RESIDEN"){
+        let link = {
+          "linkMenuResiden" : "/dashboardresiden/" + this.userData.residen.idResiden,
+          "linkLaporanPasien" : "/dashboardlaporanpasien/" + this.userData.residen.idResiden,
+          "linkLaporanTugas" : "/dashboardlaporantugas/" + this.userData.residen.idResiden,
+          "linkProgressTest" : "/dashboardprogresstest/" + this.userData.residen.idResiden,
+          "linkKompetensi" : "/dashboardkompetensi/" + this.userData.residen.idResiden,
+          "linkModul" : "/dashboardmodul/" + this.userData.residen.idResiden,
+          "linkJaga" : "/dashboardjaga/" + this.userData.residen.idResiden,
+          "linkTindakan" : "/dashboardtindakan/" + this.userData.residen.idResiden,
+        }
+        return link;
+      } else return [];
     }
   },
   
