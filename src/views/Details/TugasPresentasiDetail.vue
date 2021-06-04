@@ -33,7 +33,7 @@
 
       </div>
 
-      <div v-if="this.data.laporanTugas.status != 'DISETUJUI'">
+      <div v-if="isKonsulen">
       <router-link
         :to="'/evaluasilaporantugas/' + this.data.laporanTugas.idLaporanTugas"
       >
@@ -45,7 +45,7 @@
         </button>
       </router-link>
       </div>
-
+      
     </div>
     <div class="row justify-content-center">
       <div class="col-xxl-4 col-xl-4 mb-4">
@@ -252,6 +252,10 @@ export default {
       return JSON.parse(localStorage.getItem('user')).roles.includes('ROLE_KONSULEN')
     },
     userRoles() {
+      if (this.isLoggedIn) return this.$store.state.auth.user.roles;
+      else return ["ROLE_DEFAULT"];
+    },
+        userRoles() {
       if (this.isLoggedIn) return this.$store.state.auth.user.roles;
       else return ["ROLE_DEFAULT"];
     }

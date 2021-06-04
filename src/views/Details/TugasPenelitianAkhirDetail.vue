@@ -34,16 +34,16 @@
       </div>
 
       <div v-if="this.data.laporanTugas.status != 'DISETUJUI'">
-      <router-link
-        :to="'/evaluasilaporantugas/' + this.data.laporanTugas.idLaporanTugas"
-      >
-        <button
-          class="btn btn-warning"
-          v-if="userRoles.includes('ROLE_KONSULEN')"
+        <router-link
+          :to="'/evaluasilaporantugas/' + this.data.laporanTugas.idLaporanTugas"
         >
-          Evaluasi
-        </button>
-      </router-link>
+          <button
+            class="btn btn-warning"
+            v-if="!isResiden"
+          >
+            Evaluasi
+          </button>
+        </router-link>
       </div>
     </div>
     <div class="row justify-content-center">
@@ -243,6 +243,10 @@ export default {
         "ROLE_KONSULEN"
       );
     },
+        userRoles() {
+      if (this.isLoggedIn) return this.$store.state.auth.user.roles;
+      else return ["ROLE_DEFAULT"];
+    }
   },
   mounted() {
     this.delete.idLaporanTugas = this.$route.params.idLaporanTugas;
