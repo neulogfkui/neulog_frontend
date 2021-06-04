@@ -31,13 +31,13 @@
         </router-link>
       </div>
 
-      <div v-if="isKonsulen">
+      <div v-if="this.data.laporanTugas.status != 'DISETUJUI'">
         <router-link
           :to="'/evaluasilaporantugas/' + this.data.laporanTugas.idLaporanTugas"
         >
           <button
             class="btn btn-warning"
-            v-if="userRoles.includes('ROLE_KONSULEN')"
+            v-if="!isResiden"
           >
             Evaluasi
           </button>
@@ -239,9 +239,15 @@ export default {
       );
     },
     isKonsulen() {
-      return JSON.parse(localStorage.getItem("user")).roles.includes(
-        "ROLE_KONSULEN"
-      )  && (this.data.laporanTugas.status != "DISETUJUI");
+      return (
+        JSON.parse(localStorage.getItem("user")).roles.includes(
+          "ROLE_KONSULEN"
+        ) && this.data.laporanTugas.status != "DISETUJUI"
+      );
+    },
+    userRoles() {
+      if (this.isLoggedIn) return this.$store.state.auth.user.roles;
+      else return ["ROLE_DEFAULT"];
     },
   },
   mounted() {

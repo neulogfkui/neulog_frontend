@@ -12,7 +12,7 @@
         :total="this.total"
         :label="this.label"
         :data="this.jumlah"
-        title="Sebaran Status Laporan Pasien"
+        title="Sebaran Status Laporan Tugas"
       />
       <BarChart
         :label="this.labelBar"
@@ -174,7 +174,7 @@ import axios from "axios";
 import MainHeader from "@/components/MainHeader.vue";
 import PieChart from "@/components/PieChart.vue";
 import BarChart from "@/components/BarChart.vue";
-import dataTableLoader from "@/js/datatable";
+// import dataTableLoader from "@/js/datatable";
 
 export default {
   name: "DashboardTugasPresentasi",
@@ -233,7 +233,7 @@ export default {
         this.subtitle = this.residen.pengguna.name + " - " + this.residen.npm;
         this.mainList = this.listKasus;
         this.isMounted = true;
-        dataTableLoader();
+        // dataTableLoader();
         this.ready = true;
       });
   },

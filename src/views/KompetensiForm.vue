@@ -211,6 +211,7 @@
 import axios from "axios";
 import LightHeader from "@/components/LightHeader.vue";
 import authHeader from "@/services/auth-header";
+import loadScript from '@/js/scripts.js';
 
 export default {
   name: "KompetensiForm",
@@ -266,7 +267,7 @@ export default {
     },
     postData(e) {
       this.status = 1;
-      console.warn(this.posts);
+      // console.warn(this.posts);
       
       var url;
       if (this.$route.params.operation != 0) {
@@ -281,7 +282,7 @@ export default {
         } else {
           this.status = 3;
         }
-        console.warn(result.data);
+        // console.warn(result.data);
       });
       e.preventDefault();
     },
@@ -295,21 +296,22 @@ export default {
             this.$route.params.operation, { headers: authHeader() }
         )
         .then((resp) => {
-          console.log(resp.data);
+          // console.log(resp.data);
           this.posts.idKompetensi = resp.data.idKompetensi;
           this.posts.namaKompetensi = resp.data.namaKompetensi;
           this.posts.deskripsi = resp.data.deskripsi;
           this.posts.jumlahMinimal = resp.data.jumlahMinimal;
           this.posts.isKompetensiLanjut = resp.data.kompetensiLanjut;
         });
-        console.log(this.posts);
+        // console.log(this.posts);
     }
     axios
       .get("https://neulogfkui.herokuapp.com/api/kompetensi/getformattribute", { headers: authHeader() })
       .then((resp) => {
         this.isCreated = true;
         this.ready = true;
-      });
+    });
+    loadScript();
   },
 };
 </script>

@@ -8,7 +8,7 @@
   <div class="container" v-if="getReady">
     <div class="row upper justify-content-center">
       <PieChart
-        keterangan="Laporan Pasien"
+        keterangan="Laporan Tugas"
         :persentase="this.persentase"
         :total="this.createdLaporanTugas"
         :label="this.label"
