@@ -68,28 +68,28 @@
                     class="sidenav-menu-nested nav accordion"
                     id="accordionSidenavPages"
                   >
-                    <router-link class="nav-link" :to="linkMenuResiden"
+                    <router-link :to="linkMenuResiden"
                       >Menu</router-link
                     >
-                    <router-link class="nav-link" :to="linkLaporanPasien"
+                    <router-link :to="linkLaporanPasien"
                       >Pasien</router-link
                     >
-                    <router-link class="nav-link" :to="linkLaporanTugas"
+                    <router-link :to="linkLaporanTugas"
                       >Tugas</router-link
                     >
-                    <router-link class="nav-link" :to="linkProgressTest"
+                    <router-link :to="linkProgressTest"
                       >Progress Test</router-link
                     >
-                    <router-link class="nav-link" :to="linkKompetensi"
+                    <router-link :to="linkKompetensi"
                       >Kompetensi</router-link
                     >
-                    <router-link class="nav-link" :to="linkModul"
+                    <router-link :to="linkModul"
                       >Modul</router-link
                     >
-                    <router-link class="nav-link" :to="linkJaga"
+                    <router-link :to="linkJaga"
                       >Jaga</router-link
                     >
-                    <router-link class="nav-link" :to="linkTindakan"
+                    <router-link :to="linkTindakan"
                       >Tindakan</router-link
                     >
                   </nav>
@@ -168,10 +168,7 @@
                     <router-link class="nav-link" to="/dashboard-konsulen/tugas-presentasi/belum-dievaluasi"
                       >Tugas Presentasi</router-link
                     >
-                    <!-- <router-link class="nav-link" to="/dashboard-konsulen/tugas-publikasi/belum-dievaluasi"
-                      >Tugas Publikasi</router-link
-                    > -->
-                    <router-link class="nav-link" :to="linkTugas"
+                    <router-link class="nav-link" to="/dashboard-konsulen/tugas-publikasi/belum-dievaluasi"
                       >Tugas Publikasi</router-link
                     >
                     <router-link class="nav-link" to="/dashboard-konsulen/penelitian-akhir/belum-dievaluasi"
