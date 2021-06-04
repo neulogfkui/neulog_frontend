@@ -68,25 +68,25 @@
                     class="sidenav-menu-nested nav accordion"
                     id="accordionSidenavPages"
                   >
-                    <router-link class="nav-link" :to="this.linkMenuResiden"
+                    <router-link class="nav-link" :to="linkMenuResiden"
                       >Menu</router-link
                     >
-                    <router-link class="nav-link" :to="this.linkLaporanPasien"
+                    <router-link class="nav-link" :to="linkLaporanPasien"
                       >Pasien</router-link
                     >
-                    <router-link class="nav-link" :to="this.linkLaporanTugas"
+                    <router-link class="nav-link" :to="linkLaporanTugas"
                       >Tugas</router-link
                     >
-                    <router-link class="nav-link" :to="this.linkProgressTest"
+                    <router-link class="nav-link" :to="linkProgressTest"
                       >Progress Test</router-link
                     >
-                    <router-link class="nav-link" :to="this.linkKompetensi"
+                    <router-link class="nav-link" :to="linkKompetensi"
                       >Kompetensi</router-link
                     >
-                    <router-link class="nav-link" :to="this.linkModul"
+                    <router-link class="nav-link" :to="linkModul"
                       >Modul</router-link
                     >
-                    <router-link class="nav-link" :to="this.linkJaga"
+                    <router-link class="nav-link" :to="linkJaga"
                       >Jaga</router-link
                     >
                     <router-link class="nav-link" :to="linkTindakan"
@@ -373,7 +373,7 @@
           <div class="sidenav-footer">
             <div class="sidenav-footer-content">
               <div class="sidenav-footer-subtitle">Logged in as:</div>
-              <div class="sidenav-footer-title">{{userData.name}} ({{userData.username}}}</div>
+              <div class="sidenav-footer-title">{{userData.name}} ({{userData.username}})</div>
               <button 
                 class="btn btn-danger" 
                 style="margin-bottom:2rem!important;"
@@ -430,6 +430,7 @@ export default {
     return {
       role: [],
       id: Array,
+      userData: JSON.parse(localStorage.getItem('userData')),
       linkMenuResiden: String,
       linkLaporanPasien: String,
       linkLaporanTugas: String,
@@ -445,9 +446,9 @@ export default {
     isLoggedIn() {
       return this.$store.state.auth.status.loggedIn;
     },
-    userData() {
-      return (JSON.parse(localStorage.getItem('userData')));
-    },
+    // userData() {
+    //   return (JSON.parse(localStorage.getItem('userData')));
+    // },
     userRoles() {
       if (this.isLoggedIn) return this.$store.state.auth.user.roles;
       else return ["ROLE_DEFAULT"];
@@ -470,6 +471,7 @@ export default {
 
   updated() {
     loadScript();
+    this.userData = JSON.parse(localStorage.getItem('userData'));
   },
 
   methods: {
