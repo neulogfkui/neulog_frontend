@@ -30,10 +30,10 @@
       </div>
 
       <div v-if="isKetuaModul">
-        <router-link :to="'/evaluasimodulresiden/' + this.posts.idModulResiden">
+        <router-link :to="'/evaluasimodulresiden/' + this.data.idModulResiden">
           <button
             class="btn btn-warning"
-            v-if="this.posts.status != 'DISETUJUI'"
+            v-if="this.data.status != 'DISETUJUI'"
           >
             Evaluasi
           </button>
