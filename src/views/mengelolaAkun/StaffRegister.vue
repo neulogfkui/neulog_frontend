@@ -108,6 +108,7 @@
 
 <script>
 import Staff from '../../models/staff';
+import loadScript from "@/js/scripts.js";
 
 export default {
     name: "StaffRegister",
@@ -123,6 +124,14 @@ export default {
             error: false,
         }
     },
+
+    mounted() {
+        loadScript();
+    },
+
+	updated() {
+		loadScript();
+	},
 
     methods: {
         redirectToView() {

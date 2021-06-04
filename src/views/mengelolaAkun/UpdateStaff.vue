@@ -134,6 +134,7 @@
 
 <script>
 import Staff from '../../models/staff';
+import loadScript from "@/js/scripts.js";
 
 export default {
     name: "UpdateStaff",
@@ -158,7 +159,12 @@ export default {
 
     created() {
         this.fetchDatas();
+		loadScript();
     },
+
+	updated() {
+		loadScript();
+	},
 
     methods: {
         redirectToView() {

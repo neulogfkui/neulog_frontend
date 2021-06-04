@@ -84,6 +84,7 @@
 
 <script>
 import dataTableLoader from '../../js/datatable';
+import loadScript from "@/js/scripts.js";
 
 export default {
     data() {
@@ -118,7 +119,12 @@ export default {
 				dataTableLoader();
             }
 		);
+		loadScript();
     },
+
+	updated() {
+		loadScript();
+	},
 
     methods: {
         redirectToUpdate(id) {

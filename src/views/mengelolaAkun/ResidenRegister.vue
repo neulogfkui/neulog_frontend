@@ -130,6 +130,7 @@
 
 <script>
 import Residen from '../../models/residen';
+import loadScript from "@/js/scripts.js";
 
 export default {
     name: "ResidenRegister",
@@ -165,7 +166,12 @@ export default {
                 this.$router.push('/404');
             }
         );
+    	loadScript();
     },
+
+	updated() {
+		loadScript();
+	},
     methods: {
         redirectToHome() {
             this.$router.push('/mengelola-akun/residen');

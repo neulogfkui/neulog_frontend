@@ -204,7 +204,11 @@ export default {
                     error.message || error.toString();
             }
         );
-    loadScript();
+        loadScript();
+    },
+
+    updated() {
+        loadScript();
     },
 
     methods: {

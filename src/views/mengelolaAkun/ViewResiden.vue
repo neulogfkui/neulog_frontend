@@ -103,6 +103,7 @@
 <script>
 import Residen from '../../models/residen';
 import User from  '../../models/user';
+import loadScript from "@/js/scripts.js";
 
 export default {
     name: "ViewResiden",
@@ -147,7 +148,12 @@ export default {
             this.$router.push('/404');
             }
         );
+		loadScript();
     },
+
+	updated() {
+		loadScript();
+	},
 
     computed: {
         loggedIn(){
