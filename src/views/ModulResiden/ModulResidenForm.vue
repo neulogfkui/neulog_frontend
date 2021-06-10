@@ -229,7 +229,7 @@ export default {
         this.headertitle = "Ubah Laporan Kelulusan Modul"
       axios
         .get(
-          "https://neulogfkui.herokuapp.com/modulResiden/" + this.$route.params.operation
+          "http://localhost:8080/modulResiden/" + this.$route.params.operation
         )
         .then((resp) => {
           console.warn(resp.data);
@@ -245,7 +245,7 @@ export default {
           console.log(this.posts);
         });
     }
-    axios.get("https://neulogfkui.herokuapp.com/api/modul/all").then((resp) => {
+    axios.get("http://localhost:8080/api/modul/all").then((resp) => {
       console.warn(resp.data);
       this.listModul = resp.data;
       this.ready = true;
@@ -259,9 +259,9 @@ export default {
 
       var url = "";
       if (this.$route.params.operation == 0) {
-        url = "https://neulogfkui.herokuapp.com/modulResiden/create/";
+        url = "http://localhost:8080/modulResiden/create/";
       } else {
-        url = "https://neulogfkui.herokuapp.com/modulResiden/update/";
+        url = "http://localhost:8080/modulResiden/update/";
       }
 
       axios.post(url, this.posts,{ headers: authHeader() }).then((result) => {

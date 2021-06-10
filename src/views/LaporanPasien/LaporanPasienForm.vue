@@ -500,9 +500,9 @@ export default {
 
       var url;
       if (this.$route.params.operation != 0) {
-        url = "https://neulogfkui.herokuapp.com/api/laporan-pasien/update";
+        url = "http://localhost:8080/api/laporan-pasien/update";
       } else {
-        url = "https://neulogfkui.herokuapp.com/api/laporan-pasien/create";
+        url = "http://localhost:8080/api/laporan-pasien/create";
       }
       axios.post(url, this.posts, { headers: authHeader() }).then((result) => {
         if (result.data != "0") {
@@ -554,7 +554,7 @@ export default {
       this.showTanggal = true;
       axios
         .get(
-          "https://neulogfkui.herokuapp.com/api/laporan-pasien/" +
+          "http://localhost:8080/api/laporan-pasien/" +
             this.$route.params.operation
         )
         .then((resp) => {
@@ -584,7 +584,7 @@ export default {
         });
     }
     axios
-      .get("https://neulogfkui.herokuapp.com/api/laporan-pasien/getformattribute")
+      .get("http://localhost:8080/api/laporan-pasien/getformattribute")
       .then((resp) => {
         this.listKonsulen = resp.data.listKonsulen;
         this.listKompetensi = resp.data.listKompetensi;

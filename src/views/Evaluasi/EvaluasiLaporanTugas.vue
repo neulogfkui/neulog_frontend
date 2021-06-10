@@ -345,7 +345,7 @@ export default {
     this.posts.idLaporanTugas = this.$route.params.idLaporanTugas;
     axios
       .get(
-        "https://neulogfkui.herokuapp.com/laporantugas/" +
+        "http://localhost:8080/laporantugas/" +
           this.$route.params.idLaporanTugas,
         { headers: authHeader() }
       )
@@ -367,7 +367,7 @@ export default {
       this.status = 1;
       console.warn(this.posts);
 
-      var url = "https://neulogfkui.herokuapp.com/laporantugas/evaluasitugas/";
+      var url = "http://localhost:8080/laporantugas/evaluasitugas/";
 
       axios.post(url, this.posts, { headers: authHeader() }).then((result) => {
         if (result.data == "Success") {

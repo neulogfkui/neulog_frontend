@@ -229,7 +229,7 @@ export default {
   mounted() {
     axios
       .get(
-        "https://neulogfkui.herokuapp.com/modulResiden/" +
+        "http://localhost:8080/modulResiden/" +
           this.$route.params.idModulResiden
       )
       .then((resp) => {
@@ -247,7 +247,7 @@ export default {
       console.warn(this.posts);
       axios
         .get(
-          "https://neulogfkui.herokuapp.com/modulResiden/delete/" +
+          "http://localhost:8080/modulResiden/delete/" +
             this.$route.params.idModulResiden,
           { headers: authHeader() }
         )

@@ -104,7 +104,7 @@ export default {
   mounted() {
     this.subtitle = this.getNamaPA;
     axios
-      .get("https://neulogfkui.herokuapp.com/api/dashboardPengurusAkademik/modul/", { headers: authHeader() })
+      .get("http://localhost:8080/api/dashboardPengurusAkademik/modul/", { headers: authHeader() })
       .then((resp) => {
         this.listModul = resp.data.listModul;
         this.isMounted = true;

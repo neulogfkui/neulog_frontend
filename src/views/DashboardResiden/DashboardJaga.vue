@@ -109,7 +109,7 @@ export default {
   mounted() {
     axios
       .get(
-        "https://neulogfkui.herokuapp.com/api/dashboardResiden/jaga/" +
+        "http://localhost:8080/api/dashboardResiden/jaga/" +
           this.$route.params.idResiden
       )
       .then((resp) => {

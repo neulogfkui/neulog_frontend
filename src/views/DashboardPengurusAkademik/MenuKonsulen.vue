@@ -101,7 +101,7 @@ export default {
   mounted() {
     this.subtitle = this.getNamaPA;
     axios
-      .get("https://neulogfkui.herokuapp.com/api/dashboardPengurusAkademik/konsulen/", { headers: authHeader() })
+      .get("http://localhost:8080/api/dashboardPengurusAkademik/konsulen/", { headers: authHeader() })
       .then((resp) => {
         this.avgLaporanPasien = resp.data.averageLaporanPasien;
         this.avgLaporanTugas = resp.data.averageLaporanTugas;

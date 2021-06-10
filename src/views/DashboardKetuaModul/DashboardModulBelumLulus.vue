@@ -145,7 +145,7 @@ export default {
     console.log(this.getIdKetuaModul);
     axios
       .get(
-        "https://neulogfkui.herokuapp.com/api/dashboardKetuaModul/modul/" +
+        "http://localhost:8080/api/dashboardKetuaModul/modul/" +
           this.getIdKetuaModul
       )
       .then((resp) => {

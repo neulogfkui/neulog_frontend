@@ -143,7 +143,7 @@ export default {
   mounted() {
     this.subtitle = this.getNamaPA;
     axios
-      .get("https://neulogfkui.herokuapp.com/api/dashboardPengurusAkademik/laporantugas/", { headers: authHeader() })
+      .get("http://localhost:8080/api/dashboardPengurusAkademik/laporantugas/", { headers: authHeader() })
       .then((resp) => {
         this.labelBar = resp.data.labelJenisTugas;
         this.dataBar = resp.data.listJumlahTugasPerJenis;

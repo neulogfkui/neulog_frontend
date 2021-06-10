@@ -270,7 +270,7 @@ export default {
   components: {MainHeader},
   mounted() {
     axios
-      .get("https://neulogfkui.herokuapp.com/TugasPenelitianAkhirFormAttribute")
+      .get("http://localhost:8080/TugasPenelitianAkhirFormAttribute")
       .then((resp) => {
         console.warn(resp.data);
         this.listKonsulen = resp.data.listKonsulen;
@@ -286,7 +286,7 @@ export default {
       
       axios
         .post(
-          "https://neulogfkui.herokuapp.com/laporantugas/addtugaspenelitianakhir/",
+          "http://localhost:8080/laporantugas/addtugaspenelitianakhir/",
           this.posts
         )
         .then((result) => {

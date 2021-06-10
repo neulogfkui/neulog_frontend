@@ -489,7 +489,7 @@ export default {
       console.warn(this.posts);
 
       var url;
-      url = "https://neulogfkui.herokuapp.com/api/laporan-pasien/evaluate";
+      url = "http://localhost:8080/api/laporan-pasien/evaluate";
       axios.post(url, this.posts, { headers: authHeader() }).then((result) => {
         if (result.data != "0") {
           this.posts.idLaporanPasien = result.data;
@@ -538,7 +538,7 @@ export default {
       this.showTanggal = true;
       axios
         .get(
-          "https://neulogfkui.herokuapp.com/api/laporan-pasien/" +
+          "http://localhost:8080/api/laporan-pasien/" +
             this.$route.params.idLaporanPasien
         )
         .then((resp) => {
@@ -573,7 +573,7 @@ export default {
     }
     axios
       .get(
-        "https://neulogfkui.herokuapp.com/api/laporan-pasien/getformattribute"
+        "http://localhost:8080/api/laporan-pasien/getformattribute"
       )
       .then((resp) => {
         this.listKonsulen = resp.data.listKonsulen;

@@ -104,7 +104,7 @@ export default {
 
     created() {
         axios
-            .get("https://neulogfkui.herokuapp.com/api/laporantugas/tugaspresentasi/sudah-dievaluasi/"+JSON.parse(localStorage.getItem("userData")).konsulen.idKonsulen, { headers: authHeader() })
+            .get("http://localhost:8080/api/laporantugas/tugaspresentasi/sudah-dievaluasi/"+JSON.parse(localStorage.getItem("userData")).konsulen.idKonsulen, { headers: authHeader() })
             .then(success => {
                     this.successful = true;
                     this.laporans = success.data;

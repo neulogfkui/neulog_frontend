@@ -261,7 +261,7 @@ export default {
   },
   mounted() {
     axios
-      .get("https://neulogfkui.herokuapp.com/TugasPublikasiFormAttribute")
+      .get("http://localhost:8080/TugasPublikasiFormAttribute")
       .then((resp) => {
         console.warn(resp.data);
         this.listKonsulen = resp.data.listKonsulen;
@@ -276,7 +276,7 @@ export default {
       
       axios
         .post(
-          "https://neulogfkui.herokuapp.com/laporantugas/addtugaspublikasi/",
+          "http://localhost:8080/laporantugas/addtugaspublikasi/",
           this.posts
         )
         .then((result) => {

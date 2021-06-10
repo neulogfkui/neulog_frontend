@@ -271,9 +271,9 @@ export default {
       
       var url;
       if (this.$route.params.operation != 0) {
-        url = "https://neulogfkui.herokuapp.com/api/kompetensi/update";
+        url = "http://localhost:8080/api/kompetensi/update";
       } else {
-        url = "https://neulogfkui.herokuapp.com/api/kompetensi/create";
+        url = "http://localhost:8080/api/kompetensi/create";
       }
       axios.post(url, this.posts, { headers: authHeader() }).then((result) => {
         if (result.data != "0") {
@@ -292,7 +292,7 @@ export default {
     if (this.$route.params.operation != 0) {
       axios
         .get(
-          "https://neulogfkui.herokuapp.com/api/kompetensi/" +
+          "http://localhost:8080/api/kompetensi/" +
             this.$route.params.operation, { headers: authHeader() }
         )
         .then((resp) => {
@@ -306,7 +306,7 @@ export default {
         // console.log(this.posts);
     }
     axios
-      .get("https://neulogfkui.herokuapp.com/api/kompetensi/getformattribute", { headers: authHeader() })
+      .get("http://localhost:8080/api/kompetensi/getformattribute", { headers: authHeader() })
       .then((resp) => {
         this.isCreated = true;
         this.ready = true;

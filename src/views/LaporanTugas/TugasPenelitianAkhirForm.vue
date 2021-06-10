@@ -299,7 +299,7 @@ export default {
     if (this.$route.params.operation != 0) {
       axios
         .get(
-          "https://neulogfkui.herokuapp.com/laporantugas/" + this.$route.params.operation, { headers: authHeader() }
+          "http://localhost:8080/laporantugas/" + this.$route.params.operation, { headers: authHeader() }
         )
         .then((resp) => {
           console.warn(resp.data);
@@ -318,7 +318,7 @@ export default {
       this.isMounted = true;
     }
     axios
-      .get("https://neulogfkui.herokuapp.com/TugasPenelitianAkhirFormAttribute")
+      .get("http://localhost:8080/TugasPenelitianAkhirFormAttribute")
       .then((resp) => {
         console.warn(resp.data);
         this.listKonsulen = resp.data.listKonsulen;
@@ -350,9 +350,9 @@ export default {
 
       var url = "";
       if (this.$route.params.operation == 0) {
-        url = "https://neulogfkui.herokuapp.com/laporantugas/addtugaspenelitianakhir/";
+        url = "http://localhost:8080/laporantugas/addtugaspenelitianakhir/";
       } else {
-        url = "https://neulogfkui.herokuapp.com/laporantugas/updatetugaspenelitianakhir/";
+        url = "http://localhost:8080/laporantugas/updatetugaspenelitianakhir/";
       }
 
       axios.post(url, this.posts, { headers: authHeader() }).then((result) => {

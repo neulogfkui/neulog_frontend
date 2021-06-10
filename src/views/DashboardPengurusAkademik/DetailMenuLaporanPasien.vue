@@ -334,7 +334,7 @@ export default {
       this.status = 1;
       axios
         .get(
-          "https://neulogfkui.herokuapp.com/api/laporan-pasien/delete/" +
+          "http://localhost:8080/api/laporan-pasien/delete/" +
             this.$route.params.idLaporanPasien,  { headers: authHeader() }
         )
         .then((result) => {
@@ -350,7 +350,7 @@ export default {
   mounted() {
     axios
       .get(
-        "https://neulogfkui.herokuapp.com/api/laporan-pasien/" +
+        "http://localhost:8080/api/laporan-pasien/" +
           this.$route.params.idLaporanPasien
       ) // nanti diganti ini angka 1 nya
       .then((resp) => {
@@ -382,7 +382,7 @@ export default {
       });
     axios
       .get(
-        "https://neulogfkui.herokuapp.com/api/laporan-pasien/getformattribute"
+        "http://localhost:8080/api/laporan-pasien/getformattribute"
       )
       .then((resp) => {
         this.listKompetensi = resp.data.listKompetensi;
