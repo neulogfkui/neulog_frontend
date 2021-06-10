@@ -109,7 +109,7 @@ export default {
 
     created() {
         axios
-            .get("http://localhost:8080/api/laporan-pasien/belum-dievaluasi/"+JSON.parse(localStorage.getItem("userData")).konsulen.idKonsulen, { headers: authHeader() })
+            .get("http://localhost:8000/api/laporan-pasien/belum-dievaluasi/"+JSON.parse(localStorage.getItem("userData")).konsulen.idKonsulen, { headers: authHeader() })
             .then(success => {
                     this.successful = true;
                     this.laporans = success.data;

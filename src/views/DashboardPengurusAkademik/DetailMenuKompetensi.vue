@@ -124,7 +124,7 @@ export default {
   },
   mounted() {
     axios
-      .get("http://localhost:8080/api/dashboardPengurusAkademik/kompetensi/" + this.$route.params.idKompetensi, { headers: authHeader() }) // nanti diganti ini angka 1 nya
+      .get("http://localhost:8000/api/dashboardPengurusAkademik/kompetensi/" + this.$route.params.idKompetensi, { headers: authHeader() }) // nanti diganti ini angka 1 nya
       .then((resp) => {
         this.idKompetensi = resp.data.idKompetensi
         this.namaKompetensi = resp.data.namaKompetensi

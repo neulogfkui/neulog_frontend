@@ -108,7 +108,7 @@ export default {
   mounted() {
     axios
       .get(
-        "http://localhost:8080/api/dashboardResiden/kompetensi/" +
+        "http://localhost:8000/api/dashboardResiden/kompetensi/" +
           this.$route.params.idResiden
       )
       .then((resp) => {

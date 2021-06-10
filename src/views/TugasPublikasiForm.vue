@@ -261,7 +261,7 @@ export default {
   },
   mounted() {
     axios
-      .get("http://localhost:8080/TugasPublikasiFormAttribute")
+      .get("http://localhost:8000/TugasPublikasiFormAttribute")
       .then((resp) => {
         console.warn(resp.data);
         this.listKonsulen = resp.data.listKonsulen;
@@ -276,7 +276,7 @@ export default {
       
       axios
         .post(
-          "http://localhost:8080/laporantugas/addtugaspublikasi/",
+          "http://localhost:8000/laporantugas/addtugaspublikasi/",
           this.posts
         )
         .then((result) => {

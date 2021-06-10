@@ -331,7 +331,7 @@ export default {
     if (this.$route.params.operation != 0) {
       axios
         .get(
-          "http://localhost:8080/laporantugas/" + this.$route.params.operation, { headers: authHeader() }
+          "http://localhost:8000/laporantugas/" + this.$route.params.operation, { headers: authHeader() }
         )
         .then((resp) => {
           console.warn(resp);
@@ -349,7 +349,7 @@ export default {
       // this.isMounted = true;
     }
     axios
-      .get("http://localhost:8080/LaporanPresentasiFormAttribute", { headers: authHeader() })
+      .get("http://localhost:8000/LaporanPresentasiFormAttribute", { headers: authHeader() })
       .then((resp) => {
         console.warn(resp.data);
         this.listKonsulen = resp.data.listKonsulen;
@@ -371,9 +371,9 @@ export default {
       console.warn(this.posts);
       var url = "";
       if (this.$route.params.operation == 0) {
-        url = "http://localhost:8080/laporantugas/addtugaspresentasi/";
+        url = "http://localhost:8000/laporantugas/addtugaspresentasi/";
       } else {
-        url = "http://localhost:8080/laporantugas/updatetugaspresentasi/";
+        url = "http://localhost:8000/laporantugas/updatetugaspresentasi/";
       }
       axios.post(url, this.posts, { headers: authHeader() }).then((result) => {
         if (result.data != "0") {

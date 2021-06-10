@@ -108,7 +108,7 @@ export default {
   mounted() {
     this.subtitle = this.getNamaPA;
     axios
-      .get("http://localhost:8080/api/dashboardPengurusAkademik/kompetensi/", { headers: authHeader() })
+      .get("http://localhost:8000/api/dashboardPengurusAkademik/kompetensi/", { headers: authHeader() })
       .then((resp) => {
         this.listKompetensi = resp.data.listKompetensi;
         this.isMounted = true;

@@ -106,7 +106,7 @@ export default {
   mounted() {
     axios
       .get(
-        " http://localhost:8080/api/dashboardPengurusAkademik/konsulen/" +
+        " http://localhost:8000/api/dashboardPengurusAkademik/konsulen/" +
           this.$route.params.idKonsulen,
         { headers: authHeader() }
       )

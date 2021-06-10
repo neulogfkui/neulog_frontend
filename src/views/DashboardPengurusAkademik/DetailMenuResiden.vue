@@ -159,7 +159,7 @@ export default {
   },
   mounted() {
     axios
-      .get("http://localhost:8080/api/dashboardPengurusAkademik/residen/" + this.$route.params.idResiden, { headers: authHeader() }) // nanti diganti ini angka 1 nya
+      .get("http://localhost:8000/api/dashboardPengurusAkademik/residen/" + this.$route.params.idResiden, { headers: authHeader() }) // nanti diganti ini angka 1 nya
       .then((resp) => {
         this.data = resp.data;
         this.idResiden = resp.data.idResiden

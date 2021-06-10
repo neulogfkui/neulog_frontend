@@ -278,9 +278,9 @@ export default {
       
       var url;
       if (this.$route.params.operation != 0) {
-        url = "http://localhost:8080/api/modul/update";
+        url = "http://localhost:8000/api/modul/update";
       } else {
-        url = "http://localhost:8080/api/modul/create";
+        url = "http://localhost:8000/api/modul/create";
       }
       axios.post(url, this.posts, { headers: authHeader() }).then((result) => {
         // console.log(this.posts);
@@ -300,7 +300,7 @@ export default {
     if (this.$route.params.operation != 0) {
       axios
         .get(
-          "http://localhost:8080/api/modul/" +
+          "http://localhost:8000/api/modul/" +
             this.$route.params.operation, { headers: authHeader() }
         )
         .then((resp) => {
@@ -318,7 +318,7 @@ export default {
       // console.log(this.posts);
     }
     axios
-      .get("http://localhost:8080/api/modul/getformattribute", { headers: authHeader() })
+      .get("http://localhost:8000/api/modul/getformattribute", { headers: authHeader() })
       .then((resp) => {
         this.listKetuaModulNoModul = resp.data.listKetuaModulNoModul;
         this.listKetuaModul = resp.data.listKetuaModul;

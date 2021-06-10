@@ -229,7 +229,7 @@ export default {
   mounted() {
     axios
       .get(
-        "http://localhost:8080/modulResiden/" +
+        "http://localhost:8000/modulResiden/" +
           this.$route.params.idModulResiden
       )
       .then((resp) => {
@@ -247,7 +247,7 @@ export default {
       console.warn(this.posts);
       axios
         .get(
-          "http://localhost:8080/modulResiden/delete/" +
+          "http://localhost:8000/modulResiden/delete/" +
             this.$route.params.idModulResiden,
           { headers: authHeader() }
         )

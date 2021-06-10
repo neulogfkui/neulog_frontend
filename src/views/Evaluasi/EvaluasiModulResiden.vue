@@ -236,7 +236,7 @@ export default {
     this.posts.idModulResiden = this.$route.params.idModulResiden;
     axios
       .get(
-        "http://localhost:8080/modulResiden/" +
+        "http://localhost:8000/modulResiden/" +
           this.$route.params.idModulResiden
       )
       .then((resp) => {
@@ -266,7 +266,7 @@ export default {
       console.warn(this.posts);
 
       var url =
-        "http://localhost:8080/api/dashboardKetuaModul/kelulusan";
+        "http://localhost:8000/api/dashboardKetuaModul/kelulusan";
 
       axios.post(url, this.posts, { headers: authHeader() }).then((result) => {
         if (result.data != null) {

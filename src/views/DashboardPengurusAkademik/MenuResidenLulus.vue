@@ -119,7 +119,7 @@ export default {
   mounted() {
     this.subtitle = this.getNamaPA;
     axios
-      .get("http://localhost:8080/api/dashboardPengurusAkademik/residen/", { headers: authHeader() })
+      .get("http://localhost:8000/api/dashboardPengurusAkademik/residen/", { headers: authHeader() })
       .then((resp) => {
         this.labelPie = resp.data.labelStatus;
         this.dataPie = resp.data.listJumlahResidenPerStatus;

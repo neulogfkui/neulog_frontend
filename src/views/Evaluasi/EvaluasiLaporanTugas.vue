@@ -345,7 +345,7 @@ export default {
     this.posts.idLaporanTugas = this.$route.params.idLaporanTugas;
     axios
       .get(
-        "http://localhost:8080/laporantugas/" +
+        "http://localhost:8000/laporantugas/" +
           this.$route.params.idLaporanTugas,
         { headers: authHeader() }
       )
@@ -367,7 +367,7 @@ export default {
       this.status = 1;
       console.warn(this.posts);
 
-      var url = "http://localhost:8080/laporantugas/evaluasitugas/";
+      var url = "http://localhost:8000/laporantugas/evaluasitugas/";
 
       axios.post(url, this.posts, { headers: authHeader() }).then((result) => {
         if (result.data == "Success") {

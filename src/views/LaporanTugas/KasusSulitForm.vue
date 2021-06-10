@@ -320,7 +320,7 @@ export default {
     if (this.$route.params.operation != 0) {
       axios
         .get(
-          "http://localhost:8080/laporantugas/" + this.$route.params.operation, { headers: authHeader() }
+          "http://localhost:8000/laporantugas/" + this.$route.params.operation, { headers: authHeader() }
         )
         .then((resp) => {
           console.warn(resp.data);
@@ -338,7 +338,7 @@ export default {
           console.log(this.posts);
         });
     }
-    axios.get("http://localhost:8080/KasusSulitFormAttribute", { headers: authHeader() }).then((resp) => {
+    axios.get("http://localhost:8000/KasusSulitFormAttribute", { headers: authHeader() }).then((resp) => {
       console.warn(resp.data);
       this.listKonsulen = resp.data.listKonsulen;
       this.listNamaPertemuan = resp.data.listNamaPertemuan;
@@ -355,9 +355,9 @@ export default {
 
       var url = "";
       if (this.$route.params.operation == 0) {
-        url = "http://localhost:8080/laporantugas/addpembahasankasussulit/";
+        url = "http://localhost:8000/laporantugas/addpembahasankasussulit/";
       } else {
-        url = "http://localhost:8080/laporantugas/updatepembahasankasussulit/";
+        url = "http://localhost:8000/laporantugas/updatepembahasankasussulit/";
       }
 
       axios.post(url, this.posts,{ headers: authHeader() }).then((result) => {

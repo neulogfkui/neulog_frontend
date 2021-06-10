@@ -193,7 +193,7 @@ export default {
   },
   mounted() {
     axios
-      .get("http://localhost:8080/api/dashboardPengurusAkademik/modul/" + this.$route.params.idModul, { headers: authHeader() }) // nanti diganti ini angka 1 nya
+      .get("http://localhost:8000/api/dashboardPengurusAkademik/modul/" + this.$route.params.idModul, { headers: authHeader() }) // nanti diganti ini angka 1 nya
       .then((resp) => {
         this.idModul = resp.data.detailModul.idModul
         this.namaModul = resp.data.detailModul.namaModul

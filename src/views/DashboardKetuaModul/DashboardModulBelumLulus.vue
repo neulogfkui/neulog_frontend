@@ -145,7 +145,7 @@ export default {
     console.log(this.getIdKetuaModul);
     axios
       .get(
-        "http://localhost:8080/api/dashboardKetuaModul/modul/" +
+        "http://localhost:8000/api/dashboardKetuaModul/modul/" +
           this.getIdKetuaModul
       )
       .then((resp) => {

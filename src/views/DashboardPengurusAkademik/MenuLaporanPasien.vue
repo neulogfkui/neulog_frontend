@@ -149,7 +149,7 @@ export default {
   created() {
     this.subtitle = this.getNamaPA;
     axios
-      .get("http://localhost:8080/api/dashboardPengurusAkademik/laporanpasien/", { headers: authHeader() })
+      .get("http://localhost:8000/api/dashboardPengurusAkademik/laporanpasien/", { headers: authHeader() })
       .then((resp) => {
         this.labelBarTindakan = resp.data.labelTindakan;
         this.dataBarTindakan = resp.data.listJumlahTindakanPerKategori;
