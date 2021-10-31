@@ -80,7 +80,9 @@
                 <tr>
                   <td>Durasi</td>
                   <td>
-                    <b>{{ data.durasi }}</b>
+                    <b>
+                      {{ data.durasi }} hari ( {{ (data.durasi / 30).toFixed(3)  }} bulan)
+                    </b>
                   </td>
                 </tr>
               </tbody>

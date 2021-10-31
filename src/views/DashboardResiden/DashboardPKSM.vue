@@ -4,15 +4,16 @@
     :subtitle="this.subtitle"
     icon="file-text"
     :withLogo="false"
+    isSmall="true"
   />
   <div class="container" v-if="getReady">
-    <div class="row container justify-content-center upper">
+    <!-- <div class="row container justify-content-center upper">
       <PieChart
         :label="this.label"
         :data="this.jumlah"
         title="Sebaran Tugas Pembahasan Kasus Sulit Multidisiplin"
       />
-    </div>
+    </div> -->
 
     <div class="row container">
       <!-- Tabel Tugas  -->

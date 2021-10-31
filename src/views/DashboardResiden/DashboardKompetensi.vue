@@ -5,9 +5,10 @@
     :subtitle="this.subtitle"
     icon="file-text"
     :withLogo="false"
+    isSmall="true"
   />
   <div class="container" v-if="getReady">
-    <div class="row container justify-content-center upper">
+    <!-- <div class="row container justify-content-center upper">
       <PieChart
         keterangan="Target Tercapai"
         :persentase="this.data.persentase"
@@ -17,12 +18,12 @@
         title="Pencapaian Kompetensi"
       >
       </PieChart>
-    </div>
+    </div> -->
     <div class="row container">
       <div class="col-xxl-12 col-xl-12 mb-4 mt-4">
         <div class="card card-header-actions h-100">
           <div class="card-header">
-            <b>List Laporan Pasien</b>
+            <b>List Kompetensi</b>
           </div>
           <div class="card-body">
             <div class="datatable" v-if="getReady">

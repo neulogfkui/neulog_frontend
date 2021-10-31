@@ -2,11 +2,12 @@
   <MainHeader
     title= "Dashboard Residen"
     :subtitle="this.subtitle"
-    icon= "user">
+    icon= "user"
+    isSmall="true">
   </MainHeader>
   <div class="container">
     <div class="row upper justify-content-center">
-      <PieChart
+      <!-- <PieChart
         v-if="isMounted"
         keterangan="Residen"
         :persentase="this.persentase"
@@ -15,7 +16,7 @@
         :data="this.dataPie"
         title="Sebaran Status Residen"
       >
-      </PieChart>
+      </PieChart> -->
     </div>
     <div class="col-xxl-12 col-xl-12 mb-4 mt-4">
       <div class="card">

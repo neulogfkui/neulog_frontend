@@ -95,6 +95,7 @@ export default {
       this.idResiden = JSON.parse(localStorage.getItem("userData")).residen.idResiden;
     }else{
       this.idResiden = this.$route.params.idResiden
+      this.subtitleHeader = "";
     }
   }
 };

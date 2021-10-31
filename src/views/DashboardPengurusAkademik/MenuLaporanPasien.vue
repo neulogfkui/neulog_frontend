@@ -4,8 +4,8 @@
     :subtitle="this.subtitle"
     icon= "file-text">
   </MainHeader>
-  <div class="container">
-    <div class="row upper justify-content-center">
+  <div class="container ">
+    <div class="row justify-content-center upper">
       <!-- <BarChart
         v-if="isMounted"
         :label="this.labelBarTindakan"
@@ -13,7 +13,7 @@
         title="Sebaran Tindakan"
       >
       </BarChart> -->
-      <PieChart
+      <!-- <PieChart
         v-if="isMounted"
         keterangan="Laporan Pasien Dibuat"
         :persentase="this.persentase"
@@ -22,17 +22,17 @@
         :data="this.dataPie"
         title="Sebaran Status Laporan Pasien"
       >
-      </PieChart>
+      </PieChart> -->
       <!-- Masih error -->
-      <BarChart
+      <!-- <BarChart
         v-if="isMounted"
         :label="this.labelBarLaporan"
         :data="this.dataBarLaporan"
         title="Sebaran Tipe Laporan"
       >
-      </BarChart>
+      </BarChart> -->
       <!-- Tabel Laporan Pasien -->
-      <div class="col-xxl-12 col-xl-12 mb-4 mt-4">
+      <div class="col-xxl-12 col-xl-12 mb-4 mt-4 ">
         <div class="card card-header-actions h-100">
           <div class="card-header">
             <b>Daftar Seluruh Laporan Pasien</b>
@@ -53,7 +53,7 @@
                     <th>Usia</th>
                     <th>No Rekam Medis</th>
                     <th>Residen</th>
-                    <th>BPJP</th>
+                    <th>DPJP</th>
                     <th>Jaga</th>
                     <th>Status</th>
                     <th>Detail</th>

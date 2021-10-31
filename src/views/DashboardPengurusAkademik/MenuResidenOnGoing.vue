@@ -2,10 +2,11 @@
   <MainHeader
     title= "Dashboard Residen"
     :subtitle="this.subtitle"
-    icon= "user">
+    icon= "user"
+    isSmall="true">
   </MainHeader>
   <div class="container">
-    <div class="row upper justify-content-center">
+    <!-- <div class="row upper justify-content-center">
       <PieChart
         v-if="isMounted"
         keterangan="Residen"
@@ -16,7 +17,7 @@
         title="Sebaran Status Residen"
       >
       </PieChart>
-    </div>
+    </div> -->
 
     <!-- TAB NAVBAR -->	
     <nav class="nav nav-borders mt-4" v-if="isDataTableReady">

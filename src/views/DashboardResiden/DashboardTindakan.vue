@@ -5,8 +5,9 @@
     :subtitle="this.subtitle"
     icon="file-text"
     :withLogo="false"
+    isSmall="true"
   />
-  <div class="upper container justify-content-center">
+  <div class="container justify-content-center">
   <div class="row container">
     <div class="col-xxl-12 col-xl-12 mb-4 mt-4">
       <div class="card card-header-actions h-100">

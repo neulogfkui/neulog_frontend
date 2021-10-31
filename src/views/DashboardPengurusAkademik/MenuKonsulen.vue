@@ -6,18 +6,8 @@
   </MainHeader>
   <div class="container" v-if="isDataTableReady">
     <div class="row upper justify-content-center">
-      <BigNumberCard
-        title="Rata - Rata Laporan Pasien Per Bulan"
-        :count="avgLaporanPasien"
-        caption="Pasien / Bulan"
-      />
-      <BigNumberCard
-        title="Rata - Rata Laporan Tugas Per Bulan"
-        :count="avgLaporanTugas"
-        caption="Tugas / Bulan"
-      />
       <!-- Tabel Laporan Pasien -->
-      <div class="col-xxl-12 col-xl-12 mb-4 mt-4">
+      <div class="col-xxl-12 col-xl-12 mb-4 upper">
         <div class="card card-header-actions h-100">
           <div class="card-header">
             <b>Daftar Seluruh Konsulen</b>

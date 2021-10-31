@@ -4,10 +4,11 @@
     :subtitle="this.subtitle"
     icon="file-text"
     :withLogo="false"
+    isSmall="true"
   />
   <div class="container" v-if="getReady">
-    <div class="row upper justify-content-center">
-      <PieChart
+    <div class="row justify-content-center">
+      <!-- <PieChart
         keterangan="Laporan Tugas"
         :persentase="this.persentase"
         :total="this.createdLaporanTugas"
@@ -15,7 +16,7 @@
         :data="this.jumlah"
         title="Sebaran Status Laporan Tugas"
       >
-      </PieChart>
+      </PieChart> -->
       <!-- <BigNumberCard
         title="Rata - Rata Laporan Tugas Per Bulan"
         :count="avgTugasPerMonth"

@@ -7,13 +7,13 @@
   />
   <div class="container" v-if="getReady">
     <div class="row justify-content-center mb-4 upper">
-      <PieChart
+      <!-- <PieChart
         keterangan="Tugas Presentasi"
         :total="this.total"
         :label="this.label"
         :data="this.jumlah"
         title="Sebaran Status Laporan Tugas"
-      />
+      /> -->
       <BarChart
         :label="this.labelBar"
         :data="this.jumlahBar"

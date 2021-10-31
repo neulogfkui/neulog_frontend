@@ -13,7 +13,7 @@
         title="Sebaran Jenis Tugas"
       >
       </BarChart>
-      <PieChart
+      <!-- <PieChart
         v-if="isMounted"
         keterangan="Laporan Tugas"
         :persentase="this.persentase"
@@ -22,7 +22,7 @@
         :data="this.dataPie"
         title="Sebaran Status Laporan Tugas"
       >
-      </PieChart>
+      </PieChart> -->
       <!-- Tabel Laporan Tugas -->
     </div>
 

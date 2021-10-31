@@ -1,8 +1,9 @@
 <template>
   <MainHeader
-    title= "Dashboard Laporan Tugas"
+    title="Dashboard Laporan Tugas"
     :subtitle="this.subtitle"
-    icon= "book-open">
+    icon="book-open"
+  >
   </MainHeader>
   <div class="container">
     <div class="row upper justify-content-center">
@@ -13,7 +14,7 @@
         title="Sebaran Jenis Tugas"
       >
       </BarChart>
-      <PieChart
+      <!-- <PieChart
         v-if="isMounted"
         keterangan="Laporan Tugas"
         :persentase="this.persentase"
@@ -22,86 +23,101 @@
         :data="this.dataPie"
         title="Sebaran Status Laporan Tugas"
       >
-      </PieChart>
+      </PieChart> -->
       <!-- Tabel Laporan Tugas -->
     </div>
 
-    <!-- TAB NAVBAR -->	
+    <!-- TAB NAVBAR -->
     <nav class="nav nav-borders mt-4" v-if="isDataTableReady">
-      <router-link class="nav-link active" to="/dashboardpengurusakademik/laporantugas/tugaspresentasi">Tugas Presentasi</router-link>
-      <router-link class="nav-link" to="/dashboardpengurusakademik/laporantugas/kasussulit">Kasus Sulit dan Multidisiplin</router-link>
-      <router-link class="nav-link" to="/dashboardpengurusakademik/laporantugas/tugaspublikasi">Tugas Publikasi</router-link>
-      <router-link class="nav-link" to="/dashboardpengurusakademik/laporantugas/tugasakhir">Tugas Akhir</router-link>
+      <router-link
+        class="nav-link active"
+        to="/dashboardpengurusakademik/laporantugas/tugaspresentasi"
+        >Tugas Presentasi</router-link
+      >
+      <router-link
+        class="nav-link"
+        to="/dashboardpengurusakademik/laporantugas/kasussulit"
+        >Kasus Sulit dan Multidisiplin</router-link
+      >
+      <router-link
+        class="nav-link"
+        to="/dashboardpengurusakademik/laporantugas/tugaspublikasi"
+        >Tugas Publikasi</router-link
+      >
+      <router-link
+        class="nav-link"
+        to="/dashboardpengurusakademik/laporantugas/tugasakhir"
+        >Tugas Akhir</router-link
+      >
     </nav>
-	  <hr class="nav-underline mt-0 mb-4"/>
+    <hr class="nav-underline mt-0 mb-4" />
 
     <div v-if="isDataTableReady" class="container">
-		<div class="card mb-4">
-      <div class="card card-header-actions">
-			<div class="card-body">
-				<div class="datatable">
-					<table
-						class="table table-bordered table-hover"
-						id="dataTable"
-						width="100%"
-						cellspacing="0"
-					>
-					<thead>
-                        <tr>
-                        <th>No</th>
-                        <th>Tanggal</th>
-                        <th>Jenis</th>
-                        <th>Judul</th>
-                        <th>Modul</th>
-                        <th>Konsulen</th>
-                        <th>Status</th>
-                        <th>Detail</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <tr
-                        v-for="(item, index) in listTugasPresentasi"
-                        v-bind:key="item.id"
-                    >
-                        <td>
-                        {{ index + 1 }}
-                        </td>
-                        <td>
-                        {{ item.tanggalDibuat }}
-                        </td>
-                        <td>
-                        {{ item.tugasPresentasiModel.jenis }}
-                        </td>
-                        <td>
-                        {{ item.tugasPresentasiModel.judulMakalah }}
-                        </td>
-                        <td>
-                        {{ item.tugasPresentasiModel.modulModel.namaModul }}
-                        </td>
-                        <td>
-                        {{ item.konsulenModel.pengguna.name }}
-                        </td>
-                         <td>
-                        {{ item.status }}
-                        </td>
-                        <td>
-                        <router-link
-                            :to="'tugaspresentasi/' + item.idLaporanTugas"
-                        >
-                            <button class="btn btn-secondary">Lihat</button>
-                        </router-link>
-                        </td>
-                    </tr>
-                    </tbody>
-                    </table>
+      <div class="card mb-4">
+        <div class="card card-header-actions">
+          <div class="card-body">
+            <div class="datatable">
+              <table
+                class="table table-bordered table-hover"
+                id="dataTable"
+                width="100%"
+                cellspacing="0"
+              >
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>Tanggal</th>
+                    <th>Jenis</th>
+                    <th>Judul</th>
+                    <th>Modul</th>
+                    <th>Konsulen</th>
+                    <th>Status</th>
+                    <th>Detail</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    v-for="(item, index) in listTugasPresentasi"
+                    v-bind:key="item.id"
+                  >
+                    <td>
+                      {{ index + 1 }}
+                    </td>
+                    <td>
+                      {{ item.tanggalDibuat }}
+                    </td>
+                    <td>
+                      {{ item.tugasPresentasiModel.jenis }}
+                    </td>
+                    <td>
+                      {{ item.tugasPresentasiModel.judulMakalah }}
+                    </td>
+                    <td>
+                      {{ item.tugasPresentasiModel.modulModel.namaModul }}
+                    </td>
+                    <td>
+                      {{ item.konsulenModel.pengguna.name }}
+                    </td>
+                    <td>
+                      {{ item.status }}
+                    </td>
+                    <td>
+                      <router-link
+                        :to="'tugaspresentasi/' + item.idLaporanTugas"
+                      >
+                        <button class="btn btn-secondary">Lihat</button>
+                      </router-link>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
-      </div>
-    </div>
     </div>
   </div>
   <!-- END PRESENTASI -->
-
 </template>
 
 <script>
@@ -111,7 +127,7 @@ import PieChart from "@/components/PieChart.vue";
 import BarChart from "@/components/BarChart.vue";
 import dataTableLoader from "@/js/datatable";
 import authHeader from "@/services/auth-header";
-import loadScript from '@/js/scripts.js';
+import loadScript from "@/js/scripts.js";
 
 export default {
   name: "MenuLaporanTugas",
@@ -137,18 +153,22 @@ export default {
     PieChart,
     BarChart,
   },
-  computed:{
-    isDataTableReady(){
-      return this.ready
+  computed: {
+    isDataTableReady() {
+      return this.ready;
     },
-    getNamaPA(){
-      return JSON.parse(localStorage.getItem("userData")).pengurusAkademik.pengguna.name;
-    }
+    getNamaPA() {
+      return JSON.parse(localStorage.getItem("userData")).pengurusAkademik
+        .pengguna.name;
+    },
   },
   mounted() {
     this.subtitle = this.getNamaPA;
     axios
-      .get("https://neulogfkui.herokuapp.com/api/dashboardPengurusAkademik/laporantugas/", { headers: authHeader() })
+      .get(
+        "https://neulogfkui.herokuapp.com/api/dashboardPengurusAkademik/laporantugas/",
+        { headers: authHeader() }
+      )
       .then((resp) => {
         this.labelBar = resp.data.labelJenisTugas;
         this.dataBar = resp.data.listJumlahTugasPerJenis;
@@ -157,14 +177,15 @@ export default {
         this.totalLaporanTugas = resp.data.totalLaporanTugas;
         this.persentase = resp.data.persentaseDiterima;
         this.listTugasPresentasi = resp.data.listTugasPresentasi;
-        this.listPembahasanKasusSulitMultidisiplin = resp.data.listPembahasanKasusSulitMultidisiplin;
+        this.listPembahasanKasusSulitMultidisiplin =
+          resp.data.listPembahasanKasusSulitMultidisiplin;
         this.listTugasPublikasi = resp.data.listTugasPublikasi;
         this.listTugasPenelitianAkhir = resp.data.listTugasPenelitianAkhir;
         this.isMounted = true;
         dataTableLoader();
         this.ready = true;
-    });
+      });
     loadScript();
-  }
+  },
 };
 </script>

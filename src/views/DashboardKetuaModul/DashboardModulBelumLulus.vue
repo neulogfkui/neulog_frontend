@@ -84,7 +84,7 @@
                     {{ item.tanggalSelesai}}
                   </td>
                                     <td>
-                    {{ item.durasi }}
+                      {{ item.durasi }} hari ( {{ (item.durasi / 30).toFixed(3)  }} bulan)
                   </td>
                   
                   <td>

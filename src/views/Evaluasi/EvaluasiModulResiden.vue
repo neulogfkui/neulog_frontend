@@ -33,7 +33,7 @@
                     />
                     <label>DISETUJUI</label>
                   </div>
-                  <div class="col container m-2">
+                  <div class="col container m-2" hidden>
                     <input
                       class="mr-4"
                       type="radio"

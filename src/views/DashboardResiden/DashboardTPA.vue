@@ -4,22 +4,23 @@
     :subtitle="this.subtitle"
     icon="file-text"
     :withLogo="false"
+    isSmall="true"
   />
   <div class="container" v-if="getReady">
-    <div class="row container justify-content-center upper">
+    <!-- <div class="row container justify-content-center upper">
       <PieChart
         :label="this.label"
         :data="this.jumlah"
         title="Sebaran Tugas Publikasi"
       />
-    </div>
+    </div> -->
 
     <div class="row container">
       <!-- Tabel Tugas  -->
       <div class="col-xxl-12 col-xl-12 mb-4 mt-4">
         <div class="card card-header-actions h-100">
           <div class="card-header">
-            <b>List Tugas Publikasi</b>
+            <b>List Tugas Akhir</b>
           </div>
           <div class="card-body">
             <div class="datatable">
@@ -33,8 +34,8 @@
                   <tr>
                     <th>No</th>
                     <th>Tanggal</th>
-                    <th>Judul Publikasi</th>
-                    <th>Event Publikasi</th>
+                    <th>Judul</th>
+                    <th>Stage</th>
                     <th>Konsulen</th>
                     <th>Status</th>
                     <th>Detail</th>

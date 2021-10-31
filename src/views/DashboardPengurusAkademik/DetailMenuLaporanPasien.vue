@@ -122,7 +122,7 @@
       </div>
     </div>
     <div class="row" v-if="isMounted">
-      <div class="col-xxl-6 col-xl-6">
+      <div class="col-xxl-6 col-xl-6 p-2">
         <div class="card card-header-actions h-100">
           <div class="card-header">
             <b>Daftar Tindakan yang Dilakukan</b>
@@ -143,7 +143,7 @@
           </div>
         </div>
       </div>
-      <div class="col-xxl-6 col-xl-6">
+      <div class="col-xxl-6 col-xl-6 p-2">
         <div class="card card-header-actions h-100">
           <div class="card-header">
             <b>Daftar Kompetensi yang Didapatkan</b>

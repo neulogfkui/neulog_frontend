@@ -100,6 +100,7 @@
                   v-model="posts.linkTugas"
                   type="text"
                   placeholder="Masukkan link tugas"
+                  required
                 />
               </div>
             </div>

@@ -254,14 +254,13 @@
             <!-- BODY MODAL -->
             <div class="modal-body">
               <h5 v-if="status == 0" class="modal-title" id="exampleModalLabel">
-                Anda dapat mengubah laporan ini sebelum konsulen memberi
-                evaluasi
+                Anda tidak dapat mengvaluasi laporan ini kembali
               </h5>
               <h5 v-if="status == 1" class="modal-title" id="exampleModalLabel">
                 Harap tunggu sebentar
               </h5>
               <h5 v-if="status == 2" class="modal-title" id="exampleModalLabel">
-                Konsulen dan reviewer telah diberikan notifikasi
+                Residen telah diberikan notifikasi
               </h5>
               <h5 v-if="status == 3" class="modal-title" id="exampleModalLabel">
                 Terjadi kesalahan pada sistem. Mohon lengkapi data pada

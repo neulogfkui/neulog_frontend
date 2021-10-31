@@ -21,7 +21,7 @@
             </div>
           </div>
 
-          <div
+          <!-- <div
             v-if="this.persentase != undefined"
             class="list-group-item d-flex align-items-center justify-content-between small px-0 py-2"
           >
@@ -32,7 +32,7 @@
             <div class="font-weight-500 text-dark">
               {{ persentase }} %
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
       <!-- <div class="card-footer small text-muted">

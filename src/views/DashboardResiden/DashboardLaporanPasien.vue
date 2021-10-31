@@ -7,7 +7,7 @@
   />
   <div class="container" v-if="isDataTableReady">
     <div class="row upper justify-content-center">
-      <PieChart
+      <!-- <PieChart
         keterangan="Laporan Pasien"
         :persentase="this.persentase"
         :total="this.createdLaporanPasien"
@@ -15,7 +15,7 @@
         :data="this.jumlah"
         title="Sebaran Status Laporan Pasien"
       >
-      </PieChart>
+      </PieChart> -->
       <!-- <BigNumberCard
         title="Rata - Rata Laporan Pasien Per Bulan"
         :count="avgPasienPerMonth"
@@ -146,14 +146,14 @@ export default {
       )
       .then((resp) => {
         console.warn(resp);
-        this.createdLaporanPasien = resp.data.createdLaporanPasien;
-        this.label = resp.data.label;
-        this.jumlah = resp.data.jumlah;
+        // this.createdLaporanPasien = resp.data.createdLaporanPasien;
+        // this.label = resp.data.label;
+        // this.jumlah = resp.data.jumlah;
         this.listLaporanPasien = resp.data.listLaporanPasien;
-        this.persentase = resp.data.persentase;
+        // this.persentase = resp.data.persentase;
         this.labelBar = resp.data.labelBar;
         this.dataBar = resp.data.dataBar;
-        this.avgPasienPerMonth = resp.data.avgPasienPerMonth;
+        // this.avgPasienPerMonth = resp.data.avgPasienPerMonth;
         this.residen = resp.data.residen;
         this.subtitle = this.residen.pengguna.name + " - " + this.residen.npm;
         this.isMounted = true;

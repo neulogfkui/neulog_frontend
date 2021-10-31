@@ -4,10 +4,11 @@
     title="Dashboard Jaga"
     :subtitle="this.subtitle"
     icon="file-text"
+    isSmall="true"
   />
   <div class="container">
-    <div class="row upper justify-content-center">
-      <PieChart
+    <div class="row justify-content-center">
+      <!-- <PieChart
         v-if="isMounted"
         keterangan="Laporan Pasien Jaga Dibuat"
         :persentase="this.angkaPersentase"
@@ -15,9 +16,9 @@
         :label="this.label"
         :data="this.jumlah"
         title="Sebaran Status Laporan Pasien Jaga"
-      />
+      /> -->
       <!-- Tabel -->
-      <div class="col-xxl-12 col-xl-12 mb-4 mt-4">
+      <div class="col-xxl-12 col-xl-12 mb-4 mt-4" v-if="isDataTableReady">
         <div class="card card-header-actions h-100">
           <div class="card-header">
             <b>Daftar Seluruh Laporan Pasien Jaga</b>
