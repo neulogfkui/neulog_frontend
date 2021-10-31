@@ -386,7 +386,7 @@ export default {
         strTindakan: null,
         strTindakanLain: null,
         konsulen: null,
-        status: "DISETUJUI",
+        status: null,
         feedback: null,
         isDisetujui: null
       },
@@ -475,12 +475,15 @@ export default {
     },
     postData(e) {
       console.warn("masukk1");
+      console.warn(this.posts.status);
       this.status = 1;
       if(this.posts.status == "DISETUJUI"){
         this.posts.isDisetujui = true;
       }else{
         this.posts.isDisetujui = false;
       }
+      console.warn(this.posts.status);
+      console.warn(this.posts.isDisetujui);
       this.posts.strKompetensi = this.listToStr(this.tempKompetensi);
       this.posts.strTindakan = this.listToStr(this.tempTindakan);
       this.posts.strTindakanLain = this.listToStr(this.tempTindakanLain);
@@ -554,7 +557,7 @@ export default {
           this.posts.strTindakan = resp.data.strTindakan;
           this.posts.strTindakanLain = resp.data.strTindakanLain;
           this.posts.konsulen = resp.data.konsulen;
-          this.posts.status = resp.data.status;
+          this.posts.status = "DISETUJUI";
           this.tempKompetensi = this.strToListNumber(this.posts.strKompetensi);
           this.tempTindakan = this.strToListNumber(this.posts.strTindakan);
           if (this.posts.strTindakanLain != "") {

@@ -379,6 +379,9 @@ export default {
       });
       e.preventDefault();
     },
+    refreshSubmitted() {
+      this.status = 0;
+    },
   },
 };
 </script>
