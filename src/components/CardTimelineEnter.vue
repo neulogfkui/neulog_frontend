@@ -42,12 +42,13 @@ export default {
   methods:{
     formatData(str){
       var list = str.split(",");
-      var i;
-      for(i=0; i<list.length; i++){
-        if(i%2 == 0){
-          list[i] = list[i].substring(0,19) + " " + list[i].substring(24,28);
-        }
-      }
+      // var i;
+      // for(i=0; i<list.length; i++){
+      //   if(i%2 == 0){
+      //     list[i] = list[i].substring(0,19) + " " + list[i].substring(24,28);
+      //   }
+      // }
+      list=list.slice(1)
       console.warn(list);
       return list;
     }
