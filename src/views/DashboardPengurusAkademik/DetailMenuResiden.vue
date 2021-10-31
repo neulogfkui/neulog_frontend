@@ -116,6 +116,7 @@
                 </div> -->
             </div>
           </div>
+          <a  class="btn btn-outline-primary m-4" :href="'https://neulogfkui.herokuapp.com/api/dashboardPengurusAkademik/download/laporanpasien/' + idResiden">Export Laporan Pasien</a>
           <router-link
             class="btn btn-outline-primary m-4"
             :to="'/dashboardresiden/' + idResiden"

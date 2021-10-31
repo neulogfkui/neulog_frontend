@@ -9,6 +9,7 @@
       <div class="row mt-3">
           <ColorCardNoFooter title="Kompetensi" subtitle="Tambah" color="bg-warning" link="/kompetensiform/0" icon="trending-up"/>
       </div>
+      <a  class="btn btn-outline-primary mb-4" href="https://neulogfkui.herokuapp.com/api/dashboardPengurusAkademik/download/allkompetensi">Export Kompetensi</a>
       <!-- Tabel Kompetensi -->
       <div class="row mt-0">
       <div class="col-xxl-12 col-xl-12">
