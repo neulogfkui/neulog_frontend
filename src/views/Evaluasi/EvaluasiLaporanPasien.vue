@@ -86,7 +86,6 @@
                       name="status"
                       value="DISETUJUI"
                       v-model="posts.status"
-                      checked
                     />
                     <label>DISETUJUI</label>
                   </div>
@@ -387,7 +386,7 @@ export default {
         strTindakan: null,
         strTindakanLain: null,
         konsulen: null,
-        status: null,
+        status: "DISETUJUI",
         feedback: null,
         isDisetujui: null
       },

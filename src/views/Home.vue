@@ -64,7 +64,7 @@
         >Tindakan</router-link
       >
       <!-- Buat Laporan -->
-      <h5 class="mt-4">Dashboard Residen</h5>
+      <h5 class="mt-4">Buat Laporan</h5>
       <router-link class="nav-link btn btn-outline-primary btn-lg m-2" to="/laporanpasienform/0"
         >Pasien</router-link
       >
