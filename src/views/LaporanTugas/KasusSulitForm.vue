@@ -36,7 +36,15 @@
               <!-- KASUS YANG DIBAHAS -->
               <div class="form-group">
                 <label for="sel1">Kasus Yang Dibahas</label>
-                <select
+                                <input
+                  class="form-control"
+                  name="link"
+                  v-model="posts.kasusYangDibahas"
+                  type="text"
+                  placeholder="Masukkan kasus yang dibahas"
+                  required
+                />
+                <!-- <select
                   class="form-control"
                   name="kasusYangDibahas"
                   v-model="posts.kasusYangDibahas"
@@ -49,7 +57,7 @@
                   >
                     {{ item }}
                   </option>
-                </select>
+                </select> -->
               </div>
 
               <!-- LINK -->
